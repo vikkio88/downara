@@ -1,6 +1,6 @@
 import React from 'react';
 
-const EnvWindow = () => {
+const EnvWindow = ({ children }) => {
     return (
         <div className="
         text-gray-700
@@ -11,7 +11,7 @@ const EnvWindow = () => {
         flex flex-col
         items-center justify-center
         ">
-            Environment Window
+            {children}
         </div>
     );
 };
