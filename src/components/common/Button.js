@@ -8,10 +8,9 @@ const Button = ({ label, className = '', disabled = false, ...others }) => {
             className={`
         bg-blue-500
         hover:bg-blue-400
-        text-white font-bold 
-        py-2 px-4 border-b-4 
-        border-blue-700
-        hover:border-blue-500 rounded
+        text-white font-semibold
+        py-2 px-4 m-1
+        border border-blue-600 rounded shadow
         ${className}`
             }
             disabled={disabled}

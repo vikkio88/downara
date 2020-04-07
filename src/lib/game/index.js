@@ -1,8 +1,7 @@
-const gameState = {
-    position: 0,
-    player: {
-        life: 100,
-    }
+const STATUSES = {
+    IDLE: 'idle',
+    SPEAKING: 'speaking',
+    FIGHTING: 'fighting',
 };
 
 const DIRECTIONS = {
@@ -10,6 +9,15 @@ const DIRECTIONS = {
     SOUTH: 'south',
     EAST: 'east',
     WEST: 'west',
+};
+
+const initialGameState = {
+    position: 0,
+    player: {
+        life: 100,
+    },
+    status: STATUSES.IDLE,
+    area: null,
 };
 
 const helper = {
@@ -22,4 +30,4 @@ const helper = {
     }
 }
 
-export { gameState, helper, DIRECTIONS };
+export { initialGameState, helper, DIRECTIONS };
