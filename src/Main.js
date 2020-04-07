@@ -6,7 +6,7 @@ import EnvWindow from 'components/ui/EnvWindow';
 import CommandBar from 'components/ui/CommandBar';
 
 import { DIRECTIONS } from 'lib/game';
-import { map } from 'lib/game/models';
+import { map, DIRECTIONS_LABELS } from 'downara';
 
 const { NORTH: n, SOUTH: s, EAST: e, WEST: w } = DIRECTIONS;
 const directions = [n, s, e, w];
@@ -23,7 +23,7 @@ function Main() {
         {directions.map(d => (
           <Button
             key={d}
-            label={d}
+            label={DIRECTIONS_LABELS[d]}
             onClick={() => { dispatch('move', d) }}
             disabled={currentPosition[d] == undefined}
           />

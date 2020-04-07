@@ -1,9 +1,9 @@
-import { DIRECTIONS } from '../';
+import { DIRECTIONS } from 'lib/game';
 
 const map = {
     0: {
         id: 0,
-        label: '0',
+        label: 'Madonna di Trapani',
         [DIRECTIONS.NORTH]: 1,
         [DIRECTIONS.SOUTH]: 2,
         [DIRECTIONS.EAST]: 3,
@@ -11,7 +11,7 @@ const map = {
     },
     1: {
         id: 1,
-        label: '1',
+        label: 'Porta Nuova',
         [DIRECTIONS.NORTH]: null,
         [DIRECTIONS.SOUTH]: 0,
         [DIRECTIONS.EAST]: null,
@@ -19,7 +19,7 @@ const map = {
     },
     2: {
         id: 2,
-        label: '2',
+        label: 'Via San Francesco',
         [DIRECTIONS.NORTH]: 0,
         [DIRECTIONS.SOUTH]: null,
         [DIRECTIONS.EAST]: null,
@@ -27,7 +27,7 @@ const map = {
     },
     3: {
         id: 3,
-        label: '3',
+        label: 'Contrada Luni',
         [DIRECTIONS.NORTH]: null,
         [DIRECTIONS.SOUTH]: null,
         [DIRECTIONS.EAST]: null,
@@ -35,7 +35,7 @@ const map = {
     },
     4: {
         id: 4,
-        label: '4',
+        label: 'La Matrice',
         [DIRECTIONS.NORTH]: null,
         [DIRECTIONS.SOUTH]: null,
         [DIRECTIONS.EAST]: 0,
@@ -43,10 +43,16 @@ const map = {
     },
     5: {
         id: 5,
-        label: 'win',
+        label: 'Piazza Matteotti',
         [DIRECTIONS.EAST]: 4,
     }
 };
 
+const DIRECTIONS_LABELS = {
+    [DIRECTIONS.NORTH]: 'Nord',
+    [DIRECTIONS.SOUTH]: 'Sud',
+    [DIRECTIONS.EAST]: 'Est',
+    [DIRECTIONS.WEST]: 'Ovest',
+}
 
-export { map };
+export { map, DIRECTIONS_LABELS };

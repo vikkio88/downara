@@ -1,5 +1,5 @@
 import { helper } from 'lib/game';
-import { map } from 'lib/game/models';
+import { map } from 'downara';
 
 export default store => {
     store.on('@init', () => ({ gameState: { position: 0 }, error: null }));
