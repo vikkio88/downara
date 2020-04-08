@@ -10,7 +10,7 @@ const directions = Object.values(DIRECTIONS);
 const Movements = () => {
     const { dispatch, gameState: { area } } = useStoreon('gameState');
     return (
-        <>
+        <div className='flex flex-row'>
             {directions.map(d => (
                 <Button
                     key={d}
@@ -19,7 +19,7 @@ const Movements = () => {
                     disabled={area[d] == undefined}
                 />
             ))}
-        </>
+        </div>
     );
 };
 

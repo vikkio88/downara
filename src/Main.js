@@ -4,7 +4,7 @@ import { useStoreon } from 'storeon/react';
 import EnvWindow from 'components/ui/EnvWindow';
 import CommandBar from 'components/ui/CommandBar';
 
-import { Movements } from 'components/controls';
+import { Controls } from 'components/controls';
 
 function Main() {
   const { gameState: { status, area } } = useStoreon('gameState');
@@ -15,7 +15,7 @@ function Main() {
         <h1>{area.label}</h1>
       </EnvWindow>
       <CommandBar>
-        <Movements />
+        <Controls />
       </CommandBar>
     </div>
   );

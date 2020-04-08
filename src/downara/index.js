@@ -1,4 +1,4 @@
-import { DIRECTIONS } from 'lib/game';
+import { DIRECTIONS, ACTIONS } from 'lib/game';
 
 const map = {
     0: {
@@ -53,6 +53,11 @@ const DIRECTIONS_LABELS = {
     [DIRECTIONS.SOUTH]: 'Sud',
     [DIRECTIONS.EAST]: 'Est',
     [DIRECTIONS.WEST]: 'Ovest',
-}
+};
 
-export { map, DIRECTIONS_LABELS };
+const ACTIONS_LABELS = {
+    [ACTIONS.EXAMINE]: 'Esamina',
+    [ACTIONS.INTERACT]: 'Interagisci',
+};
+
+export { map, DIRECTIONS_LABELS, ACTIONS_LABELS };

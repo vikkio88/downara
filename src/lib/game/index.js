@@ -11,6 +11,11 @@ const DIRECTIONS = {
     WEST: 'west',
 };
 
+const ACTIONS = {
+    EXAMINE: 'examine',
+    INTERACT: 'interact' 
+};
+
 const initialGameState = {
     position: 0,
     player: {
@@ -30,4 +35,8 @@ const helper = {
     }
 }
 
-export { initialGameState, helper, DIRECTIONS };
+export {
+    initialGameState, helper,
+    DIRECTIONS, STATUSES,
+    ACTIONS
+};
