@@ -14,7 +14,7 @@ const Controls = () => {
             {status === STATUSES.IDLE && (
                 <>
                     <Movements />
-                    <Actions />
+                    {/* <Actions /> */}
                 </>
             )}
         </div>

@@ -11,7 +11,7 @@ function Main() {
   return (
     <div className="container h-screen mx-auto flex flex-col bg-gray-200">
       <EnvWindow>
-        <h1>{status}</h1>
+        {/* <h1>{status}</h1> */}
         <h1>{area.label}</h1>
       </EnvWindow>
       <CommandBar>
