@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CommandBar = ({ children, col = false, row = true }) => {
+const CommandBar = ({ children }) => {
     return (
         <div className={`
         text-gray-700 text-center

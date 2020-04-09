@@ -2,10 +2,10 @@ import { DIRECTIONS, ACTIONS } from 'lib/game';
 import map from './map';
 
 const DIRECTIONS_LABELS = {
-    [DIRECTIONS.NORTH]: 'Nord',
-    [DIRECTIONS.SOUTH]: 'Sud',
-    [DIRECTIONS.EAST]: 'Est',
-    [DIRECTIONS.WEST]: 'Ovest',
+    [DIRECTIONS.NORTH]: '↑',
+    [DIRECTIONS.SOUTH]: '↓',
+    [DIRECTIONS.EAST]: '←',
+    [DIRECTIONS.WEST]: '→',
 };
 
 const ACTIONS_LABELS = {
