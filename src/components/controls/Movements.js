@@ -5,7 +5,6 @@ import { Button } from 'components/common';
 import { DIRECTIONS } from 'lib/game';
 import { DIRECTIONS_LABELS } from 'downara';
 const { NORTH: n, SOUTH: s, EAST: e, WEST: w } = DIRECTIONS;
-const directions = Object.values(DIRECTIONS);
 
 const Movements = () => {
     const { dispatch, gameState: { area } } = useStoreon('gameState');
