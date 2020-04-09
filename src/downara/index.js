@@ -1,5 +1,6 @@
 import { DIRECTIONS, ACTIONS } from 'lib/game';
 import map from './map';
+import LABELS from './labels';
 
 const DIRECTIONS_LABELS = {
     [DIRECTIONS.NORTH]: '↑',
@@ -13,4 +14,9 @@ const ACTIONS_LABELS = {
     [ACTIONS.INTERACT]: 'Interagisci',
 };
 
-export { map, DIRECTIONS_LABELS, ACTIONS_LABELS };
+export {
+    map,
+    LABELS,
+    DIRECTIONS_LABELS,
+    ACTIONS_LABELS
+};

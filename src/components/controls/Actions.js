@@ -6,7 +6,7 @@ import { ACTIONS } from 'lib/game';
 const Actions = () => {
     return (
         <div>
-            {Object.values(ACTIONS).map(a => <Button label={ACTIONS_LABELS[a]} className="flex-1" />)}
+            {Object.values(ACTIONS).map(a => <Button key={a} label={ACTIONS_LABELS[a]} className="flex-1" />)}
         </div>
     );
 };
