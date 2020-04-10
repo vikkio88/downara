@@ -14,8 +14,15 @@ const ACTIONS_LABELS = {
     [ACTIONS.INTERACT]: 'Interagisci',
 };
 
+const AREA = {
+    size: {
+        x: 6,
+        y: 6,
+    }
+}
 export {
     map,
+    AREA,
     LABELS,
     DIRECTIONS_LABELS,
     ACTIONS_LABELS

@@ -9,7 +9,7 @@ const EnvWindow = ({ children }) => {
         min-h-twoThird 
         py-2 m-2 
         flex flex-col
-        items-center justify-center
+        items-stretch
         ">
             {children}
         </div>
