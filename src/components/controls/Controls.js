@@ -3,8 +3,7 @@ import { useStoreon } from 'storeon/react';
 import { Button } from 'components/common';
 
 import { Movements, Actions } from 'components/controls';
-import { STATUSES } from 'lib/game'
-import { LABELS } from 'downara'
+import { STATUSES } from 'lib/game';
 
 const Controls = () => {
     const { gameState: { status } } = useStoreon('gameState');
@@ -20,10 +19,9 @@ const Controls = () => {
                     {!moving && <Actions />}
                 </div>
                 <Button
-                    label=">"
+                    label={moving ? ">" : "<"}
                     noPadding
-                    noBorder
-                    className="text-xs"
+                    secondary
                     onClick={() => setMoving(!moving)}
                 />
             </>
