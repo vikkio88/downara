@@ -2,7 +2,7 @@ import React from 'react';
 import { useStoreon } from 'storeon/react';
 
 import { Button } from 'components/common';
-import { DIRECTIONS } from 'lib/game';
+import { DIRECTIONS, mapHelper } from 'lib/game';
 import { DIRECTIONS_LABELS } from 'downara';
 const { NORTH: n, SOUTH: s, EAST: e, WEST: w } = DIRECTIONS;
 
@@ -14,7 +14,7 @@ const Movements = () => {
                 key={n}
                 label={DIRECTIONS_LABELS[n]}
                 onClick={() => { dispatch('move', n) }}
-                disabled={area[n] == undefined}
+                disabled={mapHelper.isValidDirection(area[n])}
             />
             <div className='flex flex-row'>
                 {[e, s, w].map(d => (
@@ -22,7 +22,7 @@ const Movements = () => {
                         key={d}
                         label={DIRECTIONS_LABELS[d]}
                         onClick={() => { dispatch('move', d) }}
-                        disabled={area[d] == undefined}
+                        disabled={mapHelper.isValidDirection(area[d])}
                     />
                 ))}
             </div>

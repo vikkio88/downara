@@ -13,7 +13,7 @@ const DIRECTIONS = {
 
 const ACTIONS = {
     EXAMINE: 'examine',
-    INTERACT: 'interact' 
+    INTERACT: 'interact'
 };
 
 const initialGameState = {
@@ -25,18 +25,21 @@ const initialGameState = {
     area: null,
 };
 
-const helper = {
+const mapHelper = {
     move(direction, map, position) {
-        if (map[position][direction] == undefined) {
+        if (this.isValidDirection(map[position][direction])) {
             return { result: false, payload: { position } };
         }
 
         return { result: true, payload: { position: map[position][direction] } };
+    },
+    isValidDirection(positionDirection) {
+        return positionDirection === undefined || positionDirection === null;
     }
-}
+};
 
 export {
-    initialGameState, helper,
+    initialGameState, mapHelper,
     DIRECTIONS, STATUSES,
     ACTIONS
 };
