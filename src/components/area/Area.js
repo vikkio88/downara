@@ -13,8 +13,8 @@ const Tile = ({ label = " ", terrain = "grass_4", object = "house_3", player = f
             className="flex-1 flex items-center justify-center m-0"
             style={{
                 'background': `
-                    ${player ? `no-repeat center
-                    url(assets/objects/${object}.png),` : ''
+                    ${player ? `no-repeat
+                    url(assets/objects/knight_1.png),` : ''
                     }
                     ${object ? `no-repeat center
                     url(assets/objects/${object}.png),` : ''
@@ -22,6 +22,7 @@ const Tile = ({ label = " ", terrain = "grass_4", object = "house_3", player = f
                     url(assets/tiles/${terrain}.png)
                 `
             }}
+            disabled={!player}
         >
 
         </Button>
@@ -41,7 +42,7 @@ const Area = ({ label }) => {
                         className="flex-1 flex flex-row items-stretch"
                     >
                         {range(0, AREA.size.x).map((_, j) => (
-                            <Tile key={`j-${j}`} player={i === 2 && j === 2} />
+                            <Tile key={`j-${j}`} player={i === 2 && j === 3} />
                         ))}
                     </div>
                 ))}

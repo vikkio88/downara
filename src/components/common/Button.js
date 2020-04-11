@@ -8,7 +8,8 @@ const Button = ({
     className = classnames(
         className,
         {
-            'opacity-50 cursor-not-allowed': disabled,
+            'opacity-50 cursor-not-allowed': disabled && !secondary,
+            'opacity-75 cursor-not-allowed': disabled && secondary,
             'text-white bg-blue-500 hover:bg-blue-400 border border-blue-600': !secondary && primary,
             'text-blue-700 hover:bg-gray-400 border': secondary,
             'py-2 px-4': !noPadding,
