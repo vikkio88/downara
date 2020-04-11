@@ -14,6 +14,7 @@ const Tile = ({
     actionable = false,
     position = null
 }) => {
+    const { dispatch } = useStoreon('gameState');
     object = randomizer.chance(50) ? null : randomizer.pickOne(['house_1', 'man_1', 'house_3', 'tree_1', 'mansion_2', 'mountain_2'])
     terrain = randomizer.pickOne(['grass_1', 'sand_1'])
     return (
@@ -33,7 +34,7 @@ const Tile = ({
                 `
             }}
             disabled={!actionable}
-            onClick={() => actioned(position)}
+            onClick={() => dispatch('actioned', position)}
         />
     );
 }

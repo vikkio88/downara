@@ -1,12 +1,56 @@
-import { mapHelper, initialGameState } from 'lib/game';
+import { initialGameState } from 'lib/game';
 import { map } from 'downara';
 export default store => {
-    store.on('@init', () => ({ gameState: { ...initialGameState, area: map[0] } }));
+    store.on('@init', () => {
+        const { player: { areaPosition } } = initialGameState;
+        return {
+            gameState: {
+                ...initialGameState,
+                area: map[0],
+                actionedTile: {
+                    position: areaPosition
+                }
+            },
+        }
+    });
 
+    store.on('actioned', ({ gameState }, tilePosition) => {
+        return {
+            gameState: {
+                ...gameState,
+                actionedTile: {
+                    ...gameState.actionedTile,
+                    position: tilePosition
+                }
+            }
+        }
+
+    });
+
+    store.on('moveToTile', ({ gameState }, newPosition) => {
+        return {
+            gameState: {
+                ...gameState,
+                player: {
+                    ...gameState.player,
+                    areaPosition: newPosition
+                },
+                actionedTile: {
+                    position: newPosition
+                }
+            },
+        }
+    });
+
+    /*
+    to move out of bounds
     store.on('move', ({ gameState }, direction) => {
         const { result, payload: { worldPosition } } = mapHelper.move(direction, map, gameState.worldPosition);
         if (result) {
             return { gameState: { ...gameState, worldPosition, area: map[worldPosition] } }
         }
     });
+    */
+
+
 }

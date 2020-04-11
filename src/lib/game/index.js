@@ -49,6 +49,9 @@ const areaHelper = {
     },
     isAdjacent({ i: pi, j: pj }, { i: p1i, j: p1j }, maxD = 1) {
         return Math.abs(pi - p1i) <= maxD && Math.abs(pj - p1j) <= maxD;
+    },
+    isSameTile({ i, j }, { i: i1, j: j1 }) {
+        return i === i1 && j === j1;
     }
 }
 

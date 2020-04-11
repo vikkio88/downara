@@ -1,12 +1,21 @@
 import React from 'react';
+import { useStoreon } from 'storeon/react';
+
 import { Button } from 'components/common';
 import { ACTIONS_LABELS } from 'downara';
-import { ACTIONS } from 'lib/game';
+import { ACTIONS, areaHelper } from 'lib/game';
 
 const Actions = () => {
+    const { dispatch, gameState: { player, actionedTile } } = useStoreon('gameState');
+    const { areaPosition: playerAreaPosition } = player;
     return (
         <div>
-            {Object.values(ACTIONS).map(a => <Button key={a} label={ACTIONS_LABELS[a]} className="flex-1" />)}
+            <Button
+                className="flex-1"
+                label="Move here"
+                disabled={areaHelper.isSameTile(actionedTile.position, playerAreaPosition)}
+                onClick={() => dispatch('moveToTile', actionedTile.position)}
+            />
         </div>
     );
 };
