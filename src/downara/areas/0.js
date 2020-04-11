@@ -5,10 +5,10 @@ object = randomizer.chance(50) ? null : randomizer.pickOne(['house_1', 'man_1', 
 export default {
     0: {
         0: { terrain: 'grass_1', object: null, },
-        1: { terrain: 'grass_1', object: null, },
+        1: { terrain: 'grass_1', object: 'tree_2', },
         2: { terrain: 'grass_1', object: null, },
-        3: { terrain: 'grass_1', object: null, },
-        4: { terrain: 'grass_1', object: null, },
+        3: { terrain: 'grass_1', object: 'hill_1', },
+        4: { terrain: 'grass_1', object: 'hill_2', },
         5: { terrain: 'grass_1', object: 'tree_1', },
     },
     1: {
@@ -36,12 +36,12 @@ export default {
         5: { terrain: 'sand_1', object: 'man_1', },
     },
     4: {
-        0: { terrain: 'grass_1', object: null, },
+        0: { terrain: 'grass_1', object: 'house_1', },
         1: { terrain: 'grass_1', object: 'tree_1', },
-        2: { terrain: 'grass_1', object: null, },
+        2: { terrain: 'grass_1', object: 'house_2', },
         3: { terrain: 'grass_1', object: 'tree_1', },
-        4: { terrain: 'grass_1', object: null, },
-        5: { terrain: 'grass_1', object: null, },
+        4: { terrain: 'grass_1', object: 'house_3', },
+        5: { terrain: 'grass_1', object: 'mansion_1', },
     },
     5: {
         0: { terrain: 'grass_1', object: null, },
