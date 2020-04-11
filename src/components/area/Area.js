@@ -4,6 +4,7 @@ import { useStoreon } from 'storeon/react';
 import { range, randomizer } from 'lib';
 import { Button } from 'components/common';
 import { AREA } from 'downara';
+import areas from 'downara/areas';
 import { areaHelper } from 'lib/game';
 
 const Tile = ({
@@ -15,8 +16,6 @@ const Tile = ({
     position = null
 }) => {
     const { dispatch } = useStoreon('gameState');
-    object = randomizer.chance(50) ? null : randomizer.pickOne(['house_1', 'man_1', 'house_3', 'tree_1', 'mansion_2', 'mountain_2'])
-    terrain = randomizer.pickOne(['grass_1', 'sand_1'])
     return (
         <Button
             secondary
@@ -40,7 +39,7 @@ const Tile = ({
 }
 
 const Area = ({ label }) => {
-    const { gameState: { player } } = useStoreon('gameState');
+    const { gameState: { player, worldPosition } } = useStoreon('gameState');
     const { areaPosition: playerAreaPosition } = player;
     return (
         <>
@@ -56,6 +55,7 @@ const Area = ({ label }) => {
                         {range(0, AREA.size.x).map((_, j) => (
                             <Tile
                                 key={`j-${j}`}
+                                {...areas[worldPosition][i][j]}
                                 player={areaHelper.isPlayerInTile(playerAreaPosition, i, j)}
                                 actionable={areaHelper.isTileActionable(playerAreaPosition, i, j)}
                                 position={{ i, j }}
