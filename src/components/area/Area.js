@@ -3,9 +3,9 @@ import { range, randomizer } from 'lib';
 import { Button } from 'components/common';
 import { AREA } from 'downara';
 
-const Tile = ({ label = " ", terrain = "grass_4", object = "house_3" }) => {
-    object = randomizer.pickOne([null, null, null, 'house_1', 'hill_1', 'house_3', 'tree_1', 'mansion_2', 'mountain_2'])
-    terrain = randomizer.pickOne(['street_1', 'grass_1', 'sand_1'])
+const Tile = ({ label = " ", terrain = "grass_4", object = "house_3", player = false }) => {
+    object = randomizer.chance(50) ? null : randomizer.pickOne(['house_1', 'man_1', 'house_3', 'tree_1', 'mansion_2', 'mountain_2'])
+    terrain = randomizer.pickOne(['grass_1', 'sand_1'])
     return (
         <Button
             secondary
@@ -13,6 +13,9 @@ const Tile = ({ label = " ", terrain = "grass_4", object = "house_3" }) => {
             className="flex-1 flex items-center justify-center m-0"
             style={{
                 'background': `
+                    ${player ? `no-repeat center
+                    url(assets/objects/${object}.png),` : ''
+                    }
                     ${object ? `no-repeat center
                     url(assets/objects/${object}.png),` : ''
                     } 
@@ -38,7 +41,7 @@ const Area = ({ label }) => {
                         className="flex-1 flex flex-row items-stretch"
                     >
                         {range(0, AREA.size.x).map((_, j) => (
-                            <Tile key={`j-${j}`} />
+                            <Tile key={`j-${j}`} player={i === 2 && j === 2} />
                         ))}
                     </div>
                 ))}
