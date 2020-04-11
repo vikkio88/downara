@@ -1,9 +1,19 @@
 import React from 'react';
+import { useStoreon } from 'storeon/react';
+
 import { range, randomizer } from 'lib';
 import { Button } from 'components/common';
 import { AREA } from 'downara';
+import { areaHelper } from 'lib/game';
 
-const Tile = ({ label = " ", terrain = "grass_4", object = "house_3", player = false }) => {
+const Tile = ({
+    label = " ",
+    terrain = "grass_4",
+    object = "house_3",
+    player = false,
+    actionable = false,
+    position = null
+}) => {
     object = randomizer.chance(50) ? null : randomizer.pickOne(['house_1', 'man_1', 'house_3', 'tree_1', 'mansion_2', 'mountain_2'])
     terrain = randomizer.pickOne(['grass_1', 'sand_1'])
     return (
@@ -22,14 +32,15 @@ const Tile = ({ label = " ", terrain = "grass_4", object = "house_3", player = f
                     url(assets/tiles/${terrain}.png)
                 `
             }}
-            disabled={!player}
-        >
-
-        </Button>
+            disabled={!actionable}
+            onClick={() => actioned(position)}
+        />
     );
 }
 
 const Area = ({ label }) => {
+    const { gameState: { player } } = useStoreon('gameState');
+    const { areaPosition: playerAreaPosition } = player;
     return (
         <>
             <h1>{label}</h1>
@@ -42,7 +53,12 @@ const Area = ({ label }) => {
                         className="flex-1 flex flex-row items-stretch"
                     >
                         {range(0, AREA.size.x).map((_, j) => (
-                            <Tile key={`j-${j}`} player={i === 2 && j === 3} />
+                            <Tile
+                                key={`j-${j}`}
+                                player={areaHelper.isPlayerInTile(playerAreaPosition, i, j)}
+                                actionable={areaHelper.isTileActionable(playerAreaPosition, i, j)}
+                                position={{ i, j }}
+                            />
                         ))}
                     </div>
                 ))}

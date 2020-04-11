@@ -4,9 +4,9 @@ export default store => {
     store.on('@init', () => ({ gameState: { ...initialGameState, area: map[0] } }));
 
     store.on('move', ({ gameState }, direction) => {
-        const { result, payload: { position } } = mapHelper.move(direction, map, gameState.position);
+        const { result, payload: { worldPosition } } = mapHelper.move(direction, map, gameState.worldPosition);
         if (result) {
-            return { gameState: { ...gameState, position, area: map[position] } }
+            return { gameState: { ...gameState, worldPosition, area: map[worldPosition] } }
         }
     });
 }
