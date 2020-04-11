@@ -3,9 +3,9 @@ import { range, randomizer } from 'lib';
 import { Button } from 'components/common';
 import { AREA } from 'downara';
 
-const Tile = ({ label = " ", type = "grass_4", object = "house_3" }) => {
-    object = randomizer.pickOne([null, null, null, 'house_1', 'houses_2', 'house_3', 'tree_1', 'mansion_2', 'mountain_2'])
-    type = randomizer.pickOne(['grass_1', 'grass_2', 'grass_3', 'grass_4',])
+const Tile = ({ label = " ", terrain = "grass_4", object = "house_3" }) => {
+    object = randomizer.pickOne([null, null, null, 'house_1', 'hill_1', 'house_3', 'tree_1', 'mansion_2', 'mountain_2'])
+    terrain = randomizer.pickOne(['street_1', 'grass_1', 'sand_1'])
     return (
         <Button
             secondary
@@ -14,9 +14,9 @@ const Tile = ({ label = " ", type = "grass_4", object = "house_3" }) => {
             style={{
                 'background': `
                     ${object ? `no-repeat center
-                    url(assets/tiles/${object}.png),` : ''
+                    url(assets/objects/${object}.png),` : ''
                     } 
-                    url(assets/tiles/${type}.png)
+                    url(assets/tiles/${terrain}.png)
                 `
             }}
         >
