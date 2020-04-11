@@ -12,6 +12,7 @@ const DIRECTIONS_LABELS = {
 const ACTIONS_LABELS = {
     [ACTIONS.EXAMINE]: 'Esamina',
     [ACTIONS.INTERACT]: 'Interagisci',
+    [ACTIONS.MOVE]: 'Spostati',
 };
 
 const AREA = {

@@ -12,7 +12,7 @@ const Actions = () => {
         <div>
             <Button
                 className="flex-1"
-                label="Move here"
+                label={ACTIONS_LABELS[ACTIONS.MOVE]}
                 disabled={areaHelper.isSameTile(actionedTile.position, playerAreaPosition)}
                 onClick={() => dispatch('moveToTile', actionedTile.position)}
             />

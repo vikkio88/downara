@@ -13,7 +13,8 @@ const DIRECTIONS = {
 
 const ACTIONS = {
     EXAMINE: 'examine',
-    INTERACT: 'interact'
+    INTERACT: 'interact',
+    MOVE: 'move'
 };
 
 const initialGameState = {
