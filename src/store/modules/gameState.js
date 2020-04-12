@@ -1,4 +1,4 @@
-import { initialGameState } from 'lib/game';
+import { initialGameState, areaHelper } from 'lib/game';
 import { map } from 'downara';
 export default store => {
     store.on('@init', () => {
@@ -15,6 +15,15 @@ export default store => {
     });
 
     store.on('actioned', ({ gameState }, tilePosition) => {
+
+        const { player, actionedTile } = gameState;
+        if (!areaHelper.isPlayerInTile(player.areaPosition, tilePosition)
+            && areaHelper.isSameTile(actionedTile.position, tilePosition)
+        ) {
+            store.dispatch('moveToTile', tilePosition);
+            return;
+        }
+
         return {
             gameState: {
                 ...gameState,
