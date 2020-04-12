@@ -1,3 +1,6 @@
+import { npcs, OBJECT_DESCRIPTIONS } from 'downara';
+import { areaHelper } from 'lib/game';
+
 export default store => {
     store.on('@init', () => {
         return {
@@ -7,11 +10,15 @@ export default store => {
         };
     });
 
-    store.on('examine', ({ ui }, tile) => {
+    store.on('examine', ({ ui, worldState, gameState }) => {
+        const { actionedTile, worldPosition } = gameState;
+        const { objects } = worldState;
+        const areaObjects = objects[worldPosition];
+        const tile = areaHelper.getTileContent(actionedTile.position, actionedTile, areaObjects, npcs);
         return {
             ui: {
                 ...ui,
-                message: tile.description || 'Nothing here'
+                message: tile.description || OBJECT_DESCRIPTIONS.default
             }
         };
     });

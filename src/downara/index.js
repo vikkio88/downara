@@ -1,6 +1,6 @@
 import { DIRECTIONS, ACTIONS } from 'lib/game';
+import { NPC, npcs, OBJECT_DESCRIPTIONS } from './npcs';
 import map from './map';
-import LABELS from './labels';
 
 const DIRECTIONS_LABELS = {
     [DIRECTIONS.NORTH]: '↑',
@@ -22,21 +22,6 @@ const AREA = {
     }
 };
 
-const NPC_ALIGNMENT = {
-    FRIENDLY: 'friendly',
-    ENEMY: 'enemy',
-}
-const NPC = {
-    MUM: 'mum'
-};
-
-const npcs = {
-    [NPC.MUM]: {
-        object: 'woman_1',
-        alignment: NPC_ALIGNMENT.FRIENDLY,
-        description: 'vedi tua madre che fa quello che le mamme fanno di solito.'
-    }
-}
 
 const initialWorldState = {
     objects: {
@@ -48,9 +33,9 @@ export {
     map,
     npcs,
     NPC,
+    OBJECT_DESCRIPTIONS,
     initialWorldState,
     AREA,
-    LABELS,
     DIRECTIONS_LABELS,
     ACTIONS_LABELS
 };

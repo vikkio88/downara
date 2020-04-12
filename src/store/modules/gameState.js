@@ -16,7 +16,7 @@ export default store => {
     });
 
     store.on('actioned', ({ gameState }, tilePosition) => {
-
+        store.dispatch('clearMessage');
         const { player, actionedTile } = gameState;
         if (!areaHelper.isPlayerInTile(player.areaPosition, tilePosition)
             && areaHelper.isSameTile(actionedTile.position, tilePosition)

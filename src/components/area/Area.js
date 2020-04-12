@@ -8,7 +8,6 @@ import areas from 'downara/areas';
 import { areaHelper } from 'lib/game';
 
 const Tile = ({
-    label = " ",
     terrain = "grass_4",
     object = null,
     player = false,
