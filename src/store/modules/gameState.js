@@ -1,4 +1,4 @@
-import { initialGameState, areaHelper, STATUSES } from 'lib/game';
+import { initialGameState, areaHelper } from 'lib/game';
 import { map } from 'downara';
 
 export default store => {

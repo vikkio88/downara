@@ -6,7 +6,7 @@ import { ACTIONS_LABELS } from 'downara';
 import { ACTIONS, areaHelper } from 'lib/game';
 
 const Actions = () => {
-    const { dispatch, gameState: { player, actionedTile, worldPosition } } = useStoreon('gameState');
+    const { dispatch, gameState: { player, actionedTile } } = useStoreon('gameState');
     const { areaPosition: playerAreaPosition } = player;
     return (
         <div>
