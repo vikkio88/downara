@@ -1,4 +1,4 @@
-import { DIRECTIONS, ACTIONS } from 'lib/game';
+import { DIRECTIONS, ACTIONS, STATUSES } from 'lib/game';
 import { NPC, npcs, OBJECT_DESCRIPTIONS } from './npcs';
 import map from './map';
 
@@ -25,16 +25,28 @@ const AREA = {
 
 const initialWorldState = {
     objects: {
-        0: { 0: { 0: { object: NPC.MUM } } }
+        0: { 3: { 3: { object: NPC.MUM } } }
     }
 };
 
+
+const initialGameState = {
+    worldPosition: 0,
+    player: {
+        life: 100,
+        areaPosition: { i: 3, j: 2 }
+    },
+    status: STATUSES.IDLE,
+    area: null,
+};
+
 export {
+    initialGameState,
+    initialWorldState,
     map,
     npcs,
     NPC,
     OBJECT_DESCRIPTIONS,
-    initialWorldState,
     AREA,
     DIRECTIONS_LABELS,
     ACTIONS_LABELS

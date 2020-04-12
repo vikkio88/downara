@@ -1,5 +1,5 @@
-import { initialGameState, areaHelper } from 'lib/game';
-import { map } from 'downara';
+import { areaHelper } from 'lib/game';
+import { initialGameState, map } from 'downara';
 
 export default store => {
     store.on('@init', () => {

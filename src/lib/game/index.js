@@ -17,16 +17,6 @@ const ACTIONS = {
     MOVE: 'move'
 };
 
-const initialGameState = {
-    worldPosition: 0,
-    player: {
-        life: 100,
-        areaPosition: { i: 3, j: 2 }
-    },
-    status: STATUSES.IDLE,
-    area: null,
-};
-
 const mapHelper = {
     move(direction, map, currentPosition) {
         if (this.isValidDirection(map[currentPosition][direction])) {
@@ -64,7 +54,6 @@ const areaHelper = {
 }
 
 export {
-    initialGameState,
     mapHelper, areaHelper,
     DIRECTIONS, STATUSES,
     ACTIONS
