@@ -54,13 +54,12 @@ const areaHelper = {
     isSameTile({ i, j }, { i: i1, j: j1 }) {
         return i === i1 && j === j1;
     },
-    getObject({ i, j }, tile, objects, npcs) {
-        const { object } = tile;
+    getTileContent({ i, j }, tile, objects, npcs) {
         if (objects[i] && objects[i][j] && (objects[i][j]).object) {
-            return npcs[(objects[i][j]).object].object;
+            return npcs[(objects[i][j]).object];
         }
 
-        return object;
+        return tile;
     }
 }
 

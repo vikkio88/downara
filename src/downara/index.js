@@ -21,12 +21,21 @@ const AREA = {
         y: 6,
     }
 };
+
+const NPC_ALIGNMENT = {
+    FRIENDLY: 'friendly',
+    ENEMY: 'enemy',
+}
 const NPC = {
     MUM: 'mum'
 };
 
 const npcs = {
-    [NPC.MUM]: { object: 'woman_1' }
+    [NPC.MUM]: {
+        object: 'woman_1',
+        alignment: NPC_ALIGNMENT.FRIENDLY,
+        description: 'vedi tua madre che fa quello che le mamme fanno di solito.'
+    }
 }
 
 const initialWorldState = {

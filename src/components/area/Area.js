@@ -27,7 +27,7 @@ const Tile = ({
                     url(assets/objects/knight_1.png),` : ''
                     }
                     ${object ? `no-repeat center
-                    url(assets/objects/${object}.png),` : ''
+                    url(assets/objects/${object.object}.png),` : ''
                     } 
                     url(assets/tiles/${terrain}.png)
                 `
@@ -56,7 +56,7 @@ const Area = ({ label }) => {
                     >
                         {range(0, AREA.size.x).map((_, j) => {
                             const tileConfig = areas[worldPosition][i][j];
-                            const object = areaHelper.getObject({ i, j }, tileConfig, areaObjects, npcs);
+                            const object = areaHelper.getTileContent({ i, j }, tileConfig, areaObjects, npcs);
                             return (
                                 <Tile
                                     key={`j-${j}`}

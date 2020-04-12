@@ -1,4 +1,4 @@
-import { initialGameState, areaHelper } from 'lib/game';
+import { initialGameState, areaHelper, STATUSES } from 'lib/game';
 import { map } from 'downara';
 
 export default store => {
@@ -34,7 +34,6 @@ export default store => {
                 }
             }
         }
-
     });
 
     store.on('moveToTile', ({ gameState }, newPosition) => {
@@ -50,6 +49,12 @@ export default store => {
                 }
             },
         }
+    });
+
+    store.on('interact', ({ gameState }, tile) => {
+        return {
+
+        };
     });
 
     /*
