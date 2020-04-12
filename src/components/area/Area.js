@@ -1,16 +1,16 @@
 import React from 'react';
 import { useStoreon } from 'storeon/react';
 
-import { range, randomizer } from 'lib';
+import { range } from 'lib';
 import { Button } from 'components/common';
-import { AREA } from 'downara';
+import { AREA, npcs } from 'downara';
 import areas from 'downara/areas';
 import { areaHelper } from 'lib/game';
 
 const Tile = ({
     label = " ",
     terrain = "grass_4",
-    object = "house_3",
+    object = null,
     player = false,
     actionable = false,
     position = null
@@ -40,7 +40,9 @@ const Tile = ({
 
 const Area = ({ label }) => {
     const { gameState: { player, worldPosition } } = useStoreon('gameState');
+    const { worldState: { objects } } = useStoreon('worldState');
     const { areaPosition: playerAreaPosition } = player;
+    const areaObjects = objects[worldPosition];
     return (
         <>
             <h1>{label}</h1>
@@ -52,15 +54,20 @@ const Area = ({ label }) => {
                         key={`i-${i}`}
                         className="flex-1 flex flex-row items-stretch"
                     >
-                        {range(0, AREA.size.x).map((_, j) => (
-                            <Tile
-                                key={`j-${j}`}
-                                {...areas[worldPosition][i][j]}
-                                player={areaHelper.isPlayerInTile(playerAreaPosition, i, j)}
-                                actionable={areaHelper.isTileActionable(playerAreaPosition, i, j)}
-                                position={{ i, j }}
-                            />
-                        ))}
+                        {range(0, AREA.size.x).map((_, j) => {
+                            const tileConfig = areas[worldPosition][i][j];
+                            const object = areaHelper.getObject({ i, j }, tileConfig, areaObjects, npcs);
+                            return (
+                                <Tile
+                                    key={`j-${j}`}
+                                    {...tileConfig}
+                                    object={object}
+                                    player={areaHelper.isPlayerInTile(playerAreaPosition, i, j)}
+                                    actionable={areaHelper.isTileActionable(playerAreaPosition, i, j)}
+                                    position={{ i, j }}
+                                />
+                            );
+                        })}
                     </div>
                 ))}
             </div>

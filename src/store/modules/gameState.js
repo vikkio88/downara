@@ -1,5 +1,6 @@
 import { initialGameState, areaHelper } from 'lib/game';
 import { map } from 'downara';
+
 export default store => {
     store.on('@init', () => {
         const { player: { areaPosition } } = initialGameState;

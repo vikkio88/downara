@@ -20,9 +20,26 @@ const AREA = {
         x: 6,
         y: 6,
     }
+};
+const NPC = {
+    MUM: 'mum'
+};
+
+const npcs = {
+    [NPC.MUM]: { object: 'woman_1' }
 }
+
+const initialWorldState = {
+    objects: {
+        0: { 0: { 0: { object: NPC.MUM } } }
+    }
+};
+
 export {
     map,
+    npcs,
+    NPC,
+    initialWorldState,
     AREA,
     LABELS,
     DIRECTIONS_LABELS,
