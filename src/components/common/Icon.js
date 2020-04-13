@@ -12,7 +12,7 @@ const Icon = ({ name, className = '', ...others }) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            className={`fill-current ${className}`}
+            className={`fill-current h-6 w-6 ${className}`}
             viewBox="0 0 20 20"
             {...others}
         >

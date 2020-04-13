@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStoreon } from 'storeon/react';
 
-import { Button, Icon } from 'components/common';
+import { Icon } from 'components/common';
 
 const Message = () => {
     const { dispatch, ui: { message } } = useStoreon('ui');
@@ -11,7 +11,7 @@ const Message = () => {
             <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
                 <Icon
                     name={Icon.names.CROSS}
-                    className="h-6 w-6 text-blue-500"
+                    className="text-blue-500"
                     role="button"
                     onClick={() => dispatch('clearMessage')}
                 />

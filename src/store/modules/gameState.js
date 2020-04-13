@@ -1,5 +1,6 @@
-import { areaHelper } from 'lib/game';
-import { initialGameState, map } from 'downara';
+import { areaHelper, STATUSES, gameHelper } from 'lib/game';
+import { initialGameState, map, interactables } from 'downara';
+import { MESSAGES } from 'downara/mapObjects';
 
 export default store => {
     store.on('@init', () => {
@@ -51,9 +52,27 @@ export default store => {
         }
     });
 
-    store.on('interact', ({ gameState }, tile) => {
-        return {
+    store.on('interact', ({ gameState, worldState }) => {
+        const tileObject = gameHelper.getTileContent(gameState, worldState, interactables);
+        if (!tileObject.interaction) {
+            store.dispatch('message', MESSAGES.INVALID_INTERACTION);
+            return;
+        }
 
+        return {
+            gameState: {
+                ...gameState,
+                status: STATUSES.SPEAKING
+            }
+        };
+    });
+
+    store.on('stopDialogue', ({ gameState }) => {
+        return {
+            gameState: {
+                ...gameState,
+                status: STATUSES.IDLE
+            }
         };
     });
 

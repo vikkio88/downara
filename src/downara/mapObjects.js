@@ -15,6 +15,10 @@ const OBJECT_DESCRIPTIONS = {
     [NPC.MUM]: `C'è tua madre.`,
     [LOCATIONS.BAKERY]: `Il Panificio`,
     default: `Non c'è niente di interessante.`
+};
+
+const MESSAGES = {
+    INVALID_INTERACTION: `Niente da fare qui...`
 }
 
 
@@ -22,13 +26,15 @@ const interactables = {
     [NPC.MUM]: {
         object: 'woman_1',
         alignment: NPC_ALIGNMENT.FRIENDLY,
-        description: OBJECT_DESCRIPTIONS[NPC.MUM]
+        description: OBJECT_DESCRIPTIONS[NPC.MUM],
+        interaction: true
     },
     [LOCATIONS.BAKERY]: {
         object: 'house_3',
-        description: OBJECT_DESCRIPTIONS[LOCATIONS.BAKERY]
+        description: OBJECT_DESCRIPTIONS[LOCATIONS.BAKERY],
+        interaction: true
     }
 };
 
 
-export { interactables, LOCATIONS, NPC, NPC_ALIGNMENT, OBJECT_DESCRIPTIONS };
+export { interactables, LOCATIONS, NPC, NPC_ALIGNMENT, OBJECT_DESCRIPTIONS, MESSAGES };

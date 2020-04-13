@@ -58,10 +58,19 @@ const areaHelper = {
 
         return null;
     }
-}
+};
+
+const gameHelper = {
+    getTileContent(gameState, worldState, interactables) {
+        const { actionedTile, worldPosition } = gameState;
+        const { objects } = worldState;
+        const areaObjects = objects[worldPosition];
+        return areaHelper.getTileContent(actionedTile.position, actionedTile, areaObjects, interactables);
+    }
+};
 
 export {
-    mapHelper, areaHelper,
+    mapHelper, areaHelper, gameHelper,
     DIRECTIONS, STATUSES,
     ACTIONS
 };

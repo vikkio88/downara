@@ -1,5 +1,5 @@
 import { interactables, OBJECT_DESCRIPTIONS } from 'downara';
-import { areaHelper } from 'lib/game';
+import { gameHelper } from 'lib/game';
 
 export default store => {
     store.on('@init', () => {
@@ -10,11 +10,12 @@ export default store => {
         };
     });
 
+    store.on('message', ({ ui }, message) => {
+        return { ui: { message } };
+    });
+
     store.on('examine', ({ ui, worldState, gameState }) => {
-        const { actionedTile, worldPosition } = gameState;
-        const { objects } = worldState;
-        const areaObjects = objects[worldPosition];
-        const tile = areaHelper.getTileContent(actionedTile.position, actionedTile, areaObjects, interactables);
+        const tile = gameHelper.getTileContent(gameState, worldState, interactables);
         return {
             ui: {
                 ...ui,

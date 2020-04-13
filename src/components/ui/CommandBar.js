@@ -5,7 +5,7 @@ const CommandBar = ({ children }) => {
         <div className={`
         text-gray-700 text-center
         bg-gray-400
-        m-2 flex-1 flex`}
+        m-2 flex-1 flex min-h-oneThird`}
         >
             {children}
         </div>

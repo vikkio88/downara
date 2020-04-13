@@ -310,6 +310,7 @@ module.exports = {
     }),
     maxHeight: {
       full: '100%',
+      twoThird: '75%',
       screen: '100vh',
     },
     maxWidth: (theme, { breakpoints }) => ({
@@ -330,6 +331,7 @@ module.exports = {
     minHeight: {
       '0': '0',
       half: '50%',
+      oneThird: '22%',
       twoThird: '75%',
       full: '100%',
       screen: '100vh',

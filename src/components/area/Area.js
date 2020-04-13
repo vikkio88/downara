@@ -41,14 +41,14 @@ const Tile = ({
     );
 }
 
-const Area = ({ label }) => {
-    const { gameState: { player, worldPosition } } = useStoreon('gameState');
+const Area = () => {
+    const { gameState: { player, worldPosition, area } } = useStoreon('gameState');
     const { worldState: { objects, flags } } = useStoreon('worldState');
     const { areaPosition: playerAreaPosition } = player;
     const areaObjects = objects[worldPosition];
     return (
         <>
-            <h1>{label}</h1>
+            <h1>{area.label}</h1>
             <div
                 className="flex-1 flex flex-col items-stretch"
             >
