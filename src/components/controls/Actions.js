@@ -8,20 +8,28 @@ import { ACTIONS, areaHelper } from 'lib/game';
 const Actions = () => {
     const { dispatch, gameState: { player, actionedTile } } = useStoreon('gameState');
     const { areaPosition: playerAreaPosition } = player;
+    const isPlayerTile = areaHelper.isSameTile(actionedTile.position, playerAreaPosition);
     return (
         <div>
             <Button
                 className="flex-1"
                 label={ACTIONS_LABELS[ACTIONS.MOVE]}
-                disabled={areaHelper.isSameTile(actionedTile.position, playerAreaPosition)}
+                disabled={isPlayerTile}
                 onClick={() => dispatch('moveToTile', actionedTile.position)}
             />
 
             <Button
                 className="flex-1"
-                label="Esamina"
-                disabled={!areaHelper.isSameTile(actionedTile.position, playerAreaPosition)}
+                label={ACTIONS_LABELS[ACTIONS.EXAMINE]}
+                disabled={!isPlayerTile}
                 onClick={() => dispatch('examine')}
+            />
+            
+            <Button
+                className="flex-1"
+                label={ACTIONS_LABELS[ACTIONS.INTERACT]}
+                disabled={!isPlayerTile}
+                onClick={() => dispatch('interact')}
             />
         </div>
     );

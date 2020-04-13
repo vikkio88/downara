@@ -3,7 +3,7 @@ import { useStoreon } from 'storeon/react';
 
 import { range } from 'lib';
 import { Button } from 'components/common';
-import { AREA, npcs } from 'downara';
+import { AREA, interactables } from 'downara';
 import areas from 'downara/areas';
 import { areaHelper } from 'lib/game';
 
@@ -55,7 +55,7 @@ const Area = ({ label }) => {
                     >
                         {range(0, AREA.size.x).map((_, j) => {
                             const tileConfig = areas[worldPosition][i][j];
-                            const object = areaHelper.getTileContent({ i, j }, tileConfig, areaObjects, npcs);
+                            const object = areaHelper.getTileContent({ i, j }, tileConfig, areaObjects, interactables);
                             return (
                                 <Tile
                                     key={`j-${j}`}

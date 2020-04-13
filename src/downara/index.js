@@ -1,5 +1,5 @@
 import { DIRECTIONS, ACTIONS, STATUSES } from 'lib/game';
-import { NPC, npcs, OBJECT_DESCRIPTIONS } from './npcs';
+import { interactables, NPC, LOCATIONS, OBJECT_DESCRIPTIONS } from './mapObjects';
 import map from './map';
 
 const DIRECTIONS_LABELS = {
@@ -25,7 +25,10 @@ const AREA = {
 
 const initialWorldState = {
     objects: {
-        0: { 3: { 3: { object: NPC.MUM } } }
+        0: {
+            2: { 3: { object: NPC.MUM } },
+            5: { 4: { object: LOCATIONS.BAKERY } },
+        }
     }
 };
 
@@ -44,8 +47,9 @@ export {
     initialGameState,
     initialWorldState,
     map,
-    npcs,
+    interactables,
     NPC,
+    LOCATIONS,
     OBJECT_DESCRIPTIONS,
     AREA,
     DIRECTIONS_LABELS,

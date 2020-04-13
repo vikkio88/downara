@@ -1,4 +1,4 @@
-import { npcs, OBJECT_DESCRIPTIONS } from 'downara';
+import { interactables, OBJECT_DESCRIPTIONS } from 'downara';
 import { areaHelper } from 'lib/game';
 
 export default store => {
@@ -14,7 +14,7 @@ export default store => {
         const { actionedTile, worldPosition } = gameState;
         const { objects } = worldState;
         const areaObjects = objects[worldPosition];
-        const tile = areaHelper.getTileContent(actionedTile.position, actionedTile, areaObjects, npcs);
+        const tile = areaHelper.getTileContent(actionedTile.position, actionedTile, areaObjects, interactables);
         return {
             ui: {
                 ...ui,
