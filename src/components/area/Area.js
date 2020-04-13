@@ -12,7 +12,8 @@ const Tile = ({
     object = null,
     player = false,
     actionable = false,
-    position = null
+    position = null,
+    flag = null
 }) => {
     const { dispatch } = useStoreon('gameState');
     return (
@@ -22,6 +23,9 @@ const Tile = ({
             className="flex-1 flex items-center justify-center m-0"
             style={{
                 'background': `
+                    ${flag ? `no-repeat top right
+                    url(assets/flags/flag_red.png),` : ''
+                    }
                     ${player ? `no-repeat
                     url(assets/objects/knight_1.png),` : ''
                     }
@@ -64,6 +68,7 @@ const Area = ({ label }) => {
                                     player={areaHelper.isPlayerInTile(playerAreaPosition, i, j)}
                                     actionable={areaHelper.isTileActionable(playerAreaPosition, i, j)}
                                     position={{ i, j }}
+                                    flag={i === 0 && j === 1}
                                 />
                             );
                         })}
