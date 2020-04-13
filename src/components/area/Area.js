@@ -27,7 +27,7 @@ const Tile = ({
                     url(assets/flags/flag_red.png),` : ''
                     }
                     ${player ? `no-repeat
-                    url(assets/objects/knight_1.png),` : ''
+                    url(assets/objects/${player.icon}.png),` : ''
                     }
                     ${object ? `no-repeat center
                     url(assets/objects/${object.object}.png),` : ''
@@ -43,7 +43,7 @@ const Tile = ({
 
 const Area = ({ label }) => {
     const { gameState: { player, worldPosition } } = useStoreon('gameState');
-    const { worldState: { objects } } = useStoreon('worldState');
+    const { worldState: { objects, flags } } = useStoreon('worldState');
     const { areaPosition: playerAreaPosition } = player;
     const areaObjects = objects[worldPosition];
     return (
@@ -65,10 +65,10 @@ const Area = ({ label }) => {
                                     key={`j-${j}`}
                                     {...tileConfig}
                                     object={object}
-                                    player={areaHelper.isPlayerInTile(playerAreaPosition, i, j)}
+                                    player={areaHelper.isPlayerInTile(playerAreaPosition, i, j) && player}
                                     actionable={areaHelper.isTileActionable(playerAreaPosition, i, j)}
                                     position={{ i, j }}
-                                    flag={i === 0 && j === 1}
+                                    flag={areaHelper.getFlag({ i, j }, flags[worldPosition])}
                                 />
                             );
                         })}

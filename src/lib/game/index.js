@@ -44,12 +44,19 @@ const areaHelper = {
     isSameTile({ i, j }, { i: i1, j: j1 }) {
         return i === i1 && j === j1;
     },
-    getTileContent({ i, j }, tile, objects, npcs) {
+    getTileContent({ i, j }, tile, objects, interactables) {
         if (objects[i] && objects[i][j] && (objects[i][j]).object) {
-            return npcs[(objects[i][j]).object];
+            return interactables[(objects[i][j]).object];
         }
 
         return tile;
+    },
+    getFlag({ i, j }, flags) {
+        if (flags[i] && flags[i][j] && (flags[i][j]).icon) {
+            return (flags[i][j]).icon;
+        }
+
+        return null;
     }
 }
 

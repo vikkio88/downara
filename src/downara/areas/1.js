@@ -1,3 +1,50 @@
 export default {
-
+    0: {
+        0: { terrain: 'grass_1', object: null, },
+        1: { terrain: 'grass_1', object: 'tree_2', },
+        2: { terrain: 'grass_1', object: null, },
+        3: { terrain: 'grass_1', object: 'hill_1', },
+        4: { terrain: 'grass_1', object: 'hill_2', },
+        5: { terrain: 'grass_1', object: 'tree_1', },
+    },
+    1: {
+        0: { terrain: 'grass_1', object: 'house_2', },
+        1: { terrain: 'grass_1', object: 'houses_2', },
+        2: { terrain: 'grass_1', object: 'house_1', },
+        3: { terrain: 'grass_1', object: 'mansion_2', },
+        4: { terrain: 'grass_1', object: 'tree_1', },
+        5: { terrain: 'grass_1', object: 'house_3', },
+    },
+    2: {
+        0: { terrain: 'grass_1', object: 'house_1', },
+        1: { terrain: 'grass_1', object: 'houses_1', },
+        2: { terrain: 'grass_1', object: 'house_3', },
+        3: { terrain: 'grass_1', object: null, },
+        4: { terrain: 'grass_1', object: 'mansion_1', },
+        5: { terrain: 'grass_1', object: 'house_1', },
+    },
+    3: {
+        0: { terrain: 'sand_1', object: 'mansion_2', },
+        1: { terrain: 'sand_1', object: 'mansion_1', },
+        2: { terrain: 'sand_1', object: null, },
+        3: { terrain: 'sand_1', object: null, },
+        4: { terrain: 'sand_1', object: null, },
+        5: { terrain: 'sand_1', object: null, },
+    },
+    4: {
+        0: { terrain: 'grass_1', object: 'house_1', },
+        1: { terrain: 'grass_1', object: 'tree_1', },
+        2: { terrain: 'grass_1', object: 'house_2', },
+        3: { terrain: 'grass_1', object: 'tree_1', },
+        4: { terrain: 'grass_1', object: 'house_3', },
+        5: { terrain: 'grass_1', object: 'mansion_1', },
+    },
+    5: {
+        0: { terrain: 'grass_1', object: null, },
+        1: { terrain: 'grass_1', object: null, },
+        2: { terrain: 'grass_1', object: 'tree_1', },
+        3: { terrain: 'grass_1', object: null, },
+        4: { terrain: 'grass_1', object: null },
+        5: { terrain: 'grass_1', object: null, },
+    },
 };
