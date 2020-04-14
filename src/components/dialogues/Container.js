@@ -1,4 +1,5 @@
 import React from 'react';
+import { useStoreon } from 'storeon/react';
 
 const Message = ({ character, message }) => {
     const selfMessage = Boolean(character);
@@ -26,19 +27,7 @@ const Message = ({ character, message }) => {
 }
 
 const Container = () => {
-    const messages = [
-        { character: 'Mamma', message: 'sup boy?' },
-        { message: 'not bad' },
-        { character: 'Mamma', message: 'sup boy?' },
-        { message: 'not bad' },
-        { character: 'Mamma', message: 'sup boy?' },
-        { message: 'not bad' },
-        { character: 'Mamma', message: 'sup boy?' },
-        { message: 'not bad' },
-        { character: 'Mamma', message: 'sup boy?' },
-        { message: 'not bad' },
-        
-    ]
+    const { dialogue: { messages } } = useStoreon('dialogue');
     return (
         <div
             className="flex-1 flex flex-col items-stretch bg-gray-200 shadow overflow-y-auto"

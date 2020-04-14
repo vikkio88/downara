@@ -49,7 +49,8 @@ const initialWorldState = {
 const initialGameState = {
     worldPosition: 0,
     player: {
-        life: 100,
+        hp: 100,
+        stats: {},
         icon: 'man_1',
         areaPosition: { i: 3, j: 2 }
     },

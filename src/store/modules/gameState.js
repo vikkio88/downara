@@ -1,5 +1,6 @@
 import { areaHelper, STATUSES, gameHelper } from 'lib/game';
-import { initialGameState, map, interactables } from 'downara';
+import { initialGameState, map, interactables, NPC } from 'downara';
+import dialogues from 'downara/dialogues';
 import { MESSAGES } from 'downara/mapObjects';
 
 export default store => {
@@ -58,6 +59,7 @@ export default store => {
             store.dispatch('message', MESSAGES.INVALID_INTERACTION);
             return;
         }
+        store.dispatch('initDialogue', { participant: 'Mum', lines: dialogues[NPC.MUM][0] });
 
         return {
             gameState: {
@@ -68,6 +70,7 @@ export default store => {
     });
 
     store.on('stopDialogue', ({ gameState }) => {
+        store.dispatch('clearDialogue');
         return {
             gameState: {
                 ...gameState,
