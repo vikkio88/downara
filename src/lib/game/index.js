@@ -78,6 +78,9 @@ const gameHelper = {
             worldState.objects[worldPosition][position.i][position.j].props.dialogue = newDialoguePointer;
         }
         return worldState;
+    },
+    updateGameStatePostDialogue() {
+
     }
 };
 

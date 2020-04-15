@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useStoreon } from 'storeon/react';
 
 import { Button, Icon } from 'components/common';
@@ -10,14 +10,46 @@ const Actions = () => {
     const { areaPosition: playerAreaPosition } = player;
     const isPlayerTile = areaHelper.isSameTile(actionedTile.position, playerAreaPosition);
 
+    const [showMenu, setShowMenu] = useState(false);
 
+    if (showMenu) {
+        return (
+            <div>
+                <Button
+                    className="flex-1"
+                    secondary
+                    disabled={!isPlayerTile}
+                    onClick={() => setShowMenu(!showMenu)}
+                >
+                    <Icon name={Icon.names.MENU} />
+                </Button>
+                <div>
+                    <Button className="flex-1">
+                        <Icon name={Icon.names.BOX} />
+                    </Button>
+                    <Button className="flex-1">
+                        <Icon name={Icon.names.BOOK} />
+                    </Button>
+                    <Button className="flex-1">
+                        <Icon name={Icon.names.MAP} />
+                    </Button>
+                    <Button className="flex-1">
+                        <Icon name={Icon.names.USER} />
+                    </Button>
+                    <Button className="flex-1">
+                        <Icon name={Icon.names.SAVE} />
+                    </Button>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div>
             <Button
                 className="flex-1"
                 disabled={!isPlayerTile}
-                onClick={() => dispatch('examine')}
+                onClick={() => setShowMenu(!showMenu)}
             >
                 <Icon name={Icon.names.MENU} />
             </Button>
