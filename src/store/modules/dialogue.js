@@ -1,3 +1,4 @@
+const REPLY_TIMEOUT = 1500;
 const initialState = {
     finished: false,
     participant: null,
@@ -50,7 +51,7 @@ export default store => {
 
         setTimeout(
             () => store.dispatch('newMessage', { character: participant, message: lines[reply.link].message }),
-            1000
+            REPLY_TIMEOUT
         );
 
         return {
