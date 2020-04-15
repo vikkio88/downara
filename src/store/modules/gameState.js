@@ -84,7 +84,7 @@ export default store => {
     store.on('postDialogue', ({ gameState }, postDialogue) => {
         if (postDialogue.worldState) {
             // I could set flag here too for the quest
-            store.dispatch('updateWorldPostDialogue', { postDialogue })
+            store.dispatch('updateWorldPostDialogue', postDialogue)
         }
 
         if (postDialogue.gameState) {
