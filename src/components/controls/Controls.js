@@ -7,11 +7,19 @@ import { STATUSES } from 'lib/game';
 const Controls = () => {
     const { gameState: { status } } = useStoreon('gameState');
     const { ui: { message } } = useStoreon('ui');
+
+    if (status === STATUSES.SPEAKING) {
+        return (
+            <div className="flex-1 flex items-center">
+                {status === STATUSES.SPEAKING && !message && <Dialogue />}
+            </div>
+        );
+    }
+
     return (
-        <div className={`flex-1 flex items-center justify-center`}>
+        <div className="flex-1 flex items-center justify-center">
             {message && <Message />}
             {status === STATUSES.IDLE && !message && <Actions />}
-            {status === STATUSES.SPEAKING && !message && <Dialogue />}
         </div>
     );
 };

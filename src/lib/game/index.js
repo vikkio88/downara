@@ -67,6 +67,17 @@ const gameHelper = {
         const { objects } = worldState;
         const areaObjects = objects[worldPosition];
         return areaHelper.getTileContent(actionedTile.position, actionedTile, areaObjects, interactables);
+    },
+    updateWorldStatePostDialogue(worldState, gameState, payload) {
+        const { actionedTile: { position }, worldPosition } = gameState;
+        // maybe consider using optional chaining?
+        if (worldState.objects[worldPosition] && worldState.objects[worldPosition][position.i]
+            && worldState.objects[worldPosition][position.i][position.j]
+            && worldState.objects[worldPosition][position.i][position.j].props) {
+            const { newDialoguePointer = 0 } = payload;
+            worldState.objects[worldPosition][position.i][position.j].props.dialogue = newDialoguePointer;
+        }
+        return worldState;
     }
 };
 

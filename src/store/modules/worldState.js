@@ -1,5 +1,6 @@
 
 import { initialWorldState } from 'downara';
+import { gameHelper } from 'lib/game';
 
 export default store => {
     store.on('@init', () => {
@@ -8,12 +9,8 @@ export default store => {
         }
     });
 
-    store.on('updateWorldPostDialogue', ({ worldState }, payload) => {
-        // this needs to go on helper
-        const { worldPosition, position, newDialoguePointer } = payload;
-        worldState.objects[worldPosition][position.i][position.j].props.dialogue = newDialoguePointer;
-        console.log('yo', worldState);
-        return worldState;
+    store.on('updateWorldPostDialogue', ({ worldState, gameState }, payload) => {
+        return gameHelper.updateWorldStatePostDialogue(worldState, gameState, payload);
     });
 
 };

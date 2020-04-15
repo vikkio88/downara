@@ -8,15 +8,15 @@ export default {
             ]
         },
         1: {
-            message: 'Ah... ok, sei passato dalla zza Maria?', replies: [
+            message: 'Ah...Sei passato dalla zza Maria?', replies: [
                 { link: 3, message: 'Chi è la zza Maria?' },
-                { link: 4, message: 'Ovvio che no!' },
+                { link: 4, message: 'Non ancora...' },
             ]
         },
         2: {
             message: 'Oh! Sto parlando con te!', replies: [
                 { link: 1, message: `Che c'è?` },
-                { link: 1, message: 'Che vvolevi dirmi?' },
+                { link: 1, message: 'Che volevi dirmi?' },
             ]
         },
         3: {
@@ -26,11 +26,13 @@ export default {
             ]
         },
         4: {
-            message: 'Ok! Ti aspetto a casa. A Dopo',
+            message: 'Ok! Sai dove si trova, giusto? Ti aspetto a casa. A Dopo. Prendi anche questi soldi.',
             replies: [],
             postDialogue: {
+                worldState: true,
+                gameState: true,
                 quest: 0,
-                newDialoguePointer: 1
+                newDialoguePointer: 1,
             }
         },
     },
