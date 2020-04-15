@@ -46,7 +46,8 @@ const areaHelper = {
     },
     getTileContent({ i, j }, tile, objects, interactables) {
         if (objects[i] && objects[i][j] && (objects[i][j]).object) {
-            return interactables[(objects[i][j]).object];
+            const tileOverwrite = (objects[i][j]);
+            return { ...interactables[tileOverwrite.object], ...tileOverwrite.props };
         }
 
         return tile;

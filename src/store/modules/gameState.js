@@ -1,5 +1,5 @@
 import { areaHelper, STATUSES, gameHelper } from 'lib/game';
-import { initialGameState, map, interactables, NPC } from 'downara';
+import { initialGameState, map, interactables } from 'downara';
 import dialogues from 'downara/dialogues';
 import { MESSAGES } from 'downara/mapObjects';
 
@@ -59,7 +59,9 @@ export default store => {
             store.dispatch('message', MESSAGES.INVALID_INTERACTION);
             return;
         }
-        store.dispatch('initDialogue', { participant: 'Mum', lines: dialogues[NPC.MUM][0] });
+
+        const { name, id } = tileObject;
+        store.dispatch('initDialogue', { participant: { name, id }, lines: dialogues[tileObject.id][tileObject.dialogue] });
 
         return {
             gameState: {
@@ -77,6 +79,13 @@ export default store => {
                 status: STATUSES.IDLE
             }
         };
+    });
+
+    store.on('postDialogue', ({ gameState }, postDialogue) => {
+        const { actionedTile: { position }, worldPosition } = gameState;
+        if (postDialogue.newDialoguePointer) {
+            store.dispatch('updateWorldPostDialogue', { worldPosition, position, newDialoguePointer: postDialogue.newDialoguePointer })
+        }
     });
 
     /*

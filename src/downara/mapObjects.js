@@ -24,6 +24,8 @@ const MESSAGES = {
 
 const interactables = {
     [NPC.MUM]: {
+        id: NPC.MUM,
+        name: 'Mamma',
         object: 'woman_1',
         alignment: NPC_ALIGNMENT.FRIENDLY,
         description: OBJECT_DESCRIPTIONS[NPC.MUM],
@@ -32,7 +34,7 @@ const interactables = {
     [LOCATIONS.BAKERY]: {
         object: 'house_3',
         description: OBJECT_DESCRIPTIONS[LOCATIONS.BAKERY],
-        interaction: true
+        interaction: false
     }
 };
 

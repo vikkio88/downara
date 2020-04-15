@@ -24,7 +24,7 @@ export default store => {
                 currentLine: 0,
                 participant,
                 lines,
-                messages: [{ character: participant, message: lines[0].message }]
+                messages: [{ character: participant.name, message: lines[0].message }]
             }
         };
     });
@@ -50,11 +50,18 @@ export default store => {
 
     store.on('reply', ({ dialogue }, reply) => {
         const { messages, participant, lines } = dialogue;
-
+        const nextLines = lines[reply.link];
         setTimeout(
-            () => store.dispatch('newMessage', { character: participant, message: lines[reply.link].message }),
+            () => store.dispatch('newMessage', { character: participant.name, message: nextLines.message }),
             REPLY_TIMEOUT
         );
+
+        const { postDialogue = null } = nextLines;
+        if (postDialogue) {
+            //trigger postDialogue
+            store.dispatch('postDialogue', postDialogue);
+            // I could use participant.id, choose to use tile position
+        }
 
         return {
             dialogue: {

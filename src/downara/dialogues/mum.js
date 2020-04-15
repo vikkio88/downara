@@ -28,8 +28,18 @@ export default {
         4: {
             message: 'Ok! Ti aspetto a casa. A Dopo',
             replies: [],
-            
+            postDialogue: {
+                quest: 0,
+                newDialoguePointer: 1
+            }
         },
+    },
 
+    // after first quest
+    1: {
+        0: {
+            message: 'Ancora qua sei? Vai dalla zza Maria, ricorda, mezzo chilo e due panini vuoti.',
+            replies: []
+        }
     }
 };

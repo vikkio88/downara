@@ -35,7 +35,7 @@ const AREA = {
 const initialWorldState = {
     objects: {
         0: {
-            2: { 3: { object: NPC.MUM } },
+            2: { 3: { object: NPC.MUM, props: { dialogue: 0 } } },
             5: { 4: { object: LOCATIONS.BAKERY } },
         }
     },
