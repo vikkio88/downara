@@ -1,6 +1,7 @@
 const REPLY_TIMEOUT = 1500;
 const initialState = {
     finished: false,
+    waiting: false,
     participant: null,
     currentLine: null,
     lines: null,
@@ -41,6 +42,7 @@ export default store => {
         return {
             dialogue: {
                 ...dialogue,
+                waiting: false,
                 messages: [...messages, message]
             }
         };
@@ -57,6 +59,7 @@ export default store => {
         return {
             dialogue: {
                 ...dialogue,
+                waiting: true,
                 currentLine: reply.link,
                 messages: [...messages, { message: reply.message }]
             }

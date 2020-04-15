@@ -1,6 +1,7 @@
 import { ACTIONS, STATUSES } from 'lib/game';
 import { interactables, NPC, LOCATIONS, OBJECT_DESCRIPTIONS } from './mapObjects';
 import map from './map';
+import LABELS from './labels';
 
 const FLAGS = {
     FLAG_RED: 'flag_red',
@@ -52,7 +53,8 @@ const initialGameState = {
         hp: 100,
         stats: {},
         icon: 'man_1',
-        areaPosition: { i: 3, j: 2 }
+        //areaPosition: { i: 3, j: 2 }
+        areaPosition: { i: 2, j: 3 }
     },
     status: STATUSES.IDLE,
     area: null,
@@ -68,5 +70,6 @@ export {
     LOCATIONS,
     OBJECT_DESCRIPTIONS,
     AREA,
-    ACTIONS_LABELS
+    ACTIONS_LABELS,
+    LABELS
 };
