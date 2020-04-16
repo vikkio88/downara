@@ -53,8 +53,7 @@ const initialGameState = {
         hp: 100,
         stats: {},
         icon: 'man_1',
-        //areaPosition: { i: 3, j: 2 }
-        areaPosition: { i: 2, j: 3 }
+        areaPosition: { i: 3, j: 2 }
     },
     status: STATUSES.IDLE,
     area: null,
