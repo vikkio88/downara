@@ -8,6 +8,7 @@ import { ACTIONS, areaHelper } from 'lib/game';
 
 const Actions = () => {
     const { dispatch, gameState: { player, actionedTile } } = useStoreon('gameState');
+    const { ui: { notification } } = useStoreon('ui');
     const { areaPosition: playerAreaPosition } = player;
     const isPlayerTile = areaHelper.isSameTile(actionedTile.position, playerAreaPosition);
 
@@ -50,6 +51,7 @@ const Actions = () => {
             <Button
                 className="flex-1"
                 disabled={!isPlayerTile}
+                notification={Boolean(notification)}
                 onClick={() => setShowMenu(!showMenu)}
             >
                 <Icon name={Icon.names.MENU} />

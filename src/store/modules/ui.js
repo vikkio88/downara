@@ -7,12 +7,18 @@ export default store => {
             ui: {
                 message: null,
                 view: null,
+                notification: null
             }
         };
     });
 
     store.on('message', ({ ui }, message) => {
         return { ui: { message } };
+    });
+
+    store.on('notify', ({ ui }, notification) => {
+        console.log('notify', notification);
+        return { ui: { ...ui, notification: notification } };
     });
 
     store.on('examine', ({ ui, worldState, gameState }) => {
@@ -26,7 +32,8 @@ export default store => {
     });
 
     store.on('changeView', ({ ui }, view) => {
-        return { ui: { ...ui, view: view } };
+        // test for notification I am unsetting the notification
+        return { ui: { ...ui, view: view, notification: null } };
     });
 
     store.on('clearMessage', ({ ui }) => {

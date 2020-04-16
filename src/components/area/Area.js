@@ -19,6 +19,7 @@ const Tile = ({
     return (
         <Button
             secondary
+            rounded={false}
             noMargin
             className="flex-1 flex items-center justify-center m-0"
             style={{
