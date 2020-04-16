@@ -14,7 +14,6 @@ function Main() {
   const { gameState: { status } } = useStoreon('gameState');
   const { ui: { view } } = useStoreon('ui');
 
-
   return (
     <div className="container h-screen mx-auto flex flex-col bg-gray-200">
       {view && <View />}
