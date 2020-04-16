@@ -5,7 +5,8 @@ export default store => {
     store.on('@init', () => {
         return {
             ui: {
-                message: null
+                message: null,
+                view: null,
             }
         };
     });
@@ -22,6 +23,10 @@ export default store => {
                 message: tile.description || OBJECT_DESCRIPTIONS.default
             }
         };
+    });
+
+    store.on('changeView', ({ ui }, view) => {
+        return { ui: { ...ui, view: view } };
     });
 
     store.on('clearMessage', ({ ui }) => {
