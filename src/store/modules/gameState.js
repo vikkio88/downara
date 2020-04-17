@@ -92,7 +92,8 @@ export default store => {
 
         if (postDialogue.gameState) {
             // but probably is better to keep the flag alongside the quest
-            gameHelper.updateGameStatePostDialogue();
+            //gameHelper.updateGameStatePostDialogue()
+            gameState.inventory.money = 1000;
         }
     });
 
