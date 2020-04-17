@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { useStoreon } from 'storeon/react';
 
 import { Button, Icon } from 'components/common';
-import { VIEWS } from 'components/views';
 import { ACTIONS_LABELS } from 'downara';
-import { ACTIONS, areaHelper } from 'lib/game';
+import { ACTIONS, VIEWS, areaHelper } from 'lib/game';
 
 const Actions = () => {
     const { dispatch, gameState: { player, actionedTile } } = useStoreon('gameState');

@@ -17,6 +17,14 @@ const ACTIONS = {
     MOVE: 'move'
 };
 
+const VIEWS = {
+    INVENTORY: 'inventory',
+    JOURNAL: 'journal',
+    MAP: 'map',
+    PROFILE: 'profile',
+    SETTINGS: 'settings',
+};
+
 const mapHelper = {
     move(direction, map, currentPosition) {
         if (this.isValidDirection(map[currentPosition][direction])) {
@@ -87,5 +95,5 @@ const gameHelper = {
 export {
     mapHelper, areaHelper, gameHelper,
     DIRECTIONS, STATUSES,
-    ACTIONS
+    ACTIONS, VIEWS
 };

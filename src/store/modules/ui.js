@@ -17,7 +17,6 @@ export default store => {
     });
 
     store.on('notify', ({ ui }, notification) => {
-        console.log('notify', notification);
         return { ui: { ...ui, notification: notification } };
     });
 
@@ -32,7 +31,6 @@ export default store => {
     });
 
     store.on('changeView', ({ ui }, view) => {
-        // test for notification I am unsetting the notification
         return { ui: { ...ui, view: view, notification: null } };
     });
 
