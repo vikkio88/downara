@@ -35,7 +35,7 @@ const Message = ({ character, message }) => {
 
 const TypingDots = () => {
     return (
-        <div id="wave" className="flex flex-row justify-end pr-2">
+        <div id="wave" className="flex flex-row justify-end pr-2 mr-2">
             <span className="dot"></span>
             <span className="dot"></span>
             <span className="dot"></span>
