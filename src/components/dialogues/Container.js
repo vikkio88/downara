@@ -1,5 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useStoreon } from 'storeon/react';
+
+import './TypingDots.css'
+
+const scrollToBottom = id => {
+    const element = document.getElementById(id);
+    element.scrollTop = element.scrollHeight;
+}
 
 const Message = ({ character, message }) => {
     const selfMessage = Boolean(character);
@@ -24,15 +31,28 @@ const Message = ({ character, message }) => {
             </div>
         </div>
     );
-}
+};
+
+const TypingDots = () => {
+    return (
+        <div id="wave" className="flex flex-row justify-end pr-2">
+            <span className="dot"></span>
+            <span className="dot"></span>
+            <span className="dot"></span>
+        </div>
+    );
+};
 
 const Container = () => {
-    const { dialogue: { messages } } = useStoreon('dialogue');
+    const { dialogue: { messages, waiting } } = useStoreon('dialogue');
+    useEffect(() => scrollToBottom('chat'))
     return (
         <div
+            id="chat"
             className="flex-1 flex flex-col items-stretch bg-gray-200 shadow overflow-y-auto"
         >
             {messages.map((m, i) => <Message key={`msg-${i}`} {...m} />)}
+            {waiting && <TypingDots />}
         </div>
     );
 };

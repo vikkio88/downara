@@ -19,21 +19,23 @@ const Dialogue = () => {
     const { dispatch, dialogue: { currentLine, lines, waiting } } = useStoreon('dialogue');
     return (
         <div className={`flex-1 flex flex-col items-center justify-center overflow-y-auto`}>
-            <Icon
-                role="button" name={Icon.names.CROSS}
-                onClick={() => dispatch('stopDialogue')}
-                title={LABELS.CLOSE}
-            />
             {!waiting &&
-                lines[currentLine].replies.map((r, i) => (
-                    <Line
-                        key={`reply-${currentLine}-${i}`}
-                        secondary
-                        noPadding
-                        onClick={() => dispatch('reply', r)}
-                        message={r.message}
+                <>
+                    <Icon
+                        role="button" name={Icon.names.CROSS}
+                        onClick={() => dispatch('stopDialogue')}
+                        title={LABELS.CLOSE}
                     />
-                ))
+                    {lines[currentLine].replies.map((r, i) => (
+                        <Line
+                            key={`reply-${currentLine}-${i}`}
+                            secondary
+                            noPadding
+                            onClick={() => dispatch('reply', r)}
+                            message={r.message}
+                        />
+                    ))}
+                </>
             }
 
             {!waiting && lines[currentLine].replies.length === 0 && <>{LABELS.NOTHING_TO_SAY}</>}
