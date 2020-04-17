@@ -3,14 +3,14 @@ import { useStoreon } from 'storeon/react';
 import { Icon, Button } from 'components/common';
 import { VIEWS } from 'lib/game';
 
-import { Inventory } from './subViews';
+import { Inventory, Journal, Map, Profile, Settings } from './subViews';
 
 const viewsMap = {
     [VIEWS.INVENTORY]: Inventory,
-    [VIEWS.JOURNAL]: Inventory,
-    [VIEWS.MAP]: Inventory,
-    [VIEWS.PROFILE]: Inventory,
-    [VIEWS.SETTINGS]: Inventory,
+    [VIEWS.JOURNAL]: Journal,
+    [VIEWS.MAP]: Map,
+    [VIEWS.PROFILE]: Profile,
+    [VIEWS.SETTINGS]: Settings,
 };
 
 const View = () => {
@@ -25,11 +25,7 @@ const View = () => {
                 </Button>
             </div>
 
-            <div
-                className="flex-1 flex flex-col
-            items-center justify-center shadow 
-            overflow-y-auto
-            ">
+            <div className="flex-1 flex flex-col shadow overflow-y-auto">
                 <Component />
             </div>
         </>

@@ -55,6 +55,9 @@ const initialGameState = {
         icon: 'man_1',
         areaPosition: { i: 3, j: 2 }
     },
+    inventory: {
+        money: 0
+    },
     status: STATUSES.IDLE,
     area: null,
 };

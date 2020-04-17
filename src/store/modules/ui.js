@@ -1,12 +1,13 @@
 import { interactables, OBJECT_DESCRIPTIONS } from 'downara';
-import { gameHelper } from 'lib/game';
+import { gameHelper, VIEWS } from 'lib/game';
 
 export default store => {
     store.on('@init', () => {
         return {
             ui: {
                 message: null,
-                view: null,
+                // Temp to test
+                view: VIEWS.INVENTORY,
                 notification: null
             }
         };
