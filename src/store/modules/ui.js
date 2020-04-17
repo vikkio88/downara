@@ -7,7 +7,8 @@ export default store => {
             ui: {
                 message: null,
                 // Temp to test
-                view: VIEWS.INVENTORY,
+                //view: VIEWS.INVENTORY,
+                view: null,
                 notification: null
             }
         };
