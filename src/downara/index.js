@@ -56,7 +56,8 @@ const initialGameState = {
         areaPosition: { i: 3, j: 2 }
     },
     inventory: {
-        money: 0
+        maxWeight: 10,
+        money: 0,
     },
     status: STATUSES.IDLE,
     area: null,
