@@ -79,7 +79,7 @@ const Item = ({ quantity, name, description, weight, actions }) => {
                         {description} {weight > 0 && (`${weight * quantity} kg`)}
                     </div>
                     <div className="mt-1 flex flex-row justify-end items-center" style={{ flex: 1 }}>
-                        {actions.map((a, i) => <Button key={i}><Icon name={ICON_ACTIONS_MAP[a]} /></Button>)}
+                        {actions.map((a, i) => <Button key={i}><Icon size={4} name={ICON_ACTIONS_MAP[a]} /></Button>)}
                     </div>
                 </div>
             )}

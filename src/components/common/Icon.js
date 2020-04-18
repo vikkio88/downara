@@ -34,12 +34,13 @@ const map = {
     [NAMES.T_SHIRT]: <path d='M7,0 L6,0 L0,3 L0,9 L4,8 L4,20 L16,20 L16,8 L20,9 L20,3 L14,0 L13,0 C13,1.65685425 11.6568542,3 10,3 C8.34314575,3 7,1.65685425 7,0 Z' />,
 }
 
-const Icon = ({ name, title = null, className = '', ...others }) => {
+const Icon = ({ name, title = null, size = 6, className = '', ...others }) => {
     const icon = map[name];
+    const sizeClass = `h-${size} w-${size}`
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            className={`fill-current h-6 w-6 ${className}`}
+            className={`fill-current ${sizeClass} ${className}`}
             viewBox="0 0 20 20"
             fillRule="evenodd"
             {...others}
