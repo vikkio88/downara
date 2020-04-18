@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { useStoreon } from 'storeon/react';
 import { Segment } from './common';
 import { LABELS } from 'downara';
+import { Icon } from 'components/common';
 
-const itemFactory = (type, name, description, quantity = 1) => {
+const itemFactory = (type, name, description, { quantity = 1, props = {} } = {}) => {
     return {
-        name, description, quantity, type, actions: ITEM_TYPES_ACTIONS[type]
+        name, description, quantity, type, actions: ITEM_TYPES_ACTIONS[type], props
     };
 };
 const ITEM_TYPES = {
@@ -32,12 +33,11 @@ const ITEM_TYPES_ACTIONS = {
 };
 
 const items = [
-    itemFactory(ITEM_TYPES.WEAPON, 'Cutidduzzu', 'un piccolo coltellino svizzero'),
+    itemFactory(ITEM_TYPES.WEAPON, 'Cutidduzzu', 'un piccolo coltellino svizzero', { damage: 3 }),
     itemFactory(ITEM_TYPES.WEARABLE, 'Elmetto Bauli®', 'un elmetto ottenuto dal cartone del panettone Bauli®'),
     itemFactory(ITEM_TYPES.QUEST_ITEM, 'Pane', '½ Kg di pane e due panini vuoti'),
-    itemFactory(ITEM_TYPES.CONSUMABLE, 'Goleador alla coca-cola', 'Rimedio contro qualsiasi ferita', 4),
-    itemFactory(ITEM_TYPES.CONSUMABLE, 'Cerotto', 'Cura +1', 10),
-
+    itemFactory(ITEM_TYPES.CONSUMABLE, 'Goleador alla coca-cola', 'Rimedio contro qualsiasi ferita', { quantity: 4 }),
+    itemFactory(ITEM_TYPES.CONSUMABLE, 'Cerotto', 'Rimedio contro qualsiasi ferita', { quantity: 10, props: { health: 1 } }),
 ];
 
 const Item = ({ quantity, name, description }) => {
@@ -48,16 +48,21 @@ const Item = ({ quantity, name, description }) => {
                 <div>
                     {quantity}
                 </div>
-                <div>
+                <div className="font-bold">
                     {name}
                 </div>
                 <div>
-                    Actions
+                    <Icon name={toggle ? Icon.names.CHEVRON_UP : Icon.names.CHEVRON_DOWN} />
                 </div>
             </div>
             {toggle && (
-                <div>
-                    {description}
+                <div className="flex flex-1 flex-row justify-between">
+                    <div className="p-2 mt-1" style={{ flex: 3 }}>
+                        {description}
+                    </div>
+                    <div className="p-2 mt-1" style={{ flex: 1 }}>
+                        Actions
+                    </div>
                 </div>
             )}
         </Segment>
