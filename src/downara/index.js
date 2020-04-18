@@ -52,7 +52,7 @@ const initialGameState = {
     player: {
         hp: 100,
         stats: {},
-        icon: 'man_1',
+        icon: 'man',
         areaPosition: { i: 3, j: 2 }
     },
     inventory: {

@@ -26,13 +26,13 @@ const interactables = {
     [NPC.MUM]: {
         id: NPC.MUM,
         name: 'Mamma',
-        object: 'woman_1',
+        object: 'woman',
         alignment: NPC_ALIGNMENT.FRIENDLY,
         description: OBJECT_DESCRIPTIONS[NPC.MUM],
         interaction: true
     },
     [LOCATIONS.BAKERY]: {
-        object: 'house_3',
+        object: 'house3',
         description: OBJECT_DESCRIPTIONS[LOCATIONS.BAKERY],
         interaction: false
     }
