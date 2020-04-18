@@ -4,12 +4,12 @@ object = randomizer.chance(50) ? null : randomizer.pickOne(['house_1', 'man_1', 
 */
 export default {
     0: {
-        0: { terrain: 'grass_1', object: null, },
+        0: { terrain: 'grass_1', object: 'mountains', blocked: true },
         1: { terrain: 'grass_1', object: 'tree2', },
-        2: { terrain: 'grass_1', object: null, },
+        2: { terrain: 'grass_1', object: 'mountains2', blocked: true },
         3: { terrain: 'grass_1', object: 'hill', },
-        4: { terrain: 'grass_1', object: 'hills', },
-        5: { terrain: 'grass_1', object: 'tree1', },
+        4: { terrain: 'grass_1', object: 'tree', },
+        5: { terrain: 'grass_1', object: 'trees', },
     },
     1: {
         0: { terrain: 'grass_1', object: 'house3', },
@@ -30,10 +30,10 @@ export default {
     3: {
         0: { terrain: 'sand_1', object: 'mansion', },
         1: { terrain: 'sand_1', object: 'mansion1', },
-        2: { terrain: 'sand_1', object: null, },
-        3: { terrain: 'sand_1', object: null, },
-        4: { terrain: 'sand_1', object: null, },
-        5: { terrain: 'sand_1', object: null, },
+        2: { terrain: 'sand_1', object: 'houses1', },
+        3: { terrain: 'sand_1', object: 'houses2', },
+        4: { terrain: 'sand_1', object: 'house1', },
+        5: { terrain: 'sand_1', object: 'house3', },
     },
     4: {
         0: { terrain: 'grass_1', object: 'house2', },
@@ -44,11 +44,11 @@ export default {
         5: { terrain: 'grass_1', object: 'mansion1', },
     },
     5: {
-        0: { terrain: 'grass_1', object: null, },
-        1: { terrain: 'grass_1', object: null, },
+        0: { terrain: 'grass_1', object: 'houses3', },
+        1: { terrain: 'grass_1', object: 'house1', },
         2: { terrain: 'grass_1', object: 'tree1', },
-        3: { terrain: 'grass_1', object: null, },
-        4: { terrain: 'grass_1', object: null },
-        5: { terrain: 'grass_1', object: null, },
+        3: { terrain: 'grass_1', object: 'houses2', },
+        4: { terrain: 'grass_1', object: 'houses1' },
+        5: { terrain: 'grass_1', object: 'mansion', },
     },
 };

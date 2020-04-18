@@ -10,6 +10,7 @@ import { areaHelper } from 'lib/game';
 const Tile = ({
     terrain = "grass_4",
     object = null,
+    blocked = false,
     player = false,
     actionable = false,
     position = null,
@@ -36,7 +37,7 @@ const Tile = ({
                     url(assets/tiles/${terrain}.png)
                 `
             }}
-            disabled={!actionable}
+            disabled={blocked || !actionable}
             onClick={() => dispatch('actioned', position)}
         />
     );
