@@ -55,6 +55,7 @@ export default store => {
 
     store.on('interact', ({ gameState, worldState }) => {
         const tileObject = gameHelper.getTileContent(gameState, worldState, interactables);
+
         if (!tileObject.interaction) {
             store.dispatch('message', MESSAGES.INVALID_INTERACTION);
             return;
@@ -85,7 +86,7 @@ export default store => {
         if (postDialogue.worldState) {
             // test for notification
             store.dispatch('notify', { inventory: true });
-            
+
             // I could set flag here too for the quest
             store.dispatch('updateWorldPostDialogue', postDialogue)
         }

@@ -52,7 +52,26 @@ const areaHelper = {
     isSameTile({ i, j }, { i: i1, j: j1 }) {
         return i === i1 && j === j1;
     },
+    getLink(gameState, areas) {
+        const tileConfig = this.getAreaTileConfig(gameState, areas);
+        if (tileConfig.link !== undefined) {
+            return tileConfig.link;
+        }
+
+        return null;
+    },
+    getAreaTileConfig({ worldPosition, actionedTile: { position } }, areas) {
+        const { i, j } = position;
+        return areas[worldPosition][i][j];
+    },
     getTileContent({ i, j }, tile, objects, interactables) {
+        if (tile.link !== undefined) {
+            return {
+                ...tile,
+                object: 'road_sign'
+            };
+
+        }
         if (objects[i] && objects[i][j] && (objects[i][j]).object) {
             const tileOverwrite = (objects[i][j]);
             return { ...interactables[tileOverwrite.object], ...tileOverwrite.props };

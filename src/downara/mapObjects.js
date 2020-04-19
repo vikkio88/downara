@@ -14,12 +14,13 @@ const LOCATIONS = {
 const OBJECT_DESCRIPTIONS = {
     [NPC.MUM]: `C'è tua madre.`,
     [LOCATIONS.BAKERY]: `Il Panificio`,
+    ROAD_SIGN: label => `Il cartello indica "${label}"`,
     default: `Non c'è niente di interessante.`
 };
 
 const MESSAGES = {
     INVALID_INTERACTION: `Niente da fare qui...`
-}
+};
 
 
 const interactables = {

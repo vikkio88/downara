@@ -11,6 +11,7 @@ const Tile = ({
     terrain = "grass_4",
     object = null,
     blocked = false,
+    link = false,
     player = false,
     actionable = false,
     position = null,
@@ -60,7 +61,10 @@ const Area = () => {
                         className="flex-1 flex flex-row items-stretch"
                     >
                         {range(0, AREA.size.x).map((_, j) => {
-                            const tileConfig = areas[worldPosition][i][j];
+                            const tileConfig = areaHelper.getAreaTileConfig(
+                                { worldPosition, actionedTile: { position: { i, j } } },
+                                areas
+                            );
                             const object = areaHelper.getTileContent({ i, j }, tileConfig, areaObjects, interactables);
                             return (
                                 <Tile

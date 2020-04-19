@@ -1,5 +1,7 @@
-import { interactables, OBJECT_DESCRIPTIONS } from 'downara';
-import { gameHelper, VIEWS } from 'lib/game';
+import { interactables, OBJECT_DESCRIPTIONS, map } from 'downara';
+import areas from 'downara/areas';
+import { gameHelper, VIEWS, areaHelper } from 'lib/game';
+
 
 export default store => {
     store.on('@init', () => {
@@ -23,6 +25,12 @@ export default store => {
     });
 
     store.on('examine', ({ ui, worldState, gameState }) => {
+        const link = areaHelper.getLink(gameState, areas);
+        if (link !== null) {
+            store.dispatch('message', OBJECT_DESCRIPTIONS.ROAD_SIGN(map[link].label));
+            return;
+        }
+
         const tile = gameHelper.getTileContent(gameState, worldState, interactables);
         return {
             ui: {
