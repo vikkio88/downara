@@ -106,21 +106,10 @@ export default store => {
     });
 
     store.on('changeArea', ({ gameState }, newArea) => {
-        const areaPosition = { i: 3, j: 0 };
-        gameState.player.areaPosition = areaPosition;
-        gameState.actionedTile.position = areaPosition;
+        const currentWorldPosition = gameState.worldPosition;
+        const newAreaPosition = map[newArea][currentWorldPosition];
+        gameState.player.areaPosition = newAreaPosition;
+        gameState.actionedTile.position = newAreaPosition;
         return { gameState: { ...gameState, worldPosition: newArea, area: map[newArea] } }
     });
-
-    /*
-    to move out of bounds
-    store.on('move', ({ gameState }, direction) => {
-        const { result, payload: { worldPosition } } = mapHelper.move(direction, map, gameState.worldPosition);
-        if (result) {
-            return { gameState: { ...gameState, worldPosition, area: map[worldPosition] } }
-        }
-    });
-    */
-
-
-}
+};

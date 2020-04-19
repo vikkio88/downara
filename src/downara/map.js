@@ -1,13 +1,21 @@
 import { DIRECTIONS } from 'lib/game';
+const START_POINTS = {
+    [DIRECTIONS.NORTH]: { i: 0, j: 3 },
+    [DIRECTIONS.SOUTH]: { i: 5, j: 3 },
+    [DIRECTIONS.EAST]: { i: 3, j: 5 },
+    [DIRECTIONS.WEST]: { i: 3, j: 0 },
+};
 
 export default {
     0: {
         id: 0,
         label: 'Madonna di Trapani',
-        [DIRECTIONS.NORTH]: 1,
-        [DIRECTIONS.SOUTH]: 2,
-        [DIRECTIONS.EAST]: 4,
-        [DIRECTIONS.WEST]: 3,
+        4: START_POINTS[DIRECTIONS.EAST],
+    },
+    4: {
+        id: 4,
+        label: 'La Matrice',
+        0: START_POINTS[DIRECTIONS.WEST],
     },
     1: {
         id: 1,
@@ -32,14 +40,6 @@ export default {
         [DIRECTIONS.SOUTH]: null,
         [DIRECTIONS.EAST]: null,
         [DIRECTIONS.WEST]: 0,
-    },
-    4: {
-        id: 4,
-        label: 'La Matrice',
-        [DIRECTIONS.NORTH]: null,
-        [DIRECTIONS.SOUTH]: null,
-        [DIRECTIONS.EAST]: 0,
-        [DIRECTIONS.WEST]: 5,
     },
     5: {
         id: 5,
