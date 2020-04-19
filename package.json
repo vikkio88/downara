@@ -20,7 +20,7 @@
     "eject": "react-scripts eject",
     "build:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
     "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
-    "buildDeploy": "npm run build && npm run deploy",
+    "buildDeploy": "GENERATE_SOURCEMAP=false npm run build && npm run deploy",
     "deploy": "mv build/index.html build/200.html && surge --domain downara-test.surge.sh build/"
   },
   "eslintConfig": {
