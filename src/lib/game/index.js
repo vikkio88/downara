@@ -89,11 +89,12 @@ const areaHelper = {
 };
 
 const gameHelper = {
-    getTileContent(gameState, worldState, interactables) {
+    getTileContent(gameState, worldState, interactables, areas = null) {
         const { actionedTile, worldPosition } = gameState;
+        const tile = areas ? areaHelper.getAreaTileConfig(gameState, areas) : actionedTile;
         const { objects } = worldState;
         const areaObjects = objects[worldPosition];
-        return areaHelper.getTileContent(actionedTile.position, actionedTile, areaObjects, interactables);
+        return areaHelper.getTileContent(actionedTile.position, tile, areaObjects, interactables);
     },
     updateWorldStatePostDialogue(worldState, gameState, payload) {
         const { actionedTile: { position }, worldPosition } = gameState;

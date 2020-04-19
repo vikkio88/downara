@@ -8,12 +8,19 @@ const NPC = {
 };
 
 const LOCATIONS = {
-    BAKERY: 'bakery'
+    BAKERY: 'bakery',
+    MATRICE: 'matrice',
+    CAFE_HOUSE: 'cafe_house',
+    BEVAIO_PORTA_NUOVA: 'bevaio_pn',
 };
 
 const OBJECT_DESCRIPTIONS = {
-    [NPC.MUM]: `C'è tua madre.`,
-    [LOCATIONS.BAKERY]: `Il Panificio`,
+    [NPC.MUM]: `È tua mamma.`,
+    [LOCATIONS.BAKERY]: `Il Panificio della Zza Maria`,
+    [LOCATIONS.MATRICE]: `La Matrice, che edificio brutto...`,
+    [LOCATIONS.CAFE_HOUSE]: `Il Cafè House, da qua la vista è spettacolare.`,
+    [LOCATIONS.BEVAIO_PORTA_NUOVA]: `Il Bevaio di Porta Nuova, puzza di cacca di pecora...`,
+
     ROAD_SIGN: label => `Il cartello indica "${label}"`,
     default: `Non c'è niente di interessante.`
 };
@@ -36,7 +43,22 @@ const interactables = {
         object: 'mansion1',
         description: OBJECT_DESCRIPTIONS[LOCATIONS.BAKERY],
         interaction: false
-    }
+    },
+    [LOCATIONS.MATRICE]: {
+        object: 'castle',
+        description: OBJECT_DESCRIPTIONS[LOCATIONS.MATRICE],
+        interaction: false
+    },
+    [LOCATIONS.CAFE_HOUSE]: {
+        object: 'tower',
+        description: OBJECT_DESCRIPTIONS[LOCATIONS.CAFE_HOUSE],
+        interaction: false
+    },
+    [LOCATIONS.BEVAIO_PORTA_NUOVA]: {
+        object: 'pond',
+        description: OBJECT_DESCRIPTIONS[LOCATIONS.BEVAIO_PORTA_NUOVA],
+        interaction: false
+    },
 };
 
 

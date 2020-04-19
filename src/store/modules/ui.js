@@ -31,7 +31,7 @@ export default store => {
             return;
         }
 
-        const tile = gameHelper.getTileContent(gameState, worldState, interactables);
+        const tile = gameHelper.getTileContent(gameState, worldState, interactables, areas);
         return {
             ui: {
                 ...ui,
