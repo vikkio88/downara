@@ -29,7 +29,7 @@ const Tile = ({
                     url(assets/flags/flag_red.png),` : ''
                     }
                     ${player ? `no-repeat
-                    url(assets/objects/${player.icon}.png),` : ''
+                    url(assets/objects/main/${player.icon}.png),` : ''
                     }
                     ${object ? `no-repeat center
                     url(assets/objects/${object.object}.png),` : ''
