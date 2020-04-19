@@ -2,6 +2,7 @@ import { areaHelper, STATUSES, gameHelper } from 'lib/game';
 import { initialGameState, map, interactables } from 'downara';
 import dialogues from 'downara/dialogues';
 import { MESSAGES } from 'downara/mapObjects';
+import areas from 'downara/areas';
 
 export default store => {
     store.on('@init', () => {
@@ -54,6 +55,12 @@ export default store => {
     });
 
     store.on('interact', ({ gameState, worldState }) => {
+        const link = areaHelper.getLink(gameState, areas);
+        if (link !== null) {
+            store.dispatch('changeArea', link);
+            return;
+        }
+
         const tileObject = gameHelper.getTileContent(gameState, worldState, interactables);
 
         if (!tileObject.interaction) {
@@ -96,6 +103,13 @@ export default store => {
             //gameHelper.updateGameStatePostDialogue()
             gameState.inventory.money = 1000;
         }
+    });
+
+    store.on('changeArea', ({ gameState }, newArea) => {
+        const areaPosition = { i: 3, j: 0 };
+        gameState.player.areaPosition = areaPosition;
+        gameState.actionedTile.position = areaPosition;
+        return { gameState: { ...gameState, worldPosition: newArea, area: map[newArea] } }
     });
 
     /*

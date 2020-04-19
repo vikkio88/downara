@@ -72,7 +72,7 @@ const areaHelper = {
             };
 
         }
-        if (objects[i] && objects[i][j] && (objects[i][j]).object) {
+        if (objects && objects[i] && objects[i][j] && (objects[i][j]).object) {
             const tileOverwrite = (objects[i][j]);
             return { ...interactables[tileOverwrite.object], ...tileOverwrite.props };
         }
@@ -80,7 +80,7 @@ const areaHelper = {
         return tile;
     },
     getFlag({ i, j }, flags) {
-        if (flags[i] && flags[i][j] && (flags[i][j]).icon) {
+        if (flags && flags[i] && flags[i][j] && (flags[i][j]).icon) {
             return (flags[i][j]).icon;
         }
 

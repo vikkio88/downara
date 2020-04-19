@@ -13,7 +13,7 @@ const TERRAINS = {
     GRASS: 'g',
     SAND: 's',
     STREET: 'st',
-    DIRT: 'st',
+    DIRT: 'd',
 };
 const TERRAINS_CONFIG = {
     [TERRAINS.GRASS]: {

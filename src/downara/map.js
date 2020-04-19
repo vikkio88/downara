@@ -6,8 +6,8 @@ export default {
         label: 'Madonna di Trapani',
         [DIRECTIONS.NORTH]: 1,
         [DIRECTIONS.SOUTH]: 2,
-        [DIRECTIONS.EAST]: 3,
-        [DIRECTIONS.WEST]: 4,
+        [DIRECTIONS.EAST]: 4,
+        [DIRECTIONS.WEST]: 3,
     },
     1: {
         id: 1,
