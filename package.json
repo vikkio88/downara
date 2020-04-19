@@ -21,7 +21,8 @@
     "build:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
     "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
     "buildDeploy": "GENERATE_SOURCEMAP=false npm run build && npm run deploy",
-    "deploy": "mv build/index.html build/200.html && surge --domain downara-test.surge.sh build/"
+    "deploy": "mv build/index.html build/200.html && surge --domain downara-test.surge.sh build/",
+    "utils:map": "node scripts/mapGenerator.js"
   },
   "eslintConfig": {
     "extends": "react-app"
