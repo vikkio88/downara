@@ -1,1 +1,164 @@
-{"0":{"0":{"terrain":"grass_4","object":"mountains","blocked":true},"1":{"terrain":"sand_1","object":"tree2"},"2":{"terrain":"grass_2","object":"mountains","blocked":true},"3":{"terrain":"street_1","object":null},"4":{"terrain":"grass_1","object":"mountains","blocked":true},"5":{"terrain":"grass_1","object":"mountains","blocked":true}},"1":{"0":{"terrain":"grass_2","object":"house2"},"1":{"terrain":"sand_1","object":"mansion"},"2":{"terrain":"grass_3","object":"tree3"},"3":{"terrain":"street_1","object":"house2"},"4":{"terrain":"street_1","object":"house2"},"5":{"terrain":"grass_4","object":null}},"2":{"0":{"terrain":"grass_4","object":"houses2"},"1":{"terrain":"grass_3","object":"houses"},"2":{"terrain":"grass_1","object":"house2"},"3":{"terrain":"grass_2","object":null},"4":{"terrain":"street_1","object":"houses"},"5":{"terrain":"grass_3","object":"tree"}},"3":{"0":{"terrain":"street_1","object":"houses2"},"1":{"terrain":"street_1","object":"mansion1"},"2":{"terrain":"street_1","object":null},"3":{"terrain":"street_1","object":null},"4":{"terrain":"street_1","object":null},"5":{"terrain":"street_1","object":null,"link":4}},"4":{"0":{"terrain":"grass_2","object":"tree2"},"1":{"terrain":"street_1","object":"houses"},"2":{"terrain":"street_1","object":"house1"},"3":{"terrain":"street_1","object":"house"},"4":{"terrain":"grass_2","object":"tree3"},"5":{"terrain":"grass_4","object":"tree2"}},"5":{"0":{"terrain":"sand_1","object":"houses1"},"1":{"terrain":"grass_4","object":"mansion"},"2":{"terrain":"grass_4","object":"houses1"},"3":{"terrain":"street_1","object":"mansion"},"4":{"terrain":"street_1","object":"tree3"},"5":{"terrain":"sand_1","object":"houses2"}}}
+{
+    "0": {
+        "0": {
+            "terrain": "grass_1",
+            "object": "mountains2",
+            "blocked": true
+        },
+        "1": {
+            "terrain": "grass_3",
+            "object": "mountains2",
+            "blocked": true
+        },
+        "2": {
+            "terrain": "grass_4",
+            "object": "tree2"
+        },
+        "3": {
+            "terrain": "street_1",
+            "object": null,
+            "link": 1
+        },
+        "4": {
+            "terrain": "grass_2",
+            "object": "mountains",
+            "blocked": true
+        },
+        "5": {
+            "terrain": "grass_3",
+            "object": "mountains",
+            "blocked": true
+        }
+    },
+    "1": {
+        "0": {
+            "terrain": "grass_1",
+            "object": "house2"
+        },
+        "1": {
+            "terrain": "sand_1",
+            "object": "mansion"
+        },
+        "2": {
+            "terrain": "grass_4",
+            "object": "tree2"
+        },
+        "3": {
+            "terrain": "street_1",
+            "object": "house1"
+        },
+        "4": {
+            "terrain": "street_1",
+            "object": "houses"
+        },
+        "5": {
+            "terrain": "grass_3",
+            "object": null
+        }
+    },
+    "2": {
+        "0": {
+            "terrain": "grass_4",
+            "object": "houses"
+        },
+        "1": {
+            "terrain": "grass_3",
+            "object": "houses2"
+        },
+        "2": {
+            "terrain": "grass_4",
+            "object": "house1"
+        },
+        "3": {
+            "terrain": "grass_2",
+            "object": null
+        },
+        "4": {
+            "terrain": "street_1",
+            "object": "houses"
+        },
+        "5": {
+            "terrain": "grass_3",
+            "object": "tree"
+        }
+    },
+    "3": {
+        "0": {
+            "terrain": "street_1",
+            "object": null
+        },
+        "1": {
+            "terrain": "street_1",
+            "object": "mansion1"
+        },
+        "2": {
+            "terrain": "street_1",
+            "object": "mansion1"
+        },
+        "3": {
+            "terrain": "street_1",
+            "object": null
+        },
+        "4": {
+            "terrain": "street_1",
+            "object": null
+        },
+        "5": {
+            "terrain": "street_1",
+            "object": null,
+            "link": 4
+        }
+    },
+    "4": {
+        "0": {
+            "terrain": "grass_1",
+            "object": "tree"
+        },
+        "1": {
+            "terrain": "street_1",
+            "object": "house1"
+        },
+        "2": {
+            "terrain": "street_1",
+            "object": "houses1"
+        },
+        "3": {
+            "terrain": "street_1",
+            "object": "houses2"
+        },
+        "4": {
+            "terrain": "grass_4",
+            "object": "tree2"
+        },
+        "5": {
+            "terrain": "grass_2",
+            "object": "tree2"
+        }
+    },
+    "5": {
+        "0": {
+            "terrain": "sand_1",
+            "object": "house1"
+        },
+        "1": {
+            "terrain": "grass_3",
+            "object": "mansion"
+        },
+        "2": {
+            "terrain": "grass_3",
+            "object": "houses1"
+        },
+        "3": {
+            "terrain": "street_1",
+            "object": "mansion1"
+        },
+        "4": {
+            "terrain": "street_1",
+            "object": "tree2"
+        },
+        "5": {
+            "terrain": "sand_1",
+            "object": "houses1"
+        }
+    }
+}

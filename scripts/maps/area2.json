@@ -1,6 +1,6 @@
 [
     [
-        ["g", "mnt", "b", true], ["g", "mnt", "b", true], ["g", "t"], ["st", null, "l", 1], ["g", "mnt", "b", true], ["g", "mnt", "b", true]
+        ["g", "mnt", "b", true], ["s", "t"], ["g", "mnt", "b", true], ["st", null], ["g", "mnt", "b", true], ["g", "mnt", "b", true]
     ],
     [
         ["g", "h"], ["s", "m"], ["g", "t"], ["st", "h"], ["st", "h"], ["g", null]
@@ -9,7 +9,7 @@
         ["g", "h"], ["g", "h"], ["g", "h"], ["g", null], ["st", "h"], ["g", "t"]
     ],
     [
-        ["st", null], ["st", "m"], ["st", "m"], ["st", null], ["st", null], ["st", null, "l", 4]
+        ["st", "h"], ["st", "m"], ["st", null], ["st", null], ["st", null], ["st", null, "l", 4]
     ],
     [
         ["g", "t"], ["st", "h"], ["st", "h"], ["st", "h"], ["g", "t"], ["g", "t"]
