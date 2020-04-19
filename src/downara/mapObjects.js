@@ -26,17 +26,32 @@ const interactables = {
     [NPC.MUM]: {
         id: NPC.MUM,
         name: 'Mamma',
-        object: 'woman',
+        object: 'npc_woman2',
         alignment: NPC_ALIGNMENT.FRIENDLY,
         description: OBJECT_DESCRIPTIONS[NPC.MUM],
         interaction: true
     },
     [LOCATIONS.BAKERY]: {
-        object: 'house3',
+        object: 'mansion1',
         description: OBJECT_DESCRIPTIONS[LOCATIONS.BAKERY],
         interaction: false
     }
 };
 
 
-export { interactables, LOCATIONS, NPC, NPC_ALIGNMENT, OBJECT_DESCRIPTIONS, MESSAGES };
+const FLAGS = {
+    FLAG_RED: 'flag_red',
+    FLAG_YELLOW: 'flag_yellow',
+    FLAG_GREEN: 'flag_green',
+    FLAG_BLUE: 'flag_blue',
+    ARROW_UP: 'arrow_u',
+    ARROW_BOTTOM: 'arrow_b',
+    ARROW_RIGHT: 'arrow_r',
+    ARROW_LEFT: 'arrow_l',
+    ARROW_B_LEFT: 'arrow_bl',
+    ARROW_B_RIGHT: 'arrow_br',
+    ARROW_U_LEFT: 'arrow_ul',
+    ARROW_U_RIGHT: 'arrow_ur',
+};
+
+export { interactables, LOCATIONS, NPC, NPC_ALIGNMENT, OBJECT_DESCRIPTIONS, MESSAGES, FLAGS };
