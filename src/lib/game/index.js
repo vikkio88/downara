@@ -1,3 +1,5 @@
+import get from 'lodash.get';
+
 const STATUSES = {
     IDLE: 'idle',
     SPEAKING: 'speaking',
@@ -72,7 +74,7 @@ const areaHelper = {
             };
 
         }
-        if (objects && objects[i] && objects[i][j] && (objects[i][j]).object) {
+        if (objects && get(objects, `${i}.${j}.object`)) {
             const tileOverwrite = (objects[i][j]);
             return { ...interactables[tileOverwrite.object], ...tileOverwrite.props };
         }
@@ -80,7 +82,7 @@ const areaHelper = {
         return tile;
     },
     getFlag({ i, j }, flags) {
-        if (flags && flags[i] && flags[i][j] && (flags[i][j]).icon) {
+        if (flags && get(flags, `${i}.${j}.icon`)) {
             return (flags[i][j]).icon;
         }
 
@@ -98,10 +100,7 @@ const gameHelper = {
     },
     updateWorldStatePostDialogue(worldState, gameState, payload) {
         const { actionedTile: { position }, worldPosition } = gameState;
-        // maybe consider using optional chaining?
-        if (worldState.objects[worldPosition] && worldState.objects[worldPosition][position.i]
-            && worldState.objects[worldPosition][position.i][position.j]
-            && worldState.objects[worldPosition][position.i][position.j].props) {
+        if (get(worldState, `objects.${worldPosition}.${position.i}.${position.j}.props`)) {
             const { newDialoguePointer = 0 } = payload;
             worldState.objects[worldPosition][position.i][position.j].props.dialogue = newDialoguePointer;
         }
