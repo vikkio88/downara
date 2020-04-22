@@ -56,6 +56,13 @@ export default store => {
     });
 
     store.on('interact', ({ gameState, worldState }) => {
+        // Test fighting
+        if (areaHelper.isSameTile({ i: 1, j: 0 }, gameState.actionedTile.position)) {
+            store.dispatch('toggleFightingTest');
+            return;
+        }
+
+
         const link = areaHelper.getLink(gameState, areas);
         if (link !== null) {
             store.dispatch('changeArea', link);
@@ -112,5 +119,12 @@ export default store => {
         gameState.player.areaPosition = newAreaPosition;
         gameState.actionedTile.position = newAreaPosition;
         return { gameState: { ...gameState, worldPosition: newArea, area: map[newArea] } }
+    });
+
+    // For test purposes
+    store.on('toggleFightingTest', ({ gameState }) => {
+        gameState.status = gameState.status === STATUSES.FIGHTING ?
+            STATUSES.IDLE : STATUSES.FIGHTING;
+        return { gameState: { ...gameState } };
     });
 };

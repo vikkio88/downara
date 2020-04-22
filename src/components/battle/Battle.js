@@ -1,7 +1,10 @@
 import React from 'react';
+import { useStoreon } from 'storeon/react';
+
 
 import { range } from 'lib';
 import { Button } from 'components/common';
+import { areaHelper } from 'lib/game';
 
 const SIZE = 4;
 
@@ -11,6 +14,9 @@ const Tile = ({
     object = null,
     blocked = false,
 }) => {
+    const { dispatch } = useStoreon('gameState');
+    const func = areaHelper.isSameTile({ i: 3, j: 3 }, position)
+        ? () => dispatch('toggleFightingTest') : () => console.log(position);
     return (
         <Button
             secondary
@@ -18,7 +24,7 @@ const Tile = ({
             className="flex-1 flex items-center justify-center m-0"
             style={{ 'background': `url(assets/tiles/${terrain}.png)` }}
             disabled={blocked}
-            onClick={() => console.log(position)}
+            onClick={func}
         >
             {object && <img src={`assets/battle/${object}.png`} />}
         </Button>
