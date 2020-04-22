@@ -1,7 +1,9 @@
+
+
 class Character {
-    constructor(id, config, position) {
+    constructor(id, stats, inventory, position) {
         this.id = id;
-        this.config = config;
+        this.stats = config;
         this.position = position;
     }
 }
