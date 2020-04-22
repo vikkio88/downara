@@ -6,6 +6,7 @@ import EnvWindow from 'components/ui/EnvWindow';
 import CommandBar from 'components/ui/CommandBar';
 
 import { Area } from 'components/area';
+import { Battle } from 'components/battle';
 import { View } from 'components/views';
 import { Container } from 'components/dialogues';
 import { Controls } from 'components/controls';
@@ -20,6 +21,7 @@ function Main() {
       {!view && (
         <>
           <EnvWindow>
+            {status === STATUSES.FIGHTING && <Battle />}
             {status === STATUSES.IDLE && <Area />}
             {status === STATUSES.SPEAKING && <Container />}
           </EnvWindow>
