@@ -22,7 +22,8 @@ export default store => {
         store.dispatch('clearMessage');
         const { player, actionedTile } = gameState;
         if (!areaHelper.isPlayerInTile(player.areaPosition, tilePosition)
-            && areaHelper.isSameTile(actionedTile.position, tilePosition)
+            // this comment makes the user click twice to switch tile 
+            //&& areaHelper.isSameTile(actionedTile.position, tilePosition)
         ) {
             store.dispatch('moveToTile', tilePosition);
             return;
