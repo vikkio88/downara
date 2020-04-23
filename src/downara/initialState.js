@@ -34,8 +34,8 @@ const initialGameState = {
         maxWeight: 10,
         money: 0,
     },
-    status: STATUSES.IDLE,
-    //status: STATUSES.FIGHTING,
+    //status: STATUSES.IDLE,
+    status: STATUSES.FIGHTING,
     area: null,
 };
 

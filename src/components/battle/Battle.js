@@ -8,6 +8,20 @@ import { areaHelper } from 'lib/game';
 
 const SIZE = 4;
 
+const FACING = {
+    UP: 'face_up',
+    DOWN: 'face_down',
+    RIGHT: 'face_right',
+    LEFT: 'face_left',
+};
+
+const FACING_DIRECTIONS = {
+    [FACING.UP]: 'transform rotate-270',
+    [FACING.DOWN]: 'transform rotate-90',
+    [FACING.RIGHT]: '',
+    [FACING.LEFT]: 'transform rotate-180',
+};
+
 const Tile = ({
     position,
     terrain = "grass_4",
@@ -17,6 +31,7 @@ const Tile = ({
     const { dispatch } = useStoreon('gameState');
     const func = areaHelper.isSameTile({ i: 3, j: 3 }, position)
         ? () => dispatch('toggleFightingTest') : () => console.log(position);
+    const { facing = null, asset = null } = (object || {});
     return (
         <Button
             secondary
@@ -26,7 +41,7 @@ const Tile = ({
             disabled={blocked}
             onClick={func}
         >
-            {object && <img src={`assets/battle/${object}.png`} />}
+            {object && <img src={`assets/battle/${asset}.png`} className={facing ? FACING_DIRECTIONS[facing] : ''} />}
         </Button>
     );
 }
@@ -39,11 +54,11 @@ const Battle = () => {
                     {range(0, SIZE).map((_, j) => {
                         let object = null;
                         if (i === 1 && j === 0) {
-                            object = 'man_up';
+                            object = { asset: 'man_up' };
                         }
 
                         if (i === 1 && j === 3) {
-                            object = 'man_up2';
+                            object = { asset: 'man_up2', facing: FACING.LEFT };
                         }
 
                         return (
