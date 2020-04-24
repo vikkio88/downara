@@ -49,8 +49,17 @@ export class Equipment {
         return false;
     }
 
+    // { health: { modifier: -1, range: '1:3' } },
     calculateEffect(effect) {
-        // here we throw dices to get min/max damage;
-        return effect;
+        const { health = null } = effect;
+        const resultEffect = {}
+        if (health) {
+            const { modifier = 1, range = '1' } = health;
+            const [min, max = null] = range.split(':').map(n => parseInt(n));
+            const damage = randomizer.int(min, max || min);
+            resultEffect.health = modifier * damage;
+        }
+
+        return resultEffect;
     }
 }
