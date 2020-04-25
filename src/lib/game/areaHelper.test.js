@@ -75,7 +75,7 @@ describe('Area Movements', () => {
                         3: { 1: { icon: FLAGS.default } }
                     }
                 }
-            })
+            });
         });
 
         it('adds the flag correctly', () => {
@@ -100,7 +100,7 @@ describe('Area Movements', () => {
                         3: { 1: { icon: FLAGS.default } }
                     }
                 }
-            })
+            });
         });
 
         it('adds the flag correctly when empty at the beginning', () => {
@@ -122,7 +122,7 @@ describe('Area Movements', () => {
                         3: { 1: { icon: FLAGS.default } }
                     }
                 }
-            })
+            });
         });
 
         it('adds the flag correctly after removing', () => {
@@ -164,8 +164,6 @@ describe('Area Movements', () => {
                     }
                 }
             });
-
-
         });
     })
 });
