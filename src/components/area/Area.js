@@ -17,7 +17,7 @@ const Tile = ({
     position = null,
     flag = null
 }) => {
-    const { dispatch } = useStoreon('gameState');
+    const { dispatch } = useStoreon();
     return (
         <Button
             secondary

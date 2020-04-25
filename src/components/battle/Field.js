@@ -28,7 +28,7 @@ const Tile = ({
     object = null,
     blocked = false,
 }) => {
-    const { dispatch } = useStoreon('battle');
+    const { dispatch } = useStoreon();
     // test to exit battle if clicking bottom right tile
     const func = areaHelper.isSameTile({ i: 3, j: 3 }, position)
         ? () => dispatch('toggleFightingTest') : () => dispatch('battle:clickTile', position);
