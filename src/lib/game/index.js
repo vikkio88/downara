@@ -88,12 +88,14 @@ const areaHelper = {
 
         return null;
     },
-    addFlag(worldPosition, areaPosition, flags, flag) {
+    addFlag(worldPosition, areaPosition, flagsWrapper, flag) {
         const { i, j } = areaPosition;
-        const newFlag = { [worldPosition]: { [i]: { [j]: { icon: flag } } } };
+        const worldPositionFlags = get(flagsWrapper, `flags.${worldPosition}`, {});
+        const worldPositionRowFlags = get(flagsWrapper, `flags.${worldPosition}.${i}`, {});
+        const newFlag = { [worldPosition]: { ...worldPositionFlags, [i]: { ...worldPositionRowFlags, [j]: { icon: flag } } } };
         return {
             flags: {
-                ...flags,
+                ...flagsWrapper.flags,
                 ...newFlag
             }
         }
