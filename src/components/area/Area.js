@@ -45,8 +45,10 @@ const Tile = ({
 }
 
 const Area = () => {
-    const { gameState: { player, worldPosition, area } } = useStoreon('gameState');
-    const { worldState: { objects, flags } } = useStoreon('worldState');
+    const {
+        gameState: { player, worldPosition, area },
+        worldState: { objects, flags }
+    } = useStoreon('gameState', 'worldState');
     const { areaPosition: playerAreaPosition } = player;
     const areaObjects = objects[worldPosition];
     return (

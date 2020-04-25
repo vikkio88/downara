@@ -12,9 +12,7 @@ import { Container } from 'components/dialogues';
 import { Controls as IdleControls } from 'components/controls';
 
 function Main() {
-  const { gameState: { status } } = useStoreon('gameState');
-  const { ui: { view } } = useStoreon('ui');
-
+  const { gameState: { status }, ui: { view } } = useStoreon('gameState', 'ui');
   const Controls = status === STATUSES.FIGHTING ? BattleControls : IdleControls;
   return (
     <div className="container h-screen mx-auto flex flex-col bg-gray-200">

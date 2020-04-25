@@ -6,8 +6,7 @@ import { ACTIONS_LABELS } from 'downara';
 import { ACTIONS, VIEWS, areaHelper } from 'lib/game';
 
 const Actions = () => {
-    const { dispatch, gameState: { player, actionedTile } } = useStoreon('gameState');
-    const { ui: { notification } } = useStoreon('ui');
+    const { dispatch, gameState: { player, actionedTile }, ui: { notification } } = useStoreon('gameState', 'ui');
     const { areaPosition: playerAreaPosition } = player;
     const isPlayerTile = areaHelper.isSameTile(actionedTile.position, playerAreaPosition);
 
