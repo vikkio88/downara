@@ -1,4 +1,5 @@
 import { areaHelper } from 'lib/game';
+import { FLAGS } from 'downara';
 
 describe('Area Movements', () => {
     describe('Area configuration', () => {
@@ -49,4 +50,32 @@ describe('Area Movements', () => {
             };
         });
     });
+
+    describe('Area flags operations', () => {
+        const initialFlagsExample = {
+            flags: {
+                0: {
+                    2: { 3: { icon: FLAGS.default } }
+                },
+                1: {
+                    3: { 1: { icon: FLAGS.default } }
+                }
+            }
+        };
+
+        it('removes the flag correctly', () => {
+            const flags = areaHelper.removeFlag(0, { i: 2, j: 3 }, initialFlagsExample);
+
+            expect(flags).toEqual({
+                flags: {
+                    0: {
+                        2: {}
+                    },
+                    1: {
+                        3: { 1: { icon: FLAGS.default } }
+                    }
+                }
+            })
+        });
+    })
 });

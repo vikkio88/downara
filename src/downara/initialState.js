@@ -16,7 +16,7 @@ const initialWorldState = {
     },
     flags: {
         0: {
-            2: { 3: { icon: FLAGS.FLAG_RED } }
+            2: { 3: { icon: FLAGS.default } }
         }
     }
 };
@@ -34,8 +34,8 @@ const initialGameState = {
         maxWeight: 10,
         money: 0,
     },
-    //status: STATUSES.IDLE,
-    status: STATUSES.FIGHTING,
+    status: STATUSES.IDLE,
+    //status: STATUSES.FIGHTING,
     area: null,
 };
 

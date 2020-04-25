@@ -87,6 +87,22 @@ const areaHelper = {
         }
 
         return null;
+    },
+    addFlag(worldPosition, areaPosition, flags, flag) {
+        const { i, j } = areaPosition;
+        const newFlag = { [worldPosition]: { [i]: { [j]: { icon: flag } } } };
+        return {
+            flags: {
+                ...flags,
+                ...newFlag
+            }
+        }
+
+    },
+    removeFlag(worldPosition, areaPosition, flagsWrapper) {
+        const { i, j } = areaPosition;
+        delete flagsWrapper.flags[worldPosition][i][j];
+        return flagsWrapper;
     }
 };
 
