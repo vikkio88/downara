@@ -31,6 +31,7 @@ export class Equipment {
         return rolledHitDie >= hitThreshold;
     }
 
+    // both of type Character
     use(user, object) {
         const rolledDie = randomizer.dice(20);
         if (this.didHit(rolledDie)) {
