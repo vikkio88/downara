@@ -1,6 +1,6 @@
 import { randomizer } from 'lib';
 const defaultConfig = {
-    chance: 50, // chance of hitting
+    hitDie: 10, // chance of hitting on a d20
     reach: 1, // how far it can target
 };
 
@@ -26,24 +26,25 @@ export class Equipment {
         return this.config.reach;
     }
 
-    getChance() {
-        return this.config.chance;
+    didHit(rolledHitDie) {
+        const hitThreshold = this.config.hitDie;
+        return rolledHitDie >= hitThreshold;
     }
 
     use(user, object) {
-        const chance = this.getChance();
-        // here I could use dice instead of chance?
-        if (randomizer.chance(chance)) {
-            const results = [];
+        const rolledDie = randomizer.dice(20);
+        if (this.didHit(rolledDie)) {
+            const self = [];
+            const enemy = [];
             for (const i in this.effects) {
                 const baseEffect = this.effects[i];
                 const effect = this.calculateEffect(baseEffect);
                 baseEffect.self ? user.apply(effect) :
                     object.apply(effect);
 
-                results.push(effect);
+                baseEffect.self ? self.push(effect) : enemy.push(effect);
             }
-            return results;
+            return { die: rolledDie, results: { self, enemy } };
         }
 
         return false;
