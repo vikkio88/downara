@@ -3,6 +3,7 @@ import { initialGameState, map, interactables } from 'downara';
 import dialogues from 'downara/dialogues';
 import { MESSAGES } from 'downara/mapObjects';
 import areas from 'downara/areas';
+import quests from 'downara/quests';
 
 export default store => {
     store.on('@init', () => {
@@ -107,10 +108,10 @@ export default store => {
         }
 
         if (postDialogue.gameState) {
-            // but probably is better to keep the flag alongside the quest
-            //gameHelper.updateGameStatePostDialogue()
-            gameState.inventory.money = 1000;
+            gameState = gameHelper.updateGameStatePostDialogue(gameState, postDialogue, quests);
         }
+
+        return { gameState };
     });
 
     store.on('changeArea', ({ gameState }, newArea) => {

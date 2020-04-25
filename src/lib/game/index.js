@@ -124,10 +124,44 @@ const gameHelper = {
         }
         return worldState;
     },
-    updateGameStatePostDialogue() {
-
+    updateGameStatePostDialogue(gameState, { quest = null }, quests) {
+        if (quest !== null) {
+            quest = quests[quest];
+            gameState.inventory = questHelper.parseInventory(
+                gameState.inventory,
+                quest
+            );
+            gameState.quests.push(questHelper.activate(quest));
+        }
+        return gameState;
     }
 };
+
+const questHelper = {
+    activate({ title, description }) {
+        return {
+            title, description,
+            active: true, finished: false
+        };
+    },
+    parseInventory(currentInventory, { inventory = null }) {
+        if (!inventory) {
+            return currentInventory;
+        }
+
+        if (inventory.money) {
+            currentInventory = this.modifyMoney(currentInventory, inventory.money);
+        }
+
+        return currentInventory;
+    },
+    modifyMoney(inventory, moneyDiff) {
+        return {
+            ...inventory,
+            money: inventory.money += moneyDiff
+        };
+    }
+}
 
 export {
     mapHelper, areaHelper, gameHelper,

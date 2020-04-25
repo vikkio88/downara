@@ -8,7 +8,7 @@ const initialWorldState = {
             5: { 4: { object: LOCATIONS.BAKERY } },
         },
         1: {
-            0: { 2: {object: LOCATIONS.BEVAIO_PORTA_NUOVA}, 5: { object: LOCATIONS.CAFE_HOUSE } }
+            0: { 2: { object: LOCATIONS.BEVAIO_PORTA_NUOVA }, 5: { object: LOCATIONS.CAFE_HOUSE } }
         },
         4: {
             3: { 3: { object: LOCATIONS.MATRICE } }
@@ -34,6 +34,7 @@ const initialGameState = {
         maxWeight: 10,
         money: 0,
     },
+    quests: [],
     status: STATUSES.IDLE,
     //status: STATUSES.FIGHTING,
     area: null,
