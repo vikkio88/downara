@@ -4,7 +4,7 @@ import { NPC, LOCATIONS, FLAGS } from './mapObjects';
 const initialWorldState = {
     objects: {
         0: {
-            2: { 3: { object: NPC.MUM, props: { dialogue: 0 } } },
+            2: { 3: { object: NPC.MUM } },
             5: { 4: { object: LOCATIONS.BAKERY } },
         },
         1: {
@@ -12,6 +12,15 @@ const initialWorldState = {
         },
         4: {
             3: { 3: { object: LOCATIONS.MATRICE } }
+        },
+        config: {
+            [NPC.MUM]: {
+                dialogue: 0,
+                interactable: true
+            },
+            [LOCATIONS.BAKERY]: {
+                dialogue: 0
+            }
         }
     },
     flags: {

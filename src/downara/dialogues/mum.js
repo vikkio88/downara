@@ -1,3 +1,5 @@
+import { NPC } from "downara/mapObjects";
+
 export default {
     // initial
     0: {
@@ -31,6 +33,7 @@ export default {
             postDialogue: {
                 worldState: true,
                 gameState: true,
+                speaker: NPC.MUM,
                 quest: 0,
                 newDialoguePointer: 1,
             }

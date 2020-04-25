@@ -66,7 +66,7 @@ const areaHelper = {
         const { i, j } = position;
         return areas[worldPosition][i][j];
     },
-    getTileContent({ i, j }, tile, objects, interactables) {
+    getTileContent({ i, j }, tile, objects, interactables, objectConfig) {
         if (tile.link !== undefined) {
             return {
                 ...tile,
@@ -76,7 +76,8 @@ const areaHelper = {
         }
         if (objects && get(objects, `${i}.${j}.object`)) {
             const tileOverwrite = (objects[i][j]);
-            return { ...interactables[tileOverwrite.object], ...tileOverwrite.props };
+            const config = get(objectConfig, tileOverwrite.object, {});
+            return { ...interactables[tileOverwrite.object], ...config };
         }
 
         return tile;
@@ -114,15 +115,17 @@ const gameHelper = {
         const tile = areas ? areaHelper.getAreaTileConfig(gameState, areas) : actionedTile;
         const { objects } = worldState;
         const areaObjects = objects[worldPosition];
-        return areaHelper.getTileContent(actionedTile.position, tile, areaObjects, interactables);
+        const objectConfig = objects.config
+        return areaHelper.getTileContent(actionedTile.position, tile, areaObjects, interactables, objectConfig);
     },
-    updateWorldStatePostDialogue(worldState, gameState, { newDialoguePointer = null, quest = null }, quests) {
-        const { actionedTile: { position }, worldPosition } = gameState;
+    updateWorldStatePostDialogue(worldState, { newDialoguePointer = null, quest = null, speaker = null }, quests) {
         if (
-            newDialoguePointer !== null
-            && get(worldState, `objects.${worldPosition}.${position.i}.${position.j}.props`)
+            get(worldState, `objects.config.${speaker}.dialogue`, null) !== null
+            && newDialoguePointer !== null
+            && speaker
         ) {
-            worldState.objects[worldPosition][position.i][position.j].props.dialogue = newDialoguePointer;
+            // here I could set multiple speakers to setup new dialogue pointers
+            worldState.objects.config[speaker].dialogue = newDialoguePointer;
         }
 
         if (quest !== null && quests[quest]) {

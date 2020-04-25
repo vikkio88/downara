@@ -10,8 +10,8 @@ export default store => {
         }
     });
 
-    store.on('updateWorldPostDialogue', ({ worldState, gameState }, payload) => {
-        return gameHelper.updateWorldStatePostDialogue(worldState, gameState, payload, quests);
+    store.on('updateWorldPostDialogue', ({ worldState }, payload) => {
+        return gameHelper.updateWorldStatePostDialogue(worldState, payload, quests);
     });
 
 };

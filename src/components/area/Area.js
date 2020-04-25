@@ -67,7 +67,7 @@ const Area = () => {
                                 { worldPosition, actionedTile: { position: { i, j } } },
                                 areas
                             );
-                            const object = areaHelper.getTileContent({ i, j }, tileConfig, areaObjects, interactables);
+                            const object = areaHelper.getTileContent({ i, j }, tileConfig, areaObjects, interactables, objects.config);
                             return (
                                 <Tile
                                     key={`j-${j}`}
