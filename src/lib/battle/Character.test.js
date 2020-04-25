@@ -49,7 +49,6 @@ describe('Character', () => {
 
             character.apply({ health: 10 });
             expect(character.getHealthPoints()).toBe(100);
-
         });
     });
 
