@@ -1,1 +1,2 @@
-export { default as Battle } from './Battle';
+export { default as Controls } from './Controls';
+export { default as Field } from './Field';

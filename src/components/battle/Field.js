@@ -28,9 +28,11 @@ const Tile = ({
     object = null,
     blocked = false,
 }) => {
-    const { dispatch } = useStoreon('gameState');
+    const { dispatch } = useStoreon('battle');
+    // test to exit battle if clicking bottom right tile
     const func = areaHelper.isSameTile({ i: 3, j: 3 }, position)
-        ? () => dispatch('toggleFightingTest') : () => console.log(position);
+        ? () => dispatch('toggleFightingTest') : () => dispatch('battle:clickTile', position);
+
     const { facing = null, asset = null } = (object || {});
     return (
         <Button
@@ -46,7 +48,7 @@ const Tile = ({
     );
 }
 
-const Battle = () => {
+const Field = () => {
     return (
         <div className="flex-1 flex flex-col items-stretch">
             {range(0, SIZE).map((_, i) => (
@@ -75,4 +77,4 @@ const Battle = () => {
     );
 };
 
-export default Battle;
+export default Field;
