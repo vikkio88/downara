@@ -1,5 +1,6 @@
 
 import { initialWorldState } from 'downara';
+import quests from 'downara/quests';
 import { gameHelper } from 'lib/game';
 
 export default store => {
@@ -10,7 +11,7 @@ export default store => {
     });
 
     store.on('updateWorldPostDialogue', ({ worldState, gameState }, payload) => {
-        return gameHelper.updateWorldStatePostDialogue(worldState, gameState, payload);
+        return gameHelper.updateWorldStatePostDialogue(worldState, gameState, payload, quests);
     });
 
 };

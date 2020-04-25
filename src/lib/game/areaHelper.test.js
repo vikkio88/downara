@@ -67,13 +67,11 @@ describe('Area Movements', () => {
             const flags = areaHelper.removeFlag(0, { i: 2, j: 3 }, initialFlagsExample);
 
             expect(flags).toEqual({
-                flags: {
-                    0: {
-                        2: {}
-                    },
-                    1: {
-                        3: { 1: { icon: FLAGS.default } }
-                    }
+                0: {
+                    2: {}
+                },
+                1: {
+                    3: { 1: { icon: FLAGS.default } }
                 }
             });
         });
@@ -92,13 +90,11 @@ describe('Area Movements', () => {
             const flags = areaHelper.addFlag(0, { i: 2, j: 4 }, initialFlagsExample, FLAGS.default);
 
             expect(flags).toEqual({
-                flags: {
-                    0: {
-                        2: { 3: { icon: FLAGS.default }, 4: { icon: FLAGS.default } }
-                    },
-                    1: {
-                        3: { 1: { icon: FLAGS.default } }
-                    }
+                0: {
+                    2: { 3: { icon: FLAGS.default }, 4: { icon: FLAGS.default } }
+                },
+                1: {
+                    3: { 1: { icon: FLAGS.default } }
                 }
             });
         });
@@ -114,13 +110,11 @@ describe('Area Movements', () => {
             const flags = areaHelper.addFlag(0, { i: 2, j: 4 }, initialFlagsExample, FLAGS.default);
 
             expect(flags).toEqual({
-                flags: {
-                    0: {
-                        2: { 4: { icon: FLAGS.default } }
-                    },
-                    1: {
-                        3: { 1: { icon: FLAGS.default } }
-                    }
+                0: {
+                    2: { 4: { icon: FLAGS.default } }
+                },
+                1: {
+                    3: { 1: { icon: FLAGS.default } }
                 }
             });
         });
@@ -135,33 +129,29 @@ describe('Area Movements', () => {
             };
             let flags = areaHelper.addFlag(0, { i: 2, j: 4 }, initialFlagsExample, FLAGS.default);
             expect(flags).toEqual({
-                flags: {
-                    0: {
-                        2: { 4: { icon: FLAGS.default } }
-                    },
-                    1: {
-                        3: { 1: { icon: FLAGS.default } }
-                    }
+                0: {
+                    2: { 4: { icon: FLAGS.default } }
+                },
+                1: {
+                    3: { 1: { icon: FLAGS.default } }
                 }
             });
 
-            flags = areaHelper.removeFlag(0, { i: 2, j: 4 }, flags);
+            flags = areaHelper.removeFlag(0, { i: 2, j: 4 }, { flags });
             expect(flags).toEqual({
-                flags: {
-                    0: { 2: {} },
-                    1: {
-                        3: { 1: { icon: FLAGS.default } }
-                    }
+
+                0: { 2: {} },
+                1: {
+                    3: { 1: { icon: FLAGS.default } }
                 }
+
             });
 
-            flags = areaHelper.addFlag(0, { i: 3, j: 4 }, flags, FLAGS.default);
+            flags = areaHelper.addFlag(0, { i: 3, j: 4 }, { flags }, FLAGS.default);
             expect(flags).toEqual({
-                flags: {
-                    0: { 2: {}, 3: { 4: { icon: FLAGS.default } } },
-                    1: {
-                        3: { 1: { icon: FLAGS.default } }
-                    }
+                0: { 2: {}, 3: { 4: { icon: FLAGS.default } } },
+                1: {
+                    3: { 1: { icon: FLAGS.default } }
                 }
             });
         });

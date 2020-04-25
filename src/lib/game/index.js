@@ -93,18 +93,18 @@ const areaHelper = {
         const worldPositionFlags = get(flagsWrapper, `flags.${worldPosition}`, {});
         const worldPositionRowFlags = get(flagsWrapper, `flags.${worldPosition}.${i}`, {});
         const newFlag = { [worldPosition]: { ...worldPositionFlags, [i]: { ...worldPositionRowFlags, [j]: { icon: flag } } } };
-        return {
+        const result = {
             flags: {
                 ...flagsWrapper.flags,
                 ...newFlag
             }
-        }
-
+        };
+        return result.flags;
     },
     removeFlag(worldPosition, areaPosition, flagsWrapper) {
         const { i, j } = areaPosition;
         delete flagsWrapper.flags[worldPosition][i][j];
-        return flagsWrapper;
+        return flagsWrapper.flags;
     }
 };
 
@@ -116,12 +116,28 @@ const gameHelper = {
         const areaObjects = objects[worldPosition];
         return areaHelper.getTileContent(actionedTile.position, tile, areaObjects, interactables);
     },
-    updateWorldStatePostDialogue(worldState, gameState, payload) {
+    updateWorldStatePostDialogue(worldState, gameState, { newDialoguePointer = null, quest = null }, quests) {
         const { actionedTile: { position }, worldPosition } = gameState;
-        if (get(worldState, `objects.${worldPosition}.${position.i}.${position.j}.props`)) {
-            const { newDialoguePointer = 0 } = payload;
+        if (
+            newDialoguePointer !== null
+            && get(worldState, `objects.${worldPosition}.${position.i}.${position.j}.props`)
+        ) {
             worldState.objects[worldPosition][position.i][position.j].props.dialogue = newDialoguePointer;
         }
+
+        if (quest !== null && quests[quest]) {
+            const { flag = null, previousFlag = null, flagIcon } = quests[quest]
+
+            if (previousFlag !== null) {
+                worldState.flags = areaHelper.removeFlag(previousFlag.w, previousFlag.position, { flags: worldState.flags });
+            }
+
+            if (flag !== null) {
+                worldState.flags = areaHelper.addFlag(flag.w, flag.position, { flags: worldState.flags }, flagIcon);
+            }
+
+        }
+
         return worldState;
     },
     updateGameStatePostDialogue(gameState, { quest = null }, quests) {
