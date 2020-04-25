@@ -126,16 +126,7 @@ const gameHelper = {
         }
 
         if (quest !== null && quests[quest]) {
-            const { flag = null, previousFlag = null, flagIcon } = quests[quest]
-
-            if (previousFlag !== null) {
-                worldState.flags = areaHelper.removeFlag(previousFlag.w, previousFlag.position, { flags: worldState.flags });
-            }
-
-            if (flag !== null) {
-                worldState.flags = areaHelper.addFlag(flag.w, flag.position, { flags: worldState.flags }, flagIcon);
-            }
-
+            worldState = questHelper.updateWorld(worldState, quests[quest]);
         }
 
         return worldState;
@@ -176,6 +167,19 @@ const questHelper = {
             ...inventory,
             money: inventory.money += moneyDiff
         };
+    },
+    updateWorld(worldState, quest) {
+        const { flag = null, previousFlag = null, flagIcon } = quest
+
+        if (previousFlag !== null) {
+            worldState.flags = areaHelper.removeFlag(previousFlag.w, previousFlag.position, { flags: worldState.flags });
+        }
+
+        if (flag !== null) {
+            worldState.flags = areaHelper.addFlag(flag.w, flag.position, { flags: worldState.flags }, flagIcon);
+        }
+
+        return worldState;
     }
 }
 
