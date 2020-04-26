@@ -65,3 +65,14 @@ export class Equipment {
         return resultEffect;
     }
 }
+
+
+export class Fists extends Equipment {
+    constructor() {
+        super(
+            'fists',
+            EQUIPMENT_TYPES.MELEE,
+            [{ health: { modifier: -1, range: '1' } }]
+        );
+    }
+}
