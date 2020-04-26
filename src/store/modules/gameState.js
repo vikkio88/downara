@@ -14,6 +14,9 @@ export default store => {
                 area: map[0],
                 actionedTile: {
                     position: areaPosition
+                },
+                triggers: {
+                    casualEncounter: false
                 }
             },
         }
@@ -59,6 +62,7 @@ export default store => {
     store.on('interact', ({ gameState, worldState }) => {
         // Test fighting
         if (areaHelper.isSameTile({ i: 1, j: 0 }, gameState.actionedTile.position)) {
+            store.dispatch('transition', { message: 'Test Battle' });
             store.dispatch('toggleFightingTest');
             return;
         }
