@@ -154,7 +154,7 @@ const questHelper = {
             active: true, finished: false
         };
     },
-    parseInventory(currentInventory, { inventory = null }) {
+    parseInventory(currentInventory, { inventory = null } = {}) {
         if (!inventory) {
             return currentInventory;
         }
@@ -187,7 +187,8 @@ const questHelper = {
 }
 
 export {
-    mapHelper, areaHelper, gameHelper,
+    mapHelper, areaHelper,
+    gameHelper, questHelper,
     DIRECTIONS, STATUSES,
     ACTIONS, VIEWS
 };
