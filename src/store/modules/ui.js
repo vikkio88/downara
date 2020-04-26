@@ -11,9 +11,30 @@ export default store => {
                 // Temp to test
                 //view: VIEWS.INVENTORY,
                 view: null,
-                notification: null
+                notification: null,
+                transition: false,
+                transitionMessage: null
             }
         };
+    });
+
+    store.on('transition', ({ ui }, { duration = 2000, message = null } = {}) => {
+        if (duration) setTimeout(() => store.dispatch('transitionOver'), duration);
+        return {
+            ui: {
+                ...ui,
+                transition: { message: message || '' }
+            }
+        }
+    });
+
+    store.on('transitionOver', ({ ui }) => {
+        return {
+            ui: {
+                ...ui,
+                transition: false
+            }
+        }
     });
 
     store.on('message', ({ ui }, message) => {
