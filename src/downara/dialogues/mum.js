@@ -1,4 +1,4 @@
-import { NPC } from "downara/mapObjects";
+import { NPC, LOCATIONS } from "downara/mapObjects";
 
 export default {
     // initial
@@ -33,9 +33,11 @@ export default {
             postDialogue: {
                 worldState: true,
                 gameState: true,
-                speaker: NPC.MUM,
-                quest: 0,
-                newDialoguePointer: 1,
+                speakers: [
+                    { id: NPC.MUM, newDialoguePointer: 1 },
+                    { id: LOCATIONS.BAKERY, newDialoguePointer: 1 },
+                ],
+                quest: 0
             }
         },
     },

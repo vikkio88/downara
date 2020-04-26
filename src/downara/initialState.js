@@ -16,10 +16,11 @@ const initialWorldState = {
         config: {
             [NPC.MUM]: {
                 dialogue: 0,
-                interactable: true
+                interaction: true
             },
             [LOCATIONS.BAKERY]: {
-                dialogue: 0
+                dialogue: 0,
+                interaction: true
             }
         }
     },

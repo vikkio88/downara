@@ -118,14 +118,17 @@ const gameHelper = {
         const objectConfig = objects.config
         return areaHelper.getTileContent(actionedTile.position, tile, areaObjects, interactables, objectConfig);
     },
-    updateWorldStatePostDialogue(worldState, { newDialoguePointer = null, quest = null, speaker = null }, quests) {
-        if (
-            get(worldState, `objects.config.${speaker}.dialogue`, null) !== null
-            && newDialoguePointer !== null
-            && speaker
-        ) {
-            // here I could set multiple speakers to setup new dialogue pointers
-            worldState.objects.config[speaker].dialogue = newDialoguePointer;
+    updateWorldStatePostDialogue(worldState, { quest = null, speakers = [] }, quests) {
+        if (speakers.length) {
+            for (const i in speakers) {
+                const { id, newDialoguePointer } = speakers[i];
+                if (
+                    get(worldState, `objects.config.${id}.dialogue`, null) !== null
+                    && newDialoguePointer !== null
+                ) {
+                    worldState.objects.config[id].dialogue = newDialoguePointer;
+                }
+            }
         }
 
         if (quest !== null && quests[quest]) {

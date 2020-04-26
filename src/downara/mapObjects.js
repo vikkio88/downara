@@ -36,28 +36,25 @@ const interactables = {
         name: 'Mamma',
         object: 'npc_woman2',
         alignment: NPC_ALIGNMENT.FRIENDLY,
-        description: OBJECT_DESCRIPTIONS[NPC.MUM],
-        interaction: true
+        description: OBJECT_DESCRIPTIONS[NPC.MUM]
     },
     [LOCATIONS.BAKERY]: {
         object: 'mansion1',
-        description: OBJECT_DESCRIPTIONS[LOCATIONS.BAKERY],
-        interaction: false
+        id:LOCATIONS.BAKERY,
+        name: 'Zza Maria (Panificio)',
+        description: OBJECT_DESCRIPTIONS[LOCATIONS.BAKERY]
     },
     [LOCATIONS.MATRICE]: {
         object: 'castle',
-        description: OBJECT_DESCRIPTIONS[LOCATIONS.MATRICE],
-        interaction: false
+        description: OBJECT_DESCRIPTIONS[LOCATIONS.MATRICE]
     },
     [LOCATIONS.CAFE_HOUSE]: {
         object: 'tower',
-        description: OBJECT_DESCRIPTIONS[LOCATIONS.CAFE_HOUSE],
-        interaction: false
+        description: OBJECT_DESCRIPTIONS[LOCATIONS.CAFE_HOUSE]
     },
     [LOCATIONS.BEVAIO_PORTA_NUOVA]: {
         object: 'pond',
-        description: OBJECT_DESCRIPTIONS[LOCATIONS.BEVAIO_PORTA_NUOVA],
-        interaction: false
+        description: OBJECT_DESCRIPTIONS[LOCATIONS.BEVAIO_PORTA_NUOVA]
     },
 };
 

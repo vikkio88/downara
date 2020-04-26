@@ -1,6 +1,8 @@
-import { NPC } from 'downara';
+import { NPC, LOCATIONS } from 'downara';
 import mum from './mum';
+import bakery from './bakery';
 
 export default {
-    [NPC.MUM]: mum
+    [NPC.MUM]: mum,
+    [LOCATIONS.BAKERY]: bakery
 };
