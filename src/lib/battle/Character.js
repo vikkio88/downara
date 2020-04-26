@@ -7,6 +7,9 @@ export const FACING = {
 
 const defaultStats = {
     hp: 100,
+    ai: true,
+    speed: 1,
+    movements: 1
 };
 
 export class Character {
@@ -20,6 +23,10 @@ export class Character {
         this.facing = facing;
 
         this.inventory = inventory;
+    }
+
+    isAi() {
+        return this.stats.ai;
     }
 
     getPosition() {
