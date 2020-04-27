@@ -1,4 +1,4 @@
-import { NPC, LOCATIONS } from "downara/mapObjects";
+import { NPC, LOCATIONS } from 'downara/mapObjects';
 
 export default {
     // initial

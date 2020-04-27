@@ -1,4 +1,4 @@
-import { FLAGS } from "downara/mapObjects";
+import { FLAGS } from 'downara/mapObjects';
 
 export default {
     0: {
