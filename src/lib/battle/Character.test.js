@@ -50,6 +50,42 @@ describe('Character', () => {
             character.apply({ health: 10 });
             expect(character.getHealthPoints()).toBe(100);
         });
+
+        test('applying endurance effect', () => {
+            const character = new Character(id);
+            expect(character.getEndurance()).toBe(100);
+            const effect = { endurance: -10 };
+            character.apply(effect);
+            expect(character.getEndurance()).toBe(90);
+
+            character.apply({ endurance: 10 });
+            expect(character.getEndurance()).toBe(100);
+        });
+
+        test('if endurance is finished pay with hp', () => {
+            const character = new Character(id, { endurance: 10 });
+            const effect = { endurance: -10 };
+
+            expect(character.getHealthPoints()).toBe(100);
+            expect(character.getEndurance()).toBe(10);
+            character.apply(effect);
+            expect(character.getEndurance()).toBe(0);
+            expect(character.getHealthPoints()).toBe(100);
+            character.apply(effect);
+            expect(character.getEndurance()).toBe(0);
+            expect(character.getHealthPoints()).toBe(90);
+        });
+
+        test('if endurance is not enough pay the rest with hp', () => {
+            const character = new Character(id, { endurance: 20 });
+            const effect = { endurance: -40 };
+
+            expect(character.getHealthPoints()).toBe(100);
+            expect(character.getEndurance()).toBe(20);
+            character.apply(effect);
+            expect(character.getEndurance()).toBe(0);
+            expect(character.getHealthPoints()).toBe(80);
+        });
     });
 
 });

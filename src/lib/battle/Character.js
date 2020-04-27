@@ -99,13 +99,20 @@ export class Character {
         }
 
         if (endurance !== null) {
-            this.modifyStat(STATS.endurance, endurance)
+            const currentEndurance = this.getEndurance();
+            const remainingCost = currentEndurance + endurance;
+            if (remainingCost < 0) this.modifyStat(STATS.HP, remainingCost);
+            this.modifyStat(STATS.ENDURANCE, endurance);
         }
 
     }
 
     getHealthPoints() {
         return this.stats.hp;
+    }
+
+    getEndurance() {
+        return this.stats.endurance;
     }
 
     modifyStat(stat, modifier) {
