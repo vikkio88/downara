@@ -2,6 +2,7 @@ import { randomizer } from 'lib';
 const defaultConfig = {
     hitDie: 10, // chance of hitting on a d20
     reach: 1, // how far it can target
+    endurance: 0, //how much endurance it will cost to use
 };
 
 export const EQUIPMENT_TYPES = {
@@ -26,6 +27,10 @@ export class Equipment {
         return this.config.reach;
     }
 
+    getEnduranceCost() {
+        return this.config.endurance || 0;
+    }
+
     didHit(rolledHitDie) {
         const hitThreshold = this.config.hitDie;
         return rolledHitDie >= hitThreshold;
@@ -33,6 +38,10 @@ export class Equipment {
 
     // both of type Character
     use(user, { object }) {
+        // this will apply the endurance cost to use the weapon
+        const endurance = this.getEnduranceCost();
+        if (endurance !== 0) user.apply({ endurance });
+
         if (!object) {
             return false;
         }
