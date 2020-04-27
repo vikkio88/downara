@@ -1,15 +1,15 @@
-import { Fists } from "./Equipment";
+import { Fists } from './Equipment';
 
 export class Inventory {
-    constructor(armor = null, weapons = [], spells = null, items = []) {
+    constructor(armor = null, weapon = null, spells = null, items = []) {
         this.armor = armor;
-        if (weapons.length === 0) {
-            weapons = [
-                new Fists
-            ];
-        }
-        this.weapons = weapons;
+        this.weapon = weapon !== null ? weapon : new Fists;
+
         this.spells = spells;
         this.items = items;
+    }
+
+    getWeapon() {
+        return this.weapon;
     }
 }
