@@ -30,7 +30,7 @@ export class Battle {
             order,
             next: order[0],
             last: null
-        }
+        };
     }
 
     loadCharacters() {

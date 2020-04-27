@@ -9,7 +9,7 @@ export const EQUIPMENT_TYPES = {
     DISTANCE: 'distance',
     MAGIC: 'magic',
     USABLE: 'usable',
-}
+};
 
 export class Equipment {
     constructor(name, type, effects, config = {}) {
@@ -32,7 +32,11 @@ export class Equipment {
     }
 
     // both of type Character
-    use(user, object) {
+    use(user, { object }) {
+        if (!object) {
+            return false;
+        }
+
         const rolledDie = randomizer.dice(20);
         if (this.didHit(rolledDie)) {
             const self = [];
@@ -54,7 +58,7 @@ export class Equipment {
     // { health: { modifier: -1, range: '1:3' } },
     calculateEffect(effect) {
         const { health = null } = effect;
-        const resultEffect = {}
+        const resultEffect = {};
         if (health) {
             const { modifier = 1, range = '1' } = health;
             const [min, max = null] = range.split(':').map(n => parseInt(n));

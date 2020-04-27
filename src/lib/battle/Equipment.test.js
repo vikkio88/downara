@@ -5,7 +5,7 @@ describe('Equipment', () => {
     let object = null;
     beforeEach(() => {
         user = { apply: jest.fn() };
-        object = { apply: jest.fn() };
+        object = { object: { apply: jest.fn() } };
     })
 
     test('testing item health effect', () => {
@@ -18,8 +18,8 @@ describe('Equipment', () => {
         const result = lifeDrainingSword.use(user, object);
 
         expect(result).toBeTruthy();
-        expect(object.apply.mock.calls.length).toBe(1);
-        expect(object.apply.mock.calls[0][0].health).toBeLessThan(0);
+        expect(object.object.apply.mock.calls.length).toBe(1);
+        expect(object.object.apply.mock.calls[0][0].health).toBeLessThan(0);
         expect(user.apply.mock.calls.length).toBe(1);
         expect(user.apply.mock.calls[0][0].health).toBeGreaterThan(0)
 
@@ -45,8 +45,8 @@ describe('Equipment', () => {
         const result = lifeDrainingSword.use(user, object);
 
         expect(result).toBeTruthy();
-        expect(object.apply.mock.calls.length).toBe(1);
-        expect(object.apply.mock.calls[0][0].health).toBe(-1);
+        expect(object.object.apply.mock.calls.length).toBe(1);
+        expect(object.object.apply.mock.calls[0][0].health).toBe(-1);
         expect(user.apply.mock.calls.length).toBe(1)
         expect(user.apply.mock.calls[0][0].health).toBe(1);
 
@@ -60,6 +60,31 @@ describe('Equipment', () => {
 
         expect(result.results.self[0].health).toBe(1);
         expect(result.results.enemy[0].health).toBe(-1);
+    });
+
+    test('checking how it fails there was no target', () => {
+        const effects = [
+            { health: { modifier: -1, range: '1' } },
+            { self: true, health: { modifier: 1, range: '1' } },
+        ];
+
+        const lifeDrainingSword = new Equipment('Spada Suca-Vita', EQUIPMENT_TYPES.MELEE, effects, { hitDie: 1 });
+        const result = lifeDrainingSword.use(user, {});
+
+        expect(result).toBe(false);
+    });
+    
+    test('using a weapon that drains endurance also', () => {
+        const effects = [
+            { health: { modifier: -1, range: '1' } },
+            { self: true, health: { modifier: 1, range: '1' } },
+            { self: true, endurance: { modifier: 1, range: '1' } },
+        ];
+
+        const lifeDrainingSword = new Equipment('Spada Suca-Vita', EQUIPMENT_TYPES.MELEE, effects, { hitDie: 1 });
+        const result = lifeDrainingSword.use(user, object);
+
+        expect(result).toBeTruthy();
     });
 
 });
