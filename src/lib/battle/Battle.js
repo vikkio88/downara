@@ -25,10 +25,8 @@ export class Battle {
         // then ordering the actions
         const human = this.characters.find(c => !c.isAi());
         let order = this.characters.sort((c, c1) => c.getSpeed() <= c1.getSpeed() ? 1 : -1).map(c => c.id);
-        this.resolveOrder = order;
-        console.log(human);
-        order = human ? [human.id, ...order] : order;
-        console.log(order);
+        this.resolveOrder = [...order];
+        order = human ? [human.id, ...(order.filter(id => id !== human.id))] : order;
         return {
             turn: 0,
             index: 0,

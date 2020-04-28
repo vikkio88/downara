@@ -99,7 +99,7 @@ describe('Battle test (battletesting battle test)', () => {
             expect(battle.needsResolving).toBe(true);
         });
 
-        it.only('putting human first on turns, recording right order to resolve', () => {
+        it('putting human first on turns, recording right order to resolve', () => {
             const characters = [
                 { id: 'test1', getSpeed: () => 4, isAi: () => true },
                 { id: 'test2', getSpeed: () => 11, isAi: () => true },
@@ -113,11 +113,7 @@ describe('Battle test (battletesting battle test)', () => {
             const fakeAction = { type: 'a', payload: { some: 'thing' } };
 
             let charId = battle.getCurrentTurn();
-            battle.registerAction(charId, fakeAction.type, fakeAction.payload);
             expect(battle.turns.next).toBe('human');
-            expect(battle.needsResolving).toBe(false);
-
-            charId = battle.getCurrentTurn();
             battle.registerAction(charId, fakeAction.type, fakeAction.payload);
             expect(battle.turns.next).toBe('test2');
             expect(battle.needsResolving).toBe(false);
@@ -140,8 +136,12 @@ describe('Battle test (battletesting battle test)', () => {
             charId = battle.getCurrentTurn();
             battle.registerAction(charId, fakeAction.type, fakeAction.payload);
             expect(battle.turns.next).toBe('test3');
+            expect(battle.needsResolving).toBe(false);
+
+            charId = battle.getCurrentTurn();
+            battle.registerAction(charId, fakeAction.type, fakeAction.payload);
             expect(battle.needsResolving).toBe(true);
-            expect(battle.resolveOrder).toBe([
+            expect(battle.resolveOrder).toEqual([
                 'test2', 'test5', 'test1', 'test4', 'test3', 'human'
             ]);
         });
