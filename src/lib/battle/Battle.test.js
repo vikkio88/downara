@@ -112,8 +112,8 @@ describe('Battle test (battletesting battle test)', () => {
             const battle = new Battle(null, characters);
             const fakeAction = { type: 'a', payload: { some: 'thing' } };
 
-            let charId = battle.getCurrentTurn();
             expect(battle.turns.next).toBe('human');
+            let charId = battle.getCurrentTurn();
             battle.registerAction(charId, fakeAction.type, fakeAction.payload);
             expect(battle.turns.next).toBe('test2');
             expect(battle.needsResolving).toBe(false);
