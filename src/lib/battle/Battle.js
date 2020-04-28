@@ -13,6 +13,7 @@ export class Battle {
         this.finished = false;
 
         this.loadCharacters();
+        this.resolveOrder = [];
         this.turns = this.calculateTurns();
         this.needsResolving = false;
         this.moves = {};
@@ -20,9 +21,14 @@ export class Battle {
     }
 
     calculateTurns() {
-        const order = this.characters
-            .sort((c, c1) => c.getSpeed() <= c1.getSpeed() ? 1 : -1)
-            .map(c => c.id);
+        // I will put user playing firs all the time
+        // then ordering the actions
+        const human = this.characters.find(c => !c.isAi());
+        let order = this.characters.sort((c, c1) => c.getSpeed() <= c1.getSpeed() ? 1 : -1).map(c => c.id);
+        this.resolveOrder = order;
+        console.log(human);
+        order = human ? [human.id, ...order] : order;
+        console.log(order);
         return {
             turn: 0,
             index: 0,
@@ -33,6 +39,7 @@ export class Battle {
         };
     }
 
+
     loadCharacters() {
         for (const index in this.characters) {
             const character = this.characters[index];
@@ -42,6 +49,10 @@ export class Battle {
 
     getCurrentTurn() {
         return this.turns.next;
+    }
+
+    getCharacter(id) {
+        return this.characterMap.get(id);
     }
 
     registerAction(id, type, payload) {
