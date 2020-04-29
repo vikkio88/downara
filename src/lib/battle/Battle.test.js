@@ -27,6 +27,7 @@ describe('Battle test (battletesting battle test)', () => {
             expect(battle.log).toEqual({});
         });
     });
+
     describe('turns', () => {
         it('registering actions', () => {
             const characters = [
@@ -36,7 +37,7 @@ describe('Battle test (battletesting battle test)', () => {
 
             const battle = new Battle(null, characters);
             const fakeAction = { type: 'a', payload: { some: 'thing' } };
-            let charId = battle.getCurrentTurn();
+            let charId = battle.getCharacterIdTurn();
 
             battle.registerAction(charId, fakeAction.type, fakeAction.payload);
             expect(battle.turns.index).toBe(1);
@@ -47,7 +48,7 @@ describe('Battle test (battletesting battle test)', () => {
             expect(battle.moves[0][0]).toEqual({ id: charId, ...fakeAction });
             expect(battle.needsResolving).toBe(false);
 
-            charId = battle.getCurrentTurn();
+            charId = battle.getCharacterIdTurn();
             battle.registerAction(charId, fakeAction.type, fakeAction.payload);
             expect(battle.turns.index).toBe(0);
             expect(battle.turns.next).toBe('test2');
@@ -68,7 +69,7 @@ describe('Battle test (battletesting battle test)', () => {
             const battle = new Battle(null, characters);
             const fakeAction = { type: 'a', payload: { some: 'thing' } };
 
-            let charId = battle.getCurrentTurn();
+            let charId = battle.getCharacterIdTurn();
             battle.registerAction(charId, fakeAction.type, fakeAction.payload);
             expect(battle.turns.index).toBe(1);
             expect(battle.turns.next).toBe('test2');
@@ -78,7 +79,7 @@ describe('Battle test (battletesting battle test)', () => {
             expect(battle.moves[0][0]).toEqual({ id: charId, ...fakeAction });
             expect(battle.needsResolving).toBe(false);
 
-            charId = battle.getCurrentTurn();
+            charId = battle.getCharacterIdTurn();
             battle.registerAction(charId, fakeAction.type, fakeAction.payload);
             expect(battle.turns.index).toBe(2);
             expect(battle.turns.next).toBe('test1');
@@ -88,7 +89,7 @@ describe('Battle test (battletesting battle test)', () => {
             expect(battle.moves[0][1]).toEqual({ id: charId, ...fakeAction });
             expect(battle.needsResolving).toBe(false);
 
-            charId = battle.getCurrentTurn();
+            charId = battle.getCharacterIdTurn();
             battle.registerAction(charId, fakeAction.type, fakeAction.payload);
             expect(battle.turns.index).toBe(0);
             expect(battle.turns.next).toBe('test3');
@@ -113,32 +114,32 @@ describe('Battle test (battletesting battle test)', () => {
             const fakeAction = { type: 'a', payload: { some: 'thing' } };
 
             expect(battle.turns.next).toBe('human');
-            let charId = battle.getCurrentTurn();
+            let charId = battle.getCharacterIdTurn();
             battle.registerAction(charId, fakeAction.type, fakeAction.payload);
             expect(battle.turns.next).toBe('test2');
             expect(battle.needsResolving).toBe(false);
 
-            charId = battle.getCurrentTurn();
+            charId = battle.getCharacterIdTurn();
             battle.registerAction(charId, fakeAction.type, fakeAction.payload);
             expect(battle.turns.next).toBe('test5');
             expect(battle.needsResolving).toBe(false);
 
-            charId = battle.getCurrentTurn();
+            charId = battle.getCharacterIdTurn();
             battle.registerAction(charId, fakeAction.type, fakeAction.payload);
             expect(battle.turns.next).toBe('test1');
             expect(battle.needsResolving).toBe(false);
 
-            charId = battle.getCurrentTurn();
+            charId = battle.getCharacterIdTurn();
             battle.registerAction(charId, fakeAction.type, fakeAction.payload);
             expect(battle.turns.next).toBe('test4');
             expect(battle.needsResolving).toBe(false);
 
-            charId = battle.getCurrentTurn();
+            charId = battle.getCharacterIdTurn();
             battle.registerAction(charId, fakeAction.type, fakeAction.payload);
             expect(battle.turns.next).toBe('test3');
             expect(battle.needsResolving).toBe(false);
 
-            charId = battle.getCurrentTurn();
+            charId = battle.getCharacterIdTurn();
             battle.registerAction(charId, fakeAction.type, fakeAction.payload);
             expect(battle.needsResolving).toBe(true);
             expect(battle.resolveOrder).toEqual([
@@ -156,7 +157,7 @@ describe('Battle test (battletesting battle test)', () => {
             const battle = new Battle(null, characters);
             const fakeAction = { type: 'a', payload: { some: 'thing' } };
             for (let i = 0; i <= 30; i++) {
-                let charId = battle.getCurrentTurn();
+                let charId = battle.getCharacterIdTurn();
                 battle.registerAction(charId, fakeAction.type, fakeAction.payload);
                 console.log({
                     iteration: i,
@@ -170,6 +171,34 @@ describe('Battle test (battletesting battle test)', () => {
 
             console.log(JSON.stringify(battle.moves));
 
+        });
+    });
+
+    describe('flow', () => {
+        it('will execute the correct flow with 2 players', () => {
+            const fakeAction = { type: 'a', payload: { some: 'thing' } };
+            const humanDecider = jest.fn();
+            const characters = [
+                { id: 'test1', getSpeed: () => 1, isAi: () => true, decideMove: () => fakeAction },
+                { id: 'test2', getSpeed: () => 4, isAi: () => true, decideMove: () => fakeAction },
+                { id: 'human', getSpeed: () => 2, isAi: () => false, decideMove: humanDecider },
+            ];
+
+            const battle = new Battle(null, characters);
+            expect(battle.getCurrentTurn()).toBe(0);
+            const human = battle.getCharacterIdTurn();
+            expect(human).toBe('human');
+            battle.registerAction(human, fakeAction.type, fakeAction.payload);
+
+            while (!battle.needsResolving) {
+                const result = battle.getNextAction();
+                expect(result).toBe(true);
+            }
+
+            expect(battle.needsResolving).toBe(true);
+            expect(battle.getCurrentTurn()).toBe(1);
+
+            expect(humanDecider).not.toBeCalled();
         });
     });
 

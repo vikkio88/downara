@@ -46,6 +46,10 @@ export class Battle {
     }
 
     getCurrentTurn() {
+        return this.turns.turn;
+    }
+
+    getCharacterIdTurn() {
         return this.turns.next;
     }
 
@@ -71,6 +75,38 @@ export class Battle {
             this.turns.turn++;
             this.needsResolving = true;
         }
+    }
+
+    // this needs to be called in a way like
+    /*
+
+    player chooses action.
+    
+    while does not need resolving
+        getNextAction()
+    
+    resolve()
+
+    animation...
+
+    is someone dead?
+        finished
+    else    
+        new turn
+     
+    */
+    getNextAction() {
+        const turnId = this.getCharacterIdTurn();
+        const character = this.getCharacter(turnId);
+
+        let playerMove = null;
+        if (character.isAi()) {
+            playerMove = character.decideMove(this);
+            this.registerAction(turnId, playerMove.type, playerMove.payload);
+            return true;
+        }
+
+        return false;
     }
 
     resolve() {

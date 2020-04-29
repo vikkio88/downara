@@ -37,13 +37,13 @@ const ACTIONS_CONFIG = {
 
 export class Character {
     constructor(
-        id, stats = {}, inventory = null,
+        id, config = {}, inventory = null,
         position = { i: 0, j: 0 }, facing = FACING.RIGHT
     ) {
         this.id = id;
-        this.stats = {
+        this.config = {
             ...defaultStats,
-            ...stats
+            ...config
         };
         this.position = position;
         this.facing = facing;
@@ -62,7 +62,7 @@ export class Character {
     }
 
     getStats() {
-        const { hp, endurance } = this.stats;
+        const { hp, endurance } = this.config;
         return {
             hp,
             endurance,
@@ -70,11 +70,11 @@ export class Character {
     }
 
     getSpeed() {
-        return this.stats.speed || 0;
+        return this.config.speed || 0;
     }
 
     isAi() {
-        return this.stats.ai;
+        return this.config.ai;
     }
 
     getPosition() {
@@ -108,16 +108,26 @@ export class Character {
     }
 
     getHealthPoints() {
-        return this.stats.hp;
+        return this.config.hp;
     }
 
     getEndurance() {
-        return this.stats.endurance;
+        return this.config.endurance;
     }
 
     modifyStat(stat, modifier) {
-        const initialValue = this.stats[stat];
+        const initialValue = this.config[stat];
         const newValue = (initialValue + modifier);
-        this.stats[stat] = newValue < 0 ? 0 : newValue;
+        this.config[stat] = newValue < 0 ? 0 : newValue;
+    }
+
+    decideMove(battle) {
+        // get enemy position
+        // is within reach?
+        //     attack, parry or wait (if needs endurance)
+        // else
+        //     move towards enemy
+
     }
 }
+
