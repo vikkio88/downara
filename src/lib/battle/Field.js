@@ -40,7 +40,7 @@ export class Field {
         return get(this.tiles, `${i}.${j}`, null);
     }
 
-    isAdjacent({ i: pi, j: pj }, { i: p1i, j: p1j }, maxD = 1) {
+    areTilesAdjacent({ i: pi, j: pj }, { i: p1i, j: p1j }, maxD = 1) {
         return Math.abs(pi - p1i) <= maxD && Math.abs(pj - p1j) <= maxD;
     }
 }
