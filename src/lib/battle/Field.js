@@ -74,8 +74,8 @@ export class Field {
         for (const index in is) {
             const currentI = is[index];
             tiles[currentI] = {};
-            for (const jindex in js) {
-                const currentJ = js[jindex];
+            for (const jIndex in js) {
+                const currentJ = js[jIndex];
                 if (!(currentI === i && currentJ === j)) {
                     tiles[currentI][currentJ] = true;
                 }
