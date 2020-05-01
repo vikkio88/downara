@@ -53,4 +53,36 @@ export class Field {
             Math.abs(pj - p1j)
         );
     }
+
+    getTilesAtRange({ i, j }, { maxD = 1, d = null } = {}) {
+        let min = Math.max(0, i - maxD);
+        let max = Math.min(this.size.i, i + maxD);
+        const is = [];
+        for (let idx = min; idx <= max; idx++) {
+            is.push(idx);
+        }
+
+        min = Math.max(0, j - maxD);
+        max = Math.min(this.size.j, j + maxD);
+        const js = [];
+        for (let idx = min; idx <= max; idx++) {
+            js.push(idx);
+        }
+
+        const tiles = {};
+
+        for (const index in is) {
+            const currentI = is[index];
+            tiles[currentI] = {};
+            for (const jindex in js) {
+                const currentJ = js[jindex];
+                if (!(currentI === i && currentJ === j)) {
+                    tiles[currentI][currentJ] = true;
+                }
+            }
+        }
+
+        return tiles;
+
+    }
 }

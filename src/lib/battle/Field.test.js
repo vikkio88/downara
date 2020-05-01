@@ -73,5 +73,22 @@ describe('Field', () => {
             expect(field.tilesDistance(pg(3, 2), pg(1, 1))).toBe(2);
             expect(field.tilesDistance(pg(3, 3), pg(0, 1))).toBe(3);
         });
+
+        it('returns a list of adjacent tiles given a default distance of 1', () => {
+            const size = { i: 4, j: 4 };
+            const field = new Field({ size });
+            const expectedAdjacent = [
+                pg(0, 0), pg(0, 1), pg(0, 2),
+                pg(1, 0),/* self */ pg(1, 2),
+                pg(2, 0), pg(2, 1), pg(2, 2),
+            ];
+            const adjacentTiles = field.getTilesAtRange(pg(1, 1));
+
+            // checking result
+            for (let i in expectedAdjacent) {
+                const tile = expectedAdjacent[i];
+                expect(adjacentTiles[tile.i][tile.j]).toBe(true);
+            }
+        });
     });
 });
