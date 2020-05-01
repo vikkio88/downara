@@ -90,5 +90,39 @@ describe('Field', () => {
                 expect(adjacentTiles[tile.i][tile.j]).toBe(true);
             }
         });
+
+        it('returns a list of adjacent tiles given a default distance of 1, and centered in a corner', () => {
+            const size = { i: 4, j: 4 };
+            const field = new Field({ size });
+            const expectedAdjacent = [
+                /* self */, pg(0, 1),
+                pg(1, 0), pg(1, 1),
+            ];
+            const adjacentTiles = field.getTilesAtRange(pg(0, 0));
+
+            // checking result
+            for (let i in expectedAdjacent) {
+                const tile = expectedAdjacent[i];
+                expect(adjacentTiles[tile.i][tile.j]).toBe(true);
+            }
+        });
+
+        it('returns a list of adjacent tiles given a distance of 2, and centered in a corner', () => {
+            const size = { i: 4, j: 4 };
+            const field = new Field({ size });
+            const expectedAdjacent = [
+                /* self */, pg(0, 1), pg(0, 2),
+                pg(1, 0), pg(1, 1), pg(1, 2),
+                pg(2, 0), pg(2, 1), pg(2, 2)
+            ];
+            const adjacentTiles = field.getTilesAtRange(pg(0, 0), { maxD: 2 });
+
+            // checking result
+            for (let i in expectedAdjacent) {
+                const tile = expectedAdjacent[i];
+                expect(adjacentTiles[tile.i][tile.j]).toBe(true);
+            }
+        });
+
     });
 });
