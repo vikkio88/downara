@@ -128,6 +128,9 @@ export class Character {
         // else
         //     move towards enemy
 
+        const humanPosition = battle.getHumanPosition();
+        
+
     }
 }
 

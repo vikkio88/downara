@@ -24,6 +24,7 @@ export class Battle {
         // I will put user playing firs all the time
         // then ordering the actions
         const human = this.characters.find(c => !c.isAi());
+        this.humanId = human ? human.id : null;
         let order = this.characters.sort((c, c1) => c.getSpeed() <= c1.getSpeed() ? 1 : -1).map(c => c.id);
         this.resolveOrder = [...order];
         order = human ? [human.id, ...(order.filter(id => id !== human.id))] : order;
@@ -55,6 +56,16 @@ export class Battle {
 
     getCharacter(id) {
         return this.characterMap.get(id);
+    }
+
+    getPositionById(id) {
+        const character = this.getCharacter(id);
+        return character.getPosition();
+    }
+
+    getHumanPosition() {
+        if (!this.humanId) return null;
+        return this.getPositionById(this.humanId);
     }
 
     registerAction(id, type, payload) {

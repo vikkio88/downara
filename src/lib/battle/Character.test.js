@@ -1,8 +1,9 @@
 import { Character, FACING } from './Character';
+import { ACTIONS } from 'lib/game';
 
 describe('Character', () => {
     const id = 'someId';
-    const stats = {};
+    const config = {};
     const inventory = {};
     const position = { i: 0, j: 0 };
     const facing = FACING.RIGHT;
@@ -11,21 +12,21 @@ describe('Character', () => {
     describe('positioning and movements', () => {
         test('setting initial position and faced direction', () => {
             const initialPosition = { i: 1, j: 1 };
-            const character = new Character(id, stats, inventory, initialPosition, FACING.UP);
+            const character = new Character(id, config, inventory, initialPosition, FACING.UP);
 
             expect(character.getPosition()).toBe(initialPosition);
             expect(character.getFacing()).toBe(FACING.UP);
         });
 
         test('facing direction change with valid input', () => {
-            const character = new Character(id, stats, inventory, position, facing);
+            const character = new Character(id, config, inventory, position, facing);
 
             character.setFacing(FACING.DOWN);
             expect(character.getFacing()).toBe(FACING.DOWN);
         });
 
         test('facing direction change with invalid input', () => {
-            const character = new Character(id, stats, inventory, position, FACING.LEFT);
+            const character = new Character(id, config, inventory, position, FACING.LEFT);
 
             character.setFacing('fabrizio');
             expect(character.getFacing()).toBe(FACING.LEFT);
@@ -85,6 +86,22 @@ describe('Character', () => {
             character.apply(effect);
             expect(character.getEndurance()).toBe(0);
             expect(character.getHealthPoints()).toBe(80);
+        });
+    });
+
+    describe('ai decision test', () => {
+        describe('simpleton', () => {
+            it('decides to move towards the human player if they are out of range', () => {
+                const battle = {
+                    getHumanPosition: () => ({ i: 0, j: 2 })
+                };
+                const aiCharPosition = { i: 0, j: 0 };
+                const aiCharacter = new Character(id, config, inventory, aiCharPosition);
+
+                const decidedMove = aiCharacter.decideMove(battle);
+                expect(decidedMove.type).toBe(ACTIONS.MOVE);
+                expect(decidedMove.payload).toEqual({ position: { i: 0, j: 1 } });
+            });
         });
     });
 

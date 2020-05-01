@@ -67,6 +67,8 @@ describe('Battle test (battletesting battle test)', () => {
             ];
 
             const battle = new Battle(null, characters);
+            expect(battle.humanId).toBe(null);
+            expect(battle.getHumanPosition()).toBe(null);
             const fakeAction = { type: 'a', payload: { some: 'thing' } };
 
             let charId = battle.getCharacterIdTurn();
@@ -111,6 +113,7 @@ describe('Battle test (battletesting battle test)', () => {
             ];
 
             const battle = new Battle(null, characters);
+            expect(battle.humanId).toBe('human');
             const fakeAction = { type: 'a', payload: { some: 'thing' } };
 
             expect(battle.turns.next).toBe('human');
