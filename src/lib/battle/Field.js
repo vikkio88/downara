@@ -9,7 +9,10 @@ const tileGenerator = (customTile, defaultTile) => {
 };
 
 export const defaultConfig = {
-    size: 4,
+    size: {
+        i: 4,
+        j: 4
+    },
     defaultTile: {
         terrain: 'd',
         blocked: false,
@@ -25,9 +28,9 @@ export class Field {
         this.defaultTile = config.defaultTile;
         this.size = config.size;
         this.tiles = [];
-        for (const i in range(0, this.size)) {
+        for (const i in range(0, this.size.i)) {
             this.tiles[i] = [];
-            for (const j in range(0, this.size)) {
+            for (const j in range(0, this.size.j)) {
                 const customTile = get(tiles, `${i}.${j}`, null);
                 this.tiles[i][j] = customTile ?
                     tileGenerator(customTile, this.defaultTile)
@@ -42,5 +45,12 @@ export class Field {
 
     areTilesAdjacent({ i: pi, j: pj }, { i: p1i, j: p1j }, maxD = 1) {
         return Math.abs(pi - p1i) <= maxD && Math.abs(pj - p1j) <= maxD;
+    }
+
+    tilesDistance({ i: pi, j: pj }, { i: p1i, j: p1j }) {
+        return Math.max(
+            Math.abs(pi - p1i),
+            Math.abs(pj - p1j)
+        );
     }
 }
