@@ -41,6 +41,16 @@ describe('Character', () => {
             expect(character1.getHealthPoints()).toBe(10);
         });
 
+        test('max stats override', () => {
+            const character = new Character('someDude');
+            const character1 = new Character(id, { max: { hp: 130 } });
+
+            expect(character.getMaxValues().hp).toBe(100);
+            expect(character.getMaxValues().endurance).toBe(100);
+            expect(character1.getMaxValues().hp).toBe(130);
+            expect(character1.getMaxValues().endurance).toBe(100);
+        });
+
         test('applying health effect', () => {
             const character = new Character(id);
             expect(character.getHealthPoints()).toBe(100);
@@ -86,6 +96,31 @@ describe('Character', () => {
             character.apply(effect);
             expect(character.getEndurance()).toBe(0);
             expect(character.getHealthPoints()).toBe(80);
+        });
+
+        test('modifying stats cant got over max nor lower than 0', () => {
+            const character = new Character(
+                id,
+                {
+                    hp: 90, endurance: 10,
+                    max: {
+                        hp: 100,
+                        endurance: 100
+                    }
+                }
+            );
+            let effect = { endurance: -120 };
+
+            expect(character.getHealthPoints()).toBe(90);
+            expect(character.getEndurance()).toBe(10);
+            character.apply(effect);
+            expect(character.getEndurance()).toBe(0);
+            expect(character.getHealthPoints()).toBe(0);
+
+            effect = { endurance: 200, health: 300 };
+            character.apply(effect);
+            expect(character.getHealthPoints()).toBe(100);
+            expect(character.getEndurance()).toBe(100);
         });
     });
 

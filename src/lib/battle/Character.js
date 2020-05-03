@@ -20,6 +20,10 @@ export const AI = {
 const defaultStats = {
     [STATS.HP]: 100,
     [STATS.ENDURANCE]: 100,
+    max: {
+        [STATS.HP]: 100,
+        [STATS.ENDURANCE]: 100,
+    },
     ai: {
         config: {
             logic: [AI.SIMPLE],
@@ -52,7 +56,8 @@ const ACTIONS_CONFIG = {
     [ACTIONS.MOVE]: { endurance: -40 },
     [ACTIONS.WAIT]: { endurance: 20 },
     [ACTIONS.ATTACK]: { endurance: -20 },
-    [ACTIONS.PARRY]: { endurance: 0, health: 10 }, // maybe I can simulate damage reduction with a +10 health on parry
+    // maybe I can simulate damage reduction with a +10 health on parry
+    [ACTIONS.PARRY]: { endurance: 10, health: 10 },
     [ACTIONS.SPELL]: { endurance: 20 },
     [ACTIONS.USE_OBJECT]: { endurance: 0 },
 };
@@ -65,7 +70,12 @@ export class Character {
         this.id = id;
         this.config = {
             ...defaultStats,
-            ...config
+            ...config,
+            max: {
+                ...defaultStats.max,
+                ...config.max || {}
+            }
+
         };
 
         this.initAi();
@@ -110,6 +120,13 @@ export class Character {
         return {
             hp,
             endurance,
+        };
+    }
+
+    getMaxValues() {
+        const { max } = this.config;
+        return {
+            ...max
         };
     }
 
@@ -160,9 +177,12 @@ export class Character {
     }
 
     modifyStat(stat, modifier) {
+        const maxValue = this.getMaxValues()[stat];
         const initialValue = this.config[stat];
-        const newValue = (initialValue + modifier);
-        this.config[stat] = newValue < 0 ? 0 : newValue;
+        let newValue = (initialValue + modifier);
+        newValue = newValue < 0 ? 0 : newValue;
+        newValue = newValue > maxValue ? maxValue : newValue;
+        this.config[stat] = newValue;
     }
 
     decideAction(battle) {
