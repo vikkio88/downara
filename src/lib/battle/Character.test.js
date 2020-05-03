@@ -1,5 +1,6 @@
 import { Character, FACING } from './Character';
 import { ACTIONS } from 'lib/game';
+import { Field } from 'components/battle';
 
 describe('Character', () => {
     const id = 'someId';
@@ -90,15 +91,26 @@ describe('Character', () => {
     });
 
     describe('ai decision test', () => {
-        describe('simpleton', () => {
+        describe('Simple position based', () => {
             it('decides to move towards the human player if they are out of range', () => {
+                const distanceMock = jest.fn();
+                distanceMock.mockReturnValueOnce(2);
                 const battle = {
-                    getHumanPosition: () => ({ i: 0, j: 2 })
+                    getHumanPosition: () => ({ i: 0, j: 2 }),
+                    field: {
+                        tilesDistance: distanceMock,
+                        nextStepToTile: () => ({ i: 0, j: 1 })
+                    }
+                };
+
+                const inventory = {
+                    getWeapon: () => ({ getReach: () => 1 })
                 };
                 const aiCharPosition = { i: 0, j: 0 };
                 const aiCharacter = new Character(id, config, inventory, aiCharPosition);
 
-                const decidedMove = aiCharacter.decideMove(battle);
+                const decidedMove = aiCharacter.decideAction(battle);
+                expect(distanceMock).toHaveBeenCalled();
                 expect(decidedMove.type).toBe(ACTIONS.MOVE);
                 expect(decidedMove.payload).toEqual({ position: { i: 0, j: 1 } });
             });

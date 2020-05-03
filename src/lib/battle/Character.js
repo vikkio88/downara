@@ -1,3 +1,4 @@
+import SimpleApi from './deciders/SimpleAi';
 export const FACING = {
     UP: 'face_up',
     DOWN: 'face_down',
@@ -10,14 +11,26 @@ const STATS = {
     ENDURANCE: 'endurance',
 };
 
+const AI = {
+    SIMPLE: 'simple'
+};
+
 const defaultStats = {
     [STATS.HP]: 100,
     [STATS.ENDURANCE]: 100,
     ai: true,
     speed: 1,
+    logic: [AI.SIMPLE]
 };
 
-const ACTIONS = {
+const AI_DECIDER = {
+    [AI.SIMPLE]: SimpleApi,
+    default: SimpleApi
+};
+
+
+
+export const ACTIONS = {
     MOVE: 'move',
     WAIT: 'wait',
     ATTACK: 'attack',
@@ -45,10 +58,18 @@ export class Character {
             ...defaultStats,
             ...config
         };
+
+        this.initAi();
         this.position = position;
         this.facing = facing;
 
         this.inventory = inventory;
+    }
+
+    initAi() {
+        if (this.isAi()) {
+            this.decider = new AI_DECIDER[this.config.logic];
+        }
     }
 
     action(type, payload) {
@@ -121,16 +142,8 @@ export class Character {
         this.config[stat] = newValue < 0 ? 0 : newValue;
     }
 
-    decideMove(battle) {
-        // get enemy position
-        // is within reach?
-        //     attack, parry or wait (if needs endurance)
-        // else
-        //     move towards enemy
-
-        const humanPosition = battle.getHumanPosition();
-        
-
+    decideAction(battle) {
+        return this.decider.decide(this, battle);
     }
 }
 
