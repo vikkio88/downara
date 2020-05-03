@@ -91,6 +91,18 @@ describe('Field', () => {
             }
         });
 
+        it('flattens the list of adjacent tiles given from the getTilesAtRange method', () => {
+            const size = { i: 4, j: 4 };
+            const field = new Field({ size });
+            const expectedAdjacent = [
+                pg(0, 0), pg(0, 1), pg(0, 2),
+                pg(1, 0),/* self */ pg(1, 2),
+                pg(2, 0), pg(2, 1), pg(2, 2),
+            ];
+            const adjacentTiles = field.getFlatTilesAtRange(pg(1, 1));
+            expect(adjacentTiles).toEqual(expectedAdjacent);
+        });
+
         it('returns a list of adjacent tiles given a default distance of 1, and centered in a corner', () => {
             const size = { i: 4, j: 4 };
             const field = new Field({ size });
@@ -141,7 +153,7 @@ describe('Field', () => {
 
             expect(field.nextStepToTile(pg(0, 0), pg(1, 0))).toEqual({ i: 0, j: 0 });
             expect(field.nextStepToTile(pg(0, 0), pg(2, 0))).toEqual({ i: 1, j: 0 });
-            
+
             expect(field.nextStepToTile(pg(0, 0), pg(2, 2))).toEqual({ i: 1, j: 1 });
         });
 

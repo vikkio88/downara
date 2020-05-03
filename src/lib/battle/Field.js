@@ -105,8 +105,20 @@ export class Field {
 
     getFlatTilesAtRange({ i, j }, { maxD = 1, d = null } = {}) {
         const adj = this.getTilesAtRange({ i, j }, { maxD, d: d });
+        const result = [];
+        const rows = Object.keys(adj);
+        for (let rowIndex in rows) {
+            const row = rows[rowIndex];
+            const rowValue = parseInt(row);
+            const columns = Object.keys(adj[row]);
+            for (let columnIndex in columns) {
+                const column = parseInt(columns[columnIndex]);
+                result.push(
+                    { i: rowValue, j: column }
+                );
+            }
+        }
 
-        // transform to array
-        return [];
+        return result;
     }
 }
