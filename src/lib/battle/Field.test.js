@@ -1,7 +1,4 @@
-import { Field, OBJECTS, defaultConfig } from './Field';
-
-//position generator helper
-const pg = (i = 0, j = 0) => ({ i, j });
+import { Field, OBJECTS, defaultConfig, pg } from './Field';
 
 describe('Field', () => {
     describe('init functions', () => {
@@ -17,6 +14,59 @@ describe('Field', () => {
             expect(field.getTile(0, 0)).toEqual({ ...customTile, object: null });
             expect(field.getTile(0, 1)).toEqual({ ...defaultConfig.defaultTile, object: { type: OBJECTS.CHARACTER, id: 'someId' } });
         });
+    });
+
+    describe('tiles/object fetching/moving', () => {
+
+        it('places object on tiles correctly', () => {
+            const field = new Field;
+            let objectOnTile = field.getObject(pg());
+            expect(objectOnTile).toBe(null);
+            const object = { type: OBJECTS.CHARACTER, id: 'someId' };
+            field.placeObject(object, pg());
+            objectOnTile = field.getObject(pg());
+            expect(objectOnTile).toEqual(object);
+        });
+
+        it('moves object on tiles correctly', () => {
+            const field = new Field;
+            const object = { type: OBJECTS.CHARACTER, id: 'someId' };
+            field.placeObject(object, pg());
+            let objectOnTile = field.getObject(pg());
+            expect(objectOnTile).toEqual(object);
+
+            field.moveObject(pg(), pg(0, 1));
+            objectOnTile = field.getObject(pg());
+            expect(objectOnTile).toBe(null);
+            objectOnTile = field.getObject(pg(0, 1));
+            expect(objectOnTile).toEqual(object);
+        });
+
+        it('moves object on tiles correctly if free', () => {
+            const field = new Field;
+            const objectOrigin = { type: OBJECTS.CHARACTER, id: 'origin' };
+            const object11 = { type: OBJECTS.CHARACTER, id: '11' };
+
+            field.placeObject(object11, pg(1, 1));
+            field.placeObject(objectOrigin, pg());
+
+            let objectOnTile = field.getObject(pg());
+            expect(objectOnTile).toEqual(objectOrigin);
+            objectOnTile = field.getObject(pg(1, 1));
+            expect(objectOnTile).toEqual(object11);
+
+            let moveResult = field.moveObjectIfFree(pg(), pg(1, 1));
+            expect(moveResult).toBe(false);
+            moveResult = field.moveObjectIfFree(pg(), pg(0, 1));
+            expect(moveResult).toBe(true);
+            objectOnTile = field.getObject(pg(1, 1));
+            expect(objectOnTile).toEqual(object11);
+            objectOnTile = field.getObject(pg(0, 0));
+            expect(objectOnTile).toBe(null);
+            objectOnTile = field.getObject(pg(0, 1));
+            expect(objectOnTile).toEqual(objectOrigin);
+        });
+
     });
 
     describe('positioning', () => {

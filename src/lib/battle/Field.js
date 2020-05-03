@@ -1,6 +1,9 @@
 import get from 'lodash.get';
 import { range } from 'lib';
 
+//position generator helper
+export const pg = (i = 0, j = 0) => ({ i, j });
+
 export const OBJECTS = {
     CHARACTER: 'character',
     // maybe to spawn random heal items?
@@ -53,8 +56,16 @@ export class Field {
         }
     }
 
-    placeObject({ type, id }, { i, j }) {
-        this.tiles[i][j].object = { type, id };
+    placeObject({ type = null, id = null } = {}, { i, j }) {
+        if (type === null || id === null) {
+            console.error(`trying to add null object to tile {${i}, ${j}}`);
+            this.tiles[i][j].object = null;
+            return;
+        }
+        this.tiles[i][j] = {
+            ...this.tiles[i][j],
+            object: { type, id }
+        };
     }
 
     getObject({ i, j }) {
@@ -62,6 +73,27 @@ export class Field {
         return tile.object || null;
     }
 
+    moveObjectIfFree({ i, j }, { i: fi, j: fj }) {
+        const occupied = this.getObject(pg(fi, fj)) !== null;
+
+        if (occupied) return false;
+
+        this.moveObject(pg(i, j), pg(fi, fj));
+        return true;
+    }
+
+    moveObject({ i, j }, { i: fi, j: fj }) {
+        const object = this.getObject({ i, j });
+        this.removeObject({ i, j });
+        this.placeObject(object, { i: fi, j: fj });
+    }
+
+    removeObject({ i, j }) {
+        this.tiles[i][j] = {
+            ...this.tiles[i][j],
+            object: null
+        };
+    }
 
     getTile(i, j) {
         return get(this.tiles, `${i}.${j}`, null);
