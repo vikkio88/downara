@@ -203,6 +203,28 @@ describe('Battle test (battletesting battle test)', () => {
 
             expect(humanDecider).not.toBeCalled();
         });
+
+        it('resolves the turn when all the actions are registered', () => {
+            const fakeAction = { type: 'a', payload: { some: 'thing' } };
+            const characters = [
+                { id: 'test1', getSpeed: () => 1, isAi: () => true, decideMove: () => fakeAction },
+                { id: 'human', getSpeed: () => 2, isAi: () => false },
+            ];
+
+            const battle = new Battle(null, characters);
+            const human = battle.getCharacterIdTurn();
+            battle.registerAction(human, fakeAction.type, fakeAction.payload);
+
+            while (!battle.needsResolving) {
+                const result = battle.getNextAction();
+                expect(result).toBe(true);
+            }
+            expect(battle.needsResolving).toBe(true);
+
+            // here we need to get an array of actions
+            console.log(battle.resolve());
+            
+        });
     });
 
 });

@@ -121,6 +121,13 @@ export class Battle {
     }
 
     resolve() {
-
+        // get what turn we are
+        // get the order of actions
+        // perform actions for each character
+        // return log of events
+        // check if someone died
+        //      set this battle as finished            
+        // set it to be ready to go on next turn
+        //
     }
 }
