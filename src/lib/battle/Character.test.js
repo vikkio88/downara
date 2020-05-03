@@ -1,4 +1,4 @@
-import { Character, FACING, ACTIONS } from './Character';
+import { Character, FACING, ACTIONS, AI } from './Character';
 import { Field } from 'components/battle';
 
 describe('Character', () => {
@@ -113,7 +113,7 @@ describe('Character', () => {
                 expect(decidedMove.type).toBe(ACTIONS.MOVE);
                 expect(decidedMove.payload).toEqual({ position: { i: 0, j: 1 } });
             });
-            
+
             it('decides to attack the human tile if the human is in range', () => {
                 const distanceMock = jest.fn();
                 const nextStepMock = jest.fn();
@@ -136,6 +136,77 @@ describe('Character', () => {
                 expect(distanceMock).toHaveBeenCalled();
                 expect(nextStepMock).not.toHaveBeenCalled();
                 expect(decidedMove.type).toBe(ACTIONS.ATTACK);
+                expect(decidedMove.payload).toEqual({ position: { i: 0, j: 1 } });
+            });
+
+            it('decides to parry if the human is in range and defensiveness is 100%', () => {
+                const distanceMock = jest.fn();
+                const nextStepMock = jest.fn();
+                distanceMock.mockReturnValueOnce(1);
+                const battle = {
+                    getHumanPosition: () => ({ i: 0, j: 1 }),
+                    field: {
+                        tilesDistance: distanceMock,
+                        nextStepToTile: nextStepMock
+                    }
+                };
+
+                const inventory = {
+                    getWeapon: () => ({ getReach: () => 1 })
+                };
+                const aiCharPosition = { i: 0, j: 0 };
+                const aiCharacter = new Character(
+                    id,
+                    {
+                        ai: {
+                            config: {
+                                logic: AI.SIMPLE,
+                                traits: {
+                                    defensiveness: 100
+                                }
+                            }
+                        }
+                    },
+                    inventory,
+                    aiCharPosition
+                );
+
+                const decidedMove = aiCharacter.decideAction(battle);
+                expect(distanceMock).toHaveBeenCalled();
+                expect(nextStepMock).not.toHaveBeenCalled();
+                expect(decidedMove.type).toBe(ACTIONS.PARRY);
+                expect(decidedMove.payload).toEqual({ position: { i: 0, j: 1 } });
+            });
+        });
+
+        describe('Random choice', () => {
+            it('decides to a random move', () => {
+                const distanceMock = jest.fn();
+                const nextStepMock = jest.fn();
+                distanceMock.mockReturnValueOnce(1);
+                const battle = {
+                    getHumanPosition: () => ({ i: 0, j: 1 }),
+                    field: {
+                        tilesDistance: distanceMock,
+                        nextStepToTile: nextStepMock
+                    }
+                };
+
+                const inventory = {
+                    getWeapon: () => ({ getReach: () => 1 })
+                };
+                const aiCharPosition = { i: 0, j: 0 };
+                const aiCharacter = new Character(
+                    id,
+                    { ai: { config: { logic: AI.RANDOM } } },
+                    inventory,
+                    aiCharPosition
+                );
+
+                const decidedMove = aiCharacter.decideAction(battle);
+                expect(distanceMock).toHaveBeenCalled();
+                expect(nextStepMock).not.toHaveBeenCalled();
+                expect(decidedMove.type).toBe(ACTIONS.PARRY);
                 expect(decidedMove.payload).toEqual({ position: { i: 0, j: 1 } });
             });
         });

@@ -102,4 +102,11 @@ export class Field {
 
         return tiles;
     }
+
+    getFlatTilesAtRange({ i, j }, { maxD = 1, d = null } = {}) {
+        const adj = this.getTilesAtRange({ i, j }, { maxD, d: d });
+
+        // transform to array
+        return [];
+    }
 }

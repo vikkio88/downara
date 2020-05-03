@@ -1,5 +1,19 @@
+import { randomizer } from 'lib';
 import { ACTIONS } from '../Character';
 export default class SimpleAi {
+    constructor(traits) {
+        const { defensiveness } = traits;
+        this.defensiveness = defensiveness;
+    }
+
+    attackOrParry() {
+        if (randomizer.chance(this.defensiveness)) {
+            return ACTIONS.PARRY;
+        }
+
+        return ACTIONS.ATTACK;
+    }
+
     decide(self, battle) {
         // get enemy position
         // is within reach?
@@ -24,7 +38,7 @@ export default class SimpleAi {
 
         if (targetDistance <= weaponReach) {
             return {
-                type: ACTIONS.ATTACK,
+                type: this.attackOrParry(),
                 payload: {
                     position: humanPosition
                 }

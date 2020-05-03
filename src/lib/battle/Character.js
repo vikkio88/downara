@@ -1,4 +1,5 @@
-import SimpleApi from './deciders/SimpleAi';
+import SimpleAi from './deciders/SimpleAi';
+import RandomAi from './deciders/RandomAi';
 export const FACING = {
     UP: 'face_up',
     DOWN: 'face_down',
@@ -11,21 +12,29 @@ const STATS = {
     ENDURANCE: 'endurance',
 };
 
-const AI = {
-    SIMPLE: 'simple'
+export const AI = {
+    SIMPLE: 'simple',
+    RANDOM: 'random',
 };
 
 const defaultStats = {
     [STATS.HP]: 100,
     [STATS.ENDURANCE]: 100,
-    ai: true,
+    ai: {
+        config: {
+            logic: [AI.SIMPLE],
+            traits: {
+                defensiveness: 0
+            }
+        }
+    },
     speed: 1,
-    logic: [AI.SIMPLE]
 };
 
 const AI_DECIDER = {
-    [AI.SIMPLE]: SimpleApi,
-    default: SimpleApi
+    [AI.SIMPLE]: SimpleAi,
+    [AI.RANDOM]: RandomAi,
+    default: SimpleAi
 };
 
 
@@ -67,8 +76,11 @@ export class Character {
     }
 
     initAi() {
-        if (this.isAi()) {
-            this.decider = new AI_DECIDER[this.config.logic];
+        if (this.config.ai !== false) {
+            const { config } = this.config.ai;
+            const LogicClass = AI_DECIDER[config.logic] || AI_DECIDER.default;
+            const traits = config.traits || {};
+            this.decider = new LogicClass(traits);
         }
     }
 
@@ -95,7 +107,7 @@ export class Character {
     }
 
     isAi() {
-        return this.config.ai;
+        return this.config.ai !== false;
     }
 
     getPosition() {
