@@ -188,7 +188,8 @@ describe('Character', () => {
                     getHumanPosition: () => ({ i: 0, j: 1 }),
                     field: {
                         tilesDistance: distanceMock,
-                        nextStepToTile: nextStepMock
+                        nextStepToTile: nextStepMock,
+                        getFlatTilesAtRange: () => [{ i: 0, j: 1 }]
                     }
                 };
 
@@ -206,8 +207,10 @@ describe('Character', () => {
                 const decidedMove = aiCharacter.decideAction(battle);
                 expect(distanceMock).toHaveBeenCalled();
                 expect(nextStepMock).not.toHaveBeenCalled();
-                expect(decidedMove.type).toBe(ACTIONS.PARRY);
-                expect(decidedMove.payload).toEqual({ position: { i: 0, j: 1 } });
+                expect(Object.values(ACTIONS).includes(decidedMove.type)).toBe(true);
+                if (decidedMove.payload) {
+                    expect(decidedMove.payload).toEqual({ position: { i: 0, j: 1 } });
+                }
             });
         });
     });
