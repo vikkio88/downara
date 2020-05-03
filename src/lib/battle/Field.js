@@ -1,6 +1,19 @@
 import get from 'lodash.get';
 import { range } from 'lib';
 
+export const OBJECTS = {
+    CHARACTER: 'character',
+    // maybe to spawn random heal items?
+    COLLECTABLE: 'collectable',
+};
+
+export const TERRAINS = {
+    DIRT: 'dirt',
+    GRASS: 'grass',
+    STONE: 'stone',
+    WATER: 'water',
+};
+
 const tileGenerator = (customTile, defaultTile) => {
     return {
         ...defaultTile,
@@ -14,8 +27,9 @@ export const defaultConfig = {
         j: 4
     },
     defaultTile: {
-        terrain: 'd',
+        terrain: TERRAINS.GRASS,
         blocked: false,
+        object: null
     }
 };
 
@@ -38,6 +52,16 @@ export class Field {
             }
         }
     }
+
+    placeObject({ type, id }, { i, j }) {
+        this.tiles[i][j].object = { type, id };
+    }
+
+    getObject({ i, j }) {
+        const tile = this.getTile(i, j);
+        return tile.object || null;
+    }
+
 
     getTile(i, j) {
         return get(this.tiles, `${i}.${j}`, null);

@@ -1,4 +1,4 @@
-import { Field, defaultConfig } from './Field';
+import { Field, OBJECTS, defaultConfig } from './Field';
 
 //position generator helper
 const pg = (i = 0, j = 0) => ({ i, j });
@@ -12,10 +12,10 @@ describe('Field', () => {
         });
 
         test('set custom tile', () => {
-            const customTile = { terrain: 'f', blocked: false };
-            const field = new Field({}, { 0: { 0: customTile, 1: { character: 'stuff' } } });
-            expect(field.getTile(0, 0)).toEqual(customTile);
-            expect(field.getTile(0, 1)).toEqual({ ...defaultConfig.defaultTile, character: 'stuff' });
+            const customTile = { terrain: 'f', blocked: true };
+            const field = new Field({}, { 0: { 0: customTile, 1: { object: { type: OBJECTS.CHARACTER, id: 'someId' } } } });
+            expect(field.getTile(0, 0)).toEqual({ ...customTile, object: null });
+            expect(field.getTile(0, 1)).toEqual({ ...defaultConfig.defaultTile, object: { type: OBJECTS.CHARACTER, id: 'someId' } });
         });
     });
 
