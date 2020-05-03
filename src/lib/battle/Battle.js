@@ -83,7 +83,6 @@ export class Battle {
         this.turns.count++;
 
         if ((count % order.length) === order.length - 1) {
-            this.turns.turn++;
             this.needsResolving = true;
         }
     }
@@ -128,19 +127,36 @@ export class Battle {
         const order = this.resolveOrder;
         // perform actions for each character
         const log = [];
-        // this is -1 because I change the turn on line 86
-        const movesInTurn = this.moves[turn - 1];
+        const movesInTurn = this.moves[turn];
         // moves in turn is an array, as someone might be able to play twice
         // we need to sort it
         const orderedMoves = movesInTurn.sort((m, m1) => order.indexOf(m.id) > order.indexOf(m1.id) ? 1 : -1);
         for (let index in orderedMoves) {
             const move = orderedMoves[index];
-            console.log(`${index}:${move.id}`, move);
+            const character = this.getCharacter(move.id);
+
+            const result = character.perform(move, this);
+
+            log.push({
+                turn,
+                id: move.id,
+                move,
+                result
+            });
         }
-        // return log of events
+
+        this.log[turn] = log;
+        //increment turn
+        this.turns.turn++;
+        this.needsResolving = false;
+
         // check if someone died
         //      set this battle as finished            
         // set it to be ready to go on next turn
         //
+
+        // return log of events
+        return log;
+
     }
 }

@@ -84,7 +84,7 @@ export class Character {
         }
     }
 
-    action(type, payload) {
+    perform({ type, payload }, battle) {
         // this makes the user pay endurance
         this.apply(ACTIONS_CONFIG[type]);
 

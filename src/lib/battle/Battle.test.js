@@ -54,7 +54,8 @@ describe('Battle test (battletesting battle test)', () => {
             expect(battle.turns.next).toBe('test2');
             expect(battle.turns.last).toBe(charId);
             expect(battle.turns.count).toBe(2);
-            expect(battle.turns.turn).toBe(1);
+            //turn now increments on resolve
+            expect(battle.turns.turn).toBe(0);
             expect(battle.moves[0][1]).toEqual({ id: charId, ...fakeAction });
             expect(battle.needsResolving).toBe(true);
         });
@@ -97,7 +98,8 @@ describe('Battle test (battletesting battle test)', () => {
             expect(battle.turns.next).toBe('test3');
             expect(battle.turns.last).toBe(charId);
             expect(battle.turns.count).toBe(3);
-            expect(battle.turns.turn).toBe(1);
+            // turns increment on resolve
+            expect(battle.turns.turn).toBe(0);
             expect(battle.moves[0][2]).toEqual({ id: charId, ...fakeAction });
             expect(battle.needsResolving).toBe(true);
         });
@@ -198,22 +200,36 @@ describe('Battle test (battletesting battle test)', () => {
                 expect(result).toBe(true);
             }
 
+            //  turn will be incremented after resolve
+            expect(battle.getCurrentTurn()).toBe(0);
             expect(battle.needsResolving).toBe(true);
-            expect(battle.getCurrentTurn()).toBe(1);
 
             expect(humanDecider).not.toBeCalled();
         });
 
         it('resolves the turn when all the actions are registered', () => {
-            const fakeAction = { type: 'a', payload: { some: 'thing' } };
+            const performActionMock = jest.fn();
+            const fakeActionHuman = { type: 'a', payload: { some: 'human' } };
+            const fakeActionAI = { type: 'a', payload: { some: 'ai' } };
             const characters = [
-                { id: 'test1', getSpeed: () => 3, isAi: () => true, decideMove: () => fakeAction },
-                { id: 'human', getSpeed: () => 2, isAi: () => false },
+                {
+                    id: 'test1',
+                    getSpeed: () => 3,
+                    isAi: () => true,
+                    decideMove: () => fakeActionAI,
+                    perform: performActionMock
+                },
+                {
+                    id: 'human',
+                    getSpeed: () => 2,
+                    isAi: () => false,
+                    perform: performActionMock
+                },
             ];
 
             const battle = new Battle(null, characters);
             const human = battle.getCharacterIdTurn();
-            battle.registerAction(human, fakeAction.type, fakeAction.payload);
+            battle.registerAction(human, fakeActionHuman.type, fakeActionHuman.payload);
 
             while (!battle.needsResolving) {
                 const result = battle.getNextAction();
@@ -222,8 +238,12 @@ describe('Battle test (battletesting battle test)', () => {
             expect(battle.needsResolving).toBe(true);
 
             // here we need to get an array of actions
-            console.log(battle.resolve());
-            
+            const currentTurnLog = battle.resolve();
+
+            expect(battle.needsResolving).toBe(false);
+            expect(battle.turns.turn).toBe(1);
+            expect(battle.log[battle.turns.turn - 1]).toEqual(currentTurnLog);
+
         });
     });
 
