@@ -207,7 +207,7 @@ describe('Battle test (battletesting battle test)', () => {
         it('resolves the turn when all the actions are registered', () => {
             const fakeAction = { type: 'a', payload: { some: 'thing' } };
             const characters = [
-                { id: 'test1', getSpeed: () => 1, isAi: () => true, decideMove: () => fakeAction },
+                { id: 'test1', getSpeed: () => 3, isAi: () => true, decideMove: () => fakeAction },
                 { id: 'human', getSpeed: () => 2, isAi: () => false },
             ];
 

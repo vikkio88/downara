@@ -14,13 +14,13 @@ export class Battle {
 
         this.loadCharacters();
         this.resolveOrder = [];
-        this.turns = this.calculateTurns();
+        this.turns = this.initTurns();
         this.needsResolving = false;
         this.moves = {};
         this.log = {};
     }
 
-    calculateTurns() {
+    initTurns() {
         // I will put user playing firs all the time
         // then ordering the actions
         const human = this.characters.find(c => !c.isAi());
@@ -122,8 +122,21 @@ export class Battle {
 
     resolve() {
         // get what turn we are
+        const { turn } = this.turns;
+
         // get the order of actions
+        const order = this.resolveOrder;
         // perform actions for each character
+        const log = [];
+        // this is -1 because I change the turn on line 86
+        const movesInTurn = this.moves[turn - 1];
+        // moves in turn is an array, as someone might be able to play twice
+        // we need to sort it
+        const orderedMoves = movesInTurn.sort((m, m1) => order.indexOf(m.id) > order.indexOf(m1.id) ? 1 : -1);
+        for (let index in orderedMoves) {
+            const move = orderedMoves[index];
+            console.log(`${index}:${move.id}`, move);
+        }
         // return log of events
         // check if someone died
         //      set this battle as finished            
