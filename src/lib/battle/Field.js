@@ -54,6 +54,24 @@ export class Field {
         );
     }
 
+    nextStepToTile({ i: pi, j: pj }, { i: p1i, j: p1j }, step = 1) {
+        if (this.tilesDistance({ i: pi, j: pj }, { i: p1i, j: p1j }) <= step) {
+            return {
+                i: pi,
+                j: pj
+            };
+        }
+
+        const i = Math.max(pi, p1i) - Math.min(pi, p1i);
+        const j = Math.max(pj, p1j) - Math.min(pj, p1j);
+        return {
+            i: Math.min(step, i),
+            j: Math.min(step, j)
+        };
+    }
+
+    // d is there in order to maybe get only tiles to a particular
+    // fixed distance instead of a range
     getTilesAtRange({ i, j }, { maxD = 1, d = null } = {}) {
         let min = Math.max(0, i - maxD);
         let max = Math.min(this.size.i, i + maxD);
@@ -83,6 +101,5 @@ export class Field {
         }
 
         return tiles;
-
     }
 }

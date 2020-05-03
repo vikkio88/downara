@@ -124,5 +124,26 @@ describe('Field', () => {
             }
         });
 
+        it('calculates distance correctly', () => {
+            const field = new Field({ size: 4 });
+            expect(field.tilesDistance(pg(0, 0), pg(0, 0))).toBe(0);
+            expect(field.tilesDistance(pg(0, 0), pg(1, 0))).toBe(1);
+            expect(field.tilesDistance(pg(0, 0), pg(0, 2))).toBe(2);
+            expect(field.tilesDistance(pg(0, 0), pg(3, 3))).toBe(3);
+
+        });
+
+        it('returns the next step tile to get closer', () => {
+            const field = new Field({ size: 4 });
+            expect(field.nextStepToTile(pg(0, 0), pg(0, 0))).toEqual({ i: 0, j: 0 });
+            expect(field.nextStepToTile(pg(0, 0), pg(0, 2))).toEqual({ i: 0, j: 1 });
+            expect(field.nextStepToTile(pg(0, 0), pg(0, 3))).toEqual({ i: 0, j: 1 });
+
+            expect(field.nextStepToTile(pg(0, 0), pg(1, 0))).toEqual({ i: 0, j: 0 });
+            expect(field.nextStepToTile(pg(0, 0), pg(2, 0))).toEqual({ i: 1, j: 0 });
+            
+            expect(field.nextStepToTile(pg(0, 0), pg(2, 2))).toEqual({ i: 1, j: 1 });
+        });
+
     });
 });
