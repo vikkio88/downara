@@ -38,6 +38,8 @@ export default class SimpleAi {
         }
 
         // get a flat list of adjacent tiles removing the human one
+        // this work for 2 contestant for 3 gets more complex
+        // maybe I will need to create a way of getting all the occupied tiles
         let possibleTiles = battle.field.getFlatTilesAtRange();
         possibleTiles = possibleTiles.filter(({ i, j }) => !(i === humanPosition.i && j === humanPosition.j));
         return {
