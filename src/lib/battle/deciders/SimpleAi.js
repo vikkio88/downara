@@ -12,6 +12,7 @@ export default class SimpleAi {
         const weaponReach = self.inventory.getWeapon().getReach();
 
         const targetDistance = battle.field.tilesDistance(selfPosition, humanPosition);
+
         if (targetDistance > weaponReach) {
             return {
                 type: ACTIONS.MOVE,
@@ -20,5 +21,17 @@ export default class SimpleAi {
                 }
             };
         }
+
+        if (targetDistance <= weaponReach) {
+            return {
+                type: ACTIONS.ATTACK,
+                payload: {
+                    position: humanPosition
+                }
+            };
+        }
+
+
+        //here maybe some other moves
     }
 }
