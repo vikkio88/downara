@@ -189,7 +189,7 @@ describe('Character', () => {
                     field: {
                         tilesDistance: distanceMock,
                         nextStepToTile: nextStepMock,
-                        getFlatTilesAtRange: () => [{ i: 0, j: 1 }]
+                        getFlatTilesAtRange: () => [{ i: 0, j: 1 }, { i: 1, j: 0 }]
                     }
                 };
 
@@ -208,8 +208,13 @@ describe('Character', () => {
                 expect(distanceMock).toHaveBeenCalled();
                 expect(nextStepMock).not.toHaveBeenCalled();
                 expect(Object.values(ACTIONS).includes(decidedMove.type)).toBe(true);
-                if (decidedMove.payload) {
+
+                if ([ACTIONS.PARRY, ACTIONS.WAIT].includes(decidedMove.type)) {
+                    expect(decidedMove.payload).toBe(undefined);
+                } else if (decidedMove.type === ACTIONS.ATTACK) {
                     expect(decidedMove.payload).toEqual({ position: { i: 0, j: 1 } });
+                } else if (decidedMove.type !== ACTIONS.ATTACK) {
+                    expect(decidedMove.payload).toEqual({ position: { i: 1, j: 0 } });
                 }
             });
         });

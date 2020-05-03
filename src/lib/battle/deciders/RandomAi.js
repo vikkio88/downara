@@ -37,8 +37,9 @@ export default class SimpleAi {
             return { type: action };
         }
 
-        // get a flat list of adjacent tiles
-        const possibleTiles = battle.field.getFlatTilesAtRange();
+        // get a flat list of adjacent tiles removing the human one
+        let possibleTiles = battle.field.getFlatTilesAtRange();
+        possibleTiles = possibleTiles.filter(({ i, j }) => !(i === humanPosition.i && j === humanPosition.j));
         return {
             type: ACTIONS.MOVE,
             payload: {
