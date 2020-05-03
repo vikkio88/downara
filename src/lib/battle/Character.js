@@ -52,7 +52,7 @@ const ACTIONS_CONFIG = {
     [ACTIONS.MOVE]: { endurance: -40 },
     [ACTIONS.WAIT]: { endurance: 20 },
     [ACTIONS.ATTACK]: { endurance: -20 },
-    [ACTIONS.PARRY]: { endurance: 10 },
+    [ACTIONS.PARRY]: { endurance: 0, health: 10 }, // maybe I can simulate damage reduction with a +10 health on parry
     [ACTIONS.SPELL]: { endurance: 20 },
     [ACTIONS.USE_OBJECT]: { endurance: 0 },
 };
@@ -84,12 +84,23 @@ export class Character {
         }
     }
 
-    perform({ type, payload }, battle) {
+    perform({ type, payload = {} }, battle) {
         // this makes the user pay endurance
         this.apply(ACTIONS_CONFIG[type]);
 
+        const { position = null } = payload;
+
         if (type === ACTIONS.ATTACK) {
-            this.weapon.use(this, payload);
+            const targetObject = battle.field.getObject(position);
+            if (targetObject === null) return false;
+
+            this.weapon.use(this, targetObject);
+        }
+
+        //there should be a problem here if parry comes after attack
+        if (type === ACTIONS.PARRY) {
+            this.apply();
+
         }
 
     }
