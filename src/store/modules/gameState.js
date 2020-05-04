@@ -15,11 +15,12 @@ export default store => {
                 actionedTile: {
                     position: areaPosition
                 },
+                tilesEffect: {},
                 triggers: {
                     casualEncounter: false
                 }
             },
-        }
+        };
     });
 
     store.on('actioned', ({ gameState }, tilePosition) => {
@@ -41,10 +42,14 @@ export default store => {
                     position: tilePosition
                 }
             }
-        }
+        };
     });
 
     store.on('moveToTile', ({ gameState }, newPosition) => {
+        // to set movement effect on tiles
+        const tilesEffect = { [newPosition.i]: { [newPosition.j]: true } };
+        //
+
         return {
             gameState: {
                 ...gameState,
@@ -54,9 +59,10 @@ export default store => {
                 },
                 actionedTile: {
                     position: newPosition
-                }
+                },
+                tilesEffect
             },
-        }
+        };
     });
 
     store.on('interact', ({ gameState, worldState }) => {
@@ -108,7 +114,7 @@ export default store => {
             store.dispatch('notify', { inventory: true });
 
             // I could set flag here too for the quest
-            store.dispatch('updateWorldPostDialogue', postDialogue)
+            store.dispatch('updateWorldPostDialogue', postDialogue);
         }
 
         if (postDialogue.gameState) {
@@ -123,7 +129,7 @@ export default store => {
         const newAreaPosition = map[newArea][currentWorldPosition];
         gameState.player.areaPosition = newAreaPosition;
         gameState.actionedTile.position = newAreaPosition;
-        return { gameState: { ...gameState, worldPosition: newArea, area: map[newArea] } }
+        return { gameState: { ...gameState, worldPosition: newArea, area: map[newArea] } };
     });
 
     // For test purposes

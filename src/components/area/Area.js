@@ -1,4 +1,6 @@
 import React from 'react';
+import get from 'lodash.get';
+
 import { useStoreon } from 'storeon/react';
 
 import { range } from 'lib';
@@ -11,11 +13,11 @@ const Tile = ({
     terrain = "grass_4",
     object = null,
     blocked = false,
-    link = false,
     player = false,
     actionable = false,
     position = null,
-    flag = null
+    flag = null,
+    animate = false,
 }) => {
     const { dispatch } = useStoreon();
     return (
@@ -23,7 +25,7 @@ const Tile = ({
             secondary
             rounded={false}
             noMargin
-            className="flex-1 flex items-center justify-center m-0"
+            className={`flex-1 flex items-center justify-center m-0 ${animate ? 'animated pulse fast' : ''}`}
             style={{
                 'background': `
                     ${flag ? `no-repeat top right
@@ -42,11 +44,11 @@ const Tile = ({
             onClick={() => dispatch('actioned', position)}
         />
     );
-}
+};
 
 const Area = () => {
     const {
-        gameState: { player, worldPosition, area },
+        gameState: { player, worldPosition, area, tilesEffect },
         worldState: { objects, flags }
     } = useStoreon('gameState', 'worldState');
     const { areaPosition: playerAreaPosition } = player;
@@ -77,6 +79,7 @@ const Area = () => {
                                     actionable={areaHelper.isTileActionable(playerAreaPosition, i, j)}
                                     position={{ i, j }}
                                     flag={areaHelper.getFlag({ i, j }, flags[worldPosition])}
+                                    animate={get(tilesEffect, `${i}.${j}`, false)}
                                 />
                             );
                         })}
