@@ -129,6 +129,7 @@ export default store => {
         const newAreaPosition = map[newArea][currentWorldPosition];
         gameState.player.areaPosition = newAreaPosition;
         gameState.actionedTile.position = newAreaPosition;
+        // here we should animate the new position tile too
         return { gameState: { ...gameState, worldPosition: newArea, area: map[newArea] } };
     });
 
