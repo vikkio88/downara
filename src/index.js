@@ -7,8 +7,6 @@ import Main from './Main';
 //import * as serviceWorker from './serviceWorker';
 import { store } from 'store';
 
-import 'animate.css/animate.min.css';
-
 
 ReactDOM.render(
   <StoreContext.Provider value={store}>

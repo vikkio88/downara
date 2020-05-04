@@ -23,3 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 
 main.css
+public/animate.min.css
