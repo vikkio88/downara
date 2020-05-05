@@ -6,7 +6,6 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "animate.css": "^3.7.2",
     "classnames": "^2.2.6",
     "lodash.get": "^4.4.2",
     "react": "^16.13.1",
@@ -15,7 +14,6 @@
     "storeon": "^2.0.2"
   },
   "scripts": {
-    "postinstall": "cp ./node_modules/animate.css/animate.min.css public/",
     "start": "npm run watch:css && react-scripts start",
     "build": "npm run build:css && react-scripts build",
     "test": "react-scripts test",

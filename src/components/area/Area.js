@@ -17,7 +17,6 @@ const Tile = ({
     actionable = false,
     position = null,
     flag = null,
-    animate = false,
 }) => {
     const { dispatch } = useStoreon();
     return (
@@ -25,7 +24,7 @@ const Tile = ({
             secondary
             rounded={false}
             noMargin
-            className={`flex-1 flex items-center justify-center m-0 ${animate ? 'animated pulse fast' : ''}`}
+            className={`flex-1 flex items-center justify-center m-0`}
             style={{
                 'background': `
                     ${flag ? `no-repeat top right
@@ -48,7 +47,7 @@ const Tile = ({
 
 const Area = () => {
     const {
-        gameState: { player, worldPosition, area, tilesEffect },
+        gameState: { player, worldPosition, area },
         worldState: { objects, flags }
     } = useStoreon('gameState', 'worldState');
     const { areaPosition: playerAreaPosition } = player;
@@ -79,7 +78,6 @@ const Area = () => {
                                     actionable={areaHelper.isTileActionable(playerAreaPosition, i, j)}
                                     position={{ i, j }}
                                     flag={areaHelper.getFlag({ i, j }, flags[worldPosition])}
-                                    animate={get(tilesEffect, `${i}.${j}`, false)}
                                 />
                             );
                         })}
