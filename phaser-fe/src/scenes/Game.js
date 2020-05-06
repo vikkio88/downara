@@ -9,7 +9,7 @@ export default class extends Phaser.Scene {
   create() {
     this.map = this.make.tilemap({ key: "map" });
 
-    this.tiles = this.map.addTilesetImage("tuxmon");
+    this.tiles = this.map.addTilesetImage("tiles");
     this.layer = this.map.createDynamicLayer(0, this.tiles, 0, 0);
     this.blockedLayer = this.map.createStaticLayer("blocked", this.tiles, 0, 0);
     this.blockedLayer.setCollisionByExclusion([-1]);

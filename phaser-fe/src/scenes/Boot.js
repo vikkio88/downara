@@ -24,7 +24,7 @@ export default class extends Phaser.Scene {
       frameHeight: 16,
     });
 
-    this.load.spritesheet("tuxmon", "assets/maps/tuxmon.png", {
+    this.load.spritesheet("tiles", "assets/maps/tiles.png", {
       frameWidth: 64,
       frameHeight: 64,
     });

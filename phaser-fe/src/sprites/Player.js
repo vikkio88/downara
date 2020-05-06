@@ -5,7 +5,7 @@ export default class extends Phaser.GameObjects.Sprite {
     super(scene, x, y, "player", 0);
     scene.physics.world.enable(this);
     scene.add.existing(this);
-    //this.setScale();
+    //this.setScale(.5);
 
     this.isMoving = false;
     scene.anims.create({
