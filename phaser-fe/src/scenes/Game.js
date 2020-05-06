@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { Player, Pointer } from "../sprites";
+import { Player } from "../sprites";
 
 export default class extends Phaser.Scene {
   constructor() {
@@ -54,57 +54,8 @@ export default class extends Phaser.Scene {
       }
     });
 
-    this.input.on("pointerdown", ({ worldX, worldY }) => {
-      if (this.clickedTile) this.clickedTile.destroy();
-
-      if (this.destination) {
-        this.destination.destroy();
-        this.physics.world.removeCollider(this.destinationCollider);
-      }
-      /*
-      this is if we want only to click on a portion of the screen
-      if (
-        Phaser.Math.Distance.Between(
-          worldX,
-          worldY,
-          this.player.x,
-          this.player.y
-        ) > 200
-      ) {
-        return;
-      }
-      */
-      this.clickedTile = this.add
-        .sprite(worldX, worldY, "clickedTile", 0)
-        .setScale(0.2)
-        .play("pulse");
-
-      this.clickedTile.on("animationcomplete", () =>
-        this.clickedTile.destroy()
-      );
-
-      if (worldX < this.player.x) {
-        this.player.flipX = true;
-      } else {
-        this.player.flipX = false;
-      }
-
-      this.destination = this.add.rectangle(worldX, worldY, 1, 1);
-      this.physics.world.enable(this.destination);
-      this.player.startMoving();
-      this.physics.moveToObject(this.player, this.destination, 100);
-      this.destinationCollider = this.physics.add.overlap(
-        this.player,
-        this.destination,
-        () => {
-          this.player.body.stop();
-          this.physics.world.removeCollider(this.destinationCollider);
-          this.destination.destroy();
-          this.player.stopMoving();
-        },
-        null,
-        this
-      );
+    this.input.on("pointerdown", ({ worldX: x, worldY: y }) => {
+      this.player.moveTo(x, y);
 
       /*
       unfortunately tweens does not seem to respect physics
@@ -130,5 +81,5 @@ export default class extends Phaser.Scene {
     */
   }
 
-  playerFog() {}
+  playerFog() { }
 }

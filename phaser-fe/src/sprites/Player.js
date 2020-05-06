@@ -17,8 +17,46 @@ export default class extends Phaser.GameObjects.Sprite {
     });
   }
 
+  moveTo(x, y) {
+    if (this.clickedTile) this.clickedTile.destroy();
+    if (this.destination) {
+      this.destination.destroy();
+      this.scene.physics.world.removeCollider(this.destinationCollider);
+    }
+    this.clickedTile = this.scene.add
+      .sprite(x, y, "clickedTile", 0)
+      .setScale(0.2)
+      .play("pulse");
+
+    this.clickedTile.on("animationcomplete", () =>
+      this.clickedTile.destroy()
+    );
+
+    if (x < this.x) {
+      this.flipX = true;
+    } else {
+      this.flipX = false;
+    }
+
+    this.destination = this.scene.add.rectangle(x, y, 1, 1);
+    this.scene.physics.world.enable(this.destination);
+    this.startMoving();
+    this.scene.physics.moveToObject(this, this.destination, 100);
+    this.destinationCollider = this.scene.physics.add.overlap(
+      this,
+      this.destination,
+      () => {
+        this.body.stop();
+        this.scene.physics.world.removeCollider(this.destinationCollider);
+        this.destination.destroy();
+        this.stopMoving();
+      },
+      null,
+      this
+    );
+  }
+
   startMoving() {
-    console.log("started");
     if (!this.isMoving) {
       this.moving = true;
       this.play("walk");
@@ -26,7 +64,6 @@ export default class extends Phaser.GameObjects.Sprite {
   }
 
   stopMoving() {
-    console.log("stopped");
     this.moving = false;
     this.anims.stop();
   }
