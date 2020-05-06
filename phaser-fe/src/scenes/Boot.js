@@ -24,12 +24,12 @@ export default class extends Phaser.Scene {
       frameHeight: 16,
     });
 
-    this.load.spritesheet("RPGpack_sheet", "assets/maps/RPGpack_sheet.png", {
+    this.load.spritesheet("tuxmon", "assets/maps/tuxmon.png", {
       frameWidth: 64,
       frameHeight: 64,
     });
 
-    this.load.tilemapTiledJSON("map", "assets/maps/level1.json");
+    this.load.tilemapTiledJSON("map", "assets/maps/madonna.json");
   }
 
   create() {

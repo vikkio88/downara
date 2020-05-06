@@ -9,12 +9,14 @@ export default class extends Phaser.Scene {
   create() {
     this.map = this.make.tilemap({ key: "map" });
 
-    this.tiles = this.map.addTilesetImage("RPGpack_sheet");
+    this.tiles = this.map.addTilesetImage("tuxmon");
     this.layer = this.map.createDynamicLayer(0, this.tiles, 0, 0);
-    this.blockedLayer = this.map.createStaticLayer("Blocked", this.tiles, 0, 0);
+    this.blockedLayer = this.map.createStaticLayer("blocked", this.tiles, 0, 0);
     this.blockedLayer.setCollisionByExclusion([-1]);
+    this.map.createStaticLayer("under", this.tiles, 0, 0);
 
     this.player = new Player(this, 0, 0);
+    this.map.createStaticLayer("over", this.tiles, 0, 0);
     Phaser.Display.Align.In.Center(
       this.player,
       this.add.zone(400, 300, 800, 600)
