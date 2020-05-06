@@ -25,7 +25,7 @@ export default class extends Phaser.GameObjects.Sprite {
     }
     this.clickedTile = this.scene.add
       .sprite(x, y, "clickedTile", 0)
-      .setScale(0.2)
+      .setScale(1)
       .play("pulse");
 
     this.clickedTile.on("animationcomplete", () =>

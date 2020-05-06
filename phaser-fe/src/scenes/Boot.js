@@ -19,9 +19,9 @@ export default class extends Phaser.Scene {
       frameHeight: 32,
     });
 
-    this.load.spritesheet("clickedTile", "assets/images/green.png", {
-      frameWidth: 48,
-      frameHeight: 48,
+    this.load.spritesheet("clickedTile", "assets/images/direction.png", {
+      frameWidth: 16,
+      frameHeight: 16,
     });
 
     this.load.spritesheet("RPGpack_sheet", "assets/maps/RPGpack_sheet.png", {

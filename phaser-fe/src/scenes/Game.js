@@ -27,21 +27,10 @@ export default class extends Phaser.Scene {
     this.anims.create({
       key: "pulse",
       frames: this.anims.generateFrameNumbers("clickedTile"),
-      yoyo: true,
-      frameRate: 4,
-      repeat: 1,
+      frameRate: 6,
+      repeat: 0,
     });
 
-    /*
-    this is to show a circle around the clickable area
-    this.circle = this.add.circle(
-      this.player.x,
-      this.player.y,
-      200,
-      0xffffff,
-      0.1
-    );
-    */
 
     this.physics.add.collider(this.player, this.blockedLayer, () => {
       this.player.stopMoving();
@@ -56,29 +45,10 @@ export default class extends Phaser.Scene {
 
     this.input.on("pointerdown", ({ worldX: x, worldY: y }) => {
       this.player.moveTo(x, y);
-
-      /*
-      unfortunately tweens does not seem to respect physics
-      this.tweens.add({
-        targets: this.player,
-        x: worldX,
-        y: worldY,
-        duration: 500,
-        ease: "circular.easeInOut",
-        onStart: () => this.player.startMoving(),
-        onComplete: () => this.player.stopMoving(),
-        loop: false,
-      });
-      */
     });
   }
 
   update() {
-    /*
-    updating clickable area position
-    this.circle.x = this.player.x;
-    this.circle.y = this.player.y;
-    */
   }
 
   playerFog() { }
