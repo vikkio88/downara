@@ -1,33 +1,36 @@
-import React from 'react';
-import { useStoreon } from 'storeon/react';
-import { STATUSES } from 'lib/game';
+import React from "react";
+import { useStoreon } from "storeon/react";
+import { STATUSES } from "lib/game";
 
-import Transition from 'components/ui/Transition';
-import EnvWindow from 'components/ui/EnvWindow';
-import CommandBar from 'components/ui/CommandBar';
+import Transition from "components/ui/Transition";
+import EnvWindow from "components/ui/EnvWindow";
+import CommandBar from "components/ui/CommandBar";
 
-import { Area } from 'components/area';
-import { Field, Controls as BattleControls } from 'components/battle';
-import { View } from 'components/views';
-import { Container } from 'components/dialogues';
-import { Controls as IdleControls } from 'components/controls';
+import { Area } from "components/area";
+import { Field, Controls as BattleControls } from "components/battle";
+import { View } from "components/views";
+import { Container } from "components/dialogues";
+import { Controls as IdleControls } from "components/controls";
 
 function Main() {
-  const { gameState: { status }, ui: { view, transition } } = useStoreon('gameState', 'ui');
+  const {
+    gameState: { status },
+    ui: { view, transition },
+  } = useStoreon("gameState", "ui");
   const Controls = status === STATUSES.FIGHTING ? BattleControls : IdleControls;
 
   if (transition) {
-    return <Transition message={transition.message} />
+    return <Transition message={transition.message} />;
   }
 
   return (
-    <div className="container h-screen mx-auto flex flex-col bg-gray-200">
+    <>
       {view && <View />}
       {!view && (
         <>
           <EnvWindow>
-            {status === STATUSES.FIGHTING && <Field />}
-            {status === STATUSES.IDLE && <Area />}
+            {/*status === STATUSES.FIGHTING && <Field />*/}
+            {/*status === STATUSES.IDLE && <Area />*/}
             {status === STATUSES.SPEAKING && <Container />}
           </EnvWindow>
           <CommandBar>
@@ -35,7 +38,7 @@ function Main() {
           </CommandBar>
         </>
       )}
-    </div>
+    </>
   );
 }
 

@@ -19,7 +19,7 @@ const View = () => {
     const Component = viewsMap[view];
     return (
         <>
-            <div className="flex justify-end">
+            <div className="flex justify-end bg-gray-400">
                 <Button onClick={() => dispatch('changeView', null)}>
                     <Icon name={Icon.names.CROSS} />
                 </Button>

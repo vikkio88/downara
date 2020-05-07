@@ -14,22 +14,10 @@ export default class extends Phaser.Scene {
       progress.fillRect(700 - value * 600, 250, value * 600, 100);
     });
 
-    this.load.spritesheet("player", "assets/images/player.png", {
+    this.load.spritesheet("player", "assets/objects/main/player.png", {
       frameWidth: 32,
       frameHeight: 32,
     });
-
-    this.load.spritesheet("clickedTile", "assets/images/direction.png", {
-      frameWidth: 16,
-      frameHeight: 16,
-    });
-
-    this.load.spritesheet("tiles", "assets/maps/tiles.png", {
-      frameWidth: 64,
-      frameHeight: 64,
-    });
-
-    this.load.tilemapTiledJSON("map", "assets/maps/madonna.json");
   }
 
   create() {
