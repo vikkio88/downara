@@ -1,5 +1,7 @@
 import Phaser from "phaser";
 
+
+
 export default class extends Phaser.Scene {
   constructor() {
     super({ key: "Boot" });
@@ -18,6 +20,13 @@ export default class extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 32,
     });
+
+    this.load.spritesheet("tiles", "assets/tiles/tiles.png", {
+      frameWidth: 48,
+      frameHeight: 48,
+    });
+
+    this.load.tilemapTiledJSON("map", 'assets/test1.json');
   }
 
   create() {

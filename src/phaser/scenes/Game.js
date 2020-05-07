@@ -7,6 +7,14 @@ export default class extends Phaser.Scene {
   }
 
   create() {
+    this.map = this.make.tilemap({ key: "map" });
+
+    this.tiles = this.map.addTilesetImage("tiles");
+    this.layer = this.map.createDynamicLayer(0, this.tiles, 0, 0);
+    this.blockedLayer = this.map.createStaticLayer("street", this.tiles, 0, 0);
+    this.blockedLayer = this.map.createStaticLayer("houses", this.tiles, 0, 0);
+
+
     this.player = new Player(this, 0, 0);
     Phaser.Display.Align.In.Center(
       this.player,
@@ -21,7 +29,7 @@ export default class extends Phaser.Scene {
       } else {
         this.player.flipX = false;
       }
-      
+
       this.tweens.add({
         targets: this.player,
         x: worldX,
