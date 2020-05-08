@@ -9,9 +9,11 @@ export default class extends Phaser.Scene {
   create() {
     this.map = this.make.tilemap({ key: "map" });
 
+    this.terrain = this.map.addTilesetImage("terrain");
     this.tiles = this.map.addTilesetImage("tiles");
+    //this.layer = this.map.createDynamicLayer(0, this.tiles, 0, 0);
     this.layer = this.map.createDynamicLayer(0, this.tiles, 0, 0);
-    this.blockedLayer = this.map.createStaticLayer("street", this.tiles, 0, 0);
+    this.map.createStaticLayer("street", this.tiles, 0, 0);
     this.blockedLayer = this.map.createStaticLayer("houses", this.tiles, 0, 0);
 
 
@@ -22,6 +24,7 @@ export default class extends Phaser.Scene {
     );
     const camera = this.cameras.main;
     camera.startFollow(this.player);
+    camera.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
 
     this.input.on("pointerdown", ({ worldX, worldY }) => {
       if (worldX < this.player.x) {
@@ -37,7 +40,11 @@ export default class extends Phaser.Scene {
         duration: 1000,
         ease: 'circular.easeInOut',
         onStart: () => this.player.startMoving(),
-        onComplete: () => this.player.stopMoving(),
+        onComplete: () => {
+          this.player.stopMoving();
+          const { x: j, y: i } = this.layer.getTileAtWorldXY(this.player.x, this.player.y);
+          window.eventBridge.emit('phaser:enteredTile', { i, j });
+        },
         loop: false,
       });
     });
