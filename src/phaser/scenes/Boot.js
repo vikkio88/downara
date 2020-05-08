@@ -21,12 +21,17 @@ export default class extends Phaser.Scene {
       frameHeight: 32,
     });
 
+    this.load.spritesheet("terrain", "assets/tiles/tilesExtruded.png", {
+      frameWidth: 48,
+      frameHeight: 48,
+    });
+    
     this.load.spritesheet("tiles", "assets/tiles/tiles.png", {
       frameWidth: 48,
       frameHeight: 48,
     });
 
-    this.load.tilemapTiledJSON("map", 'assets/test1.json');
+    this.load.tilemapTiledJSON("map", 'assets/maps/test1.json');
   }
 
   create() {
