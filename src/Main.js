@@ -14,11 +14,13 @@ import { Controls as IdleControls } from "components/controls";
 
 function Main() {
   const {
-    gameState: { status },
+    gameState: { status, player },
     ui: { view, transition },
   } = useStoreon("gameState", "ui");
+
   const Controls = status === STATUSES.FIGHTING ? BattleControls : IdleControls;
 
+  console.log('player post', player.areaPosition);
   if (transition) {
     return <Transition message={transition.message} />;
   }

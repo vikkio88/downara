@@ -12,8 +12,10 @@ import { store } from "store";
 import "./bridge";
 import "./phaser";
 
-window.eventBridge.on('phaser:enteredTile', console.log);
 
+window.eventBridge.on('phaser:enteredTile', ({ i, j }) => {
+  store.dispatch('moveToTile', { i, j });
+});
 
 ReactDOM.render(
   <StoreContext.Provider value={store}>

@@ -47,7 +47,7 @@ export default store => {
 
     store.on('moveToTile', ({ gameState }, newPosition) => {
         // to set movement effect on tiles
-        const tilesEffect = { [newPosition.i]: { [newPosition.j]: true } };
+        //const tilesEffect = { [newPosition.i]: { [newPosition.j]: true } };
         //
 
         return {
@@ -59,8 +59,7 @@ export default store => {
                 },
                 actionedTile: {
                     position: newPosition
-                },
-                tilesEffect
+                }
             },
         };
     });
