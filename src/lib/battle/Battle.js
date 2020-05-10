@@ -46,6 +46,10 @@ export class Battle {
         }
     }
 
+    checkCharacterStatuses() {
+
+    }
+
     getCurrentTurn() {
         return this.turns.turn;
     }
@@ -149,6 +153,18 @@ export class Battle {
         //increment turn
         this.turns.turn++;
         this.needsResolving = false;
+
+
+        // Need to consider the deaths too
+        const { finished, winner, deaths } = this.getBattleStatus();
+        this.finished = finished;
+        if(this.finished){
+            this.log[RESULT] = {winner, deaths};
+        }
+
+        if(deaths){
+            this.removeDeaths(deaths);
+        }
 
         // check if someone died
         //      set this battle as finished            
