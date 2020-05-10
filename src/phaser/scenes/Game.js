@@ -16,7 +16,6 @@ export default class extends Phaser.Scene {
     this.map.createStaticLayer("street", this.tiles, 0, 0);
     this.blockedLayer = this.map.createStaticLayer("houses", this.tiles, 0, 0);
 
-
     this.player = new Player(this, 0, 0);
     Phaser.Display.Align.In.Center(
       this.player,
