@@ -16,6 +16,11 @@ export default class extends Phaser.Scene {
       progress.fillRect(700 - value * 600, 250, value * 600, 100);
     });
 
+    this.load.image('grass', 'assets/tiles/grass_1.png');
+    this.load.image('sand', 'assets/tiles/sand_1.png');
+    this.load.image('street', 'assets/tiles/street_1.png');
+    this.load.image('dirt', 'assets/tiles/dirt_1.png');
+
     this.load.spritesheet("player", "assets/objects/main/player.png", {
       frameWidth: 32,
       frameHeight: 32,
