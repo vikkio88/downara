@@ -3,7 +3,6 @@ import Phaser from "phaser";
 export default class extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y) {
     super(scene, x, y, "player", 0);
-    scene.physics.world.enable(this);
     scene.add.existing(this);
     //this.setScale(.5);
 
@@ -17,43 +16,26 @@ export default class extends Phaser.GameObjects.Sprite {
     });
   }
 
-  moveTo(x, y) {
-    if (this.clickedTile) this.clickedTile.destroy();
-    if (this.destination) {
-      this.destination.destroy();
-      this.scene.physics.world.removeCollider(this.destinationCollider);
-    }
-    this.clickedTile = this.scene.add
-      .sprite(x, y, "clickedTile", 0)
-      .setScale(1)
-      .play("pulse");
-
-    this.clickedTile.on("animationcomplete", () =>
-      this.clickedTile.destroy()
-    );
-
-    if (x < this.x) {
+  moveTo(worldX, worldY) {
+    if (worldX < this.x) {
       this.flipX = true;
     } else {
       this.flipX = false;
     }
 
-    this.destination = this.scene.add.rectangle(x, y, 1, 1);
-    this.scene.physics.world.enable(this.destination);
-    this.startMoving();
-    this.scene.physics.moveToObject(this, this.destination, 100);
-    this.destinationCollider = this.scene.physics.add.overlap(
-      this,
-      this.destination,
-      () => {
-        this.body.stop();
-        this.scene.physics.world.removeCollider(this.destinationCollider);
-        this.destination.destroy();
+    this.scene.tweens.add({
+      targets: this,
+      x: worldX,
+      y: worldY,
+      duration: 1000,
+      ease: 'circular.easeInOut',
+      onStart: () => this.startMoving(),
+      onComplete: () => {
         this.stopMoving();
+        window.eventBridge.emit('phaser:enteredTile', { i: 0, j: 0 });
       },
-      null,
-      this
-    );
+      loop: false,
+    });
   }
 
   startMoving() {
@@ -66,9 +48,5 @@ export default class extends Phaser.GameObjects.Sprite {
   stopMoving() {
     this.moving = false;
     this.anims.stop();
-  }
-
-  update() {
-    this.angle += 1;
   }
 }
