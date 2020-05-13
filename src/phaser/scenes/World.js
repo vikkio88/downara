@@ -23,7 +23,7 @@ export default class extends Phaser.Scene {
   }
 
   createGrid() {
-    this.grid = new Grid(this);
+    this.grid = new Grid(this, { rows: 30, columns: 30 });
     this.grid.create();
   }
 

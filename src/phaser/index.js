@@ -7,8 +7,8 @@ config.type = Phaser.AUTO;
 config.scene = [Boot, Battle, World];
 config.scale = {
     mode: Phaser.Scale.FIT,
-    parent: 'phaser-example',
-    autoCenter: Phaser.Scale.CENTER_BOTH,
+    parent: 'gameNode',
+    autoCenter: Phaser.Scale.FIT,
     width: window.innerWidth,
     height: window.innerHeight
 };
