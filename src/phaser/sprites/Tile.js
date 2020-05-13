@@ -30,7 +30,7 @@ export default class extends Phaser.GameObjects.TileSprite {
             const { x, y } = this.getCenter();
             this.scene.player.moveTo({ x, y }, this.gridIndexes);
         });
-        this.on('pointerup', () => {
+        this.on('pointerout', () => {
             this.setAlpha(1);
         });
     }
