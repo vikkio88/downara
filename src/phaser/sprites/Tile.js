@@ -27,12 +27,10 @@ export default class extends Phaser.GameObjects.TileSprite {
         this.setInteractive();
         this.on('pointerdown', () => {
             this.setAlpha(.5);
-            console.log(this.gridIndexes);
-            const center = this.getTopCenter();
-            this.text = this.scene.add.text(center.x, center.y, `{${i},${j}}`);
+            const { x, y } = this.getCenter();
+            this.scene.player.moveTo({ x, y }, this.gridIndexes);
         });
         this.on('pointerup', () => {
-            this.text && this.text.destroy();
             this.setAlpha(1);
         });
     }

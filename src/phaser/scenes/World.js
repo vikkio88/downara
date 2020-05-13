@@ -20,9 +20,6 @@ export default class extends Phaser.Scene {
     const camera = this.cameras.main;
     camera.startFollow(this.player);
     camera.setBounds(0, 0, this.widthInPixels, this.heightInPixels);
-    this.input.on("pointerdown", ({ worldX, worldY }) => {
-      this.player.moveTo(worldX, worldY);
-    });
   }
 
   createGrid() {

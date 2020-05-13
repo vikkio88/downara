@@ -1,5 +1,7 @@
 import Phaser from "phaser";
 
+import { eventBridge } from '../helpers';
+
 export default class extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y) {
     super(scene, x, y, "player", 0);
@@ -16,8 +18,8 @@ export default class extends Phaser.GameObjects.Sprite {
     });
   }
 
-  moveTo(worldX, worldY) {
-    if (worldX < this.x) {
+  moveTo({ x, y }, { i, j }) {
+    if (x < this.x) {
       this.flipX = true;
     } else {
       this.flipX = false;
@@ -25,14 +27,13 @@ export default class extends Phaser.GameObjects.Sprite {
 
     this.scene.tweens.add({
       targets: this,
-      x: worldX,
-      y: worldY,
+      x, y,
       duration: 1000,
       ease: 'circular.easeInOut',
       onStart: () => this.startMoving(),
       onComplete: () => {
         this.stopMoving();
-        window.eventBridge.emit('phaser:enteredTile', { i: 0, j: 0 });
+        eventBridge.emit('phaser:enteredTile', { i, j });
       },
       loop: false,
     });
