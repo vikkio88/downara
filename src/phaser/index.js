@@ -13,4 +13,9 @@ config.scale = {
     height: window.innerHeight
 };
 
+const uiRoot = document.getElementById('uiRoot');
+for (const eventName of ['mouseup','mousedown', 'touchstart', 'touchmove', 'touchend', 'touchcancel']){
+    uiRoot.addEventListener(eventName, e => e.stopPropagation());
+}
+
 const game = new Phaser.Game(config); // eslint-disable-line no-unused-vars

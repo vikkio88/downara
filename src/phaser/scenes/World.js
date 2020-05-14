@@ -9,14 +9,21 @@ export default class extends Phaser.Scene {
   create() {
     this.createGrid();
     this.createPlayer();
+
+    /*
+    eventBridge.on('ui:pause', () => {
+      this.input.enabled = false;
+    });
+    
+    eventBridge.on('ui:resume', () => {
+      this.input.enabled = true;
+    });
+    */
+
   }
 
   createPlayer() {
-    this.player = new Player(this, 0, 0);
-    Phaser.Display.Align.In.Center(
-      this.player,
-      this.add.zone(400, 300, 800, 600)
-    );
+    this.player = new Player(this, 50, 50);
     const camera = this.cameras.main;
     camera.startFollow(this.player);
     camera.setBounds(0, 0, this.widthInPixels, this.heightInPixels);

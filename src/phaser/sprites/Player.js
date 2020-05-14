@@ -8,6 +8,9 @@ export default class extends Phaser.GameObjects.Sprite {
     scene.add.existing(this);
     //this.setScale(.5);
 
+
+    this.speed = 150;
+
     this.isMoving = false;
     scene.anims.create({
       key: "walk",
@@ -19,16 +22,23 @@ export default class extends Phaser.GameObjects.Sprite {
   }
 
   moveTo({ x, y }, { i, j }) {
+    const distance = Phaser.Math.Distance.BetweenPoints({ x: this.x, y: this.y }, { x, y });
+    if (distance > 300) {
+      console.log('nope');
+      return;
+    }
+
     if (x < this.x) {
       this.flipX = true;
     } else {
       this.flipX = false;
     }
 
+    const dt = distance / this.speed;
     this.scene.tweens.add({
       targets: this,
       x, y,
-      duration: 1000,
+      duration: dt * 1000,
       ease: 'circular.easeInOut',
       onStart: () => this.startMoving(),
       onComplete: () => {
@@ -40,8 +50,8 @@ export default class extends Phaser.GameObjects.Sprite {
   }
 
   startMoving() {
+    this.moving = true;
     if (!this.isMoving) {
-      this.moving = true;
       this.play("walk");
     }
   }
