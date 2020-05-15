@@ -1,4 +1,5 @@
 const range = (start, end) => Array.from({ length: end }, (_, i) => start + 1);
+
 const randomizer = {
     pickOne(array) {
         return array[this.int(0, array.length - 1)]
@@ -13,4 +14,20 @@ const randomizer = {
         return this.int(1, faces);
     }
 };
-export { range, randomizer };
+
+const eventBridge = {
+    emit(event, payload) {
+        if (!window.eventBridge) return false;
+
+        window.eventBridge.emit(event, payload);
+        return true;
+    },
+    on(event, callback) {
+        if (!window.eventBridge) return false;
+        
+        window.eventBridge.on(event, callback);
+        return true;
+    }
+};
+
+export { range, randomizer, eventBridge };

@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 
-import { eventBridge } from '../helpers';
+import { eventBridge } from 'lib';
 
 export default class extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y) {

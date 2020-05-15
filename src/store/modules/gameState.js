@@ -25,15 +25,6 @@ export default store => {
 
     store.on('actioned', ({ gameState }, tilePosition) => {
         store.dispatch('clearMessage');
-        const { player, actionedTile } = gameState;
-        if (!areaHelper.isPlayerInTile(player.areaPosition, tilePosition)
-            // this comment makes the user click twice to switch tile 
-            //&& areaHelper.isSameTile(actionedTile.position, tilePosition)
-        ) {
-            store.dispatch('moveToTile', tilePosition);
-            return;
-        }
-
         return {
             gameState: {
                 ...gameState,
@@ -49,7 +40,7 @@ export default store => {
         // to set movement effect on tiles
         //const tilesEffect = { [newPosition.i]: { [newPosition.j]: true } };
         //
-
+        store.dispatch('clearMessage');
         return {
             gameState: {
                 ...gameState,
