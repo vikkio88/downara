@@ -24,7 +24,6 @@ export default class extends Phaser.GameObjects.Sprite {
   moveTo({ x, y }, { i, j }) {
     const distance = Phaser.Math.Distance.BetweenPoints({ x: this.x, y: this.y }, { x, y });
     if (distance > 300) {
-      console.log('nope');
       return;
     }
 
@@ -41,23 +40,20 @@ export default class extends Phaser.GameObjects.Sprite {
       duration: dt * 1000,
       ease: 'circular.easeInOut',
       onStart: () => this.startMoving(),
-      onComplete: () => {
-        this.stopMoving();
-        eventBridge.emit('phaser:enteredTile', { i, j });
-      },
+      onComplete: () => this.stopMoving({ i, j }),
       loop: false,
     });
   }
 
   startMoving() {
     this.moving = true;
-    if (!this.isMoving) {
-      this.play("walk");
-    }
+    this.play("walk");
+    eventBridge.emit('phaser:storeon', { type: 'clearMessage' });
   }
 
-  stopMoving() {
+  stopMoving({ i, j }) {
     this.moving = false;
     this.anims.stop();
+    eventBridge.emit('phaser:storeon', { type: 'movedToTile', payload: { i, j } });
   }
 }

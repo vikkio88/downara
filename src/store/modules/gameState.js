@@ -36,11 +36,8 @@ export default store => {
         };
     });
 
-    store.on('moveToTile', ({ gameState }, newPosition) => {
-        // to set movement effect on tiles
-        //const tilesEffect = { [newPosition.i]: { [newPosition.j]: true } };
-        //
-        store.dispatch('clearMessage');
+    store.on('movedToTile', ({ gameState }, newPosition) => {
+        console.log('moved to tile', newPosition);
         return {
             gameState: {
                 ...gameState,
@@ -56,7 +53,6 @@ export default store => {
     });
 
     store.on('interact', ({ gameState, worldState }) => {
-        // Test fighting
         if (areaHelper.isSameTile({ i: 1, j: 0 }, gameState.actionedTile.position)) {
             store.dispatch('transition', { message: 'Test Battle' });
             store.dispatch('toggleFightingTest');
