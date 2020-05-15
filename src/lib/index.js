@@ -2,7 +2,7 @@ const range = (start, end) => Array.from({ length: end }, (_, i) => start + 1);
 
 const randomizer = {
     pickOne(array) {
-        return array[this.int(0, array.length - 1)]
+        return array[this.int(0, array.length - 1)];
     },
     int(low, high) {
         return Math.round(Math.random() * (high - low) + low);
@@ -24,9 +24,12 @@ const eventBridge = {
     },
     on(event, callback) {
         if (!window.eventBridge) return false;
-        
+
         window.eventBridge.on(event, callback);
         return true;
+    },
+    emitFromPhaser(type, payload = null) {
+        this.emit('phaser:storeon', { type, payload });
     }
 };
 

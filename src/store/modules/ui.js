@@ -25,7 +25,7 @@ export default store => {
                 ...ui,
                 transition: { message: message || '' }
             }
-        }
+        };
     });
 
     store.on('transitionOver', ({ ui }) => {
@@ -34,7 +34,7 @@ export default store => {
                 ...ui,
                 transition: false
             }
-        }
+        };
     });
 
     store.on('message', ({ ui }, message) => {
@@ -66,6 +66,8 @@ export default store => {
     });
 
     store.on('clearMessage', ({ ui }) => {
+        if (!ui.message) return;
+        
         return {
             ui: {
                 ...ui,

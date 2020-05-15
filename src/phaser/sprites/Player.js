@@ -9,6 +9,7 @@ export default class extends Phaser.GameObjects.Sprite {
     //this.setScale(.5);
 
 
+    this.tile = { i: 0, j: 0 };
     this.speed = 150;
 
     this.isMoving = false;
@@ -22,6 +23,7 @@ export default class extends Phaser.GameObjects.Sprite {
   }
 
   moveTo({ x, y }, { i, j }) {
+    if (this.isInTile({ i, j })) return;
     const distance = Phaser.Math.Distance.BetweenPoints({ x: this.x, y: this.y }, { x, y });
     if (distance > 300) {
       return;
@@ -48,12 +50,17 @@ export default class extends Phaser.GameObjects.Sprite {
   startMoving() {
     this.moving = true;
     this.play("walk");
-    eventBridge.emit('phaser:storeon', { type: 'clearMessage' });
+    eventBridge.emitFromPhaser('clearMessage');
   }
 
   stopMoving({ i, j }) {
     this.moving = false;
     this.anims.stop();
-    eventBridge.emit('phaser:storeon', { type: 'movedToTile', payload: { i, j } });
+    this.tile = { i, j };
+    eventBridge.emitFromPhaser('movedToTile', { i, j });
+  }
+
+  isInTile({ i, j }) {
+    return i === this.tile.i && j === this.tile.j;
   }
 }
