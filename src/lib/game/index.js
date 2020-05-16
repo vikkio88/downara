@@ -27,6 +27,11 @@ const VIEWS = {
     SETTINGS: 'settings',
 };
 
+const MESSAGE_TYPES = {
+    INFO: 'info',
+    ERROR: 'error',
+}
+
 const mapHelper = {
     move(direction, map, currentPosition) {
         if (this.isValidDirection(map[currentPosition][direction])) {
@@ -193,5 +198,5 @@ export {
     mapHelper, areaHelper,
     gameHelper, questHelper,
     DIRECTIONS, STATUSES,
-    ACTIONS, VIEWS
+    ACTIONS, VIEWS, MESSAGE_TYPES
 };

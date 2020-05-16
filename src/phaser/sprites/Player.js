@@ -1,5 +1,7 @@
 import Phaser from "phaser";
 
+import LABELS from 'downara/labels';
+
 import { eventBridge } from 'lib';
 
 export default class extends Phaser.GameObjects.Sprite {
@@ -11,6 +13,7 @@ export default class extends Phaser.GameObjects.Sprite {
 
     this.tile = { i: 0, j: 0 };
     this.speed = 150;
+    this.actionableDistance = 300;
 
     this.isMoving = false;
     scene.anims.create({
@@ -23,9 +26,14 @@ export default class extends Phaser.GameObjects.Sprite {
   }
 
   moveTo({ x, y }, { i, j }) {
-    if (this.isInTile({ i, j })) return;
+    if (this.isInTile({ i, j })) {
+      this.showActionableArea();
+      return;
+    }
+
     const distance = Phaser.Math.Distance.BetweenPoints({ x: this.x, y: this.y }, { x, y });
-    if (distance > 300) {
+    if (distance > this.actionableDistance) {
+      eventBridge.emitFromPhaser('error', LABELS.TOO_FAR);
       return;
     }
 
@@ -43,6 +51,22 @@ export default class extends Phaser.GameObjects.Sprite {
       ease: 'circular.easeInOut',
       onStart: () => this.startMoving(),
       onComplete: () => this.stopMoving({ i, j }),
+      loop: false,
+    });
+  }
+
+  showActionableArea() {
+    this.circle = this.scene.add.circle(
+      this.x,
+      this.y,
+      this.actionableDistance - 50,
+      0xffffff,
+      0.3
+    );
+
+    this.scene.time.addEvent({
+      delay: 1000,
+      callback: () => this.circle.destroy(),
       loop: false,
     });
   }

@@ -4,5 +4,7 @@ export default {
 
     MONEY: 'Soldi',
     CURRENCY_SYMBOL: '₤',
+
+    TOO_FAR: 'Troppo Lontano...',
     
 };

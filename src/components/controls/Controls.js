@@ -17,7 +17,7 @@ const Controls = () => {
 
     return (
         <div className="flex-1 flex items-center justify-center">
-            {message && <Message />}
+            {message && <Message {...message} />}
             {status === STATUSES.IDLE && !message && <Actions />}
         </div>
     );
