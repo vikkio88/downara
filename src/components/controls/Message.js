@@ -1,5 +1,4 @@
 import React from 'react';
-import { useStoreon } from 'storeon/react';
 
 import { Icon } from 'components/common';
 import { MESSAGE_TYPES } from 'lib/game';
@@ -14,10 +13,8 @@ const typeClasses = {
     }
 };
 
-const Message = ({ message, type }) => {
-    const { dispatch } = useStoreon('ui');
+const Message = ({ message, type, onDismiss = () => { } }) => {
     const { wrapper, icon } = typeClasses[type] || typeClasses[MESSAGE_TYPES.INFO];
-
     return (
         <div className={`border-t border-b px-4 py-3 rounded relative min-w-full ${wrapper}`} role="alert">
             <span className="block sm:inline">{message}</span>
@@ -26,7 +23,7 @@ const Message = ({ message, type }) => {
                     name={Icon.names.CROSS}
                     className={`${icon}`}
                     role="button"
-                    onClick={() => dispatch('clearMessage')}
+                    onClick={onDismiss}
                 />
             </span>
         </div>

@@ -1,4 +1,5 @@
 import Tile from './Tile';
+import { FRAMES, NAMES } from './mapping';
 
 export default class {
     constructor(scene, { rows = 9, columns = 13, tileSize = 100, tileMargin = 1, marginI = 0, marginJ = 0 } = {}) {
@@ -9,12 +10,12 @@ export default class {
         this.tileMargin = tileMargin;
         this.marginI = marginI;
         this.marginJ = marginJ;
-        this.tiles = new Map;
+        this.tiles = new Map();
     }
 
     create() {
         for (let i = 0; i < this.rows; i++) {
-            const row = new Map;
+            const row = new Map();
             for (let j = 0; j < this.columns; j++) {
                 const tile = new Tile(
                     this.scene,
@@ -25,9 +26,21 @@ export default class {
                         y: this.marginI + (this.tileMargin * (i + 1)) + (i * this.tileSize)
                     }
                 );
+                this.addObject('house', tile.getCenter());
                 row.set(j, tile);
             }
             this.tiles.set(i, row);
         }
+
+    }
+
+    addObject(name, { x, y }) {
+        if (!Object.values(NAMES).includes(name)) {
+            return;
+        }
+
+        const frame = FRAMES[name][0];
+
+        this.scene.add.sprite(x, y, 'mapTiles', frame).setScale(2.5);
     }
 }

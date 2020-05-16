@@ -33,6 +33,7 @@ export default class extends Phaser.GameObjects.Sprite {
 
     const distance = Phaser.Math.Distance.BetweenPoints({ x: this.x, y: this.y }, { x, y });
     if (distance > this.actionableDistance) {
+      this.showActionableArea();
       eventBridge.emitFromPhaser('error', LABELS.TOO_FAR);
       return;
     }
@@ -72,13 +73,13 @@ export default class extends Phaser.GameObjects.Sprite {
   }
 
   startMoving() {
-    this.moving = true;
+    this.isMoving = true;
     this.play("walk");
     eventBridge.emitFromPhaser('clearMessage');
   }
 
   stopMoving({ i, j }) {
-    this.moving = false;
+    this.isMoving = false;
     this.anims.stop();
     this.tile = { i, j };
     eventBridge.emitFromPhaser('movedToTile', { i, j });
