@@ -1,5 +1,5 @@
 import Tile from './Tile';
-import { FRAMES, NAMES } from './mapping';
+import { FRAMES, NAMES, OBJECT_CONFIG } from './mapping';
 
 export default class {
     constructor(scene, { rows = 9, columns = 13, tileSize = 100, tileMargin = 1, marginI = 0, marginJ = 0 } = {}) {
@@ -39,8 +39,15 @@ export default class {
             return;
         }
 
+        console.log(OBJECT_CONFIG);
+        //const configuration = OBJECT_CONFIG[name] || OBJECT_CONFIG.fallback;
         const frame = FRAMES[name][0];
 
-        this.scene.add.sprite(x, y, 'mapTiles', frame).setScale(2.5);
+        this.scene.add.sprite(
+            x ,//+ configuration.offset.x,
+            y ,//+ configuration.offset.y,
+            'mapTiles',
+            frame
+        ).setScale(2)//configuration.scale);
     }
 }

@@ -27,3 +27,10 @@ export const FRAMES = {
     [NAMES.HOUSE]: [7, 8, 14, 15],
     [NAMES.MANSION]: [9, 16, 17],
 };
+
+export const OBJECT_CONFIG = {
+    fallback: {
+        offsets: { x: 0, y: 0 },
+        scale: 3
+    }
+};
