@@ -1,3 +1,5 @@
+import get from 'lodash.get';
+
 const range = (start, end) => Array.from({ length: end }, (_, i) => start + 1);
 
 const randomizer = {
@@ -33,4 +35,6 @@ const eventBridge = {
     }
 };
 
-export { range, randomizer, eventBridge };
+const extractFromCoordinates = ({ i, j }, mapping, fallback = null) => get(mapping, `${i}.${j}`, fallback);
+
+export { range, randomizer, eventBridge, extractFromCoordinates };

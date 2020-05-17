@@ -29,8 +29,8 @@ export const FRAMES = {
 };
 
 export const OBJECT_CONFIG = {
-    fallback: {
-        offsets: { x: 0, y: 0 },
+    default: {
+        offset: { x: 0, y: 0 },
         scale: 3
     }
 };

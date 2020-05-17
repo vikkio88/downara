@@ -30,7 +30,8 @@ export default class extends Phaser.Scene {
   }
 
   createGrid() {
-    this.grid = new Grid(this, { rows: 30, columns: 30 });
+    const map = this.cache.json.get('area_1');
+    this.grid = new Grid(this, map, {}, { rows: 20, columns: 20 });
     this.grid.create();
   }
 
