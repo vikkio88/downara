@@ -11,7 +11,6 @@ export const NAMES = {
     TOWER: 'tower',
     SETTLEMENT: 'settlement',
     WALLS: 'wall',
-    ROAD_SIGN: 'road_sign',
     CASTLE: 'castle',
 
     // Nature
@@ -19,13 +18,36 @@ export const NAMES = {
     MOUNTAINS: 'mountains',
     POND: 'pond',
     HILLS: 'hills',
+
+    // Items
+    FLAG: 'flag',
+    BOX: 'box',
+    ROAD_SIGN: 'road_sign',
 };
 
 
 export const FRAMES = {
-    [NAMES.TREE]: [4, 5, 6],
+    [NAMES.WOMAN]: [7, 8, 14, 15],
+    [NAMES.MAN]: [7, 8, 14, 15],
+    [NAMES.FARMER]: [7, 8, 14, 15],
+    [NAMES.FARMER_W]: [7, 8, 14, 15],
+
     [NAMES.HOUSE]: [7, 8, 14, 15],
     [NAMES.MANSION]: [9, 16, 17],
+    [NAMES.TOWER]: [22, 23, 24, 25, 26],
+    [NAMES.SETTLEMENT]: [42, 43],
+    [NAMES.WALLS]: [29, 30, 31, 32, 33],
+    [NAMES.ROAD_SIGN]: [],
+    [NAMES.CASTLE]: [],
+
+    [NAMES.TREE]: [4, 5, 6],
+    [NAMES.MOUNTAINS]: [10, 11, 12],
+    [NAMES.POND]: [19],
+    [NAMES.HILLS]: [13, 27],
+
+    [NAMES.FLAG]: [],
+    [NAMES.BOX]: [],
+    [NAMES.ROAD_SIGN]: [237],
 };
 
 export const OBJECT_CONFIG = {
