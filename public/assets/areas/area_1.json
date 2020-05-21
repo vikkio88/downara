@@ -1,5 +1,5 @@
 {
     "0": {
-        "0": {"t": "grass"}, "1": {"t": "sand", "o": "house", "ov": 1, "b": 0}, "2": {"t": "grass", "o": "road_sign", "ov": 1, "b": 1}
+        "0": {"t": "grass"}, "1": {"t": "sand", "o": "house", "ov": 1, "b": 0}, "2": {"t": "grass", "o": "road_sign", "ov": 1, "b": 0}
     }
 }

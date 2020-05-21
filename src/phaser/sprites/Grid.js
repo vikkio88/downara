@@ -24,6 +24,8 @@ export default class {
         this.marginI = marginI;
         this.marginJ = marginJ;
         this.tiles = new Map();
+
+        this.objectsMap = new Map();
     }
 
     create() {
@@ -33,6 +35,7 @@ export default class {
                 const {
                     t: terrain, o: object, ov: variant, b: blocked
                 } = extractFromCoordinates({ i, j }, this.map, {});
+
                 const tile = new Tile(
                     this.scene,
                     this.tileSize,
@@ -45,26 +48,37 @@ export default class {
                     Boolean(blocked)
                 );
 
-                this.addObject(object, tile.getCenter(), variant);
+                const { object: overrideObject } = extractFromCoordinates({ i, j }, this.objects, {});
+                this.addObject(overrideObject || object, tile.getCenter(), variant, overrideObject ? `${i}_${j}` : false);
                 row.set(j, tile);
             }
             this.tiles.set(i, row);
         }
+
+        console.log(this.objectsMap);
     }
 
-    addObject(name, { x, y }, variant = 0) {
+    addObject(name, { x, y }, variant = 0, key = false) {
         if (!Object.values(NAMES).includes(name)) {
             return;
         }
 
-        const { offset, scale } = OBJECT_CONFIG[name] || OBJECT_CONFIG.default;
+        const defaultConfig = OBJECT_CONFIG.default;
+        const config = {
+            ...defaultConfig,
+            ...(OBJECT_CONFIG[name] || {})
+        };
+        const { offset, scale } = config;
+        
         const frame = FRAMES[name][variant] || FRAMES[name][0];
 
-        this.scene.add.sprite(
+        const object = this.scene.add.sprite(
             x + offset.x,
             y + offset.y,
             'mapTiles',
             frame
         ).setScale(scale);
+
+        if (key) this.objectsMap.set(key, object);
     }
 }

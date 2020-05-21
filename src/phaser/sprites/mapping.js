@@ -27,7 +27,7 @@ export const NAMES = {
 
 
 export const FRAMES = {
-    [NAMES.WOMAN]: [7, 8, 14, 15],
+    [NAMES.WOMAN]: [250, 246, 253, 258, 260],
     [NAMES.MAN]: [7, 8, 14, 15],
     [NAMES.FARMER]: [7, 8, 14, 15],
     [NAMES.FARMER_W]: [7, 8, 14, 15],
@@ -51,8 +51,15 @@ export const FRAMES = {
 };
 
 export const OBJECT_CONFIG = {
+    [NAMES.WOMAN]: {
+        offset: { x: 20, y: 0 },
+        scale: 2
+    },
+    [NAMES.ROAD_SIGN]:{
+        scale: 2
+    },
     default: {
         offset: { x: 0, y: 0 },
-        scale: 3
+        scale: 3.5
     }
 };
