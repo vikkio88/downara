@@ -15,7 +15,7 @@ export default class extends Phaser.GameObjects.Sprite {
     this.speed = 150;
     this.actionableDistance = 300;
 
-    this.isMoving = false;
+    this.movingQueue = 0;
     scene.anims.create({
       key: "walk",
       frames: this.scene.anims.generateFrameNumbers("player"),
@@ -73,17 +73,19 @@ export default class extends Phaser.GameObjects.Sprite {
   }
 
   startMoving() {
-    this.isMoving = true;
+    this.movingQueue += 1;
     this.play("walk");
     eventBridge.emitFromPhaser('clearMessage');
   }
 
   stopMoving({ i, j }) {
-    this.isMoving = false;
-    this.anims.stop();
-    this.tile = { i, j };
-    this.flipX = false;
-    eventBridge.emitFromPhaser('movedToTile', { i, j });
+    this.movingQueue -= 1;
+    if (this.movingQueue <= 0) {
+      this.tile = { i, j };
+      this.flipX = false;
+      this.anims.stop();
+      eventBridge.emitFromPhaser('movedToTile', { i, j });
+    }
   }
 
   isInTile({ i, j }) {
