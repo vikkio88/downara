@@ -26,7 +26,7 @@ const initialWorldState = {
     },
     flags: {
         0: {
-            2: { 3: { icon: FLAGS.default } }
+            2: { 3: { type: FLAGS.default } }
         }
     }
 };

@@ -1,5 +1,6 @@
 import { areaHelper, STATUSES, gameHelper } from 'lib/game';
 import { initialGameState, map, interactables } from 'downara';
+import { eventBridge } from 'lib';
 import dialogues from 'downara/dialogues';
 import { MESSAGES } from 'downara/mapObjects';
 import areas from 'downara/areas';
@@ -21,6 +22,15 @@ export default store => {
                 }
             },
         };
+    });
+
+    store.on('phaserReady', ({ gameState, worldState }) => {
+        console.log('[gameState] phaser ready received');
+        eventBridge.emit('game:worldInit', {
+            gameState,
+            worldState
+        });
+        return;
     });
 
     store.on('actioned', ({ gameState }, tilePosition) => {

@@ -72,7 +72,7 @@ const FLAGS = {
     ARROW_B_RIGHT: 'arrow_br',
     ARROW_U_LEFT: 'arrow_ul',
     ARROW_U_RIGHT: 'arrow_ur',
-    default: 'flag_red'
+    default: 'red'
 };
 
 export { interactables, LOCATIONS, NPC, NPC_ALIGNMENT, OBJECT_DESCRIPTIONS, MESSAGES, FLAGS };

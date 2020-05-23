@@ -14,7 +14,7 @@ config.scale = {
 };
 
 const uiRoot = document.getElementById('uiRoot');
-for (const eventName of ['mouseup','mousedown', 'touchstart', 'touchmove', 'touchend', 'touchcancel']){
+for (const eventName of ['mouseup', 'mousedown', 'touchstart', 'touchmove', 'touchend', 'touchcancel']) {
     uiRoot.addEventListener(eventName, e => e.stopPropagation());
 }
 
