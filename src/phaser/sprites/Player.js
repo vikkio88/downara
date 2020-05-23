@@ -57,6 +57,8 @@ export default class extends Phaser.GameObjects.Sprite {
   }
 
   showActionableArea() {
+    if (this.circle) this.circle.destroy();
+    
     this.circle = this.scene.add.circle(
       this.x,
       this.y,
@@ -75,13 +77,13 @@ export default class extends Phaser.GameObjects.Sprite {
   startMoving() {
     this.movingQueue += 1;
     this.play("walk");
-    eventBridge.emitFromPhaser('clearMessage');
+    if (this.movingQueue === 1) eventBridge.emitFromPhaser('clearMessage');
   }
 
   stopMoving({ i, j }) {
     this.movingQueue -= 1;
+    this.tile = { i, j };
     if (this.movingQueue <= 0) {
-      this.tile = { i, j };
       this.flipX = false;
       this.anims.stop();
       eventBridge.emitFromPhaser('movedToTile', { i, j });
