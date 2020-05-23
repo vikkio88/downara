@@ -82,6 +82,7 @@ export default class extends Phaser.GameObjects.Sprite {
     this.isMoving = false;
     this.anims.stop();
     this.tile = { i, j };
+    this.flipX = false;
     eventBridge.emitFromPhaser('movedToTile', { i, j });
   }
 
