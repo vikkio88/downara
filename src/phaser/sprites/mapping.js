@@ -44,22 +44,29 @@ export const FRAMES = {
     [NAMES.MOUNTAINS]: [10, 11, 12],
     [NAMES.POND]: [19],
     [NAMES.HILLS]: [13, 27],
-
-    [NAMES.FLAG]: [],
     [NAMES.BOX]: [],
     [NAMES.ROAD_SIGN]: [237],
 };
 
 export const OBJECT_CONFIG = {
     [NAMES.WOMAN]: {
-        offset: { x: 20, y: 0 },
-        scale: 2
+        offset: { x: 25, y: 0 },
+        scale: 2,
+        flipX: true
     },
     [NAMES.ROAD_SIGN]:{
         scale: 2
     },
     default: {
         offset: { x: 0, y: 0 },
-        scale: 3.5
+        scale: 3.5,
+        flipX: false
     }
 };
+
+export const FLAGS = {
+    'red': 44,
+    'green': 45,
+    'blue': 46,
+    'yellow': 47,
+}

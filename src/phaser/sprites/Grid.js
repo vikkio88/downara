@@ -1,12 +1,13 @@
 import { extractFromCoordinates } from 'lib';
 import Tile from './Tile';
-import { FRAMES, NAMES, OBJECT_CONFIG } from './mapping';
+import { FRAMES, NAMES, OBJECT_CONFIG, FLAGS } from './mapping';
 
 export default class {
     constructor(
         scene,
         map = {},
         objects = {},
+        flags = {},
         config = {}
     ) {
         const { rows = 9, columns = 13, tileSize = 100,
@@ -16,6 +17,7 @@ export default class {
 
         this.map = map;
         this.objects = objects;
+        this.flags = flags;
 
         this.rows = rows;
         this.columns = columns;
@@ -26,6 +28,7 @@ export default class {
         this.tiles = new Map();
 
         this.objectsMap = new Map();
+        this.flagsMap = new Map();
     }
 
     create() {
@@ -48,14 +51,17 @@ export default class {
                     Boolean(blocked)
                 );
 
+                const tileKey = `${i}_${j}`;
                 const { object: overrideObject } = extractFromCoordinates({ i, j }, this.objects, {});
-                this.addObject(overrideObject || object, tile.getCenter(), variant, overrideObject ? `${i}_${j}` : false);
+                this.addObject(overrideObject || object, tile.getCenter(), variant, overrideObject ? tileKey : false);
+                const { type } = extractFromCoordinates({ i, j }, this.flags, {});
+                if (type) this.addFlag(type, tile.getTopRight(), tileKey);
                 row.set(j, tile);
             }
             this.tiles.set(i, row);
         }
 
-        console.log(this.objectsMap);
+        console.log(this.flagsMap);
     }
 
     addObject(name, { x, y }, variant = 0, key = false) {
@@ -68,8 +74,8 @@ export default class {
             ...defaultConfig,
             ...(OBJECT_CONFIG[name] || {})
         };
-        const { offset, scale } = config;
-        
+        const { offset, scale, flipX } = config;
+
         const frame = FRAMES[name][variant] || FRAMES[name][0];
 
         const object = this.scene.add.sprite(
@@ -79,6 +85,34 @@ export default class {
             frame
         ).setScale(scale);
 
+        if (flipX) object.flipX = true;
+
         if (key) this.objectsMap.set(key, object);
+    }
+
+    addFlag(type, { x, y }, key) {
+        const flag = this.scene.add.sprite(
+            x - 10,
+            y + 10,
+            'mapTiles',
+            FLAGS[type] || FLAGS.red
+        ).setScale(1.5);
+
+        this.flagsMap.set(key, flag);
+    }
+
+    updateGrid(objects, flags) {
+        // thinking of doing something like
+        // { add , remove }
+        // remove forEach 
+        // add forEach getTile i,j -> addObject object, tileXY
+    }
+
+
+    getTile({ i, j }) {
+        const row = this.tiles.get(i) || null;
+        if (!row) return null;
+
+        return row.get(j) || null;
     }
 }

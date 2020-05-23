@@ -36,9 +36,14 @@ export default class extends Phaser.Scene {
         3: { object: 'woman' }
       }
     };
-    this.grid = new Grid(this, map, objects, { rows: 20, columns: 20 });
+
+    const flags = {
+      2: { 3: { type: 'red' } }
+    };
+    
+    this.grid = new Grid(this, map, objects, flags, { rows: 20, columns: 20 });
     this.grid.create();
-  }
+  };
 
   update() { }
 }
