@@ -1,11 +1,12 @@
 import { STATUSES } from 'lib/game';
-import { NPC, LOCATIONS, FLAGS } from './mapObjects';
+import SPRITES from './sprites';
+import { NPC, LOCATIONS } from './mapObjects';
 
 const initialWorldState = {
     objects: {
         0: {
-            2: { 3: { object: NPC.MUM, sprite: 'woman' } },
-            5: { 4: { object: LOCATIONS.BAKERY, sprite: 'mansion' } },
+            2: { 3: { object: NPC.MUM, sprite: SPRITES.NAMES.WOMAN } },
+            5: { 4: { object: LOCATIONS.BAKERY, sprite: SPRITES.NAMES.MANSION } },
         },
         1: {
             0: { 2: { object: LOCATIONS.BEVAIO_PORTA_NUOVA }, 5: { object: LOCATIONS.CAFE_HOUSE } }
@@ -26,7 +27,7 @@ const initialWorldState = {
     },
     flags: {
         0: {
-            2: { 3: { type: FLAGS.default } }
+            2: { 3: { type: SPRITES.FLAGS.red } }
         }
     }
 };

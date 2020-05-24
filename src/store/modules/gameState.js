@@ -71,6 +71,10 @@ export default store => {
                 flags: {
                     remove: [{ i: 2, j: 3 }],
                     add: [{ i: 2, j: 4, type: 'red' }]
+                },
+                objects:{
+                    remove: [{ i: 2, j: 3 }],
+                    add: [{ i: 6, j: 6, sprite: 'woman' }]
                 }
             }
             );

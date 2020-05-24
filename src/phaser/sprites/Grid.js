@@ -1,6 +1,7 @@
 import { extractFromCoordinates } from 'lib';
 import Tile from './Tile';
-import { FRAMES, NAMES, OBJECT_CONFIG, FLAGS } from './mapping';
+import SPRITES from 'downara/sprites';
+import { OBJECT_CONFIG } from './mapping';
 
 export default class {
     constructor(
@@ -63,7 +64,7 @@ export default class {
     }
 
     addObject(name, { x, y }, variant = 0, key = false) {
-        if (!Object.values(NAMES).includes(name)) {
+        if (!Object.values(SPRITES.NAMES).includes(name)) {
             return;
         }
 
@@ -74,7 +75,7 @@ export default class {
         };
         const { offset, scale, flipX } = config;
 
-        const frame = FRAMES[name][variant] || FRAMES[name][0];
+        const frame = SPRITES.FRAMES[name][variant] || SPRITES.FRAMES[name][0];
 
         const object = this.scene.add.sprite(
             x + offset.x,
@@ -93,7 +94,7 @@ export default class {
             x - 10,
             y + 10,
             'mapTiles',
-            FLAGS[type] || FLAGS.red
+            SPRITES.FLAGS[type] || SPRITES.FLAGS.red
         ).setScale(1.5);
 
         this.flagsMap.set(key, flag);
@@ -104,8 +105,7 @@ export default class {
         let { remove = [], add = [] } = flags;
         for (let flag of remove) {
             const key = `${flag.i}_${flag.j}`;
-            const toDestroy = this.flagsMap.get(key);
-            if (toDestroy) toDestroy.destroy();
+            this.destroyByKey(this.flagsMap, key);
         }
 
         for (let flag of add) {
@@ -114,11 +114,18 @@ export default class {
             this.addFlag(type, { x, y }, `${i}_${j}`);
         }
 
+        remove = objects.remove || [];
+        add = objects.add || [];
+        for (let object of remove) {
+            const key = `${object.i}_${object.j}`;
+            this.destroyByKey(this.objectsMap, key);
+        }
 
-        // thinking of doing something like
-        // { add , remove }
-        // remove forEach 
-        // add forEach getTile i,j -> addObject object, tileXY
+        for (let object of add) {
+            const { i, j, sprite, variant = 0 } = object;
+            const { x, y } = this.getTile(object).getCenter();
+            this.addObject(sprite, { x, y }, variant, `${i}_${j}`);
+        }
     }
 
 
@@ -127,5 +134,10 @@ export default class {
         if (!row) return null;
 
         return row.get(j) || null;
+    }
+
+    destroyByKey(map, key) {
+        const toDestroy = map.get(key);
+        if (toDestroy) toDestroy.destroy();
     }
 }
