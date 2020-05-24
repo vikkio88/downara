@@ -25,12 +25,15 @@ export default store => {
     });
 
     store.on('phaserReady', ({ gameState, worldState }) => {
-        console.log('[gameState] phaser ready received');
-        eventBridge.emit('game:worldInit', {
+        eventBridge.emit('game:areaInit', {
             gameState,
             worldState
         });
         return;
+    });
+
+    store.on('areaUpdate', ({ }, payload) => {
+        eventBridge.emit('game:areaUpdate', payload);
     });
 
     store.on('actioned', ({ gameState }, tilePosition) => {
@@ -64,8 +67,13 @@ export default store => {
 
     store.on('interact', ({ gameState, worldState }) => {
         if (areaHelper.isSameTile({ i: 1, j: 0 }, gameState.actionedTile.position)) {
-            store.dispatch('transition', { message: 'Test Battle' });
-            store.dispatch('toggleFightingTest');
+            store.dispatch('areaUpdate', {
+                flags: {
+                    remove: [{ i: 2, j: 3 }],
+                    add: [{ i: 2, j: 4, type: 'red' }]
+                }
+            }
+            );
             return;
         }
 

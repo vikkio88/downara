@@ -52,7 +52,7 @@ export default class {
                 );
 
                 const tileKey = `${i}_${j}`;
-                const { object: overrideObject } = extractFromCoordinates({ i, j }, this.objects, {});
+                const { sprite: overrideObject } = extractFromCoordinates({ i, j }, this.objects, {});
                 this.addObject(overrideObject || object, tile.getCenter(), variant, overrideObject ? tileKey : false);
                 const { type } = extractFromCoordinates({ i, j }, this.flags, {});
                 if (type) this.addFlag(type, tile.getTopRight(), tileKey);
@@ -60,8 +60,6 @@ export default class {
             }
             this.tiles.set(i, row);
         }
-
-        console.log(this.flagsMap);
     }
 
     addObject(name, { x, y }, variant = 0, key = false) {
@@ -102,6 +100,21 @@ export default class {
     }
 
     updateGrid(objects, flags) {
+        // flags
+        let { remove = [], add = [] } = flags;
+        for (let flag of remove) {
+            const key = `${flag.i}_${flag.j}`;
+            const toDestroy = this.flagsMap.get(key);
+            if (toDestroy) toDestroy.destroy();
+        }
+
+        for (let flag of add) {
+            const { i, j, type } = flag;
+            const { x, y } = this.getTile(flag).getTopRight();
+            this.addFlag(type, { x, y }, `${i}_${j}`);
+        }
+
+
         // thinking of doing something like
         // { add , remove }
         // remove forEach 

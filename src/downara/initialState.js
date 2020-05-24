@@ -4,8 +4,8 @@ import { NPC, LOCATIONS, FLAGS } from './mapObjects';
 const initialWorldState = {
     objects: {
         0: {
-            2: { 3: { object: NPC.MUM } },
-            5: { 4: { object: LOCATIONS.BAKERY } },
+            2: { 3: { object: NPC.MUM, sprite: 'woman' } },
+            5: { 4: { object: LOCATIONS.BAKERY, sprite: 'mansion' } },
         },
         1: {
             0: { 2: { object: LOCATIONS.BEVAIO_PORTA_NUOVA }, 5: { object: LOCATIONS.CAFE_HOUSE } }

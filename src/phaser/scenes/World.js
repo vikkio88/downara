@@ -7,16 +7,13 @@ export default class extends Phaser.Scene {
   constructor() {
     super({ key: "World" });
 
-    eventBridge.on('game:worldInit', payload => {
-      console.log('[phaser] world init', payload);
-      const { worldState, gameState } = payload;
-      const { player, worldPosition } = gameState;
-      const { flags } = worldState;
-
-      this.area = worldPosition;
-      this.playerInitialPosition = player.areaPosition;
-
-      this.flags = flags[this.area] || {};
+    eventBridge.on('game:areaInit', payload => {
+      console.log('[phaser] area init', payload);
+      this.areaInit(payload);
+    });
+    eventBridge.on('game:areaUpdate', payload => {
+      console.log('[phaser] area update', payload);
+      this.areaUpdate(payload);
     });
     eventBridge.emit('phaser:ready');
   }
@@ -36,17 +33,23 @@ export default class extends Phaser.Scene {
   }
 
   createGrid() {
-    const map = this.cache.json.get('area_1');
-    const objects = {
-      2: {
-        3: { object: 'woman' }
-      }
-    };
-
-    console.log('creating Grid', this.flags);
-    this.grid = new Grid(this, map, objects, this.flags, { rows: 20, columns: 20 });
+    const map = this.cache.json.get(`area_${this.area}`);
+    this.grid = new Grid(this, map, this.objects, this.flags, { rows: 20, columns: 20 });
     this.grid.create();
-  };
+  }
 
-  update() { }
+  areaInit(payload) {
+    const { worldState, gameState } = payload;
+    const { player, worldPosition } = gameState;
+    this.playerInitialPosition = player.areaPosition;
+    this.area = worldPosition;
+    const { flags, objects } = worldState;
+    this.flags = flags[this.area] || {};
+    this.objects = objects[this.area] || {};
+  }
+
+  areaUpdate({ objects = {}, flags = {} }) {
+    this.grid.updateGrid(objects, flags);
+  }
+
 }
