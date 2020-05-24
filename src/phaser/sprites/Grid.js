@@ -40,6 +40,7 @@ export default class {
                     t: terrain, o: object, ov: variant, b: blocked
                 } = extractFromCoordinates({ i, j }, this.map, {});
 
+                const { sprite: overrideObject } = extractFromCoordinates({ i, j }, this.objects, {});
                 const tile = new Tile(
                     this.scene,
                     this.tileSize,
@@ -49,11 +50,10 @@ export default class {
                         y: this.marginI + (this.tileMargin * (i + 1)) + (i * this.tileSize)
                     },
                     terrain,
-                    Boolean(blocked)
+                    overrideObject ? false : Boolean(blocked)
                 );
 
                 const tileKey = `${i}_${j}`;
-                const { sprite: overrideObject } = extractFromCoordinates({ i, j }, this.objects, {});
                 this.addObject(overrideObject || object, tile.getCenter(), variant, overrideObject ? tileKey : false);
                 const { type } = extractFromCoordinates({ i, j }, this.flags, {});
                 if (type) this.addFlag(type, tile.getTopRight(), tileKey);
