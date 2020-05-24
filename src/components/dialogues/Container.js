@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useStoreon } from 'storeon/react';
+import { CloseRow } from 'components/common';
 
-import './TypingDots.css'
+import './TypingDots.css';
 
 const scrollToBottom = id => {
     const element = document.getElementById(id);
     element.scrollTop = element.scrollHeight;
-}
+};
 
 const Message = ({ character, message }) => {
     const selfMessage = Boolean(character);
@@ -44,16 +45,19 @@ const TypingDots = () => {
 };
 
 const Container = () => {
-    const { dialogue: { messages, waiting } } = useStoreon('dialogue');
-    useEffect(() => scrollToBottom('chat'))
+    const { dispatch, dialogue: { messages, waiting } } = useStoreon('dialogue');
+    useEffect(() => scrollToBottom('chat'));
     return (
-        <div
-            id="chat"
-            className="flex-1 flex flex-col items-stretch bg-gray-200 shadow overflow-y-auto"
-        >
-            {messages.map((m, i) => <Message key={`msg-${i}`} {...m} />)}
-            {waiting && <TypingDots />}
-        </div>
+        <>
+            <CloseRow onClose={() => dispatch('stopDialogue')} disabled={waiting} />
+            <div
+                id="chat"
+                className="flex-1 flex flex-col items-stretch bg-gray-200 shadow overflow-y-auto"
+            >
+                {messages.map((m, i) => <Message key={`msg-${i}`} {...m} />)}
+                {waiting && <TypingDots />}
+            </div>
+        </>
     );
 };
 

@@ -3,8 +3,10 @@ import { initialGameState, map, interactables } from 'downara';
 import { eventBridge } from 'lib';
 import dialogues from 'downara/dialogues';
 import { MESSAGES } from 'downara/mapObjects';
-import areas from 'downara/areas';
 import quests from 'downara/quests';
+
+// replacement for areas
+const areas = {};
 
 export default store => {
     store.on('@init', () => {
@@ -138,12 +140,5 @@ export default store => {
         gameState.player.areaPosition = newAreaPosition;
         gameState.actionedTile.position = newAreaPosition;
         return { gameState: { ...gameState, worldPosition: newArea, area: map[newArea] } };
-    });
-
-    // For test purposes
-    store.on('toggleFightingTest', ({ gameState }) => {
-        gameState.status = gameState.status === STATUSES.FIGHTING ?
-            STATUSES.IDLE : STATUSES.FIGHTING;
-        return { gameState: { ...gameState } };
     });
 };
