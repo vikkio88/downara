@@ -56,7 +56,11 @@ export default class {
                 const tileKey = `${i}_${j}`;
                 this.addObject(overrideObject || object, tile.getCenter(), variant, overrideObject ? tileKey : false);
                 const { type } = extractFromCoordinates({ i, j }, this.flags, {});
-                if (type) this.addFlag(type, tile.getTopRight(), tileKey);
+                if (type) {
+                    this.addFlag(type, tile.getTopRight(), tileKey);
+                    tile.highlight();
+                }
+
                 row.set(j, tile);
             }
             this.tiles.set(i, row);
@@ -110,7 +114,9 @@ export default class {
 
         for (let flag of add) {
             const { i, j, type } = flag;
-            const { x, y } = this.getTile(flag).getTopRight();
+            const tile = this.getTile(flag);
+            tile.highlight();
+            const { x, y } = tile.getTopRight();
             this.addFlag(type, { x, y }, `${i}_${j}`);
         }
 

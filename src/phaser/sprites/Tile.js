@@ -41,4 +41,24 @@ export default class extends Phaser.GameObjects.TileSprite {
             this.setAlpha(1);
         });
     }
+
+    highlight() {
+        this.setTint(0x00ff00);
+        const border = this.scene.add.graphics();
+        border.lineStyle(3, 0xffffff, 1);
+        border.strokeRoundedRect(3, 3, 94, 94, 10);
+        border.x = this.x;
+        border.y = this.y;
+        border.alpha = 0;
+
+        this.scene.tweens.add({
+            targets: border,
+            duration: 600,
+            delay: 300,
+            alpha: 1,
+            repeat: 2,
+            onComplete: () => this.setTint(0xffffff),
+            yoyo: true
+        });
+    }
 }
