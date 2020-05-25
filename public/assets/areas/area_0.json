@@ -108,21 +108,13 @@
       "ov": 1
     },
     "1": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "2": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "3": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "4": {
       "t": "grass",
@@ -138,21 +130,13 @@
       "ov": 1
     },
     "7": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "8": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "9": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "10": {
       "t": "grass",
@@ -177,26 +161,16 @@
       "ov": 1
     },
     "16": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "17": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "18": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "19": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     }
   },
   "2": {
@@ -236,9 +210,7 @@
       "ov": 1
     },
     "7": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "8": {
       "t": "sand",
@@ -246,9 +218,7 @@
       "ov": 0
     },
     "9": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "10": {
       "t": "grass",
@@ -273,15 +243,10 @@
       "ov": 1
     },
     "15": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "16": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "17": {
       "t": "sand",
@@ -294,16 +259,13 @@
       "ov": 0
     },
     "19": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     }
   },
   "3": {
     "0": {
       "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "o": "road_sign"
     },
     "1": {
       "t": "sand",
@@ -321,9 +283,7 @@
       "ov": 1
     },
     "4": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "5": {
       "t": "grass",
@@ -336,10 +296,7 @@
       "ov": 1
     },
     "7": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "8": {
       "t": "sand",
@@ -352,15 +309,10 @@
       "ov": 0
     },
     "10": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "11": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "12": {
       "t": "grass",
@@ -375,15 +327,10 @@
       "b": 1
     },
     "14": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "15": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "16": {
       "t": "sand",
@@ -408,9 +355,7 @@
   },
   "4": {
     "0": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "1": {
       "t": "sand",
@@ -448,9 +393,7 @@
       "b": 1
     },
     "8": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "9": {
       "t": "sand",
@@ -458,36 +401,22 @@
       "ov": 0
     },
     "10": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "11": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "12": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "13": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "14": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "15": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "16": {
       "t": "sand",
@@ -512,9 +441,7 @@
   },
   "5": {
     "0": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "1": {
       "t": "sand",
@@ -537,9 +464,7 @@
       "ov": 1
     },
     "5": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "6": {
       "t": "grass",
@@ -556,59 +481,38 @@
       "b": 1
     },
     "9": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "10": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "11": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "12": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "13": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "14": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "15": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "16": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "17": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "18": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "19": {
       "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "o": "road_sign"
     }
   },
   "6": {
@@ -664,38 +568,22 @@
       "b": 1
     },
     "10": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "11": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "12": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "13": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "14": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "15": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "16": {
       "t": "grass",
@@ -729,10 +617,7 @@
       "ov": 1
     },
     "1": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "2": {
       "t": "sand",
@@ -760,10 +645,7 @@
       "ov": 1
     },
     "7": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "8": {
       "t": "sand"
@@ -777,22 +659,13 @@
       "ov": 1
     },
     "11": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "12": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "13": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "14": {
       "t": "grass",
@@ -829,9 +702,7 @@
       "b": 1
     },
     "2": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "3": {
       "t": "sand",
@@ -921,9 +792,7 @@
       "ov": 1
     },
     "2": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "3": {
       "t": "sand",
@@ -951,10 +820,7 @@
       "ov": 1
     },
     "8": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "9": {
       "t": "grass",
@@ -1020,9 +886,7 @@
       "ov": 1
     },
     "2": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "3": {
       "t": "sand",
@@ -1050,9 +914,7 @@
       "ov": 1
     },
     "8": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "9": {
       "t": "grass",
@@ -1120,9 +982,7 @@
       "ov": 1
     },
     "2": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "3": {
       "t": "sand",
@@ -1150,10 +1010,7 @@
       "ov": 1
     },
     "8": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "9": {
       "t": "grass",
@@ -1222,9 +1079,7 @@
       "b": 1
     },
     "2": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "3": {
       "t": "sand",
@@ -1313,10 +1168,7 @@
       "ov": 1
     },
     "1": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "2": {
       "t": "sand",
@@ -1344,10 +1196,7 @@
       "ov": 0
     },
     "7": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "8": {
       "t": "sand"
@@ -1367,10 +1216,7 @@
       "b": 1
     },
     "12": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "13": {
       "t": "grass",
@@ -1401,15 +1247,10 @@
   },
   "14": {
     "0": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "1": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "2": {
       "t": "sand",
@@ -1427,9 +1268,7 @@
       "ov": 1
     },
     "5": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "6": {
       "t": "grass",
@@ -1450,16 +1289,10 @@
       "b": 1
     },
     "10": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "11": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "12": {
       "t": "grass",
@@ -1498,9 +1331,7 @@
   },
   "15": {
     "0": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "1": {
       "t": "sand",
@@ -1518,9 +1349,7 @@
       "ov": 0
     },
     "4": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "5": {
       "t": "grass",
@@ -1537,31 +1366,19 @@
       "ov": 1
     },
     "8": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "9": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "10": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "11": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "12": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "13": {
       "t": "grass",
@@ -1593,9 +1410,7 @@
   },
   "16": {
     "0": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "1": {
       "t": "sand",
@@ -1628,9 +1443,7 @@
       "b": 1
     },
     "7": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "8": {
       "t": "sand",
@@ -1643,14 +1456,10 @@
       "ov": 0
     },
     "10": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "11": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "12": {
       "t": "grass",
@@ -1685,14 +1494,10 @@
   },
   "17": {
     "0": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "1": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "2": {
       "t": "grass",
@@ -1716,9 +1521,7 @@
       "b": 1
     },
     "6": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "7": {
       "t": "sand",
@@ -1736,9 +1539,7 @@
       "ov": 0
     },
     "10": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "11": {
       "t": "grass",
@@ -1788,16 +1589,10 @@
   },
   "18": {
     "0": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "1": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "2": {
       "t": "grass",
@@ -1835,9 +1630,7 @@
       "ov": 1
     },
     "9": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "10": {
       "t": "grass",
@@ -1860,9 +1653,7 @@
       "b": 1
     },
     "14": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "15": {
       "t": "sand",
@@ -1870,9 +1661,7 @@
       "ov": 0
     },
     "16": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "17": {
       "t": "grass",
@@ -1913,9 +1702,7 @@
       "b": 1
     },
     "5": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "6": {
       "t": "sand",
@@ -1928,15 +1715,10 @@
       "ov": 0
     },
     "8": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "9": {
-      "t": "grass",
-      "o": "pond",
-      "ov": 1,
-      "b": 1
+      "t": "grass"
     },
     "10": {
       "t": "grass",
@@ -1953,9 +1735,7 @@
       "b": 1
     },
     "13": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "14": {
       "t": "sand",
@@ -1973,9 +1753,7 @@
       "ov": 1
     },
     "17": {
-      "t": "grass",
-      "o": "hills",
-      "ov": 1
+      "t": "grass"
     },
     "18": {
       "t": "grass",

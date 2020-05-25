@@ -1,8 +1,6 @@
 import { interactables, OBJECT_DESCRIPTIONS, map } from 'downara';
 import { gameHelper, areaHelper, MESSAGE_TYPES } from 'lib/game';
-
-// replacement for areas
-const areas = {};
+import { areas } from 'downara/areas';
 
 export default store => {
     store.on('@init', () => {

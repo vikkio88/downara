@@ -6,7 +6,7 @@ import { MESSAGES } from 'downara/mapObjects';
 import quests from 'downara/quests';
 
 // replacement for areas
-const areas = {};
+import { areas } from 'downara/areas';
 
 export default store => {
     store.on('@init', () => {
@@ -68,13 +68,14 @@ export default store => {
     });
 
     store.on('interact', ({ gameState, worldState }) => {
+        // first test of phaser interaction update
         if (areaHelper.isSameTile({ i: 1, j: 0 }, gameState.actionedTile.position)) {
             store.dispatch('areaUpdate', {
                 flags: {
                     remove: [{ i: 2, j: 3 }],
                     add: [{ i: 2, j: 4, type: 'red' }]
                 },
-                objects:{
+                objects: {
                     remove: [{ i: 2, j: 3 }],
                     add: [{ i: 6, j: 6, sprite: 'woman' }]
                 }
@@ -137,6 +138,9 @@ export default store => {
     store.on('changeArea', ({ gameState }, newArea) => {
         const currentWorldPosition = gameState.worldPosition;
         const newAreaPosition = map[newArea][currentWorldPosition];
+        console.log('changeArea', { newArea, currentWorldPosition, newAreaPosition });
+        return;
+
         gameState.player.areaPosition = newAreaPosition;
         gameState.actionedTile.position = newAreaPosition;
         return { gameState: { ...gameState, worldPosition: newArea, area: map[newArea] } };
