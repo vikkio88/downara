@@ -28,6 +28,7 @@ export default class {
         this.marginJ = marginJ;
         this.tiles = new Map();
 
+        this.staticAssets = [];
         this.objectsMap = new Map();
         this.flagsMap = new Map();
     }
@@ -91,6 +92,7 @@ export default class {
         if (flipX) object.flipX = true;
 
         if (key) this.objectsMap.set(key, object);
+        if (!key) this.staticAssets.push(object);
     }
 
     addFlag(type, { x, y }, key) {
@@ -145,5 +147,25 @@ export default class {
     destroyByKey(map, key) {
         const toDestroy = map.get(key);
         if (toDestroy) toDestroy.destroy();
+    }
+
+    destroy() {
+        for (const [i, row] of this.tiles) {
+            for (const [j, tile] of row) {
+                tile.destroy();
+            }
+        }
+
+        for (const [_, flag] of this.flagsMap) {
+            flag.destroy();
+        }
+
+        for (const [_, object] of this.objectsMap) {
+            object.destroy();
+        }
+
+        for (const object of this.staticAssets) {
+            object.destroy();
+        }
     }
 }

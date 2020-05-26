@@ -30,7 +30,7 @@ export default class extends Phaser.Scene {
       frameHeight: 16,
     });
 
-    for (let i = 0; i <= 0; i++) {
+    for (let i = 0; i <= 4; i++) {
       this.load.json(`area_${i}`, `assets/areas/area_${i}.json`);
     }
   }

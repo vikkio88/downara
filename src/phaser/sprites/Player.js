@@ -13,7 +13,12 @@ export default class extends Phaser.GameObjects.Sprite {
 
     this.tile = { i: 0, j: 0 };
     this.speed = 150;
-    this.actionableDistance = 300;
+    
+    //Disabling for testing
+    // @TODO: TEST HACK
+    //this.actionableDistance = 300;
+    this.actionableDistance = 700000000000000;
+    //
 
     this.movingQueue = 0;
     scene.anims.create({
@@ -58,7 +63,7 @@ export default class extends Phaser.GameObjects.Sprite {
 
   showActionableArea() {
     if (this.circle) this.circle.destroy();
-    
+
     this.circle = this.scene.add.circle(
       this.x,
       this.y,

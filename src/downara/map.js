@@ -3,7 +3,7 @@ const START_POINTS = {
     [DIRECTIONS.NORTH]: { i: 0, j: 3 },
     [DIRECTIONS.SOUTH]: { i: 5, j: 3 },
     [DIRECTIONS.EAST]: { i: 3, j: 5 },
-    [DIRECTIONS.WEST]: { i: 3, j: 0 },
+    [DIRECTIONS.WEST]: { i: 5, j: 19 },
 };
 
 export default {

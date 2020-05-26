@@ -135,14 +135,16 @@ export default store => {
         return { gameState };
     });
 
-    store.on('changeArea', ({ gameState }, newArea) => {
+    store.on('changeArea', ({ gameState, worldState }, newArea) => {
         const currentWorldPosition = gameState.worldPosition;
         const newAreaPosition = map[newArea][currentWorldPosition];
-        console.log('changeArea', { newArea, currentWorldPosition, newAreaPosition });
-        return;
-
         gameState.player.areaPosition = newAreaPosition;
         gameState.actionedTile.position = newAreaPosition;
-        return { gameState: { ...gameState, worldPosition: newArea, area: map[newArea] } };
+        gameState = { ...gameState, worldPosition: newArea, area: map[newArea] };
+        eventBridge.emit('game:areaChange', {
+            gameState,
+            worldState
+        });
+        return;
     });
 };

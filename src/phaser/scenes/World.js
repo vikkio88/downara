@@ -16,6 +16,13 @@ export default class extends Phaser.Scene {
       console.log('[phaser] area init', payload);
       this.areaInit(payload);
     });
+    eventBridge.on('game:areaChange', payload => {
+      console.log('[phaser] area change', payload);
+      this.areaInit(payload);
+      this.player.destroy();
+      this.grid.destroy();
+      this.create();
+    });
     eventBridge.on('game:areaUpdate', payload => {
       console.log('[phaser] area update', payload);
       this.areaUpdate(payload);
@@ -50,7 +57,7 @@ export default class extends Phaser.Scene {
     this.mainCamera.zoomTo(NORMAL_ZOOM, ZOOM_DURATION, Phaser.Math.Easing.Sine.InOut);
     this.mainCamera.on('camerazoomcomplete', () => {
       this.input.enabled = true;
-      this.player.showActionableArea()
+      this.player.showActionableArea();
     });
   }
 
