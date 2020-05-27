@@ -36,7 +36,8 @@ export default class extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start("World");
+    this.scene.start("TestMap");
+    //this.scene.start("World");
     //this.scene.start("Battle");
   }
 }
