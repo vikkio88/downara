@@ -1,8 +1,5 @@
 import get from 'lodash.get';
-import { range } from 'lib';
-
-//position generator helper
-export const pg = (i = 0, j = 0) => ({ i, j });
+import { range, pg } from 'lib';
 
 export const OBJECTS = {
     CHARACTER: 'character',

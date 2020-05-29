@@ -1,4 +1,5 @@
-import { Field, OBJECTS, defaultConfig, pg } from './Field';
+import { pg } from 'lib';
+import { Field, OBJECTS, defaultConfig } from './Field';
 
 describe('Field', () => {
     describe('init functions', () => {

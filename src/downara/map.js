@@ -1,4 +1,7 @@
+import { pg } from 'lib';
 import { DIRECTIONS } from 'lib/game';
+
+
 const START_POINTS = {
     [DIRECTIONS.NORTH]: { i: 0, j: 3 },
     [DIRECTIONS.SOUTH]: { i: 5, j: 3 },
@@ -6,13 +9,14 @@ const START_POINTS = {
     [DIRECTIONS.WEST]: { i: 5, j: 19 },
 };
 
+
 export default {
     0: {
         id: 0,
         label: 'Madonna di Trapani',
         1: START_POINTS[DIRECTIONS.NORTH],
         2: START_POINTS[DIRECTIONS.SOUTH],
-        3: START_POINTS[DIRECTIONS.WEST],
+        3: pg(5, 19),
         4: START_POINTS[DIRECTIONS.EAST],
     },
     1: {

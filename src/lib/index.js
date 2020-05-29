@@ -37,4 +37,13 @@ const eventBridge = {
 
 const extractFromCoordinates = ({ i, j }, mapping, fallback = null) => get(mapping, `${i}.${j}`, fallback);
 
-export { range, randomizer, eventBridge, extractFromCoordinates };
+/**
+ * Position Generator pg
+ * Generating position object
+ * 
+ * @param Number i row index
+ * @param Number j column index
+ */
+const pg = (i = 0, j = 0) => ({ i, j });
+
+export { range, randomizer, eventBridge, extractFromCoordinates, pg };

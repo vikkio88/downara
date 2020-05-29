@@ -51,7 +51,8 @@
       "ov": 1
     },
     "10": {
-      "t": "grass"
+      "t": "grass",
+      "o": "road_sign"
     },
     "11": {
       "t": "grass",
