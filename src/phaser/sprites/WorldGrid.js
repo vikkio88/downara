@@ -1,5 +1,5 @@
 import { extractFromCoordinates } from 'lib';
-import Tile from './Tile';
+import WorldTile from './WorldTile';
 import SPRITES from 'downara/sprites';
 import { OBJECT_CONFIG } from './mapping';
 
@@ -44,7 +44,7 @@ export default class {
                 } = extractFromCoordinates({ i, j }, this.map, {});
 
                 const { sprite: overrideObject } = extractFromCoordinates({ i, j }, this.objects, {});
-                const tile = new Tile(
+                const tile = new WorldTile(
                     this.scene,
                     this.tileSize,
                     { i, j },

@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 import { eventBridge } from 'lib';
 
-import { TestPlayer, Grid } from "../sprites";
+import { TestPlayer, WorldGrid } from "../sprites";
 
 const INITIAL_ZOOM = 5;
 const NORMAL_ZOOM = 1;
@@ -32,7 +32,7 @@ export default class extends Phaser.Scene {
 
   createGrid() {
     const map = this.cache.json.get(`area_${this.area}`);
-    this.grid = new Grid(
+    this.grid = new WorldGrid(
       this,
       { map, objects: this.objects, flags: this.flags },
       { rows: 20, columns: 20 }

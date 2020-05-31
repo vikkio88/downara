@@ -19,6 +19,9 @@ export default class extends Phaser.Scene {
     this.load.image('sand', 'assets/tiles/sand_1.png');
     this.load.image('street', 'assets/tiles/street_1.png');
     this.load.image('dirt', 'assets/tiles/dirt_1.png');
+    
+    this.load.image('battlePlayer', 'assets/battle/man_up.png');
+    this.load.image('battleEnemy', 'assets/battle/man_up2.png');
 
     this.load.spritesheet('player', "assets/objects/main/player.png", {
       frameWidth: 32,
