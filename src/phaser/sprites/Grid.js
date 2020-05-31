@@ -6,9 +6,11 @@ import { OBJECT_CONFIG } from './mapping';
 export default class {
     constructor(
         scene,
-        map = {},
-        objects = {},
-        flags = {},
+        {
+            map = {},
+            objects = {},
+            flags = {},
+        } = {},
         config = {}
     ) {
         const { rows = 9, columns = 13, tileSize = 100,

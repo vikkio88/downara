@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 
+import { Grid } from "../sprites";
 
 export default class extends Phaser.Scene {
     constructor() {
@@ -7,6 +8,11 @@ export default class extends Phaser.Scene {
     }
 
     create() {
-        this.tiles = [];
+        this.grid = new Grid(
+            this,
+            {},
+            { rows: 6, columns: 7, tileSize: 150 }
+        );
+        this.grid.create();
     }
 }

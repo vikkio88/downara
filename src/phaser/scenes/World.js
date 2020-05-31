@@ -27,6 +27,11 @@ export default class extends Phaser.Scene {
       console.log('[phaser] area update', payload);
       this.areaUpdate(payload);
     });
+
+    eventBridge.on('game:battle', payload => {
+      console.log('[phaser] trigger battle', payload);
+    });
+
     eventBridge.emit('phaser:ready');
   }
 
@@ -44,7 +49,11 @@ export default class extends Phaser.Scene {
 
   createGrid() {
     const map = this.cache.json.get(`area_${this.area}`);
-    this.grid = new Grid(this, map, this.objects, this.flags, { rows: 20, columns: 20 });
+    this.grid = new Grid(
+      this,
+      { map, objects: this.objects, flags: this.flags },
+      { rows: 20, columns: 20 }
+    );
     this.grid.create();
   }
 
