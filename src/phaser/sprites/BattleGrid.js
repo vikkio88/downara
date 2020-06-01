@@ -1,8 +1,40 @@
 import { extractFromCoordinates } from 'lib';
+import { FACING } from "lib/battle";
 import Tile from './Tile';
 import SPRITES from 'downara/sprites';
 import { OBJECT_CONFIG } from './mapping';
 
+const FACING_DIRECTIONS = {
+    [FACING.UP]: 270,
+    [FACING.DOWN]: 90,
+    [FACING.RIGHT]: 0,
+    [FACING.LEFT]: 180,
+};
+
+const ACTIONS = {
+    MOVE: 'move',
+    ATTACK: 'attack',
+    PARRY: 'parry',
+    USE_ITEM: 'use_item'
+};
+
+const ACTION_TWEENS = {
+    [ACTIONS.MOVE]: (target, grid, payload) => {
+        const { i, j } = payload;
+        const tile = grid.getTile({ i, j });
+        const { x, y } = tile.getCenter();
+        return {
+            targets: target,
+            x, y,
+            duration: 1500,
+            ease: 'circular.easeInOut',
+            loop: false,
+        };
+    },
+    [ACTIONS.ATTACK]: () => { },
+    [ACTIONS.PARRY]: () => { },
+    [ACTIONS.USE_ITEM]: () => { },
+};
 export default class {
     constructor(
         scene,
@@ -62,7 +94,7 @@ export default class {
 
     }
 
-    addActor({ id, type, i, j }) {
+    addActor({ id, type, i, j, facing = FACING.RIGHT }) {
         const tile = this.tiles.get(i).get(j);
         const { x, y } = tile.getCenter();
         const actor = this.scene.add.sprite(
@@ -71,9 +103,14 @@ export default class {
             type
         );
 
+        this.setFacingDirection(actor, facing);
         this.actorsMap.set(id, actor);
-
     }
+
+    setFacingDirection(actor, facing) {
+        actor.setAngle(FACING_DIRECTIONS[facing] || FACING_DIRECTIONS[FACING.RIGHT]);
+    }
+
     addObject(name, { x, y }, variant = 0) {
         if (!Object.values(SPRITES.NAMES).includes(name)) {
             return;
@@ -125,5 +162,16 @@ export default class {
         for (const object of this.staticAssets) {
             object.destroy();
         }
+    }
+
+    play(id, action) {
+        const actor = this.actorsMap.get(id);
+        const { type, payload } = action;
+
+        const tweenGenerator = ACTION_TWEENS[type];
+        if (!tweenGenerator) return;
+
+        const tween = tweenGenerator(actor, this, payload);
+        this.scene.tweens.add(tween);
     }
 }
