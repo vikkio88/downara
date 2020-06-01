@@ -5,6 +5,9 @@ import dialogues from 'downara/dialogues';
 import { MESSAGES } from 'downara/mapObjects';
 import quests from 'downara/quests';
 
+
+import { FACING } from "lib/battle";
+
 // replacement for areas
 import { areas } from 'downara/areas';
 
@@ -70,6 +73,25 @@ export default store => {
     store.on('interact', ({ gameState, worldState }) => {
         // first test of phaser interaction update
         if (areaHelper.isSameTile({ i: 1, j: 0 }, gameState.actionedTile.position)) {
+            eventBridge.emit('game:battle', {
+                actors: [
+                    {
+                        id: 'player',
+                        type: 'battlePlayer',
+                        facing: FACING.RIGHT,
+                        i: 0, j: 1
+                    },
+                    {
+                        id: 'enemy',
+                        type: 'battleEnemy',
+                        facing: FACING.LEFT,
+                        i: 2, j: 3
+                    },
+                ]
+            });
+
+            /*
+            this is to trigger world updates
             store.dispatch('areaUpdate', {
                 flags: {
                     remove: [{ i: 2, j: 3 }],
@@ -79,9 +101,9 @@ export default store => {
                     remove: [{ i: 2, j: 3 }],
                     add: [{ i: 6, j: 6, sprite: 'woman' }]
                 }
-            }
-            );
-            return;
+            });
+            */
+            return { gameState: { ...gameState, status: STATUSES.FIGHTING } };
         }
 
 

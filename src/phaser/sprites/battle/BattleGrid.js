@@ -1,8 +1,8 @@
 import { extractFromCoordinates } from 'lib';
 import { FACING } from "lib/battle";
-import Tile from './Tile';
+import Tile from './BattleTile';
 import SPRITES from 'downara/sprites';
-import { OBJECT_CONFIG } from './mapping';
+import { OBJECT_CONFIG } from '../mapping';
 
 const FACING_DIRECTIONS = {
     [FACING.UP]: 270,
@@ -29,6 +29,7 @@ const ACTION_TWEENS = {
             duration: 1500,
             ease: 'circular.easeInOut',
             loop: false,
+            onUpdate: stuff => console.log('onUpdate', stuff)
         };
     },
     [ACTIONS.ATTACK]: () => { },
@@ -91,7 +92,13 @@ export default class {
         for (const actor of this.actors) {
             this.addActor(actor);
         }
+    }
 
+    highlight(tiles = []) {
+        for (const tile of tiles) {
+            const { i, j } = tile;
+            this.tiles.get(i).get(j).setActionable();
+        }
     }
 
     addActor({ id, type, i, j, facing = FACING.RIGHT }) {
@@ -172,6 +179,7 @@ export default class {
         if (!tweenGenerator) return;
 
         const tween = tweenGenerator(actor, this, payload);
+        console.log(this.scene.tweens, 'tween manager');
         this.scene.tweens.add(tween);
     }
 }

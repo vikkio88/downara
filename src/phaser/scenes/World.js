@@ -30,6 +30,7 @@ export default class extends Phaser.Scene {
 
     eventBridge.on('game:battle', payload => {
       console.log('[phaser] trigger battle', payload);
+      this.scene.start("Battle", payload);
     });
 
     eventBridge.emit('phaser:ready');

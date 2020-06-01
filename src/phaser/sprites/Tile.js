@@ -61,7 +61,7 @@ export default class extends Phaser.GameObjects.TileSprite {
             duration: 600,
             delay: 300,
             alpha: 1,
-            repeat: 2,
+            repeat: 3,
             onComplete: () => this.setTint(0xffffff),
             yoyo: true
         });

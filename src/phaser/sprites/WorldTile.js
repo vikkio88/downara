@@ -5,5 +5,4 @@ export default class extends Tile {
         const { x, y } = this.getCenter();
         this.scene.player.moveTo({ x, y }, this.gridIndexes);
     }
-
 }
