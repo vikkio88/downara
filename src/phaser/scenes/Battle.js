@@ -19,6 +19,10 @@ export default class extends Phaser.Scene {
             const { tiles } = payload;
             this.grid.highlight(tiles);
         });
+
+        eventBridge.on('battle:resetActionableTiles', () => {
+            this.grid.resetHighlighted();
+        });
     }
 
     create() {

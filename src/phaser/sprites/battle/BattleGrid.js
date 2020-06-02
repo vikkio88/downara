@@ -1,5 +1,6 @@
 import { extractFromCoordinates } from 'lib';
 import { FACING } from "lib/battle";
+import { ACTIONS } from "lib/battle/Battle";
 import Tile from './BattleTile';
 import SPRITES from 'downara/sprites';
 import { OBJECT_CONFIG } from '../mapping';
@@ -9,13 +10,6 @@ const FACING_DIRECTIONS = {
     [FACING.DOWN]: 90,
     [FACING.RIGHT]: 0,
     [FACING.LEFT]: 180,
-};
-
-const ACTIONS = {
-    MOVE: 'move',
-    ATTACK: 'attack',
-    PARRY: 'parry',
-    USE_ITEM: 'use_item'
 };
 
 const ACTION_TWEENS = {
@@ -60,7 +54,7 @@ export default class {
         this.marginI = marginI;
         this.marginJ = marginJ;
         this.tiles = new Map();
-
+        this.highlightedTiles = [];
         this.staticAssets = [];
         this.actorsMap = new Map();
     }
@@ -97,8 +91,19 @@ export default class {
     highlight(tiles = []) {
         for (const tile of tiles) {
             const { i, j } = tile;
-            this.tiles.get(i).get(j).setActionable();
+            this.tiles.get(i).get(j).setActionable(() => this.resetHighlighted());
         }
+
+        this.highlightedTiles = tiles;
+    }
+
+    resetHighlighted() {
+        for (const tile of this.highlightedTiles) {
+            const { i, j } = tile;
+            this.tiles.get(i).get(j).reset();
+        }
+
+        this.highlightedTiles = [];
     }
 
     addActor({ id, type, i, j, facing = FACING.RIGHT }) {

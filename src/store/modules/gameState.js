@@ -72,7 +72,7 @@ export default store => {
 
     store.on('interact', ({ gameState, worldState }) => {
         // first test of phaser interaction update
-        if (areaHelper.isSameTile({ i: 1, j: 0 }, gameState.actionedTile.position)) {
+        if (areaHelper.isSameTile({ i: 3, j: 2 }, gameState.actionedTile.position)) {
             const payload = {
                 actors: [
                     {

@@ -1,7 +1,8 @@
-const ACTIONS = {
+export const ACTIONS = {
     MOVE: 'move',
     ATTACK: 'attack',
     PARRY: 'parry',
+    CHANGE_FACING: 'change_facing',
     USE_ITEM: 'use_item'
 };
 
@@ -158,11 +159,11 @@ export class Battle {
         // Need to consider the deaths too
         const { finished, winner, deaths } = this.getBattleStatus();
         this.finished = finished;
-        if(this.finished){
-            this.log[RESULT] = {winner, deaths};
+        if (this.finished) {
+            //this.log[RESULT] = { winner, deaths };
         }
 
-        if(deaths){
+        if (deaths) {
             this.removeDeaths(deaths);
         }
 

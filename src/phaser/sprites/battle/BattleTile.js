@@ -8,14 +8,18 @@ export default class extends Tile {
     }
     onClick() {
         eventBridge.emitFromPhaser('battle:tileClicked', this.gridIndexes);
+        if (this.callback) this.callback();
     }
 
-    setActionable() {
+    setActionable(callback) {
         this.setTint(0x00ff00);
         this.setInteractive();
+
+        if (callback) this.callback = callback;
     }
 
     reset() {
         this.setTint(0xffffff);
+        this.disableInteractive();
     }
 }
