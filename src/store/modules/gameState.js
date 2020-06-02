@@ -73,7 +73,7 @@ export default store => {
     store.on('interact', ({ gameState, worldState }) => {
         // first test of phaser interaction update
         if (areaHelper.isSameTile({ i: 1, j: 0 }, gameState.actionedTile.position)) {
-            eventBridge.emit('game:battle', {
+            const payload = {
                 actors: [
                     {
                         id: 'player',
@@ -87,8 +87,11 @@ export default store => {
                         facing: FACING.LEFT,
                         i: 2, j: 3
                     },
-                ]
-            });
+                ],
+                size: { i: 6, j: 6 }
+            };
+            eventBridge.emit('game:battle', payload);
+            store.dispatch('battle:init', payload);
 
             /*
             this is to trigger world updates

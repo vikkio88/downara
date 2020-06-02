@@ -9,9 +9,11 @@ export default class extends Phaser.Scene {
     }
 
     init(payload) {
-        const { actors = [], map = [] } = payload;
+        const { actors = [], map = [], size = { i: 6, j: 6 } } = payload;
         this.actors = actors;
         this.map = map;
+        this.rows = size.i;
+        this.columns = size.j;
         eventBridge.on('battle:showActionableTiles', payload => {
             console.log('[phaser] actionableTiles', payload);
             const { tiles } = payload;
@@ -28,7 +30,7 @@ export default class extends Phaser.Scene {
                 actors: this.actors,
                 map: this.map
             },
-            { rows: 6, columns: 6, tileSize: 100, marginJ, marginI }
+            { rows: this.rows, columns: this.columns, tileSize: 100, marginJ, marginI }
         );
         this.grid.create();
     }
