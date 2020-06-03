@@ -12,19 +12,21 @@ const FACING_DIRECTIONS = {
     [FACING.LEFT]: 180,
 };
 
-const ACTION_TWEENS = {
-    [ACTIONS.MOVE]: (target, grid, payload) => {
+const ACTION_ANIMATIONS = {
+    [ACTIONS.MOVE]: (grid, target, payload) => {
         const { i, j } = payload;
         const tile = grid.getTile({ i, j });
         const { x, y } = tile.getCenter();
-        return {
-            targets: target,
-            x, y,
-            duration: 1500,
-            ease: 'circular.easeInOut',
-            loop: false,
-            onUpdate: stuff => console.log('onUpdate', stuff)
-        };
+        grid.scene.tweens.add(
+            {
+                targets: target,
+                x, y,
+                duration: 1500,
+                ease: 'circular.easeInOut',
+                loop: false,
+                onComplete: () => console.log('move completed')
+            }
+        );
     },
     [ACTIONS.ATTACK]: () => { },
     [ACTIONS.PARRY]: () => { },
@@ -91,6 +93,8 @@ export default class {
     highlight(tiles = []) {
         for (const tile of tiles) {
             const { i, j } = tile;
+            console.log(`highlight i : ${i} ,  j : ${j}`);
+            // found error here where highlighting i > size
             this.tiles.get(i).get(j).setActionable(() => this.resetHighlighted());
         }
 
@@ -176,15 +180,21 @@ export default class {
         }
     }
 
+    playTurnActions(actions) {
+        for (const { id, action } of actions) {
+            // here we need wait for the action 
+            // to be finished before doing the next somehow
+            this.play(id, action);
+        }
+    }
+
     play(id, action) {
         const actor = this.actorsMap.get(id);
         const { type, payload } = action;
 
-        const tweenGenerator = ACTION_TWEENS[type];
-        if (!tweenGenerator) return;
+        const actionAnimation = ACTION_ANIMATIONS[type];
+        if (!actionAnimation) return;
 
-        const tween = tweenGenerator(actor, this, payload);
-        console.log(this.scene.tweens, 'tween manager');
-        this.scene.tweens.add(tween);
+        actionAnimation(this, actor, payload);
     }
 }

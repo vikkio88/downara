@@ -138,6 +138,10 @@ export class Character {
         return this.config.ai !== false;
     }
 
+    setPosition(position) {
+        this.position = position;
+    }
+
     getPosition() {
         return this.position;
     }

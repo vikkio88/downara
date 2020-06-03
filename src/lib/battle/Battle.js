@@ -8,6 +8,8 @@ export const ACTIONS = {
 
 export class Battle {
     constructor(field, characters = []) {
+        this.field = field;
+
         this.characterMap = new Map();
         this.characters = characters;
 
@@ -66,6 +68,11 @@ export class Battle {
     getPositionById(id) {
         const character = this.getCharacter(id);
         return character.getPosition();
+    }
+
+    getHuman() {
+        if (!this.humanId) return null;
+        return this.getCharacter(this.humanId);
     }
 
     getHumanPosition() {

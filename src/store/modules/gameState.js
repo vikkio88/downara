@@ -85,6 +85,13 @@ export default store => {
                         id: 'enemy',
                         type: 'battleEnemy',
                         facing: FACING.LEFT,
+                        // this should probably 
+                        // be not hardcoded
+                        ai: {
+                            config: {
+                                logic: 'simple',
+                            }
+                        },
                         i: 2, j: 3
                     },
                 ],

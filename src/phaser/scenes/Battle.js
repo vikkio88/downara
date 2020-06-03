@@ -23,6 +23,10 @@ export default class extends Phaser.Scene {
         eventBridge.on('battle:resetActionableTiles', () => {
             this.grid.resetHighlighted();
         });
+
+        eventBridge.on('battle:resolved', resolvedTurn => {
+            this.grid.playTurnActions(resolvedTurn);
+        });
     }
 
     create() {
