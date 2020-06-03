@@ -127,14 +127,14 @@ export class Field {
     // fixed distance instead of a range
     getTilesAtRange({ i, j }, { maxD = 1, d = null } = {}) {
         let min = Math.max(0, i - maxD);
-        let max = Math.min(this.size.i, i + maxD);
+        let max = Math.min(this.size.i - 1, i + maxD);
         const is = [];
         for (let idx = min; idx <= max; idx++) {
             is.push(idx);
         }
 
         min = Math.max(0, j - maxD);
-        max = Math.min(this.size.j, j + maxD);
+        max = Math.min(this.size.j - 1, j + maxD);
         const js = [];
         for (let idx = min; idx <= max; idx++) {
             js.push(idx);

@@ -188,16 +188,15 @@ describe('Field', () => {
         });
 
         it('calculates distance correctly', () => {
-            const field = new Field({ size: 4 });
+            const field = new Field({ size: pg(4, 4) });
             expect(field.tilesDistance(pg(0, 0), pg(0, 0))).toBe(0);
             expect(field.tilesDistance(pg(0, 0), pg(1, 0))).toBe(1);
             expect(field.tilesDistance(pg(0, 0), pg(0, 2))).toBe(2);
             expect(field.tilesDistance(pg(0, 0), pg(3, 3))).toBe(3);
-
         });
 
         it('returns the next step tile to get closer', () => {
-            const field = new Field({ size: 4 });
+            const field = new Field({ size: pg(4, 4) });
             expect(field.nextStepToTile(pg(0, 0), pg(0, 0))).toEqual({ i: 0, j: 0 });
             expect(field.nextStepToTile(pg(0, 0), pg(0, 2))).toEqual({ i: 0, j: 1 });
             expect(field.nextStepToTile(pg(0, 0), pg(0, 3))).toEqual({ i: 0, j: 1 });
@@ -206,6 +205,12 @@ describe('Field', () => {
             expect(field.nextStepToTile(pg(0, 0), pg(2, 0))).toEqual({ i: 1, j: 0 });
 
             expect(field.nextStepToTile(pg(0, 0), pg(2, 2))).toEqual({ i: 1, j: 1 });
+        });
+
+        // Regression tests
+        it('[REGRESSION] on a 6x6 Field on the bottom corner returns un-existing row 6', () => {
+            const field = new Field({ size: pg(6, 6) });
+            expect(field.getFlatTilesAtRange(pg(5, 0))).not.toEqual(expect.arrayContaining([pg(6, 0)]));
         });
 
     });
