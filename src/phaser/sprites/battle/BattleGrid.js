@@ -21,7 +21,7 @@ const ACTION_ANIMATIONS = {
             {
                 targets: target,
                 x, y,
-                duration: 1500,
+                duration: 1000,
                 ease: 'circular.easeInOut',
                 loop: false,
                 onComplete: () => console.log('move completed')
@@ -93,8 +93,6 @@ export default class {
     highlight(tiles = []) {
         for (const tile of tiles) {
             const { i, j } = tile;
-            console.log(`highlight i : ${i} ,  j : ${j}`);
-            // found error here where highlighting i > size
             this.tiles.get(i).get(j).setActionable(() => this.resetHighlighted());
         }
 
