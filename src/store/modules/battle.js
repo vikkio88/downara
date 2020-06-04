@@ -85,6 +85,13 @@ export default store => {
                 action: { type: ACTIONS.MOVE, payload: position }
             });
         }
+
+
+        // adding fake move of the enemy
+        resolvedTurn.push({
+            id: 'enemy',
+            action: { type: ACTIONS.MOVE, payload: { i: 3, j: 3 } }
+        });
         // send them to phaser to play
         eventBridge.emit('battle:resolved', resolvedTurn);
         // wait for them to play in order to reset

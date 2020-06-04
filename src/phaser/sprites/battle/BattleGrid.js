@@ -5,6 +5,8 @@ import Tile from './BattleTile';
 import SPRITES from 'downara/sprites';
 import { OBJECT_CONFIG } from '../mapping';
 
+const animationFinishedLabel = index => `turn_${index}_finished`;
+
 const FACING_DIRECTIONS = {
     [FACING.UP]: 270,
     [FACING.DOWN]: 90,
@@ -13,20 +15,19 @@ const FACING_DIRECTIONS = {
 };
 
 const ACTION_ANIMATIONS = {
-    [ACTIONS.MOVE]: (grid, target, payload) => {
+    [ACTIONS.MOVE]: (grid, target, payload, index) => {
         const { i, j } = payload;
         const tile = grid.getTile({ i, j });
         const { x, y } = tile.getCenter();
-        grid.scene.tweens.add(
-            {
-                targets: target,
-                x, y,
-                duration: 1000,
-                ease: 'circular.easeInOut',
-                loop: false,
-                onComplete: () => console.log('move completed')
-            }
-        );
+        const config = {
+            targets: target,
+            x, y,
+            duration: 1000,
+            ease: 'circular.easeInOut',
+            loop: false,
+            onComplete: () => grid.scene.events.emit(animationFinishedLabel(index))
+        };
+        return () => grid.scene.tweens.add(config);
     },
     [ACTIONS.ATTACK]: () => { },
     [ACTIONS.PARRY]: () => { },
@@ -179,20 +180,32 @@ export default class {
     }
 
     playTurnActions(actions) {
-        for (const { id, action } of actions) {
-            // here we need wait for the action 
-            // to be finished before doing the next somehow
-            this.play(id, action);
+        let firstTurn = null;
+        for (const index in actions) {
+            console.log(`iterating ${index}`);
+            const { id, action } = actions[index];
+            if (parseInt(index) === 0) {
+                firstTurn = this.getAnimation(id, action, index);
+                console.log(`set first Turn`, firstTurn);
+                continue;
+            }
+
+            this.scene.events.on(
+                animationFinishedLabel(index - 1),
+                this.getAnimation(id, action, index)
+            );
         }
+
+        firstTurn && firstTurn();
     }
 
-    play(id, action) {
+    getAnimation(id, action, index) {
         const actor = this.actorsMap.get(id);
         const { type, payload } = action;
 
-        const actionAnimation = ACTION_ANIMATIONS[type];
-        if (!actionAnimation) return;
+        const actionAnimationGenerator = ACTION_ANIMATIONS[type];
+        if (!actionAnimationGenerator) return;
 
-        actionAnimation(this, actor, payload);
+        return actionAnimationGenerator(this, actor, payload, index);
     }
 }
