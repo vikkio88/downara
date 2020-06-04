@@ -182,11 +182,9 @@ export default class {
     playTurnActions(actions) {
         let firstTurn = null;
         for (const index in actions) {
-            console.log(`iterating ${index}`);
             const { id, action } = actions[index];
             if (parseInt(index) === 0) {
                 firstTurn = this.getAnimation(id, action, index);
-                console.log(`set first Turn`, firstTurn);
                 continue;
             }
 
