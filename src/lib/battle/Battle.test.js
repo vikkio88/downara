@@ -1,13 +1,17 @@
 import { Battle } from './Battle';
 
+const charGen = ({ id = 'test1', getSpeed = () => 1, isAi = () => true, getHealthPoints = () => 1, ...others } = {}) => {
+    return { id, getSpeed, isAi, getHealthPoints, ...others };
+};
+
 
 describe('Battle test (battletesting battle test)', () => {
 
     describe('initialization', () => {
         it('initializes correctly the battle', () => {
             const characters = [
-                { id: 'test1', getSpeed: () => 1, isAi: () => true },
-                { id: 'test2', getSpeed: () => 4, isAi: () => true },
+                charGen(),
+                charGen({ id: 'test2', getSpeed: () => 4 }),
             ];
 
             const battle = new Battle(null, characters);
@@ -31,8 +35,8 @@ describe('Battle test (battletesting battle test)', () => {
     describe('turns', () => {
         it('registering actions', () => {
             const characters = [
-                { id: 'test1', getSpeed: () => 1, isAi: () => true },
-                { id: 'test2', getSpeed: () => 4, isAi: () => true },
+                charGen(),
+                charGen({ id: 'test2', getSpeed: () => 4 }),
             ];
 
             const battle = new Battle(null, characters);
@@ -62,9 +66,9 @@ describe('Battle test (battletesting battle test)', () => {
 
         it('registering actions with 3 characters', () => {
             const characters = [
-                { id: 'test1', getSpeed: () => 1, isAi: () => true },
-                { id: 'test2', getSpeed: () => 4, isAi: () => true },
-                { id: 'test3', getSpeed: () => 5, isAi: () => true },
+                charGen(),
+                charGen({ id: 'test2', getSpeed: () => 4 }),
+                charGen({ id: 'test3', getSpeed: () => 5 }),
             ];
 
             const battle = new Battle(null, characters);
@@ -106,12 +110,12 @@ describe('Battle test (battletesting battle test)', () => {
 
         it('putting human first on turns, recording right order to resolve', () => {
             const characters = [
-                { id: 'test1', getSpeed: () => 4, isAi: () => true },
-                { id: 'test2', getSpeed: () => 11, isAi: () => true },
-                { id: 'test3', getSpeed: () => 2, isAi: () => true },
-                { id: 'test5', getSpeed: () => 10, isAi: () => true },
-                { id: 'human', getSpeed: () => 1, isAi: () => false },
-                { id: 'test4', getSpeed: () => 3, isAi: () => true },
+                charGen({ getSpeed: () => 4 }),
+                charGen({ id: 'test2', getSpeed: () => 11 }),
+                charGen({ id: 'test3', getSpeed: () => 2 }),
+                charGen({ id: 'test5', getSpeed: () => 10 }),
+                charGen({ id: 'human', getSpeed: () => 1, isAi: () => false }),
+                charGen({ id: 'test4', getSpeed: () => 3 }),
             ];
 
             const battle = new Battle(null, characters);
@@ -154,9 +158,9 @@ describe('Battle test (battletesting battle test)', () => {
 
         it.skip('test', () => {
             const characters = [
-                { id: 'test1', getSpeed: () => 1, isAi: () => true },
-                { id: 'test2', getSpeed: () => 4, isAi: () => true },
-                { id: 'test3', getSpeed: () => 2, isAi: () => true },
+                charGen(),
+                charGen({ id: 'test2', getSpeed: () => 4 }),
+                charGen({ id: 'test3', getSpeed: () => 2 }),
             ];
 
             const battle = new Battle(null, characters);
@@ -176,6 +180,47 @@ describe('Battle test (battletesting battle test)', () => {
 
             console.log(JSON.stringify(battle.moves));
 
+        });
+    });
+
+    describe('battleStatus', () => {
+        it('returns correct info given enemies are still alive', () => {
+            const characters = [
+                charGen(),
+                charGen({ id: 'test2', getHealthPoints: () => 0 }),
+                charGen({ id: 'test3' }),
+                charGen({ id: 'human', isAi: () => false }),
+            ];
+
+            const battle = new Battle(null, characters);
+
+            expect(battle.getStatus()).toEqual({ winner: false, finished: false, deaths: ['test2'] });
+        });
+
+        it('returns correct info given player death', () => {
+            const characters = [
+                charGen(),
+                charGen({ id: 'test2' }),
+                charGen({ id: 'test3' }),
+                charGen({ id: 'human', isAi: () => false, getHealthPoints: () => 0 }),
+            ];
+
+            const battle = new Battle(null, characters);
+
+            expect(battle.getStatus()).toEqual({ winner: false, finished: true });
+        });
+
+        it('returns correct info given all enemies are dead', () => {
+            const characters = [
+                charGen({ getHealthPoints: () => 0 }),
+                charGen({ id: 'test2', getHealthPoints: () => 0 }),
+                charGen({ id: 'test3', getHealthPoints: () => 0 }),
+                charGen({ id: 'human', isAi: () => false }),
+            ];
+
+            const battle = new Battle(null, characters);
+
+            expect(battle.getStatus()).toEqual({ winner: true, finished: true, deaths: ['test1', 'test2', 'test3',] });
         });
     });
 
@@ -212,19 +257,19 @@ describe('Battle test (battletesting battle test)', () => {
             const fakeActionHuman = { type: 'a', payload: { some: 'human' } };
             const fakeActionAI = { type: 'a', payload: { some: 'ai' } };
             const characters = [
-                {
+                charGen({
                     id: 'test1',
                     getSpeed: () => 3,
                     isAi: () => true,
                     decideMove: () => fakeActionAI,
                     perform: performActionMock
-                },
-                {
+                }),
+                charGen({
                     id: 'human',
                     getSpeed: () => 2,
                     isAi: () => false,
                     perform: performActionMock
-                },
+                }),
             ];
 
             const battle = new Battle(null, characters);
@@ -238,12 +283,13 @@ describe('Battle test (battletesting battle test)', () => {
             expect(battle.needsResolving).toBe(true);
 
             // here we need to get an array of actions
-            const currentTurnLog = battle.resolve();
+            const { finished, currentTurnResult } = battle.resolve();
 
+            expect(finished).toBe(false);
             expect(battle.needsResolving).toBe(false);
             expect(battle.turns.turn).toBe(1);
-            expect(battle.log[battle.turns.turn - 1]).toEqual(currentTurnLog);
-
+            expect(battle.log[battle.turns.turn - 1]).toEqual(currentTurnResult);
+            console.log(JSON.stringify(currentTurnResult));
         });
     });
 
