@@ -15,8 +15,9 @@ const FACING_DIRECTIONS = {
 };
 
 const ACTION_ANIMATIONS = {
-    [ACTIONS.MOVE]: (grid, target, payload, index) => {
-        const { i, j } = payload;
+    [ACTIONS.MOVE]: (grid, target, result, index) => {
+        if (!result) return () => { }; //here we should play an animation of failed walking
+        const { i, j } = result.position;
         const tile = grid.getTile({ i, j });
         const { x, y } = tile.getCenter();
         const config = {
@@ -182,15 +183,17 @@ export default class {
     playTurnActions(actions) {
         let firstTurn = null;
         for (const index in actions) {
-            const { id, action } = actions[index];
+            const { id, move, result } = actions[index];
+            const { type, payload } = move; // for some reason payload has payload
+            // if result failed we should skip or play a failed animation
             if (parseInt(index) === 0) {
-                firstTurn = this.getAnimation(id, action, index);
+                firstTurn = this.getAnimation(id, { type, payload, result }, index);
                 continue;
             }
 
             this.scene.events.on(
                 animationFinishedLabel(index - 1),
-                this.getAnimation(id, action, index)
+                this.getAnimation(id, { type, payload, result }, index)
             );
         }
 
@@ -199,11 +202,11 @@ export default class {
 
     getAnimation(id, action, index) {
         const actor = this.actorsMap.get(id);
-        const { type, payload } = action;
+        const { type, payload, result } = action;
 
         const actionAnimationGenerator = ACTION_ANIMATIONS[type];
         if (!actionAnimationGenerator) return;
 
-        return actionAnimationGenerator(this, actor, payload, index);
+        return actionAnimationGenerator(this, actor, result, index);
     }
 }

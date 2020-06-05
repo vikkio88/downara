@@ -1,4 +1,5 @@
 import { areaHelper, STATUSES, gameHelper } from 'lib/game';
+
 import { initialGameState, map, interactables } from 'downara';
 import { eventBridge } from 'lib';
 import dialogues from 'downara/dialogues';
@@ -7,6 +8,7 @@ import quests from 'downara/quests';
 
 
 import { FACING } from "lib/battle";
+import { AI, getAiConfig } from "lib/battle/Character";
 
 // replacement for areas
 import { areas } from 'downara/areas';
@@ -87,11 +89,7 @@ export default store => {
                         facing: FACING.LEFT,
                         // this should probably 
                         // be not hardcoded
-                        ai: {
-                            config: {
-                                logic: 'simple',
-                            }
-                        },
+                        ai: getAiConfig(AI.ROAMER),
                         i: 2, j: 3
                     },
                 ],

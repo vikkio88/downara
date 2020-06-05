@@ -75,25 +75,21 @@ export default store => {
 
     store.on('battle:tileClicked', ({ battle }, position) => {
         const { battleInstance } = battle;
+        console.log('clicked', position);
         // HERE we need to register human action
         // calculate moves
-        const resolvedTurn = [];
-        if (battle.action === ACTIONS.MOVE) {
-            battleInstance.getHuman().setPosition(position);
-            resolvedTurn.push({
-                id: 'player',
-                action: { type: ACTIONS.MOVE, payload: position }
-            });
+        const human = battleInstance.getCharacterIdTurn();
+        battleInstance.registerAction(human, battle.action, { position });
+        console.log('actions registered');
+        while (!battleInstance.needsResolving) {
+            console.log('does not need resolving yet');
+            const result = battleInstance.getNextAction();
+            console.log('got action AI: ', result);
         }
+        const { finished, currentTurnResult } = battleInstance.resolve();
+        console.log('resolved', { finished, currentTurnResult });
 
-
-        // adding fake move of the enemy
-        resolvedTurn.push({
-            id: 'enemy',
-            action: { type: ACTIONS.MOVE, payload: { i: 3, j: 3 } }
-        });
-        // send them to phaser to play
-        eventBridge.emit('battle:resolved', resolvedTurn);
+        eventBridge.emit('battle:resolved', currentTurnResult);
         // wait for them to play in order to reset
 
         // at the moment I am just resetting

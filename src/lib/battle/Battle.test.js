@@ -229,9 +229,9 @@ describe('Battle test (battletesting battle test)', () => {
             const fakeAction = { type: 'a', payload: { some: 'thing' } };
             const humanDecider = jest.fn();
             const characters = [
-                { id: 'test1', getSpeed: () => 1, isAi: () => true, decideMove: () => fakeAction },
-                { id: 'test2', getSpeed: () => 4, isAi: () => true, decideMove: () => fakeAction },
-                { id: 'human', getSpeed: () => 2, isAi: () => false, decideMove: humanDecider },
+                { id: 'test1', getSpeed: () => 1, isAi: () => true, decideAction: () => fakeAction },
+                { id: 'test2', getSpeed: () => 4, isAi: () => true, decideAction: () => fakeAction },
+                { id: 'human', getSpeed: () => 2, isAi: () => false, decideAction: humanDecider },
             ];
 
             const battle = new Battle(null, characters);
@@ -261,7 +261,7 @@ describe('Battle test (battletesting battle test)', () => {
                     id: 'test1',
                     getSpeed: () => 3,
                     isAi: () => true,
-                    decideMove: () => fakeActionAI,
+                    decideAction: () => fakeActionAI,
                     perform: performActionMock
                 }),
                 charGen({

@@ -1,5 +1,6 @@
 import SimpleAi from './deciders/SimpleAi';
 import RandomAi from './deciders/RandomAi';
+import RoamerAi from './deciders/RoamerAi';
 export const FACING = {
     UP: 'face_up',
     DOWN: 'face_down',
@@ -15,6 +16,7 @@ const STATS = {
 export const AI = {
     SIMPLE: 'simple',
     RANDOM: 'random',
+    ROAMER: 'roamer',
 };
 
 const defaultStats = {
@@ -38,8 +40,11 @@ const defaultStats = {
 const AI_DECIDER = {
     [AI.SIMPLE]: SimpleAi,
     [AI.RANDOM]: RandomAi,
+    [AI.ROAMER]: RoamerAi,
     default: SimpleAi
 };
+
+export const getAiConfig = type => ({ config: { logic: type } });
 
 
 
@@ -87,18 +92,21 @@ export class Character {
 
     initAi() {
         if (this.config.ai !== false) {
+            console.log('yoyoyo', this.config.ai);
             const { config } = this.config.ai;
             const LogicClass = AI_DECIDER[config.logic] || AI_DECIDER.default;
             const traits = config.traits || {};
             this.decider = new LogicClass(traits);
+            console.log('yoyoyo', this.decider);
         }
     }
 
     perform({ type, payload = {} }, battle) {
+        console.log(`${this.id} performing: ${type} payload:`, payload);
         // this makes the user pay endurance
         this.apply(ACTIONS_CONFIG[type]);
 
-        const { position = null } = payload;
+        const { position = this.getPosition() } = payload;
 
         if (type === ACTIONS.ATTACK) {
             const targetObject = battle.field.getObject(position);
@@ -107,10 +115,20 @@ export class Character {
             this.weapon.use(this, targetObject);
         }
 
-        //there should be a problem here if parry comes after attack
-        if (type === ACTIONS.PARRY) {
-            this.apply();
+        if (type === ACTIONS.MOVE) {
+            const targetObject = battle.field.getObject(position);
+            if (targetObject === null) {
+                // this should be using Field
+                this.setPosition(position);
+                return { position };
+            }
 
+            return false;
+        }
+
+        // I will implement a SHIELD UP buff here
+        if (type === ACTIONS.PARRY) {
+            //this.apply();
         }
 
     }

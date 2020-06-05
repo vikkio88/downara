@@ -134,7 +134,7 @@ export class Battle {
 
         let playerMove = null;
         if (character.isAi()) {
-            playerMove = character.decideMove(this);
+            playerMove = character.decideAction(this);
             this.registerAction(turnId, playerMove.type, playerMove.payload);
             return true;
         }
