@@ -16,7 +16,7 @@ const FACING_DIRECTIONS = {
 
 const ACTION_ANIMATIONS = {
     [ACTIONS.MOVE]: (grid, target, result, index) => {
-        if (!result) return () => { }; //here we should play an animation of failed walking
+        if (result) return ACTION_ANIMATIONS.failedWiggle(grid, target, result, index);
         const { i, j } = result.position;
         const tile = grid.getTile({ i, j });
         const { x, y } = tile.getCenter();
@@ -33,6 +33,24 @@ const ACTION_ANIMATIONS = {
     [ACTIONS.ATTACK]: () => { },
     [ACTIONS.PARRY]: () => { },
     [ACTIONS.USE_ITEM]: () => { },
+    failedWiggle: (grid, target, result, index) => {
+        console.log('failed');
+        return () => {
+            grid.scene.tweens.add({
+                targets: target,
+                scale: { from: 1, to: 3 },
+                rotation: {from: 0, to: 360},
+                duration: 1000,
+                ease: 'circular.easeInOut',
+                loop: false,
+                yoyo: true,
+                onComplete: () => grid.scene.events.emit(animationFinishedLabel(index))
+            });
+        };
+    },
+    failedTile: (grid, target, result, index) => {
+
+    }
 };
 export default class {
     constructor(
@@ -191,7 +209,7 @@ export default class {
                 continue;
             }
 
-            this.scene.events.on(
+            this.scene.events.once(
                 animationFinishedLabel(index - 1),
                 this.getAnimation(id, { type, payload, result }, index)
             );
