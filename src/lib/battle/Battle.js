@@ -59,14 +59,10 @@ export class Battle {
             const character = this.characters[index];
             this.characterMap.set(character.id, character);
             this.field.placeObject(
-                {type: OBJECTS.CHARACTER, id: character.id},
+                { type: OBJECTS.CHARACTER, id: character.id },
                 character.getPosition()
             );
         }
-    }
-
-    checkCharacterStatuses() {
-
     }
 
     getCurrentTurn() {
@@ -166,6 +162,16 @@ export class Battle {
         }
 
         return { finished, winner, deaths };
+    }
+
+    loop() {
+        // preventing looping if user needs to move
+        if (this.getCharacterIdTurn() === this.humanId) return false;
+
+        while (!this.needsResolving) {
+            this.getNextAction();
+        }
+        return true;
     }
 
     resolve() {

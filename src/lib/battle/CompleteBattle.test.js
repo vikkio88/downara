@@ -1,5 +1,5 @@
 import { pg } from 'lib';
-import { Battle } from './Battle';
+import { Battle, ACTIONS } from './Battle';
 import { Field } from './Field';
 import { Character, FACING, AI } from './Character';
 
@@ -58,7 +58,7 @@ describe('Full Battle test (battletesting battle test testing battle testing bat
             id: 'player',
             type: 'character'
         });
-        
+
         expect(battleInstance.field.getObject(pg(2, 2))).toEqual({
             id: 'enemy',
             type: 'character'
@@ -68,6 +68,39 @@ describe('Full Battle test (battletesting battle test testing battle testing bat
         expect(battleInstance.humanId).toBe(HUMAN_ID);
         expect(battleInstance.enemies.length).toBe(1);
         expect(battleInstance.aliveEnemies.length).toBe(1);
+
+        // this should be changed when I add stats loading to fromActor
+        expect(battleInstance.resolveOrder).toEqual([
+            HUMAN_ID, ENEMY_ID
+        ]);
+        expect(battleInstance.needsResolving).toBe(false);
+
+
+        // NOW WE CAN START THE BATTLE
+
+        // first player select a move and a tile
+        // as a first move I would move to 0,1
+        const human = battleInstance.getCharacterIdTurn();
+        // this should be human id
+        // he choses first, but plays whenever his turn is
+        expect(human).toBe(HUMAN_ID);
+        // this will exit when all the AI played their move
+        // I havent moved so this will exit
+        expect(battleInstance.loop()).toBe(false);
+        
+        // registering action
+        battleInstance.registerAction(human, ACTIONS.MOVE, { position: { ...pg(0, 1) } });
+        
+        // now I can loop
+        expect(battleInstance.loop()).toBe(true);
+
+        // now the battle will need resolving
+        expect(battleInstance.needsResolving).toBe(true);
+
+        // resolving and getting results of this turn
+        const { finished, currentTurnResult } = battleInstance.resolve();
+
+        expect(finished).toBe(false);
 
     });
 });
