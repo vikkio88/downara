@@ -149,5 +149,35 @@ describe('Full Battle test (battletesting battle test testing battle testing bat
 
 
         // THIRD TURN
+        // here I am sure that the AI will try to go 1,1
+        // so I will go 1,2
+        human = battleInstance.getCharacterIdTurn();
+        battleInstance.registerAction(human, ACTIONS.MOVE, { position: { ...pg(1, 2) } });
+        expect(battleInstance.loop()).toBe(true);
+        expect(battleInstance.needsResolving).toBe(true);
+        result = battleInstance.resolve();
+        finished = result.finished;
+        currentTurnResult = result.currentTurnResult;
+        expect(finished).toBe(false);
+        expect(currentTurnResult.length).toBe(2);
+        //console.log(JSON.stringify(currentTurnResult));
+        playerMove = currentTurnResult[0];
+        enemyMove = currentTurnResult[1];
+        expect(Boolean(playerMove.result)).toBe(true);
+        expect(Boolean(enemyMove.result)).toBe(true);
+        expect(battleInstance.field.getObject(pg(1, 2))).toEqual({
+            id: HUMAN_ID,
+            type: 'character'
+        });
+        expect(battleInstance.field.getObject(pg(1, 1))).toEqual({
+            id: ENEMY_ID,
+            type: 'character'
+        });
+
+        //  FOURTH TURN
+
+        // now I think I will make the player parry and the enemy will attack
+
+
     });
 });
