@@ -1,6 +1,7 @@
 import SimpleAi from './deciders/SimpleAi';
 import RandomAi from './deciders/RandomAi';
 import RoamerAi from './deciders/RoamerAi';
+
 export const FACING = {
     UP: 'face_up',
     DOWN: 'face_down',
@@ -8,9 +9,10 @@ export const FACING = {
     LEFT: 'face_left',
 };
 
-const STATS = {
+export const STATS = {
     HP: 'hp',
     ENDURANCE: 'endurance',
+    SHIELD: 'shield',
 };
 
 export const AI = {
@@ -36,6 +38,27 @@ const defaultStats = {
     },
     speed: 1,
 };
+
+
+
+
+export const statsGenerator = ({
+    hp = 100, endurance = 100, shield = 0, speed = 1,
+    max: { maxH = null, maxE = null, maxS = 10 } = {},
+} = {}) => {
+    return {
+        [STATS.HP]: hp,
+        [STATS.ENDURANCE]: endurance,
+        [STATS.SHIELD]: shield,
+        max: {
+            [STATS.HP]: maxH || hp,
+            [STATS.ENDURANCE]: maxE || endurance,
+            [STATS.SHIELD]: maxS || shield,
+        },
+        speed: speed
+    };
+};
+
 
 const AI_DECIDER = {
     [AI.SIMPLE]: SimpleAi,
@@ -221,11 +244,11 @@ export class Character {
     }
 
     static fromActor(actor) {
-        const { id, inventory = null, i, j, facing } = actor;
+        const { id, inventory = null, i, j, stats, facing } = actor;
         let { ai = false } = actor;
         if (ai) ai = getAiConfig(ai);
         // here  I will need to load the inventory from a js maybe
-        return new Character(id, { ai }, inventory, { i, j }, facing);
+        return new Character(id, { ...stats, ai: ai }, inventory, { i, j }, facing);
     }
 }
 

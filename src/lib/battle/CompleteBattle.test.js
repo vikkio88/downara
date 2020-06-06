@@ -1,7 +1,7 @@
 import { pg } from 'lib';
 import { Battle, ACTIONS } from './Battle';
 import { Field } from './Field';
-import { Character, FACING, AI } from './Character';
+import { Character, FACING, AI, statsGenerator } from './Character';
 
 
 
@@ -18,6 +18,7 @@ describe('Full Battle test (battletesting battle test testing battle testing bat
                     type: 'battlePlayer', // this is a sprite name
                     facing: FACING.RIGHT,
                     // I need to pass stats here too
+                    stats: statsGenerator(),
                     i: 0, j: 0 // maybe this is always i:0 and j variable
                 },
                 {
@@ -26,6 +27,7 @@ describe('Full Battle test (battletesting battle test testing battle testing bat
                     facing: FACING.LEFT,
                     ai: AI.SIMPLE,
                     // I need to pass stats here too
+                    stats: statsGenerator({ hp: 1 }),
                     i: 2, j: 2 // maybe this should always vary as long as it is not same as player
                 },
             ],
@@ -68,6 +70,10 @@ describe('Full Battle test (battletesting battle test testing battle testing bat
         expect(battleInstance.humanId).toBe(HUMAN_ID);
         expect(battleInstance.enemies.length).toBe(1);
         expect(battleInstance.aliveEnemies.length).toBe(1);
+
+        // check if stats propagated correctly
+        expect(battleInstance.getHuman(HUMAN_ID).getHealthPoints()).toBe(100);
+        expect(battleInstance.getCharacter(ENEMY_ID).getHealthPoints()).toBe(1);
 
         // this should be changed when I add stats loading to fromActor
         expect(battleInstance.resolveOrder).toEqual([
