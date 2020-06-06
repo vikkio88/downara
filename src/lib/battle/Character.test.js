@@ -70,13 +70,14 @@ describe('Character', () => {
             character.apply(effect);
             expect(character.getShield()).toBe(0);
             expect(character.getHealthPoints()).toBe(100);
-            
+
             character.apply({ health: -10 });
             expect(character.getShield()).toBe(0);
             expect(character.getHealthPoints()).toBe(90);
-            
-            character.apply({ health: 10 });
-            expect(character.getShield()).toBe(0);
+
+            // shield cannot go over max (default 10)
+            character.apply({ health: 10, shield: 20 });
+            expect(character.getShield()).toBe(10);
             expect(character.getHealthPoints()).toBe(100);
         });
 
