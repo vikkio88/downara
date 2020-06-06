@@ -95,7 +95,6 @@ export default store => {
                 ],
                 size: { i: 6, j: 6 }
             };
-            eventBridge.emit('game:battle', payload);
             store.dispatch('battle:init', payload);
 
             /*

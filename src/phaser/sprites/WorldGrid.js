@@ -82,7 +82,7 @@ export default class {
         };
         const { offset, scale, flipX } = config;
 
-        const frame = SPRITES.FRAMES[name][variant] || SPRITES.FRAMES[name][0];
+        const frame = SPRITES.getFrameByName(name, variant);
 
         const object = this.scene.add.sprite(
             x + offset.x,

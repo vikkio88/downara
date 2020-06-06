@@ -21,17 +21,29 @@ export default store => {
         // here most likely will init all the lib/battle classes
         const { size, actors } = payload;
         // actors are  ↑ sent in gameState to phaser
+        
         const characters = [];
+        const actorsCharacter = [];
         for (const actor of actors) {
             const { id, i, j, facing, ai = false } = actor;
-            characters.push(
-                new Character(id, { ai }, null, { i, j }, facing)
+            const char = new Character(
+                id, { ai }, null, { i, j }, facing
             );
+            characters.push(char);
+            actorsCharacter.push({
+                ...actor,
+                character: char.toJs()
+            });
+
         }
         const battleInstance = new Battle(
             new Field({ size }),
             characters
         );
+        eventBridge.emit('game:battle', {
+            size,
+            actors: actorsCharacter
+        });
 
         return {
             battle: {

@@ -23,6 +23,9 @@ export const NAMES = {
     FLAG: 'flag',
     BOX: 'box',
     ROAD_SIGN: 'road_sign',
+
+    // Indicators
+    CROSS: 'cross'
 };
 
 const FLAGS = {
@@ -52,7 +55,17 @@ const FRAMES = {
     [NAMES.HILLS]: [13, 27],
     [NAMES.BOX]: [],
     [NAMES.ROAD_SIGN]: [237],
+
+    [NAMES.CROSS]: [207]
+};
+
+const getFrameByName = (name, variant = 0) => {
+    if (!Object.values(NAMES).includes(name)) {
+        return null;
+    }
+
+    return FRAMES[name][variant] || FRAMES[name][0];
 };
 
 
-export default { NAMES, FRAMES, FLAGS };
+export default { NAMES, FRAMES, FLAGS, getFrameByName };

@@ -1,4 +1,4 @@
-import { extractFromCoordinates } from 'lib';
+import { extractFromCoordinates, randomizer } from 'lib';
 import { FACING } from "lib/battle";
 import { ACTIONS } from "lib/battle/Battle";
 import Tile from './BattleTile';
@@ -34,14 +34,17 @@ const ACTION_ANIMATIONS = {
     [ACTIONS.PARRY]: () => { },
     [ACTIONS.USE_ITEM]: () => { },
     failedWiggle: (grid, target, result, index) => {
-        console.log('failed');
+        const x = randomizer.bool() ? 1 : -1 * randomizer.int(30, 50);
+        const y = randomizer.bool() ? 1 : -1 * randomizer.int(30, 50);
+        //const to = randomizer.bool() ? 1 : -1 * randomizer.int(20, 180);
         return () => {
             grid.scene.tweens.add({
                 targets: target,
-                scale: { from: 1, to: 3 },
-                rotation: {from: 0, to: 360},
+                x: target.x - x,
+                y: target.y + y,
+                //      angle: { from: 0, to },
                 duration: 1000,
-                ease: 'circular.easeInOut',
+                ease: 'circular.linear',
                 loop: false,
                 yoyo: true,
                 onComplete: () => grid.scene.events.emit(animationFinishedLabel(index))
@@ -49,7 +52,19 @@ const ACTION_ANIMATIONS = {
         };
     },
     failedTile: (grid, target, result, index) => {
-
+        const { i, j } = result.position;
+        const tile = grid.getTile({ i, j });
+        const callback = () => {
+            grid.scene.time.addEvent({
+                delay: 1000,
+                callback: () => {
+                    grid.scene.events.emit(animationFinishedLabel(index));
+                    tile.resetIndicator();
+                },
+                loop: false,
+            });
+        };
+        return () => tile.setFailedMove(callback);
     }
 };
 export default class {

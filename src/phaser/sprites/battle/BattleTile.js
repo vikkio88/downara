@@ -1,4 +1,5 @@
 import { eventBridge } from 'lib';
+import SPRITES from 'downara/sprites';
 import Tile from "../Tile";
 
 export default class extends Tile {
@@ -17,6 +18,22 @@ export default class extends Tile {
 
         if (callback) this.callback = callback;
     }
+
+    setFailedMove(callback) {
+        const { x, y } = this.getCenter();
+        this.indicator = this.scene.add.sprite(
+            x,
+            y,
+            'mapTiles',
+            SPRITES.getFrameByName(SPRITES.NAMES.CROSS)
+        ).setScale(3);
+        if (callback) callback();
+    }
+
+    resetIndicator() {
+        if (this.indicator) this.indicator.destroy();
+    }
+
 
     reset() {
         this.setTint(0xffffff);

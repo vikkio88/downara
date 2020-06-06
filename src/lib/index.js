@@ -14,6 +14,9 @@ const randomizer = {
     },
     dice(faces = 6) {
         return this.int(1, faces);
+    },
+    bool() {
+        return this.chance(50);
     }
 };
 

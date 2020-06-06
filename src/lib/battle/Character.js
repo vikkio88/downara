@@ -210,5 +210,15 @@ export class Character {
     decideAction(battle) {
         return this.decider.decide(this, battle);
     }
+
+    toJs() {
+        return {
+            id: this.id,
+            position: this.getPosition(),
+            stats: this.getStats(),
+            speed: this.getSpeed(),
+            facing: this.facing
+        };
+    }
 }
 
