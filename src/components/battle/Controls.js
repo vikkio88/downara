@@ -17,7 +17,7 @@ const Controls = () => {
                             onClick={() => dispatch('battle:cancelSelectedAction')}
                         >
                             Cancel
-                </Button>
+                        </Button>
                     </div>
                 )}
 
@@ -28,21 +28,21 @@ const Controls = () => {
                         onClick={() => dispatch('battle:actionSelected', 'move')}
                     >
                         Move
-            </Button>
+                    </Button>
 
                     <Button
                         disabled={action && !tile}
                         onClick={() => dispatch('battle:actionSelected', 'attack')}
                     >
                         Attack
-            </Button>
+                    </Button>
 
                     <Button
                         disabled={(action && !confirmation)}
                         onClick={() => dispatch(confirmation ? 'battle:actionConfirmed' : 'battle:actionSelected', 'parry')}
                     >
                         Parry
-            </Button>
+                    </Button>
                 </div>
             </div>
         </div>
