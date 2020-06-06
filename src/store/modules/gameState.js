@@ -82,7 +82,7 @@ export default store => {
                         id: 'player',
                         type: 'battlePlayer',
                         facing: FACING.RIGHT,
-                        stats: statsGenerator({ hp: 1 }),
+                        stats: statsGenerator(),
                         inventory: inventoryGenerator(),
                         i: 0, j: 1
                     },
