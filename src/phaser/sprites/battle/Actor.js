@@ -33,4 +33,26 @@ export default class extends Phaser.GameObjects.Sprite {
     getPosition() {
         return this.character.position;
     }
+
+    reportResult(action, success = false) {
+        const fill = success ? '#fff' : '#ff0000';
+        const stroke = success ? '#000' : '#fff';
+        const text = this.scene.add.text(
+            this.x - 25, this.y - 50,
+            action,
+            {
+                font: '20px monospace',
+                fill, align: 'center',
+                fontStyle: 'strong',
+                strokeThickness: 2,
+                stroke
+            }
+        );
+
+        this.scene.time.addEvent({
+            delay: 1000,
+            callback: () => text.destroy(),
+            loop: false,
+        });
+    }
 }

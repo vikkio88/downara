@@ -1,22 +1,16 @@
 import { extractFromCoordinates, randomizer } from 'lib';
-import { FACING } from "lib/battle";
 import { ACTIONS } from "lib/battle/Battle";
 import Tile from './BattleTile';
+import Actor from './Actor';
 import SPRITES from 'downara/sprites';
 import { OBJECT_CONFIG } from '../mapping';
 
 const animationFinishedLabel = index => `turn_${index}_finished`;
 
-const FACING_DIRECTIONS = {
-    [FACING.UP]: 270,
-    [FACING.DOWN]: 90,
-    [FACING.RIGHT]: 0,
-    [FACING.LEFT]: 180,
-};
-
 const ACTION_ANIMATIONS = {
     [ACTIONS.MOVE]: (grid, target, result, index) => {
-        if (result) return ACTION_ANIMATIONS.failedWiggle(grid, target, result, index);
+        const move = ACTIONS.MOVE;
+        if (!result) return ACTION_ANIMATIONS.failedWiggle(grid, target, result, index, move);
         const { i, j } = result.position;
         const tile = grid.getTile({ i, j });
         const { x, y } = tile.getCenter();
@@ -28,16 +22,20 @@ const ACTION_ANIMATIONS = {
             loop: false,
             onComplete: () => grid.scene.events.emit(animationFinishedLabel(index))
         };
-        return () => grid.scene.tweens.add(config);
+        return () => {
+            target.reportResult(move, false)//Boolean(result));
+            grid.scene.tweens.add(config);
+        };
     },
     [ACTIONS.ATTACK]: () => { },
     [ACTIONS.PARRY]: () => { },
     [ACTIONS.USE_ITEM]: () => { },
-    failedWiggle: (grid, target, result, index) => {
+    failedWiggle: (grid, target, result, index, move) => {
         const x = randomizer.bool() ? 1 : -1 * randomizer.int(30, 50);
         const y = randomizer.bool() ? 1 : -1 * randomizer.int(30, 50);
         //const to = randomizer.bool() ? 1 : -1 * randomizer.int(20, 180);
         return () => {
+            target.reportResult(move);
             grid.scene.tweens.add({
                 targets: target,
                 x: target.x - x,
@@ -143,21 +141,12 @@ export default class {
         this.highlightedTiles = [];
     }
 
-    addActor({ id, type, i, j, facing = FACING.RIGHT }) {
+    addActor(config) {
+        const { id, type, i, j, character } = config;
         const tile = this.tiles.get(i).get(j);
         const { x, y } = tile.getCenter();
-        const actor = this.scene.add.sprite(
-            x,
-            y,
-            type
-        );
-
-        this.setFacingDirection(actor, facing);
+        const actor = new Actor(this.scene, character, type, x, y);
         this.actorsMap.set(id, actor);
-    }
-
-    setFacingDirection(actor, facing) {
-        actor.setAngle(FACING_DIRECTIONS[facing] || FACING_DIRECTIONS[FACING.RIGHT]);
     }
 
     addObject(name, { x, y }, variant = 0) {
@@ -218,7 +207,6 @@ export default class {
         for (const index in actions) {
             const { id, move, result } = actions[index];
             const { type, payload } = move; // for some reason payload has payload
-            // if result failed we should skip or play a failed animation
             if (parseInt(index) === 0) {
                 firstTurn = this.getAnimation(id, { type, payload, result }, index);
                 continue;
