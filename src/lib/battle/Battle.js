@@ -174,6 +174,47 @@ export class Battle {
         return true;
     }
 
+
+    /**
+     * Example result
+     * [
+            {
+                "turn": 0,
+                "id": "player",
+                "move": {
+                    "id": "player",
+                    "type": "move",
+                    "payload": {
+                        "position": {
+                            "i": 1,
+                            "j": 1
+                        }
+                    }
+                },
+                "result": {
+                    "position": {
+                        "i": 1,
+                        "j": 1
+                    }
+                }
+            },
+            {
+                "turn": 0,
+                "id": "enemy",
+                "move": {
+                    "id": "enemy",
+                    "type": "move",
+                    "payload": {
+                        "position": {
+                            "i": 1,
+                            "j": 1
+                        }
+                    }
+                },
+                "result": false
+            }
+        ]
+     */
     resolve() {
         // get what turn we are
         const { turn } = this.turns;

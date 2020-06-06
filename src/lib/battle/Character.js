@@ -117,6 +117,7 @@ export class Character {
             const targetObject = battle.field.getObject(position);
             if (targetObject === null) {
                 // this should be using Field
+                battle.field.moveObject(this.getPosition(), position);
                 this.setPosition(position);
                 return { position };
             }

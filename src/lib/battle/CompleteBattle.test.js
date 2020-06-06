@@ -55,12 +55,12 @@ describe('Full Battle test (battletesting battle test testing battle testing bat
 
         // check that placement worked
         expect(battleInstance.field.getObject(pg(0, 0))).toEqual({
-            id: 'player',
+            id: HUMAN_ID,
             type: 'character'
         });
 
         expect(battleInstance.field.getObject(pg(2, 2))).toEqual({
-            id: 'enemy',
+            id: ENEMY_ID,
             type: 'character'
         });
 
@@ -78,19 +78,22 @@ describe('Full Battle test (battletesting battle test testing battle testing bat
 
         // NOW WE CAN START THE BATTLE
 
+
+        // FIRST TURN
         // first player select a move and a tile
-        // as a first move I would move to 0,1
-        const human = battleInstance.getCharacterIdTurn();
+        let human = battleInstance.getCharacterIdTurn();
         // this should be human id
         // he choses first, but plays whenever his turn is
         expect(human).toBe(HUMAN_ID);
         // this will exit when all the AI played their move
         // I havent moved so this will exit
         expect(battleInstance.loop()).toBe(false);
-        
+
+        // as a first move I would move to 1,1
+        // I know that SIMPLEAI will move there too, but will fail because I am already there
         // registering action
-        battleInstance.registerAction(human, ACTIONS.MOVE, { position: { ...pg(0, 1) } });
-        
+        battleInstance.registerAction(human, ACTIONS.MOVE, { position: { ...pg(1, 1) } });
+
         // now I can loop
         expect(battleInstance.loop()).toBe(true);
 
@@ -98,9 +101,53 @@ describe('Full Battle test (battletesting battle test testing battle testing bat
         expect(battleInstance.needsResolving).toBe(true);
 
         // resolving and getting results of this turn
-        const { finished, currentTurnResult } = battleInstance.resolve();
+        let result = battleInstance.resolve();
+        let finished = result.finished;
+        let currentTurnResult = result.currentTurnResult;
 
         expect(finished).toBe(false);
+        expect(currentTurnResult.length).toBe(2);
+        //console.log(JSON.stringify(currentTurnResult));
+        let playerMove = currentTurnResult[0];
+        let enemyMove = currentTurnResult[1];
+        expect(Boolean(playerMove.result)).toBe(true);
+        expect(playerMove.result).toEqual({ position: pg(1, 1) });
+        expect(Boolean(enemyMove.result)).toBe(false);
 
+        // checking if positions got updated
+        expect(battleInstance.getHuman().getPosition()).toEqual(pg(1, 1));
+        expect(battleInstance.field.getObject(pg(1, 1))).toEqual({
+            id: HUMAN_ID,
+            type: 'character'
+        });
+        expect(battleInstance.getPositionById(ENEMY_ID)).toEqual(pg(2, 2));
+        expect(battleInstance.field.getObject(pg(2, 2))).toEqual({
+            id: ENEMY_ID,
+            type: 'character'
+        });
+
+        // SECOND TURN
+
+        // now I think the AI will try to attack me so I go to 0,1
+        human = battleInstance.getCharacterIdTurn();
+        battleInstance.registerAction(human, ACTIONS.MOVE, { position: { ...pg(0, 1) } });
+        expect(battleInstance.loop()).toBe(true);
+        expect(battleInstance.needsResolving).toBe(true);
+        result = battleInstance.resolve();
+        finished = result.finished;
+        currentTurnResult = result.currentTurnResult;
+
+        expect(finished).toBe(false);
+        expect(currentTurnResult.length).toBe(2);
+        //console.log(JSON.stringify(currentTurnResult));
+        playerMove = currentTurnResult[0];
+        enemyMove = currentTurnResult[1];
+        expect(Boolean(playerMove.result)).toBe(true);
+        expect(playerMove.result).toEqual({ position: pg(0, 1) });
+        expect(enemyMove.move.type).toBe(ACTIONS.ATTACK);
+        expect(Boolean(enemyMove.result)).toBe(false);
+
+
+        // THIRD TURN
     });
 });
