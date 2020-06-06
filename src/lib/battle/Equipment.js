@@ -37,14 +37,14 @@ export class Equipment {
     }
 
     // both of type Character
-    use(user, { object }) {
-        // this will apply the endurance cost to use the weapon
-        const endurance = this.getEnduranceCost();
-        if (endurance !== 0) user.apply({ endurance });
-
-        if (!object) {
+    use(user, object) {
+        if (!object || object.apply === undefined) {
             return false;
         }
+        console.log(`${user.id} attacking with ${this.name}`);
+        console.log('starting', user.getStats(), object.getStats());
+        const endurance = this.getEnduranceCost();
+        if (endurance !== 0) user.apply({ endurance });
 
         const rolledDie = randomizer.dice(20);
         if (this.didHit(rolledDie)) {
@@ -85,7 +85,19 @@ export class Fists extends Equipment {
         super(
             'fists',
             EQUIPMENT_TYPES.MELEE,
-            [{ health: { modifier: -1, range: '1' } }]
+            [{ health: { modifier: -1, range: '1' } }],
+            { hitDie: 2 }
+        );
+    }
+}
+
+export class InfallibleFists extends Equipment {
+    constructor() {
+        super(
+            'infallible Fists',
+            EQUIPMENT_TYPES.MELEE,
+            [{ health: { modifier: -1, range: '1' } }],
+            { hitDie: 0 }
         );
     }
 }

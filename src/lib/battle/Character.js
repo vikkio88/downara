@@ -1,6 +1,7 @@
 import SimpleAi from './deciders/SimpleAi';
 import RandomAi from './deciders/RandomAi';
 import RoamerAi from './deciders/RoamerAi';
+import { OBJECTS } from './Field';
 
 export const FACING = {
     UP: 'face_up',
@@ -83,11 +84,10 @@ export const ACTIONS = {
 };
 
 const ACTIONS_CONFIG = {
-    [ACTIONS.MOVE]: { endurance: -40 },
+    [ACTIONS.MOVE]: { endurance: -20 },
     [ACTIONS.WAIT]: { endurance: 20 },
     [ACTIONS.ATTACK]: { endurance: -20 },
-    // maybe I can simulate damage reduction with a +10 health on parry
-    [ACTIONS.PARRY]: { endurance: 10, health: 10 },
+    [ACTIONS.PARRY]: { endurance: 5 },
     [ACTIONS.SPELL]: { endurance: 20 },
     [ACTIONS.USE_OBJECT]: { endurance: 0 },
 };
@@ -112,6 +112,8 @@ export class Character {
         this.position = position;
         this.facing = facing;
 
+        // here I probably need to do something 
+        // about shield/armour and STAT.SHIELD
         this.inventory = inventory;
     }
 
@@ -124,6 +126,10 @@ export class Character {
         }
     }
 
+    getWeapon() {
+        return this.inventory.getWeapon();
+    }
+
     perform({ type, payload = {} }, battle) {
         console.log(`${this.id} performing: ${type} payload:`, payload);
         // this makes the user pay endurance
@@ -132,10 +138,10 @@ export class Character {
         const { position = this.getPosition() } = payload;
 
         if (type === ACTIONS.ATTACK) {
-            const targetObject = battle.field.getObject(position);
-            if (targetObject === null) return false;
-
-            this.weapon.use(this, targetObject);
+            let targetObject = battle.field.getObject(position);
+            if (targetObject === null || targetObject.type != OBJECTS.CHARACTER) return false;
+            targetObject = battle.getCharacter(targetObject.id);
+            return this.getWeapon().use(this, targetObject);
         }
 
         if (type === ACTIONS.MOVE) {
@@ -150,18 +156,21 @@ export class Character {
             return false;
         }
 
-        // I will implement a SHIELD UP buff here
         if (type === ACTIONS.PARRY) {
-            //this.apply();
+            // shield will depend on inventory
+            this.apply({ shield: 5 });
+            return true;
         }
 
+        return false;
     }
 
     getStats() {
-        const { hp, endurance } = this.config;
+        const { hp, endurance, shield } = this.config;
         return {
             hp,
             endurance,
+            shield
         };
     }
 

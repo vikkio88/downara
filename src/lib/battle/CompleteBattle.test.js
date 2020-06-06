@@ -1,6 +1,8 @@
 import { pg } from 'lib';
 import { Battle, ACTIONS } from './Battle';
 import { Field } from './Field';
+import { inventoryGenerator } from './Inventory';
+import { InfallibleFists } from './Equipment';
 import { Character, FACING, AI, statsGenerator } from './Character';
 
 
@@ -18,7 +20,8 @@ describe('Full Battle test (battletesting battle test testing battle testing bat
                     type: 'battlePlayer', // this is a sprite name
                     facing: FACING.RIGHT,
                     // I need to pass stats here too
-                    stats: statsGenerator(),
+                    stats: statsGenerator({ weapon: new InfallibleFists }),
+                    inventory: inventoryGenerator(),
                     i: 0, j: 0 // maybe this is always i:0 and j variable
                 },
                 {
@@ -28,6 +31,7 @@ describe('Full Battle test (battletesting battle test testing battle testing bat
                     ai: AI.SIMPLE,
                     // I need to pass stats here too
                     stats: statsGenerator({ hp: 1 }),
+                    inventory: inventoryGenerator(),
                     i: 2, j: 2 // maybe this should always vary as long as it is not same as player
                 },
             ],
@@ -183,9 +187,57 @@ describe('Full Battle test (battletesting battle test testing battle testing bat
         });
 
         //  FOURTH TURN
-
         // now I think I will make the player parry and the enemy will attack
+        human = battleInstance.getCharacterIdTurn();
+        battleInstance.registerAction(human, ACTIONS.PARRY, {});
+        expect(battleInstance.loop()).toBe(true);
+        expect(battleInstance.needsResolving).toBe(true);
+        result = battleInstance.resolve();
+        finished = result.finished;
+        currentTurnResult = result.currentTurnResult;
+        //console.log(JSON.stringify(currentTurnResult));
+        expect(finished).toBe(false);
+        expect(currentTurnResult.length).toBe(2);
+        playerMove = currentTurnResult[0];
+        enemyMove = currentTurnResult[1];
+        expect(Boolean(playerMove.result)).toBe(true);
+        // this could rarely fail ↓
+        expect(Boolean(enemyMove.result)).toBe(true);
+        expect(battleInstance.field.getObject(pg(1, 2))).toEqual({
+            id: HUMAN_ID,
+            type: 'character'
+        });
+        expect(battleInstance.field.getObject(pg(1, 1))).toEqual({
+            id: ENEMY_ID,
+            type: 'character'
+        });
 
+        //  FIFTH TURN
+        // now I think I will finish him
+        human = battleInstance.getCharacterIdTurn();
+        battleInstance.registerAction(human, ACTIONS.ATTACK, { position: pg(1, 1) });
+        expect(battleInstance.loop()).toBe(true);
+        expect(battleInstance.needsResolving).toBe(true);
+        result = battleInstance.resolve();
+        finished = result.finished;
+        const winner = result.winner;
+        currentTurnResult = result.currentTurnResult;
+        console.log(JSON.stringify(currentTurnResult));
+        expect(finished).toBe(true);
+        expect(winner).toBe(true);
+        expect(currentTurnResult.length).toBe(2);
+        playerMove = currentTurnResult[0];
+        enemyMove = currentTurnResult[1];
+        expect(Boolean(playerMove.result)).toBe(true);
+        expect(Boolean(enemyMove.result)).toBe(true);
+        expect(battleInstance.field.getObject(pg(1, 2))).toEqual({
+            id: HUMAN_ID,
+            type: 'character'
+        });
+        expect(battleInstance.field.getObject(pg(1, 1))).toEqual({
+            id: ENEMY_ID,
+            type: 'character'
+        });
 
     });
 });

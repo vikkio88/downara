@@ -135,6 +135,7 @@ export class Battle {
 
         let playerMove = null;
         if (character.isAi()) {
+            // maybe here I can check if dead return false or register fake action?
             playerMove = character.decideAction(this);
             this.registerAction(turnId, playerMove.type, playerMove.payload);
             return true;

@@ -1,5 +1,4 @@
-import { Character, FACING, ACTIONS, AI, STATS } from './Character';
-import { Field } from 'components/battle';
+import { Character, FACING, ACTIONS, AI } from './Character';
 
 describe('Character', () => {
     const id = 'someId';

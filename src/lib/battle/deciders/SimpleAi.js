@@ -23,7 +23,7 @@ export default class SimpleAi {
 
         const humanPosition = battle.getHumanPosition();
         const selfPosition = self.getPosition();
-        const weaponReach = 1;//self.inventory.getWeapon().getReach();
+        const weaponReach = self.getWeapon().getReach();
 
         const targetDistance = battle.field.tilesDistance(selfPosition, humanPosition);
 
