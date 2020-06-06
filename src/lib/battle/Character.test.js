@@ -1,4 +1,4 @@
-import { Character, FACING, ACTIONS, AI } from './Character';
+import { Character, FACING, ACTIONS, AI, STATS } from './Character';
 import { Field } from 'components/battle';
 
 describe('Character', () => {
@@ -59,6 +59,24 @@ describe('Character', () => {
             expect(character.getHealthPoints()).toBe(90);
 
             character.apply({ health: 10 });
+            expect(character.getHealthPoints()).toBe(100);
+        });
+
+        test.only('applying health effect with Shield Up', () => {
+            const character = new Character(id, { shield: 10 });
+            expect(character.getHealthPoints()).toBe(100);
+            expect(character.getShield()).toBe(10);
+            const effect = { health: -10 };
+            character.apply(effect);
+            expect(character.getShield()).toBe(0);
+            expect(character.getHealthPoints()).toBe(100);
+            
+            character.apply({ health: -10 });
+            expect(character.getShield()).toBe(0);
+            expect(character.getHealthPoints()).toBe(90);
+            
+            character.apply({ health: 10 });
+            expect(character.getShield()).toBe(0);
             expect(character.getHealthPoints()).toBe(100);
         });
 

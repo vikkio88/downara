@@ -73,7 +73,9 @@ describe('Full Battle test (battletesting battle test testing battle testing bat
 
         // check if stats propagated correctly
         expect(battleInstance.getHuman(HUMAN_ID).getHealthPoints()).toBe(100);
+        expect(battleInstance.getHuman(HUMAN_ID).getShield()).toBe(0);
         expect(battleInstance.getCharacter(ENEMY_ID).getHealthPoints()).toBe(1);
+        expect(battleInstance.getCharacter(ENEMY_ID).getShield()).toBe(0);
 
         // this should be changed when I add stats loading to fromActor
         expect(battleInstance.resolveOrder).toEqual([

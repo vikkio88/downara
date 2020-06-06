@@ -24,9 +24,11 @@ export const AI = {
 const defaultStats = {
     [STATS.HP]: 100,
     [STATS.ENDURANCE]: 100,
+    [STATS.SHIELD]: 0,
     max: {
         [STATS.HP]: 100,
         [STATS.ENDURANCE]: 100,
+        [STATS.SHIELD]: 10,
     },
     ai: {
         config: {
@@ -198,9 +200,19 @@ export class Character {
         return this.facing;
     }
 
-    apply({ health = null, endurance = null } = {}) {
+    apply({ health = null, endurance = null, shield = null } = {}) {
+        if (shield !== null) {
+            this.modifyStat(STATS.SHIELD, shield);
+        }
+
         if (health !== null) {
-            this.modifyStat(STATS.HP, health);
+            let damage = health;
+            const currentShield = this.getShield();
+            if (damage < 0 && currentShield > 0) {
+                this.modifyStat(STATS.SHIELD, damage);
+                damage = damage + currentShield;
+            }
+            this.modifyStat(STATS.HP, damage);
         }
 
         if (endurance !== null) {
@@ -220,12 +232,17 @@ export class Character {
         return this.config.endurance;
     }
 
+    getShield() {
+        return this.config.shield;
+    }
+
     modifyStat(stat, modifier) {
         const maxValue = this.getMaxValues()[stat];
         const initialValue = this.config[stat];
         let newValue = (initialValue + modifier);
         newValue = newValue < 0 ? 0 : newValue;
         newValue = newValue > maxValue ? maxValue : newValue;
+
         this.config[stat] = newValue;
     }
 
