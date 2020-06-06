@@ -92,12 +92,10 @@ export class Character {
 
     initAi() {
         if (this.config.ai !== false) {
-            console.log('yoyoyo', this.config.ai);
             const { config } = this.config.ai;
             const LogicClass = AI_DECIDER[config.logic] || AI_DECIDER.default;
             const traits = config.traits || {};
             this.decider = new LogicClass(traits);
-            console.log('yoyoyo', this.decider);
         }
     }
 
@@ -219,6 +217,14 @@ export class Character {
             speed: this.getSpeed(),
             facing: this.facing
         };
+    }
+
+    static fromActor(actor) {
+        const { id, inventory = null, i, j, facing } = actor;
+        let { ai = false } = actor;
+        if (ai) ai = getAiConfig(ai);
+        // here  I will need to load the inventory from a js maybe
+        return new Character(id, { ai }, inventory, { i, j }, facing);
     }
 }
 

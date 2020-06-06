@@ -1,3 +1,4 @@
+import { OBJECTS } from './Field';
 export const ACTIONS = {
     MOVE: 'move',
     ATTACK: 'attack',
@@ -57,6 +58,10 @@ export class Battle {
         for (const index in this.characters) {
             const character = this.characters[index];
             this.characterMap.set(character.id, character);
+            this.field.placeObject(
+                {type: OBJECTS.CHARACTER, id: character.id},
+                character.getPosition()
+            );
         }
     }
 

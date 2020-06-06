@@ -1,9 +1,15 @@
 import { Battle } from './Battle';
+import { pg } from 'lib';
 
 const charGen = ({ id = 'test1', getSpeed = () => 1, isAi = () => true, getHealthPoints = () => 1, ...others } = {}) => {
-    return { id, getSpeed, isAi, getHealthPoints, ...others };
+    return {
+        id, getSpeed, isAi,
+        getHealthPoints, getPosition: () => pg(0, 0),
+        ...others
+    };
 };
 
+const fieldMock = { placeObject: () => { } };
 
 describe('Battle test (battletesting battle test)', () => {
 
@@ -14,7 +20,7 @@ describe('Battle test (battletesting battle test)', () => {
                 charGen({ id: 'test2', getSpeed: () => 4 }),
             ];
 
-            const battle = new Battle(null, characters);
+            const battle = new Battle(fieldMock, characters);
             expect(battle.characters).toEqual(characters);
             expect(battle.finished).toBe(false);
             expect(battle.needsResolving).toBe(false);
@@ -39,7 +45,7 @@ describe('Battle test (battletesting battle test)', () => {
                 charGen({ id: 'test2', getSpeed: () => 4 }),
             ];
 
-            const battle = new Battle(null, characters);
+            const battle = new Battle(fieldMock, characters);
             const fakeAction = { type: 'a', payload: { some: 'thing' } };
             let charId = battle.getCharacterIdTurn();
 
@@ -71,7 +77,7 @@ describe('Battle test (battletesting battle test)', () => {
                 charGen({ id: 'test3', getSpeed: () => 5 }),
             ];
 
-            const battle = new Battle(null, characters);
+            const battle = new Battle(fieldMock, characters);
             expect(battle.humanId).toBe(null);
             expect(battle.getHumanPosition()).toBe(null);
             const fakeAction = { type: 'a', payload: { some: 'thing' } };
@@ -118,7 +124,7 @@ describe('Battle test (battletesting battle test)', () => {
                 charGen({ id: 'test4', getSpeed: () => 3 }),
             ];
 
-            const battle = new Battle(null, characters);
+            const battle = new Battle(fieldMock, characters);
             expect(battle.humanId).toBe('human');
             const fakeAction = { type: 'a', payload: { some: 'thing' } };
 
@@ -163,7 +169,7 @@ describe('Battle test (battletesting battle test)', () => {
                 charGen({ id: 'test3', getSpeed: () => 2 }),
             ];
 
-            const battle = new Battle(null, characters);
+            const battle = new Battle(fieldMock, characters);
             const fakeAction = { type: 'a', payload: { some: 'thing' } };
             for (let i = 0; i <= 30; i++) {
                 let charId = battle.getCharacterIdTurn();
@@ -192,7 +198,7 @@ describe('Battle test (battletesting battle test)', () => {
                 charGen({ id: 'human', isAi: () => false }),
             ];
 
-            const battle = new Battle(null, characters);
+            const battle = new Battle(fieldMock, characters);
 
             expect(battle.getStatus()).toEqual({ winner: false, finished: false, deaths: ['test2'] });
         });
@@ -205,7 +211,7 @@ describe('Battle test (battletesting battle test)', () => {
                 charGen({ id: 'human', isAi: () => false, getHealthPoints: () => 0 }),
             ];
 
-            const battle = new Battle(null, characters);
+            const battle = new Battle(fieldMock, characters);
 
             expect(battle.getStatus()).toEqual({ winner: false, finished: true });
         });
@@ -218,7 +224,7 @@ describe('Battle test (battletesting battle test)', () => {
                 charGen({ id: 'human', isAi: () => false }),
             ];
 
-            const battle = new Battle(null, characters);
+            const battle = new Battle(fieldMock, characters);
 
             expect(battle.getStatus()).toEqual({ winner: true, finished: true, deaths: ['test1', 'test2', 'test3',] });
         });
@@ -229,12 +235,12 @@ describe('Battle test (battletesting battle test)', () => {
             const fakeAction = { type: 'a', payload: { some: 'thing' } };
             const humanDecider = jest.fn();
             const characters = [
-                { id: 'test1', getSpeed: () => 1, isAi: () => true, decideAction: () => fakeAction },
-                { id: 'test2', getSpeed: () => 4, isAi: () => true, decideAction: () => fakeAction },
-                { id: 'human', getSpeed: () => 2, isAi: () => false, decideAction: humanDecider },
+                { id: 'test1', getSpeed: () => 1, isAi: () => true, decideAction: () => fakeAction, getPosition: jest.fn() },
+                { id: 'test2', getSpeed: () => 4, isAi: () => true, decideAction: () => fakeAction, getPosition: jest.fn() },
+                { id: 'human', getSpeed: () => 2, isAi: () => false, decideAction: humanDecider, getPosition: jest.fn() },
             ];
 
-            const battle = new Battle(null, characters);
+            const battle = new Battle(fieldMock, characters);
             expect(battle.getCurrentTurn()).toBe(0);
             const human = battle.getCharacterIdTurn();
             expect(human).toBe('human');
@@ -272,7 +278,7 @@ describe('Battle test (battletesting battle test)', () => {
                 }),
             ];
 
-            const battle = new Battle(null, characters);
+            const battle = new Battle(fieldMock, characters);
             const human = battle.getCharacterIdTurn();
             battle.registerAction(human, fakeActionHuman.type, fakeActionHuman.payload);
 
@@ -289,7 +295,6 @@ describe('Battle test (battletesting battle test)', () => {
             expect(battle.needsResolving).toBe(false);
             expect(battle.turns.turn).toBe(1);
             expect(battle.log[battle.turns.turn - 1]).toEqual(currentTurnResult);
-            console.log(JSON.stringify(currentTurnResult));
         });
     });
 
