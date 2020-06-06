@@ -112,7 +112,7 @@ export default store => {
         return {
             battle: {
                 ...battle,
-                tile: { ...position },
+                tile: null,
                 action: null,
                 confirmation: null
             }

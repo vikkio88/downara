@@ -29,7 +29,7 @@ export default class extends Tile {
         ).setScale(3);
         if (callback) callback();
     }
-
+    
     resetIndicator() {
         if (this.indicator) this.indicator.destroy();
     }

@@ -25,7 +25,8 @@ export const NAMES = {
     ROAD_SIGN: 'road_sign',
 
     // Indicators
-    CROSS: 'cross'
+    CROSS: 'cross',
+    SHIELD: 'shield',
 };
 
 const FLAGS = {
@@ -56,7 +57,8 @@ const FRAMES = {
     [NAMES.BOX]: [],
     [NAMES.ROAD_SIGN]: [237],
 
-    [NAMES.CROSS]: [207]
+    [NAMES.CROSS]: [207],
+    [NAMES.SHIELD]: [181, 174],
 };
 
 const getFrameByName = (name, variant = 0) => {

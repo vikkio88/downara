@@ -23,13 +23,22 @@ const ACTION_ANIMATIONS = {
             onComplete: () => grid.scene.events.emit(animationFinishedLabel(index))
         };
         return () => {
-            target.reportResult(move, false)//Boolean(result));
+            target.reportResult(move, Boolean(result));
             grid.scene.tweens.add(config);
         };
     },
     [ACTIONS.ATTACK]: () => { },
-    [ACTIONS.PARRY]: () => { },
-    [ACTIONS.USE_ITEM]: () => { },
+    [ACTIONS.PARRY]: (grid, target, result, index) => {
+        // result will always be true here I think
+        const callback = () => grid.scene.events.emit(animationFinishedLabel(index));
+        return () => {
+            target.reportResult(ACTIONS.PARRY, Boolean(result));
+            target.showParry(callback);
+        };
+    },
+    [ACTIONS.USE_ITEM]: () => {
+
+    },
     failedWiggle: (grid, target, result, index, move) => {
         const x = randomizer.bool() ? 1 : -1 * randomizer.int(30, 50);
         const y = randomizer.bool() ? 1 : -1 * randomizer.int(30, 50);

@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import SPRITES from 'downara/sprites';
 import { FACING } from "lib/battle";
 
 const FACING_DIRECTIONS = {
@@ -55,4 +56,26 @@ export default class extends Phaser.GameObjects.Sprite {
             loop: false,
         });
     }
+
+    showParry(callback) {
+        const x = this.x;
+        const y = this.y;
+        const shield = this.scene.add.sprite(
+            x,
+            y,
+            'mapTiles',
+            SPRITES.getFrameByName(SPRITES.NAMES.SHIELD)
+        ).setScale(5);
+
+
+        this.scene.time.addEvent({
+            delay: 1500,
+            callback: () => {
+                shield.destroy();
+                callback && callback()
+            },
+            loop: false,
+        });
+    }
+
 }
