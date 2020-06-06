@@ -8,7 +8,7 @@ export default class extends Tile {
         this.disableInteractive();
     }
     onClick() {
-        eventBridge.emitFromPhaser('battle:tileClicked', this.gridIndexes);
+        eventBridge.emitFromPhaser('battle:actionConfirmed', this.gridIndexes);
         if (this.callback) this.callback();
     }
 

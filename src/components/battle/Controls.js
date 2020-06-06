@@ -3,7 +3,7 @@ import { useStoreon } from 'storeon/react';
 import { Button } from '../common';
 
 const Controls = () => {
-    const { dispatch, battle: { tile, action } } = useStoreon('battle');
+    const { dispatch, battle: { tile, action, confirmation } } = useStoreon('battle');
     return (
         <div className="flex-1 flex items-center justify-center flex-col">
             {action && (
@@ -34,8 +34,8 @@ const Controls = () => {
             </Button>
 
                 <Button
-                    disabled={action && !tile}
-                    onClick={() => dispatch('battle:actionSelected', 'parry')}
+                    disabled={(action && !confirmation)}
+                    onClick={() => dispatch(confirmation ? 'battle:actionConfirmed' : 'battle:actionSelected', 'parry')}
                 >
                     Parry
             </Button>

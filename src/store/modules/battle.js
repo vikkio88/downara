@@ -1,12 +1,13 @@
-import { pg, eventBridge } from 'lib';
+import { eventBridge } from 'lib';
 
 // battle classes
-import { Battle } from 'lib/battle/Battle';
+import { Battle, ACTIONS } from 'lib/battle/Battle';
 import { Field } from 'lib/battle/Field';
+import { Character } from 'lib/battle/Character';
 //
 
-import { ACTIONS } from 'lib/game';
-import { Character } from 'lib/battle/Character';
+const ACTIONS_TARGETS = [ACTIONS.MOVE, ACTIONS.ATTACK];
+
 export default store => {
     store.on('@init', () => {
         return {
@@ -21,7 +22,7 @@ export default store => {
         // here most likely will init all the lib/battle classes
         const { size, actors } = payload;
         // actors are  ↑ sent in gameState to phaser
-        
+
         const characters = [];
         const actorsCharacter = [];
         for (const actor of actors) {
@@ -57,7 +58,8 @@ export default store => {
         return {
             battle: {
                 ...battle,
-                action: null
+                action: null,
+                confirmation: false
             }
         };
     });
@@ -65,6 +67,16 @@ export default store => {
     store.on('battle:actionSelected', ({ battle }, action) => {
         console.log('action selected', action);
         const { battleInstance } = battle;
+        if (!ACTIONS_TARGETS.includes(action)) {
+            //store.dispatch('battle:actionConfirmed');
+            return {
+                battle: {
+                    ...battle,
+                    action,
+                    confirmation: true
+                }
+            };
+        }
         // some action need a tile to select and a radius
         // like moving
         const tiles = battleInstance.field.getFlatTilesAtRange(
@@ -82,13 +94,13 @@ export default store => {
         };
     });
 
-    store.on('battle:tileClicked', ({ battle }, position) => {
+    store.on('battle:actionConfirmed', ({ battle }, position) => {
         const { battleInstance } = battle;
         console.log('clicked', position);
         // HERE we need to register human action
         // calculate moves
         const human = battleInstance.getCharacterIdTurn();
-        battleInstance.registerAction(human, battle.action, { position });
+        battleInstance.registerAction(human, battle.action, { position:position });
         battleInstance.loop();
         const { finished, currentTurnResult } = battleInstance.resolve();
         console.log('resolved', { finished, currentTurnResult });
@@ -101,7 +113,8 @@ export default store => {
             battle: {
                 ...battle,
                 tile: { ...position },
-                action: null
+                action: null,
+                confirmation: null
             }
         };
     });
