@@ -8,7 +8,8 @@ import quests from 'downara/quests';
 
 
 import { FACING } from "lib/battle";
-import { AI, getAiConfig } from "lib/battle/Character";
+import { inventoryGenerator } from "lib/battle/Inventory";
+import { AI, statsGenerator } from "lib/battle/Character";
 
 // replacement for areas
 import { areas } from 'downara/areas';
@@ -81,15 +82,18 @@ export default store => {
                         id: 'player',
                         type: 'battlePlayer',
                         facing: FACING.RIGHT,
+                        stats: statsGenerator({ hp: 1 }),
+                        inventory: inventoryGenerator(),
                         i: 0, j: 1
                     },
                     {
                         id: 'enemy',
                         type: 'battleEnemy',
                         facing: FACING.LEFT,
-                        // this should probably 
-                        // be not hardcoded
-                        ai: getAiConfig(AI.ROAMER),
+                        ai: AI.ROAMER,
+                        // I need to pass stats here too
+                        stats: statsGenerator({ hp: 1 }),
+                        inventory: inventoryGenerator(),
                         i: 2, j: 3
                     },
                 ],

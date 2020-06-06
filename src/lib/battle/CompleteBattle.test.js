@@ -20,8 +20,8 @@ describe('Full Battle test (battletesting battle test testing battle testing bat
                     type: 'battlePlayer', // this is a sprite name
                     facing: FACING.RIGHT,
                     // I need to pass stats here too
-                    stats: statsGenerator({ weapon: new InfallibleFists }),
-                    inventory: inventoryGenerator(),
+                    stats: statsGenerator(),
+                    inventory: inventoryGenerator({ weapon: new InfallibleFists }),
                     i: 0, j: 0 // maybe this is always i:0 and j variable
                 },
                 {

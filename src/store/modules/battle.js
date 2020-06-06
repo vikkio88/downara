@@ -25,10 +25,7 @@ export default store => {
         const characters = [];
         const actorsCharacter = [];
         for (const actor of actors) {
-            const { id, i, j, facing, ai = false } = actor;
-            const char = new Character(
-                id, { ai }, null, { i, j }, facing
-            );
+            const char = Character.fromActor(actor);
             characters.push(char);
             actorsCharacter.push({
                 ...actor,
@@ -92,12 +89,7 @@ export default store => {
         // calculate moves
         const human = battleInstance.getCharacterIdTurn();
         battleInstance.registerAction(human, battle.action, { position });
-        console.log('actions registered');
-        while (!battleInstance.needsResolving) {
-            console.log('does not need resolving yet');
-            const result = battleInstance.getNextAction();
-            console.log('got action AI: ', result);
-        }
+        battleInstance.loop();
         const { finished, currentTurnResult } = battleInstance.resolve();
         console.log('resolved', { finished, currentTurnResult });
 
