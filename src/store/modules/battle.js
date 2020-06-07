@@ -97,19 +97,14 @@ export default store => {
 
     store.on('battle:actionConfirmed', ({ battle }, position) => {
         const { battleInstance } = battle;
-        console.log('clicked', position);
-        // HERE we need to register human action
         // calculate moves
         const human = battleInstance.getCharacterIdTurn();
         battleInstance.registerAction(human, battle.action, { position: position });
         battleInstance.loop();
-        const { finished, currentTurnResult } = battleInstance.resolve();
-        console.log('resolved', { finished, currentTurnResult });
+        const { finished, winner, currentTurnResult } = battleInstance.resolve();
+        console.log('TURN RESOLVED:', { finished, winner, currentTurnResult });
 
         eventBridge.emit('battle:resolved', currentTurnResult);
-        // wait for them to play in order to reset
-
-        // at the moment I am just resetting
         return {
             battle: {
                 ...battle,

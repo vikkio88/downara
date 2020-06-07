@@ -131,7 +131,6 @@ export class Character {
     }
 
     perform({ type, payload = {} }, battle) {
-        console.log(`${this.id} performing: ${type} payload:`, payload);
         // this makes the user pay endurance
         this.apply(ACTIONS_CONFIG[type]);
 
@@ -220,6 +219,7 @@ export class Character {
             if (damage < 0 && currentShield > 0) {
                 this.modifyStat(STATS.SHIELD, damage);
                 damage = damage + currentShield;
+                // LOL healing shield
             }
             this.modifyStat(STATS.HP, damage);
         }
