@@ -98,6 +98,9 @@ export class Character {
         position = { i: 0, j: 0 }, facing = FACING.RIGHT
     ) {
         this.id = id;
+
+        // here we are not checking whether the stat is exceeding the max
+        // maybe is a good thing?
         this.config = {
             ...defaultStats,
             ...config,
@@ -219,7 +222,8 @@ export class Character {
             if (damage < 0 && currentShield > 0) {
                 this.modifyStat(STATS.SHIELD, damage);
                 damage = damage + currentShield;
-                // LOL healing shield
+                // preventing healing shield
+                damage = damage < 0 ? damage : 0;
             }
             this.modifyStat(STATS.HP, damage);
         }
