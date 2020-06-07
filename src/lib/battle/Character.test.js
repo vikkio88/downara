@@ -93,7 +93,6 @@ describe('Character', () => {
             character.apply({ health: -10 });
             expect(character.getShield()).toBe(40);
             expect(character.getHealthPoints()).toBe(50); // lol this failed
-            
         });
 
         test('applying endurance effect', () => {
