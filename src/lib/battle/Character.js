@@ -265,7 +265,8 @@ export class Character {
             position: this.getPosition(),
             stats: this.getStats(),
             speed: this.getSpeed(),
-            facing: this.facing
+            facing: this.facing,
+            ai: this.isAi()
         };
     }
 

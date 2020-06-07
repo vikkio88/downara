@@ -9,14 +9,14 @@ const Controls = () => {
 
     if (status === STATUSES.SPEAKING) {
         return (
-            <div className="flex-1 flex items-center">
+            <div className="flex-1 flex items-center bg-gray-400">
                 {status === STATUSES.SPEAKING && !message && <Dialogue />}
             </div>
         );
     }
 
     return (
-        <div className="flex-1 flex items-center justify-center">
+        <div className="flex-1 flex items-center justify-center bg-gray-400">
             {message && <Message {...message} onDismiss={() => dispatch('clearMessage')} />}
             {status === STATUSES.IDLE && !message && <Actions />}
         </div>

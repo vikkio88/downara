@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { eventBridge } from 'lib';
 import SPRITES from 'downara/sprites';
 import { FACING } from "lib/battle";
 
@@ -11,12 +12,36 @@ const FACING_DIRECTIONS = {
 
 
 export default class extends Phaser.GameObjects.Sprite {
-    constructor(scene, character, type, x, y) {
+    constructor(scene, grid, character, type, x, y) {
         super(scene, x, y, type, 0);
         this.scene.add.existing(this);
+        this.grid = grid;
+        // character comes from Character.toJs()
         this.character = character;
         this.facing = character.facing;
         this.setFacing(this.facing);
+
+        // this is used to show stats on click
+        if (this.character.ai) {
+            // if an action is selected store will prevent this to be performed
+            this.enableClick();
+            grid.registerActionable(this);
+            this.on('pointerdown', () => {
+                this.setAlpha(.5);
+                eventBridge.emitFromPhaser('battle:selectEnemy', this.character.id);
+            });
+            this.on('pointerout', () => {
+                this.setAlpha(1);
+            });
+        }
+    }
+
+    enableClick() {
+        this.setInteractive();
+    }
+
+    disableClick() {
+        this.disableInteractive();
     }
 
     setFacing(facing) {
@@ -72,7 +97,7 @@ export default class extends Phaser.GameObjects.Sprite {
             delay: 1500,
             callback: () => {
                 shield.destroy();
-                callback && callback()
+                callback && callback();
             },
             loop: false,
         });

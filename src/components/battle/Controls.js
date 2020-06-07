@@ -1,48 +1,58 @@
 import React from 'react';
 import { useStoreon } from 'storeon/react';
 import Stats from './Stats';
-import { Button, Progress } from '../common';
+import { Button, CloseRow } from '../common';
 
 const Controls = () => {
-    const { dispatch, battle: { tile, action, confirmation, battleInstance } } = useStoreon('battle');
+    const { dispatch, battle: { tile, action, confirmation, battleInstance, selectedEnemyId } } = useStoreon('battle');
     const human = battleInstance.getHuman();
+    const selectedEnemy = selectedEnemyId ? battleInstance.getCharacter(selectedEnemyId) : null;
     return (
         <div className="flex-1 flex flex-col">
-            <Stats stats={human.getStats()} maxes={human.getMaxValues()} />
-            <div className="flex-1 flex items-center justify-center flex-col">
-                {action && (
-                    <div className="flex-1 flex items-center justify-center">
-                        <Button
-                            disabled={!action}
-                            onClick={() => dispatch('battle:cancelSelectedAction')}
-                        >
-                            Cancel
+            {selectedEnemy && (
+                <div className="flex-1 flex flex-col bg-gray-400 mb-10">
+                    <CloseRow onClose={() => dispatch('battle:unselectEnemy', null)} />
+                    <span className="font-semibold">{selectedEnemy.id}</span>
+                    <Stats stats={selectedEnemy.getStats()} maxes={selectedEnemy.getMaxValues()} />
+                </div>
+            )}
+            <div className="flex-1 flex flex-col bg-gray-400">
+                <Stats stats={human.getStats()} maxes={human.getMaxValues()} />
+                <div className="flex-1 flex items-center justify-center flex-col">
+                    {action && (
+                        <div className="flex-1 flex items-center justify-center">
+                            <Button
+                                disabled={!action}
+                                onClick={() => dispatch('battle:cancelSelectedAction')}
+                            >
+                                Cancel
                         </Button>
+                        </div>
+                    )}
+
+                    <div className="flex-1 flex items-center justify-center">
+
+                        <Button
+                            disabled={action && !tile}
+                            onClick={() => dispatch('battle:actionSelected', 'move')}
+                        >
+                            Move
+                    </Button>
+
+                        <Button
+                            disabled={action && !tile}
+                            onClick={() => dispatch('battle:actionSelected', 'attack')}
+                        >
+                            Attack
+                    </Button>
+
+                        <Button
+                            disabled={(action && !confirmation)}
+                            onClick={() => dispatch(confirmation ? 'battle:actionConfirmed' : 'battle:actionSelected', 'parry')}
+                        >
+                            Parry
+                    </Button>
                     </div>
-                )}
-
-                <div className="flex-1 flex items-center justify-center">
-
-                    <Button
-                        disabled={action && !tile}
-                        onClick={() => dispatch('battle:actionSelected', 'move')}
-                    >
-                        Move
-                    </Button>
-
-                    <Button
-                        disabled={action && !tile}
-                        onClick={() => dispatch('battle:actionSelected', 'attack')}
-                    >
-                        Attack
-                    </Button>
-
-                    <Button
-                        disabled={(action && !confirmation)}
-                        onClick={() => dispatch(confirmation ? 'battle:actionConfirmed' : 'battle:actionSelected', 'parry')}
-                    >
-                        Parry
-                    </Button>
                 </div>
             </div>
         </div>

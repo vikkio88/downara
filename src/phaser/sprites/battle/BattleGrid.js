@@ -123,6 +123,8 @@ export default class {
         this.highlightedTiles = [];
         this.staticAssets = [];
         this.actorsMap = new Map();
+
+        this.actionables = [];
     }
 
     create() {
@@ -160,6 +162,8 @@ export default class {
             this.tiles.get(i).get(j).setActionable(() => this.resetHighlighted());
         }
 
+        this.disableActionables();
+
         this.highlightedTiles = tiles;
     }
 
@@ -169,6 +173,7 @@ export default class {
             this.tiles.get(i).get(j).reset();
         }
 
+        this.enableActionables();
         this.highlightedTiles = [];
     }
 
@@ -176,7 +181,7 @@ export default class {
         const { id, type, i, j, character } = config;
         const tile = this.tiles.get(i).get(j);
         const { x, y } = tile.getCenter();
-        const actor = new Actor(this.scene, character, type, x, y);
+        const actor = new Actor(this.scene, this, character, type, x, y);
         this.actorsMap.set(id, actor);
     }
 
@@ -230,6 +235,22 @@ export default class {
 
         for (const object of this.staticAssets) {
             object.destroy();
+        }
+    }
+
+    registerActionable(object) {
+        this.actionables.push(object);
+    }
+
+    disableActionables() {
+        for (const actionable of this.actionables) {
+            actionable.disableClick();
+        }
+    }
+
+    enableActionables() {
+        for (const actionable of this.actionables) {
+            actionable.enableClick();
         }
     }
 

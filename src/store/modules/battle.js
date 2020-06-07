@@ -14,6 +14,7 @@ export default store => {
             battle: {
                 tile: null,
                 action: null,
+                selectedEnemyId: null,
             },
         };
     });
@@ -100,7 +101,7 @@ export default store => {
         // HERE we need to register human action
         // calculate moves
         const human = battleInstance.getCharacterIdTurn();
-        battleInstance.registerAction(human, battle.action, { position:position });
+        battleInstance.registerAction(human, battle.action, { position: position });
         battleInstance.loop();
         const { finished, currentTurnResult } = battleInstance.resolve();
         console.log('resolved', { finished, currentTurnResult });
@@ -119,4 +120,21 @@ export default store => {
         };
     });
 
+    store.on('battle:unselectEnemy', ({ battle }) => {
+        return {
+            battle: {
+                ...battle,
+                selectedEnemyId: null
+            }
+        };
+    });
+    store.on('battle:selectEnemy', ({ battle }, enemyId) => {
+        if (battle.action) return;
+        return {
+            battle: {
+                ...battle,
+                selectedEnemyId: enemyId
+            }
+        };
+    });
 };
