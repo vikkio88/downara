@@ -8,7 +8,7 @@ const Controls = () => {
     const human = battleInstance.getHuman();
     return (
         <div className="flex-1 flex flex-col">
-            <Stats actor={human} />
+            <Stats stats={human.getStats()} maxes={human.getMaxValues()} />
             <div className="flex-1 flex items-center justify-center flex-col">
                 {action && (
                     <div className="flex-1 flex items-center justify-center">
