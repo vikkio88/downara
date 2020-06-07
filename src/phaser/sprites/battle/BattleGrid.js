@@ -1,4 +1,4 @@
-import { extractFromCoordinates, randomizer } from 'lib';
+import { extractFromCoordinates, randomizer, eventBridge } from 'lib';
 import { ACTIONS } from "lib/battle/Battle";
 import Tile from './BattleTile';
 import Actor from './Actor';
@@ -270,6 +270,11 @@ export default class {
                 this.getAnimation(id, { type, payload, result }, index)
             );
         }
+
+        this.scene.events.once(
+            animationFinishedLabel(actions.length - 1),
+            () => eventBridge.emitFromPhaser('battle:unlock')
+        );
 
         firstTurn && firstTurn();
     }

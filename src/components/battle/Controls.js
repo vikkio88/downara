@@ -4,7 +4,8 @@ import Stats from './Stats';
 import { Button, CloseRow } from '../common';
 
 const Controls = () => {
-    const { dispatch, battle: { tile, action, confirmation, battleInstance, selectedEnemyId } } = useStoreon('battle');
+    const { dispatch, battle } = useStoreon('battle');
+    const { tile, action, confirmation, battleInstance, selectedEnemyId, lock } = battle;
     const human = battleInstance.getHuman();
     const selectedEnemy = selectedEnemyId ? battleInstance.getCharacter(selectedEnemyId) : null;
     return (
@@ -33,21 +34,21 @@ const Controls = () => {
                     <div className="flex-1 flex items-center justify-center">
 
                         <Button
-                            disabled={action && !tile}
+                            disabled={lock || (action && !tile)}
                             onClick={() => dispatch('battle:actionSelected', 'move')}
                         >
                             Move
                     </Button>
 
                         <Button
-                            disabled={action && !tile}
+                            disabled={lock || (action && !tile)}
                             onClick={() => dispatch('battle:actionSelected', 'attack')}
                         >
                             Attack
                     </Button>
 
                         <Button
-                            disabled={(action && !confirmation)}
+                            disabled={lock || (action && !confirmation)}
                             onClick={() => dispatch(confirmation ? 'battle:actionConfirmed' : 'battle:actionSelected', 'parry')}
                         >
                             Parry

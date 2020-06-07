@@ -27,6 +27,25 @@ export default class extends Phaser.Scene {
         eventBridge.on('battle:resolved', resolvedTurn => {
             this.grid.playTurnActions(resolvedTurn);
         });
+
+        eventBridge.on('battle:finished', winner => {
+            this.grid.destroy();
+            const message = winner ? 'YOU WIN' : 'YOU DIED';
+            const fill = winner ? '#00ff00' : '#ff0000';
+            const stroke = winner ? '#fff' : '#000';
+            // just trying to see what to do in here
+            this.add.text(
+                100, 100,
+                message,
+                {
+                    font: '40px monospace',
+                    fill, align: 'center',
+                    fontStyle: 'strong',
+                    strokeThickness: 2,
+                    stroke
+                }
+            );
+        });
     }
 
     create() {

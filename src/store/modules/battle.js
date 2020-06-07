@@ -15,6 +15,7 @@ export default store => {
                 tile: null,
                 action: null,
                 selectedEnemyId: null,
+                lock: false
             },
         };
     });
@@ -54,7 +55,6 @@ export default store => {
     });
 
     store.on('battle:cancelSelectedAction', ({ battle }) => {
-        console.log('canceling');
         eventBridge.emit('battle:resetActionableTiles');
         return {
             battle: {
@@ -110,7 +110,25 @@ export default store => {
                 ...battle,
                 tile: null,
                 action: null,
-                confirmation: null
+                confirmation: null,
+                lock: true
+            }
+        };
+    });
+
+    store.on('battle:unlock', ({ battle }) => {
+        // here we check if finished
+        const { battleInstance } = battle;
+        const { finished, winner } = battleInstance.getStatus();
+        if (finished) {
+            store.dispatch('battle:finished', winner);
+            // I wont unlock if finished
+            return;
+        }
+        return {
+            battle: {
+                ...battle,
+                lock: false
             }
         };
     });
@@ -131,5 +149,13 @@ export default store => {
                 selectedEnemyId: enemyId
             }
         };
+    });
+
+    store.on('battle:finished', ({ battle }, winner) => {
+        eventBridge.emit('battle:finished', winner);
+        console.log('battle finished');
+
+        // maybe here we generate loot 
+        // or we make the user go back to the main menu
     });
 };
