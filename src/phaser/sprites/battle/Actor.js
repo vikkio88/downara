@@ -39,7 +39,7 @@ export default class extends Phaser.GameObjects.Sprite {
         const fill = success ? '#fff' : '#ff0000';
         const stroke = success ? '#000' : '#fff';
         const text = this.scene.add.text(
-            this.x - 25, this.y - 50,
+            this.x - 25, this.y - 70,
             action,
             {
                 font: '20px monospace',

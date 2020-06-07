@@ -27,7 +27,20 @@ export default class SimpleAi {
 
         const targetDistance = battle.field.tilesDistance(selfPosition, humanPosition);
 
+        const endurance = self.getEndurance();
+
+        if (endurance < 30) {
+            return {
+                type: ACTIONS.PARRY,
+                payload: {
+                    position: null
+                }
+            };
+        }
+
         if (targetDistance > weaponReach) {
+            //@TODO there is a bug here need to check
+            console.log('AI', selfPosition, humanPosition, battle.field.nextStepToTile(selfPosition, humanPosition));
             return {
                 type: ACTIONS.MOVE,
                 payload: {

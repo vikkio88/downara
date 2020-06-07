@@ -41,8 +41,6 @@ export class Equipment {
         if (!object || object.apply === undefined) {
             return false;
         }
-        console.log(`${user.id} attacking with ${this.name}`);
-        console.log('starting', user.getStats(), object.getStats());
         const endurance = this.getEnduranceCost();
         if (endurance !== 0) user.apply({ endurance });
 
@@ -85,7 +83,7 @@ export class Fists extends Equipment {
         super(
             'fists',
             EQUIPMENT_TYPES.MELEE,
-            [{ health: { modifier: -1, range: '1' } }],
+            [{ health: { modifier: -1, range: '1:3' } }],
             { hitDie: 2 }
         );
     }

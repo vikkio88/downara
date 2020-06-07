@@ -27,6 +27,7 @@ export const NAMES = {
     // Indicators
     CROSS: 'cross',
     SHIELD: 'shield',
+    SWORDS: 'swords',
 };
 
 const FLAGS = {
@@ -59,6 +60,8 @@ const FRAMES = {
 
     [NAMES.CROSS]: [207],
     [NAMES.SHIELD]: [181, 174],
+    [NAMES.SWORDS]: [172, 173],
+
 };
 
 const getFrameByName = (name, variant = 0) => {

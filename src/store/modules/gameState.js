@@ -90,8 +90,7 @@ export default store => {
                         id: 'enemy',
                         type: 'battleEnemy',
                         facing: FACING.LEFT,
-                        ai: AI.ROAMER,
-                        // I need to pass stats here too
+                        ai: AI.SIMPLE,
                         stats: statsGenerator({ hp: 1 }),
                         inventory: inventoryGenerator(),
                         i: 2, j: 3

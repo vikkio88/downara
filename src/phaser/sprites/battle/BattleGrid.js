@@ -11,7 +11,7 @@ const ACTION_ANIMATIONS = {
     [ACTIONS.MOVE]: (grid, target, result, index) => {
         const move = ACTIONS.MOVE;
         if (!result) return ACTION_ANIMATIONS.failedWiggle(grid, target, result, index, move);
-        const { i, j } = result.position;
+        const { i, j } = result.position || target.getPosition();
         const tile = grid.getTile({ i, j });
         const { x, y } = tile.getCenter();
         const config = {
@@ -27,7 +27,26 @@ const ACTION_ANIMATIONS = {
             grid.scene.tweens.add(config);
         };
     },
-    [ACTIONS.ATTACK]: () => { },
+    [ACTIONS.ATTACK]: (grid, target, result, index, movePayload) => {
+        const { position } = movePayload;
+        const move = ACTIONS.ATTACK;
+        if (!result) return ACTION_ANIMATIONS.failedTile(grid, target, { position }, index, ACTIONS.ATTACK);
+        const tile = grid.getTile(position);
+        const callback = () => {
+            grid.scene.time.addEvent({
+                delay: 1500,
+                callback: () => {
+                    grid.scene.events.emit(animationFinishedLabel(index));
+                    tile.resetIndicator();
+                },
+                loop: false,
+            });
+        };
+        return () => {
+            target.reportResult(move, Boolean(result));
+            tile.showAttackSuccess(result, callback);
+        };
+    },
     [ACTIONS.PARRY]: (grid, target, result, index) => {
         // result will always be true here I think
         const callback = () => grid.scene.events.emit(animationFinishedLabel(index));
@@ -42,23 +61,23 @@ const ACTION_ANIMATIONS = {
     failedWiggle: (grid, target, result, index, move) => {
         const x = randomizer.bool() ? 1 : -1 * randomizer.int(30, 50);
         const y = randomizer.bool() ? 1 : -1 * randomizer.int(30, 50);
-        //const to = randomizer.bool() ? 1 : -1 * randomizer.int(20, 180);
+        const to = randomizer.bool() ? 1 : -1 * randomizer.int(20, 180);
         return () => {
             target.reportResult(move);
             grid.scene.tweens.add({
                 targets: target,
                 x: target.x - x,
                 y: target.y + y,
-                //      angle: { from: 0, to },
+                angle: { from: 0, to },
                 duration: 1000,
-                ease: 'circular.linear',
+                ease: 'sine.out',
                 loop: false,
                 yoyo: true,
                 onComplete: () => grid.scene.events.emit(animationFinishedLabel(index))
             });
         };
     },
-    failedTile: (grid, target, result, index) => {
+    failedTile: (grid, target, result, index, move) => {
         const { i, j } = result.position;
         const tile = grid.getTile({ i, j });
         const callback = () => {
@@ -71,7 +90,10 @@ const ACTION_ANIMATIONS = {
                 loop: false,
             });
         };
-        return () => tile.setFailedMove(callback);
+        return () => {
+            target.reportResult(move);
+            tile.showFailedMove(callback);
+        };
     }
 };
 export default class {
@@ -237,6 +259,6 @@ export default class {
         const actionAnimationGenerator = ACTION_ANIMATIONS[type];
         if (!actionAnimationGenerator) return;
 
-        return actionAnimationGenerator(this, actor, result, index);
+        return actionAnimationGenerator(this, actor, result, index, payload);
     }
 }
