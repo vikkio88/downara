@@ -41,5 +41,17 @@ export default class extends Phaser.Scene {
             { rows: this.rows, columns: this.columns, tileSize: 100, marginJ, marginI }
         );
         this.grid.create();
+
+        this.setUpCamera();
+    }
+
+    setUpCamera() {
+        this.mainCamera = this.cameras.main;
+        this.mainCamera.startFollow(this.grid.player);
+        this.mainCamera.setBounds(0, 0, this.widthInPixels, this.heightInPixels);
+        this.mainCamera.zoom = 1;
+        this.input.on('wheel', ({ deltaY }) => {
+            console.log('wheel', { deltaY });
+        });
     }
 }

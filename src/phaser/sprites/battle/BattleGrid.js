@@ -183,6 +183,7 @@ export default class {
         const { x, y } = tile.getCenter();
         const actor = new Actor(this.scene, this, character, type, x, y);
         this.actorsMap.set(id, actor);
+        if (!character.ai) this.player = actor;
     }
 
     addObject(name, { x, y }, variant = 0) {
