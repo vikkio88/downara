@@ -83,8 +83,8 @@ export class Fists extends Equipment {
         super(
             'fists',
             EQUIPMENT_TYPES.MELEE,
-            [{ health: { modifier: -1, range: '1:3' } }],
-            { hitDie: 2 }
+            [{ health: { modifier: -1, range: '1:10' } }],
+            { hitDie: 5 }
         );
     }
 }

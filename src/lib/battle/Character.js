@@ -87,7 +87,7 @@ const ACTIONS_CONFIG = {
     [ACTIONS.MOVE]: { endurance: -20 },
     [ACTIONS.WAIT]: { endurance: 20 },
     [ACTIONS.ATTACK]: { endurance: -20 },
-    [ACTIONS.PARRY]: { endurance: 5 },
+    [ACTIONS.PARRY]: { endurance: 25 },
     [ACTIONS.SPELL]: { endurance: 20 },
     [ACTIONS.USE_OBJECT]: { endurance: 0 },
 };
@@ -160,7 +160,7 @@ export class Character {
 
         if (type === ACTIONS.PARRY) {
             // shield will depend on inventory
-            this.apply({ shield: 1 }); // testing values 5 was too much
+            this.apply({ shield: 10 }); // testing values 5 was too much
             return true;
         }
 
