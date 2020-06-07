@@ -160,7 +160,7 @@ export class Character {
 
         if (type === ACTIONS.PARRY) {
             // shield will depend on inventory
-            this.apply({ shield: 5 });
+            this.apply({ shield: 1 }); // testing values 5 was too much
             return true;
         }
 
