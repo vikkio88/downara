@@ -213,5 +213,11 @@ describe('Field', () => {
             expect(field.getFlatTilesAtRange(pg(5, 0))).not.toEqual(expect.arrayContaining([pg(6, 0)]));
         });
 
+        it('[REGRESSION] on a 6x6 Field SimpleAI tries to move on wrong places', () => {
+            const field = new Field({ size: pg(6, 6) });
+
+            const nextStep = field.nextStepToTile(pg(2, 3), pg(0, 1));
+            expect(nextStep).not.toEqual(pg(1, 1));
+        });
     });
 });

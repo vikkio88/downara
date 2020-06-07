@@ -115,12 +115,9 @@ export class Field {
             };
         }
 
-        const i = Math.max(pi, p1i) - Math.min(pi, p1i);
-        const j = Math.max(pj, p1j) - Math.min(pj, p1j);
-        return {
-            i: Math.min(step, i),
-            j: Math.min(step, j)
-        };
+        const i = pi > p1i ? pi - step : (pi < p1i) ? pi + step : pi;
+        const j = pj > p1j ? pj - step : (pj < p1j) ? pj + step : pj;
+        return { i, j };
     }
 
     // d is there in order to maybe get only tiles to a particular
