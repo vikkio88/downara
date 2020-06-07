@@ -79,9 +79,13 @@ export default class extends Phaser.GameObjects.Sprite {
             }
         );
 
-        this.scene.time.addEvent({
-            delay: 1000,
-            callback: () => text.destroy(),
+        this.scene.tweens.add({
+            targets: text,
+            x: text.x, y: text.y - 25,
+            alpha: { from: 1, to: .3 },
+            duration: 1500,
+            ease: 'circular.easeInOut',
+            onComplete: () => text.destroy(),
             loop: false,
         });
     }

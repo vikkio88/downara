@@ -25,12 +25,12 @@ export default class extends Tile {
         const stroke = negative ? '#fff' : '#000';
         const { x, y } = this.getCenter();
         // here there could be endurance or other effects, showing just health atm
-        const value = get(result, 'results.enemy.0.health', 0);
+        const value = Math.abs(get(result, 'results.enemy.0.health', 0));
         const text = this.scene.add.text(
             x, y - 30,
             value,
             {
-                font: '40px monospace',
+                font: '30px monospace',
                 fill,
                 fontStyle: 'strong',
                 strokeThickness: 2,
@@ -38,9 +38,13 @@ export default class extends Tile {
             }
         );
 
-        this.scene.time.addEvent({
-            delay: 1500,
-            callback: () => text.destroy(),
+        this.scene.tweens.add({
+            targets: text,
+            x: text.x, y: text.y - 40,
+            alpha: { from: 1, to: .3 },
+            duration: 1500,
+            ease: 'circular.easeInOut',
+            onComplete: () => text.destroy(),
             loop: false,
         });
     }
@@ -54,7 +58,8 @@ export default class extends Tile {
             'mapTiles',
             SPRITES.getFrameByName(SPRITES.NAMES.SWORDS)
         ).setScale(3);
-
+        // shake effect on camera when damage received
+        this.scene.mainCamera.shake(500, .001);
         this.reportResult(result);
 
         if (callback) callback();
