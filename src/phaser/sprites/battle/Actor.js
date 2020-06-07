@@ -24,6 +24,8 @@ export default class extends Phaser.GameObjects.Sprite {
         // this is used to show stats on click
         if (this.character.ai) {
             // if an action is selected store will prevent this to be performed
+            // also grid will maintain an index of clickable items to activate them 
+            // on demand
             this.enableClick();
             grid.registerActionable(this);
             this.on('pointerdown', () => {
@@ -41,6 +43,8 @@ export default class extends Phaser.GameObjects.Sprite {
     }
 
     disableClick() {
+        // this is called by grid if we need to
+        // disable the interactables
         this.disableInteractive();
     }
 
