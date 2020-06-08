@@ -84,9 +84,11 @@ export const ACTIONS = {
 };
 
 const ACTIONS_CONFIG = {
-    [ACTIONS.MOVE]: { endurance: -20 },
+    // if player moves shield drops
+    [ACTIONS.MOVE]: { endurance: -20, shield: -10 }, 
     [ACTIONS.WAIT]: { endurance: 20 },
-    [ACTIONS.ATTACK]: { endurance: -20 },
+    // if player attacks shield drops
+    [ACTIONS.ATTACK]: { endurance: -20, shield: -5 },
     [ACTIONS.PARRY]: { endurance: 25 },
     [ACTIONS.SPELL]: { endurance: 20 },
     [ACTIONS.USE_OBJECT]: { endurance: 0 },
