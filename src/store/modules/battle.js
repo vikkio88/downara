@@ -155,6 +155,14 @@ export default store => {
         eventBridge.emit('battle:finished', winner);
         console.log('battle finished');
 
+        return {
+            battle:{
+                ...battle,
+                selectedEnemyId: null,
+                lock: true
+            }
+        }
+
         // maybe here we generate loot 
         // or we make the user go back to the main menu
     });
