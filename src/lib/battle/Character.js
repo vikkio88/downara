@@ -136,6 +136,8 @@ export class Character {
         const armour = this.inventory ? this.inventory.getArmour() : null;
         if (!armour) return;
         this.config.max.shield += armour.getMaxShieldModifier();
+        
+        // need to cap this to 1 and need to test it properly
         this.config.speed += armour.getSpeedModifier();
     }
 
