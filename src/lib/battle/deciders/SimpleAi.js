@@ -39,9 +39,7 @@ export default class SimpleAi {
         }
 
         if (targetDistance > weaponReach) {
-            //@TODO there is a bug here need to check
             const nextStep = battle.field.nextStepToTile(selfPosition, humanPosition);
-            console.log(`AI: is at ${selfPosition.i},${selfPosition.j}  human is at: ${humanPosition.i},${humanPosition.j}  || next step ${nextStep.i},${nextStep.j}`);
             return {
                 type: ACTIONS.MOVE,
                 payload: {

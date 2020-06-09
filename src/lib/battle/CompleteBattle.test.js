@@ -1,14 +1,14 @@
 import { pg } from 'lib';
 import { Battle, ACTIONS } from './Battle';
 import { Field } from './Field';
-import { inventoryGenerator } from './Inventory';
+import { inventoryGenerator, armourGenerator } from './Inventory';
 import { InfallibleFists } from './Equipment';
 import { Character, FACING, AI, statsGenerator } from './Character';
 
 
 
 describe('Full Battle test (battletesting battle test testing battle testing battling the tests)', () => {
-    test.only('full battle flow', () => {
+    test('full battle flow', () => {
         const HUMAN_ID = 'player';
         const ENEMY_ID = 'enemy';
 
@@ -21,7 +21,7 @@ describe('Full Battle test (battletesting battle test testing battle testing bat
                     facing: FACING.RIGHT,
                     // I need to pass stats here too
                     stats: statsGenerator(),
-                    inventory: inventoryGenerator({ weapon: new InfallibleFists }),
+                    inventory: inventoryGenerator({ weapon: new InfallibleFists, armour: armourGenerator({ maxShield: 5, parry: 30 }) }),
                     i: 0, j: 0 // maybe this is always i:0 and j variable
                 },
                 {
@@ -78,8 +78,14 @@ describe('Full Battle test (battletesting battle test testing battle testing bat
         // check if stats propagated correctly
         expect(battleInstance.getHuman(HUMAN_ID).getHealthPoints()).toBe(100);
         expect(battleInstance.getHuman(HUMAN_ID).getShield()).toBe(0);
+        expect(battleInstance.getHuman(HUMAN_ID).getMaxValues().shield).toBe(15);
         expect(battleInstance.getCharacter(ENEMY_ID).getHealthPoints()).toBe(1);
         expect(battleInstance.getCharacter(ENEMY_ID).getShield()).toBe(0);
+        expect(battleInstance.getCharacter(ENEMY_ID).getMaxValues().shield).toBe(10);
+
+        // check inventory
+        expect(battleInstance.getHuman(HUMAN_ID).getArmour().getParry()).toBe(30);
+        expect(battleInstance.getCharacter(ENEMY_ID).getArmour().getParry()).toBe(5);
 
         // this should be changed when I add stats loading to fromActor
         expect(battleInstance.resolveOrder).toEqual([

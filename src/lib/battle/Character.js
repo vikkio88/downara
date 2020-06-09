@@ -85,7 +85,7 @@ export const ACTIONS = {
 
 const ACTIONS_CONFIG = {
     // if player moves shield drops
-    [ACTIONS.MOVE]: { endurance: -20, shield: -10 }, 
+    [ACTIONS.MOVE]: { endurance: -20, shield: -10 },
     [ACTIONS.WAIT]: { endurance: 20 },
     // if player attacks shield drops
     [ACTIONS.ATTACK]: { endurance: -20, shield: -5 },
@@ -120,6 +120,7 @@ export class Character {
         // here I probably need to do something 
         // about shield/armour and STAT.SHIELD
         this.inventory = inventory;
+        this.applyInventoryEffects();
     }
 
     initAi() {
@@ -131,9 +132,21 @@ export class Character {
         }
     }
 
+    applyInventoryEffects() {
+        const armour = this.inventory ? this.inventory.getArmour() : null;
+        if (!armour) return;
+        this.config.max.shield += armour.getMaxShieldModifier();
+        this.config.speed += armour.getSpeedModifier();
+    }
+
     getWeapon() {
         return this.inventory.getWeapon();
     }
+
+    getArmour() {
+        return this.inventory.getArmour();
+    }
+
 
     perform({ type, payload = {} }, battle) {
         // this makes the user pay endurance
@@ -161,8 +174,7 @@ export class Character {
         }
 
         if (type === ACTIONS.PARRY) {
-            // shield will depend on inventory
-            this.apply({ shield: 10 }); // testing values 5 was too much
+            this.apply({ shield: this.getArmour().getParry() });
             return true;
         }
 

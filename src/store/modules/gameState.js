@@ -8,7 +8,7 @@ import quests from 'downara/quests';
 
 
 import { FACING } from "lib/battle";
-import { inventoryGenerator } from "lib/battle/Inventory";
+import { inventoryGenerator, armourGenerator } from "lib/battle/Inventory";
 import { AI, statsGenerator } from "lib/battle/Character";
 
 // replacement for areas
@@ -83,7 +83,9 @@ export default store => {
                         type: 'battlePlayer',
                         facing: FACING.RIGHT,
                         stats: statsGenerator({ hp: 100 }),
-                        inventory: inventoryGenerator(),
+                        inventory: inventoryGenerator({
+                            armour: armourGenerator({ name: 'robes', maxShield: 10, parry: 15 })
+                        }),
                         i: 0, j: 1
                     },
                     {

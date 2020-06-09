@@ -75,6 +75,50 @@ export class Equipment {
 
         return resultEffect;
     }
+
+    toJs() {
+        return {
+            name: this.name,
+            effects: this.effects,
+            type: this.type,
+            endurance: this.getEnduranceCost(),
+            reach: this.getReach(),
+            hitDie: this.config.hitDie
+        };
+    }
+}
+
+const MIN_PARRY = 5;
+
+export class Armour {
+    constructor(name = null, config = {}) {
+        this.name = name;
+        const { maxShield = 0, parry = MIN_PARRY, speed = 0 } = config;
+        this.maxShieldModifier = maxShield;
+        this.parry = parry;
+        this.speedModifier = speed;
+    }
+
+    getMaxShieldModifier(){
+        return this.maxShieldModifier || 0
+    }
+
+    getParry(){
+        return this.parry || MIN_PARRY;
+    }
+
+    getSpeedModifier(){
+        return this.speedModifier || 0;
+    }
+
+    toJs(){
+        return {
+            name: this.name,
+            maxShield: this.getMaxShield(),
+            parry: this.parry,
+            speedModifier: this.speedModifier
+        }
+    }
 }
 
 
