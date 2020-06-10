@@ -136,7 +136,7 @@ export class Character {
         const armour = this.inventory ? this.inventory.getArmour() : null;
         if (!armour) return;
         this.config.max.shield += armour.getMaxShieldModifier();
-        
+
         // need to cap this to 1 and need to test it properly
         this.config.speed += armour.getSpeedModifier();
     }
@@ -279,6 +279,10 @@ export class Character {
         return this.decider.decide(this, battle);
     }
 
+    getName() {
+        return this.config.name || this.id;
+    }
+
     toJs() {
         return {
             id: this.id,
@@ -291,11 +295,11 @@ export class Character {
     }
 
     static fromActor(actor) {
-        const { id, inventory = null, i, j, stats, facing } = actor;
+        const { id, inventory = null, i, j, stats, facing, name } = actor;
         let { ai = false } = actor;
         if (ai) ai = getAiConfig(ai);
         // here  I will need to load the inventory from a js maybe
-        return new Character(id, { ...stats, ai: ai }, inventory, { i, j }, facing);
+        return new Character(id, { ...stats, ai: ai, name }, inventory, { i, j }, facing);
     }
 }
 

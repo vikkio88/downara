@@ -21,21 +21,21 @@ export default class extends Phaser.GameObjects.Sprite {
         this.facing = character.facing;
         this.setFacing(this.facing);
 
-        // this is used to show stats on click
-        if (this.character.ai) {
-            // if an action is selected store will prevent this to be performed
-            // also grid will maintain an index of clickable items to activate them 
-            // on demand
-            this.enableClick();
-            grid.registerActionable(this);
-            this.on('pointerdown', () => {
-                this.setAlpha(.5);
-                eventBridge.emitFromPhaser('battle:selectEnemy', this.character.id);
-            });
-            this.on('pointerout', () => {
-                this.setAlpha(1);
-            });
-        }
+
+
+        // if an action is selected store will prevent this to be performed
+        // also grid will maintain an index of clickable items to activate them 
+        // on demand
+        this.enableClick();
+        grid.registerActionable(this);
+        this.on('pointerdown', () => {
+            this.setAlpha(.5);
+            eventBridge.emitFromPhaser('battle:showInfo', this.character.id);
+        });
+        this.on('pointerout', () => {
+            this.setAlpha(1);
+        });
+
     }
 
     enableClick() {

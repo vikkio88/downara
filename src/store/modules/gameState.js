@@ -80,6 +80,7 @@ export default store => {
                 actors: [
                     {
                         id: 'player',
+                        name: 'Player One',
                         type: 'battlePlayer',
                         facing: FACING.RIGHT,
                         stats: statsGenerator({ hp: 100 }),
@@ -90,6 +91,7 @@ export default store => {
                     },
                     {
                         id: 'enemy',
+                        name: 'A Random Bully',
                         type: 'battleEnemy',
                         facing: FACING.LEFT,
                         ai: AI.SIMPLE,

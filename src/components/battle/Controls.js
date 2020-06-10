@@ -1,24 +1,17 @@
 import React from 'react';
 import { useStoreon } from 'storeon/react';
-import Stats from './Stats';
-import { Button, CloseRow } from '../common';
+import CharSheets from './CharSheets';
+import { Button } from '../common';
 
 const Controls = () => {
     const { dispatch, battle } = useStoreon('battle');
-    const { tile, action, confirmation, battleInstance, selectedEnemyId, lock } = battle;
-    const human = battleInstance.getHuman();
-    const selectedEnemy = selectedEnemyId ? battleInstance.getCharacter(selectedEnemyId) : null;
+    const { tile, action, confirmation, selectedCharacters, lock } = battle;
     return (
         <div className="flex-1 flex flex-col">
-            {selectedEnemy && (
-                <div className="flex-1 flex flex-col bg-gray-400 mb-10">
-                    <CloseRow onClose={() => dispatch('battle:unselectEnemy', null)} />
-                    <span className="font-semibold">{selectedEnemy.id}</span>
-                    <Stats stats={selectedEnemy.getStats()} maxes={selectedEnemy.getMaxValues()} />
-                </div>
+            {selectedCharacters.length > 0 && (
+                <CharSheets characters={selectedCharacters} />
             )}
             <div className="flex-1 flex flex-col bg-gray-400">
-                <Stats stats={human.getStats()} maxes={human.getMaxValues()} />
                 <div className="flex-1 flex items-center justify-center flex-col">
                     {action && (
                         <div className="flex-1 flex items-center justify-center">

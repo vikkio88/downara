@@ -14,7 +14,7 @@ export default store => {
             battle: {
                 tile: null,
                 action: null,
-                selectedEnemyId: null,
+                selectedCharacters: [],
                 lock: false
             },
         };
@@ -133,20 +133,24 @@ export default store => {
         };
     });
 
-    store.on('battle:unselectEnemy', ({ battle }) => {
+    store.on('battle:unselectCharacter', ({ battle }, unselectedId) => {
         return {
             battle: {
                 ...battle,
-                selectedEnemyId: null
+                selectedCharacters: battle.selectedCharacters.filter(c => c.id !== unselectedId)
             }
         };
     });
-    store.on('battle:selectEnemy', ({ battle }, enemyId) => {
+    store.on('battle:showInfo', ({ battle }, id) => {
         if (battle.action) return;
+        const { selectedCharacters, battleInstance } = battle;
+        if (selectedCharacters.filter(c => c.id === id).length > 0) return;
+
+        const character = battleInstance.getCharacter(id);
         return {
             battle: {
                 ...battle,
-                selectedEnemyId: enemyId
+                selectedCharacters: [...selectedCharacters, character]
             }
         };
     });
@@ -156,12 +160,12 @@ export default store => {
         console.log('battle finished');
 
         return {
-            battle:{
+            battle: {
                 ...battle,
-                selectedEnemyId: null,
+                selectedCharacters: [],
                 lock: true
             }
-        }
+        };
 
         // maybe here we generate loot 
         // or we make the user go back to the main menu
