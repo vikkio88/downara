@@ -114,9 +114,9 @@ export class Armour {
     toJs(){
         return {
             name: this.name,
-            maxShield: this.getMaxShield(),
-            parry: this.parry,
-            speedModifier: this.speedModifier
+            maxShield: this.getMaxShieldModifier(),
+            parry: this.getParry(),
+            speedModifier: this.getSpeedModifier()
         }
     }
 }

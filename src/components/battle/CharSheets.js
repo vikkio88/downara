@@ -32,11 +32,29 @@ const Weapon = ({ name, effects, type, reach, hitDie }) => {
     );
 };
 
+const Armour = ({ name, maxShield, parry, speedModifier }) => {
+    return (
+        <table className="table-fixed shadow-lg">
+            <thead className="border bg-white">
+                <tr className="text-lg">
+                    <th colSpan="2">{name ? name : ' No Armour'}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ValueRow label="shield" value={`+${maxShield}`} />
+                <ValueRow label="parry" value={`${parry}`} />
+                {speedModifier !== 0 && <ValueRow label="movement" value={`${speedModifier}`} />}
+            </tbody>
+        </table>
+    );
+};
+
 const CharSheet = ({ char }) => {
     const { dispatch } = useStoreon();
     const isPlayer = !(char.isAi());
     const header = <span className={`text-xl${isPlayer ? ' font-semibold' : ''}`}>{char.getName()}</span>;
     const weapon = char.getWeapon().toJs();
+    const armour = char.getArmour().toJs();
     return (
         <div className="flex-1 flex flex-col m-2 bg-gray-300 border-2 border-solid rounded">
             <CloseRow onClose={() => dispatch('battle:unselectCharacter', char.id)} header={header} />
@@ -45,8 +63,8 @@ const CharSheet = ({ char }) => {
                     <div className="flex-1 flex flex-col">
                         <Weapon {...weapon} />
                     </div>
-                    <div className="flex-1">
-                        Armour
+                    <div className="flex-1 flex flex-col">
+                        <Armour {...armour} />
                     </div>
                 </div>
                 <Stats stats={char.getStats()} maxes={char.getMaxValues()} />
