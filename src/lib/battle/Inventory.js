@@ -1,6 +1,5 @@
 import { Fists, EQUIPMENT_TYPES, Equipment, Armour } from './Equipment';
 
-//EFFECTS { health: { modifier: -1, range: '1:3' } },
 export const armourGenerator = ({
     name,
     maxShield = 0,

@@ -1,14 +1,14 @@
 import { areaHelper, STATUSES, gameHelper } from 'lib/game';
 
 import { initialGameState, map, interactables } from 'downara';
-import { eventBridge } from 'lib';
+import { eventBridge, randomizer } from 'lib';
 import dialogues from 'downara/dialogues';
 import { MESSAGES } from 'downara/mapObjects';
 import quests from 'downara/quests';
 
 
 import { FACING } from "lib/battle";
-import { inventoryGenerator, armourGenerator } from "lib/battle/Inventory";
+import { inventoryGenerator, armourGenerator, weaponGenerator } from "lib/battle/Inventory";
 import { AI, statsGenerator } from "lib/battle/Character";
 
 // replacement for areas
@@ -85,9 +85,10 @@ export default store => {
                         facing: FACING.RIGHT,
                         stats: statsGenerator({ hp: 100 }),
                         inventory: inventoryGenerator({
+                            weapon: weaponGenerator({ name: 'Spaccaculi', hitDie: 1, effects: [{ health: { modifier: -1, range: '10:20' } }] }),
                             armour: armourGenerator({ name: 'robes', maxShield: 10, parry: 15 })
                         }),
-                        i: 0, j: 1
+                        ...randomizer.tile()
                     },
                     {
                         id: 'enemy',
@@ -95,9 +96,9 @@ export default store => {
                         type: 'battleEnemy',
                         facing: FACING.LEFT,
                         ai: AI.SIMPLE,
-                        stats: statsGenerator({ hp: 100 }),
+                        stats: statsGenerator({ hp: 50 }),
                         inventory: inventoryGenerator(),
-                        i: 2, j: 3
+                        ...randomizer.tile()
                     },
                 ],
                 size: { i: 6, j: 6 }

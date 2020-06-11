@@ -17,6 +17,11 @@ const randomizer = {
     },
     bool() {
         return this.chance(50);
+    },
+    tile(size = 6) {
+        const i = this.int(0, size - 1);
+        const j = this.int(0, size - 1);
+        return { i, j };
     }
 };
 
