@@ -1,4 +1,6 @@
 import React from 'react';
+import './Stat.css';
+
 const VARIANTS = {
     GRAY: 'gray',
     RED: 'red',
@@ -22,7 +24,7 @@ const Stat = ({ label, value, max, variant }) => {
                 </div>
             </div>
             <div className={`overflow-hidden h-2 mb-4 text-xs flex rounded bg-${variant}-200`}>
-                <div style={{ width: `${percentage}%` }} className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-${variant}-500`}></div>
+                <div id="statValue" style={{ width: `${percentage}%` }} className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-${variant}-500`}></div>
             </div>
         </div>
     );

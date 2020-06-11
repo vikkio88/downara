@@ -128,6 +128,7 @@ export default store => {
         return {
             battle: {
                 ...battle,
+                action: null,
                 lock: false
             }
         };
