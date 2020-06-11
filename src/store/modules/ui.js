@@ -17,25 +17,6 @@ export default store => {
         };
     });
 
-    store.on('transition', ({ ui }, { duration = 2000, message = null } = {}) => {
-        if (duration) setTimeout(() => store.dispatch('transitionOver'), duration);
-        return {
-            ui: {
-                ...ui,
-                transition: { message: message || '' }
-            }
-        };
-    });
-
-    store.on('transitionOver', ({ ui }) => {
-        return {
-            ui: {
-                ...ui,
-                transition: false
-            }
-        };
-    });
-
     store.on('error', ({ ui }, message) => {
         return { ui: { ...ui, message: { message, type: MESSAGE_TYPES.ERROR } } };
     });
@@ -47,18 +28,6 @@ export default store => {
 
     store.on('notify', ({ ui }, notification) => {
         return { ui: { ...ui, notification: notification } };
-    });
-
-    store.on('examine', ({ ui, worldState, gameState }) => {
-        const link = areaHelper.getLink(gameState, areas);
-        if (link !== null) {
-            store.dispatch('message', OBJECT_DESCRIPTIONS.ROAD_SIGN(map[link].label));
-            return;
-        }
-
-        const tile = gameHelper.getTileContent(gameState, worldState, interactables, areas);
-        store.dispatch('message', tile.description || OBJECT_DESCRIPTIONS.default);
-        return;
     });
 
     store.on('changeView', ({ ui }, view) => {

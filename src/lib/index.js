@@ -18,9 +18,9 @@ const randomizer = {
     bool() {
         return this.chance(50);
     },
-    tile(size = 6) {
-        const i = this.int(0, size - 1);
-        const j = this.int(0, size - 1);
+    tile({ i = null, j = null, size = 6 }) {
+        i = i !== null ? i : this.int(0, size - 1);
+        j = j !== null ? j : this.int(0, size - 1);
         return { i, j };
     }
 };
