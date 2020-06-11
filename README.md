@@ -16,3 +16,5 @@ a lame browser-based simple rpg.
 
 - [CurrentMaster](https://down-test-master.surge.sh)
 
+- [Testing Battles](https://down-test-battles.surge.sh)
+

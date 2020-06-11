@@ -33,10 +33,41 @@ export default store => {
     });
 
     store.on('phaserReady', ({ gameState, worldState }) => {
+        const payload = {
+            actors: [
+                {
+                    id: 'player',
+                    name: 'Player One',
+                    type: 'battlePlayer',
+                    facing: FACING.RIGHT,
+                    stats: statsGenerator({ hp: 100 }),
+                    inventory: inventoryGenerator({
+                        weapon: weaponGenerator({ name: 'Spaccaculi', hitDie: 1, effects: [{ health: { modifier: -1, range: '10:20' } }] }),
+                        armour: armourGenerator({ name: 'robes', maxShield: 10, parry: 15 })
+                    }),
+                    ...randomizer.tile()
+                },
+                {
+                    id: 'enemy',
+                    name: 'A Random Bully',
+                    type: 'battleEnemy',
+                    facing: FACING.LEFT,
+                    ai: AI.SIMPLE,
+                    stats: statsGenerator({ hp: 50 }),
+                    inventory: inventoryGenerator(),
+                    ...randomizer.tile()
+                },
+            ],
+            size: { i: 6, j: 6 }
+        };
+        store.dispatch('battle:init', payload);
+        return { gameState: { ...gameState, status: STATUSES.FIGHTING } };
+        /*
         eventBridge.emit('game:areaInit', {
             gameState,
             worldState
         });
+        */
         return;
     });
 
@@ -76,35 +107,6 @@ export default store => {
     store.on('interact', ({ gameState, worldState }) => {
         // first test of phaser interaction update
         if (areaHelper.isSameTile({ i: 3, j: 2 }, gameState.actionedTile.position)) {
-            const payload = {
-                actors: [
-                    {
-                        id: 'player',
-                        name: 'Player One',
-                        type: 'battlePlayer',
-                        facing: FACING.RIGHT,
-                        stats: statsGenerator({ hp: 100 }),
-                        inventory: inventoryGenerator({
-                            weapon: weaponGenerator({ name: 'Spaccaculi', hitDie: 1, effects: [{ health: { modifier: -1, range: '10:20' } }] }),
-                            armour: armourGenerator({ name: 'robes', maxShield: 10, parry: 15 })
-                        }),
-                        ...randomizer.tile()
-                    },
-                    {
-                        id: 'enemy',
-                        name: 'A Random Bully',
-                        type: 'battleEnemy',
-                        facing: FACING.LEFT,
-                        ai: AI.SIMPLE,
-                        stats: statsGenerator({ hp: 50 }),
-                        inventory: inventoryGenerator(),
-                        ...randomizer.tile()
-                    },
-                ],
-                size: { i: 6, j: 6 }
-            };
-            store.dispatch('battle:init', payload);
-
             /*
             this is to trigger world updates
             store.dispatch('areaUpdate', {

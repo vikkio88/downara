@@ -4,7 +4,7 @@ import { Boot, Battle, World, TestMap } from "./scenes";
 import config from "./config";
 
 config.type = Phaser.AUTO;
-config.scene = [Boot, Battle, World , TestMap];
+config.scene = [Boot, Battle, TestMap];
 config.scale = {
     mode: Phaser.Scale.FIT,
     parent: 'gameNode',
