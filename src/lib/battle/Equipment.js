@@ -37,14 +37,12 @@ export class Equipment {
     }
 
     // both of type Character
-    use(user, { object }) {
-        // this will apply the endurance cost to use the weapon
-        const endurance = this.getEnduranceCost();
-        if (endurance !== 0) user.apply({ endurance });
-
-        if (!object) {
+    use(user, object) {
+        if (!object || object.apply === undefined) {
             return false;
         }
+        const endurance = this.getEnduranceCost();
+        if (endurance !== 0) user.apply({ endurance });
 
         const rolledDie = randomizer.dice(20);
         if (this.didHit(rolledDie)) {
@@ -77,6 +75,50 @@ export class Equipment {
 
         return resultEffect;
     }
+
+    toJs() {
+        return {
+            name: this.name,
+            effects: this.effects,
+            type: this.type,
+            endurance: this.getEnduranceCost(),
+            reach: this.getReach(),
+            hitDie: this.config.hitDie
+        };
+    }
+}
+
+const MIN_PARRY = 5;
+
+export class Armour {
+    constructor(name = null, config = {}) {
+        this.name = name;
+        const { maxShield = 0, parry = MIN_PARRY, speed = 0 } = config;
+        this.maxShieldModifier = maxShield;
+        this.parry = parry;
+        this.speedModifier = speed;
+    }
+
+    getMaxShieldModifier(){
+        return this.maxShieldModifier || 0
+    }
+
+    getParry(){
+        return this.parry || MIN_PARRY;
+    }
+
+    getSpeedModifier(){
+        return this.speedModifier || 0;
+    }
+
+    toJs(){
+        return {
+            name: this.name,
+            maxShield: this.getMaxShieldModifier(),
+            parry: this.getParry(),
+            speedModifier: this.getSpeedModifier()
+        }
+    }
 }
 
 
@@ -85,7 +127,19 @@ export class Fists extends Equipment {
         super(
             'fists',
             EQUIPMENT_TYPES.MELEE,
-            [{ health: { modifier: -1, range: '1' } }]
+            [{ health: { modifier: -1, range: '1:10' } }],
+            { hitDie: 5 }
+        );
+    }
+}
+
+export class InfallibleFists extends Equipment {
+    constructor() {
+        super(
+            'infallible Fists',
+            EQUIPMENT_TYPES.MELEE,
+            [{ health: { modifier: -1, range: '1' } }],
+            { hitDie: 0 }
         );
     }
 }

@@ -12,8 +12,8 @@ const Line = ({ message, onClick = () => { } }) => {
         >
             {message}
         </div>
-    )
-}
+    );
+};
 
 const Dialogue = () => {
     const { dispatch, dialogue: { currentLine, lines, waiting } } = useStoreon('dialogue');
@@ -21,11 +21,6 @@ const Dialogue = () => {
         <div className={`flex-1 flex flex-col items-center justify-center overflow-y-auto`}>
             {!waiting &&
                 <>
-                    <Icon
-                        role="button" name={Icon.names.CROSS}
-                        onClick={() => dispatch('stopDialogue')}
-                        title={LABELS.CLOSE}
-                    />
                     {lines[currentLine].replies.map((r, i) => (
                         <Line
                             key={`reply-${currentLine}-${i}`}
@@ -38,7 +33,16 @@ const Dialogue = () => {
                 </>
             }
 
-            {!waiting && lines[currentLine].replies.length === 0 && <>{LABELS.NOTHING_TO_SAY}</>}
+            {!waiting && lines[currentLine].replies.length === 0 && (
+                <>
+                    {LABELS.NOTHING_TO_SAY}
+                    <Icon
+                        role="button" name={Icon.names.CROSS}
+                        onClick={() => dispatch('stopDialogue')}
+                        title={LABELS.CLOSE}
+                    />
+                </>
+            )}
         </div>
     );
 };

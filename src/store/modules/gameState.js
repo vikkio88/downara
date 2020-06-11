@@ -1,9 +1,18 @@
 import { areaHelper, STATUSES, gameHelper } from 'lib/game';
+
 import { initialGameState, map, interactables } from 'downara';
+import { eventBridge, randomizer } from 'lib';
 import dialogues from 'downara/dialogues';
 import { MESSAGES } from 'downara/mapObjects';
-import areas from 'downara/areas';
 import quests from 'downara/quests';
+
+
+import { FACING } from "lib/battle";
+import { inventoryGenerator, armourGenerator, weaponGenerator } from "lib/battle/Inventory";
+import { AI, statsGenerator } from "lib/battle/Character";
+
+// replacement for areas
+import { areas } from 'downara/areas';
 
 export default store => {
     store.on('@init', () => {
@@ -23,17 +32,20 @@ export default store => {
         };
     });
 
+    store.on('phaserReady', ({ gameState, worldState }) => {
+        eventBridge.emit('game:areaInit', {
+            gameState,
+            worldState
+        });
+        return;
+    });
+
+    store.on('areaUpdate', ({ }, payload) => {
+        eventBridge.emit('game:areaUpdate', payload);
+    });
+
     store.on('actioned', ({ gameState }, tilePosition) => {
         store.dispatch('clearMessage');
-        const { player, actionedTile } = gameState;
-        if (!areaHelper.isPlayerInTile(player.areaPosition, tilePosition)
-            // this comment makes the user click twice to switch tile 
-            //&& areaHelper.isSameTile(actionedTile.position, tilePosition)
-        ) {
-            store.dispatch('moveToTile', tilePosition);
-            return;
-        }
-
         return {
             gameState: {
                 ...gameState,
@@ -45,11 +57,8 @@ export default store => {
         };
     });
 
-    store.on('moveToTile', ({ gameState }, newPosition) => {
-        // to set movement effect on tiles
-        const tilesEffect = { [newPosition.i]: { [newPosition.j]: true } };
-        //
-
+    store.on('movedToTile', ({ gameState }, newPosition) => {
+        console.log('moved to tile', newPosition);
         return {
             gameState: {
                 ...gameState,
@@ -59,18 +68,57 @@ export default store => {
                 },
                 actionedTile: {
                     position: newPosition
-                },
-                tilesEffect
+                }
             },
         };
     });
 
     store.on('interact', ({ gameState, worldState }) => {
-        // Test fighting
-        if (areaHelper.isSameTile({ i: 1, j: 0 }, gameState.actionedTile.position)) {
-            store.dispatch('transition', { message: 'Test Battle' });
-            store.dispatch('toggleFightingTest');
-            return;
+        // first test of phaser interaction update
+        if (areaHelper.isSameTile({ i: 3, j: 2 }, gameState.actionedTile.position)) {
+            const payload = {
+                actors: [
+                    {
+                        id: 'player',
+                        name: 'Player One',
+                        type: 'battlePlayer',
+                        facing: FACING.RIGHT,
+                        stats: statsGenerator({ hp: 100 }),
+                        inventory: inventoryGenerator({
+                            weapon: weaponGenerator({ name: 'Spaccaculi', hitDie: 1, effects: [{ health: { modifier: -1, range: '10:20' } }] }),
+                            armour: armourGenerator({ name: 'robes', maxShield: 10, parry: 15 })
+                        }),
+                        ...randomizer.tile()
+                    },
+                    {
+                        id: 'enemy',
+                        name: 'A Random Bully',
+                        type: 'battleEnemy',
+                        facing: FACING.LEFT,
+                        ai: AI.SIMPLE,
+                        stats: statsGenerator({ hp: 50 }),
+                        inventory: inventoryGenerator(),
+                        ...randomizer.tile()
+                    },
+                ],
+                size: { i: 6, j: 6 }
+            };
+            store.dispatch('battle:init', payload);
+
+            /*
+            this is to trigger world updates
+            store.dispatch('areaUpdate', {
+                flags: {
+                    remove: [{ i: 2, j: 3 }],
+                    add: [{ i: 2, j: 4, type: 'red' }]
+                },
+                objects: {
+                    remove: [{ i: 2, j: 3 }],
+                    add: [{ i: 6, j: 6, sprite: 'woman' }]
+                }
+            });
+            */
+            return { gameState: { ...gameState, status: STATUSES.FIGHTING } };
         }
 
 
@@ -124,18 +172,16 @@ export default store => {
         return { gameState };
     });
 
-    store.on('changeArea', ({ gameState }, newArea) => {
+    store.on('changeArea', ({ gameState, worldState }, newArea) => {
         const currentWorldPosition = gameState.worldPosition;
         const newAreaPosition = map[newArea][currentWorldPosition];
         gameState.player.areaPosition = newAreaPosition;
         gameState.actionedTile.position = newAreaPosition;
-        return { gameState: { ...gameState, worldPosition: newArea, area: map[newArea] } };
-    });
-
-    // For test purposes
-    store.on('toggleFightingTest', ({ gameState }) => {
-        gameState.status = gameState.status === STATUSES.FIGHTING ?
-            STATUSES.IDLE : STATUSES.FIGHTING;
-        return { gameState: { ...gameState } };
+        gameState = { ...gameState, worldPosition: newArea, area: map[newArea] };
+        eventBridge.emit('game:areaChange', {
+            gameState,
+            worldState
+        });
+        return;
     });
 };

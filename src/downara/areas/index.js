@@ -1,10 +1,17 @@
-import area_0 from './0.json';
-import area_1 from './1.json';
-import area_4 from './4.json';
+export const areas = {
+    0: {
+        0: {
+            10: { link: 1 }
+        },
+        3: {
+            0: { link: 3 }
+        },
+        5: {
+            19: { link: 4 }
+        },
+        19: {
+            9: { link: 2 }
+        }
+    }
 
-
-export default {
-    0: area_0,
-    1: area_1,
-    4: area_4,
-};
+}

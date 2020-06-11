@@ -1,5 +1,8 @@
 import SimpleAi from './deciders/SimpleAi';
 import RandomAi from './deciders/RandomAi';
+import RoamerAi from './deciders/RoamerAi';
+import { OBJECTS } from './Field';
+
 export const FACING = {
     UP: 'face_up',
     DOWN: 'face_down',
@@ -7,22 +10,26 @@ export const FACING = {
     LEFT: 'face_left',
 };
 
-const STATS = {
+export const STATS = {
     HP: 'hp',
     ENDURANCE: 'endurance',
+    SHIELD: 'shield',
 };
 
 export const AI = {
     SIMPLE: 'simple',
     RANDOM: 'random',
+    ROAMER: 'roamer',
 };
 
 const defaultStats = {
     [STATS.HP]: 100,
     [STATS.ENDURANCE]: 100,
+    [STATS.SHIELD]: 0,
     max: {
         [STATS.HP]: 100,
         [STATS.ENDURANCE]: 100,
+        [STATS.SHIELD]: 10,
     },
     ai: {
         config: {
@@ -35,11 +42,35 @@ const defaultStats = {
     speed: 1,
 };
 
+
+
+
+export const statsGenerator = ({
+    hp = 100, endurance = 100, shield = 0, speed = 1,
+    max: { maxH = null, maxE = null, maxS = 10 } = {},
+} = {}) => {
+    return {
+        [STATS.HP]: hp,
+        [STATS.ENDURANCE]: endurance,
+        [STATS.SHIELD]: shield,
+        max: {
+            [STATS.HP]: maxH || hp,
+            [STATS.ENDURANCE]: maxE || endurance,
+            [STATS.SHIELD]: maxS || shield,
+        },
+        speed: speed
+    };
+};
+
+
 const AI_DECIDER = {
     [AI.SIMPLE]: SimpleAi,
     [AI.RANDOM]: RandomAi,
+    [AI.ROAMER]: RoamerAi,
     default: SimpleAi
 };
+
+export const getAiConfig = type => ({ config: { logic: type } });
 
 
 
@@ -53,11 +84,12 @@ export const ACTIONS = {
 };
 
 const ACTIONS_CONFIG = {
-    [ACTIONS.MOVE]: { endurance: -40 },
+    // if player moves shield drops
+    [ACTIONS.MOVE]: { endurance: -20, shield: -10 },
     [ACTIONS.WAIT]: { endurance: 20 },
-    [ACTIONS.ATTACK]: { endurance: -20 },
-    // maybe I can simulate damage reduction with a +10 health on parry
-    [ACTIONS.PARRY]: { endurance: 10, health: 10 },
+    // if player attacks shield drops
+    [ACTIONS.ATTACK]: { endurance: -20, shield: -5 },
+    [ACTIONS.PARRY]: { endurance: 25 },
     [ACTIONS.SPELL]: { endurance: 20 },
     [ACTIONS.USE_OBJECT]: { endurance: 0 },
 };
@@ -68,6 +100,9 @@ export class Character {
         position = { i: 0, j: 0 }, facing = FACING.RIGHT
     ) {
         this.id = id;
+
+        // here we are not checking whether the stat is exceeding the max
+        // maybe is a good thing?
         this.config = {
             ...defaultStats,
             ...config,
@@ -82,7 +117,10 @@ export class Character {
         this.position = position;
         this.facing = facing;
 
+        // here I probably need to do something 
+        // about shield/armour and STAT.SHIELD
         this.inventory = inventory;
+        this.applyInventoryEffects();
     }
 
     initAi() {
@@ -94,32 +132,63 @@ export class Character {
         }
     }
 
+    applyInventoryEffects() {
+        const armour = this.inventory ? this.inventory.getArmour() : null;
+        if (!armour) return;
+        this.config.max.shield += armour.getMaxShieldModifier();
+
+        // need to cap this to 1 and need to test it properly
+        this.config.speed += armour.getSpeedModifier();
+    }
+
+    getWeapon() {
+        return this.inventory.getWeapon();
+    }
+
+    getArmour() {
+        return this.inventory.getArmour();
+    }
+
+
     perform({ type, payload = {} }, battle) {
         // this makes the user pay endurance
         this.apply(ACTIONS_CONFIG[type]);
 
-        const { position = null } = payload;
+        const { position = this.getPosition() } = payload;
 
         if (type === ACTIONS.ATTACK) {
+            let targetObject = battle.field.getObject(position);
+            if (targetObject === null || targetObject.type != OBJECTS.CHARACTER) return false;
+            targetObject = battle.getCharacter(targetObject.id);
+            return this.getWeapon().use(this, targetObject);
+        }
+
+        if (type === ACTIONS.MOVE) {
             const targetObject = battle.field.getObject(position);
-            if (targetObject === null) return false;
+            if (targetObject === null) {
+                // this should be using Field
+                battle.field.moveObject(this.getPosition(), position);
+                this.setPosition(position);
+                return { position };
+            }
 
-            this.weapon.use(this, targetObject);
+            return false;
         }
 
-        //there should be a problem here if parry comes after attack
         if (type === ACTIONS.PARRY) {
-            this.apply();
-
+            this.apply({ shield: this.getArmour().getParry() });
+            return true;
         }
 
+        return false;
     }
 
     getStats() {
-        const { hp, endurance } = this.config;
+        const { hp, endurance, shield } = this.config;
         return {
             hp,
             endurance,
+            shield
         };
     }
 
@@ -138,6 +207,10 @@ export class Character {
         return this.config.ai !== false;
     }
 
+    setPosition(position) {
+        this.position = position;
+    }
+
     getPosition() {
         return this.position;
     }
@@ -154,9 +227,21 @@ export class Character {
         return this.facing;
     }
 
-    apply({ health = null, endurance = null } = {}) {
+    apply({ health = null, endurance = null, shield = null } = {}) {
+        if (shield !== null) {
+            this.modifyStat(STATS.SHIELD, shield);
+        }
+
         if (health !== null) {
-            this.modifyStat(STATS.HP, health);
+            let damage = health;
+            const currentShield = this.getShield();
+            if (damage < 0 && currentShield > 0) {
+                this.modifyStat(STATS.SHIELD, damage);
+                damage = damage + currentShield;
+                // preventing healing shield
+                damage = damage < 0 ? damage : 0;
+            }
+            this.modifyStat(STATS.HP, damage);
         }
 
         if (endurance !== null) {
@@ -176,17 +261,45 @@ export class Character {
         return this.config.endurance;
     }
 
+    getShield() {
+        return this.config.shield;
+    }
+
     modifyStat(stat, modifier) {
         const maxValue = this.getMaxValues()[stat];
         const initialValue = this.config[stat];
         let newValue = (initialValue + modifier);
         newValue = newValue < 0 ? 0 : newValue;
         newValue = newValue > maxValue ? maxValue : newValue;
+
         this.config[stat] = newValue;
     }
 
     decideAction(battle) {
         return this.decider.decide(this, battle);
+    }
+
+    getName() {
+        return this.config.name || this.id;
+    }
+
+    toJs() {
+        return {
+            id: this.id,
+            position: this.getPosition(),
+            stats: this.getStats(),
+            speed: this.getSpeed(),
+            facing: this.facing,
+            ai: this.isAi()
+        };
+    }
+
+    static fromActor(actor) {
+        const { id, inventory = null, i, j, stats, facing, name } = actor;
+        let { ai = false } = actor;
+        if (ai) ai = getAiConfig(ai);
+        // here  I will need to load the inventory from a js maybe
+        return new Character(id, { ...stats, ai: ai, name }, inventory, { i, j }, facing);
     }
 }
 

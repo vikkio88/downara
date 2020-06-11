@@ -4,8 +4,8 @@ describe('Equipment', () => {
     let user = null;
     let object = null;
     beforeEach(() => {
-        user = { apply: jest.fn() };
-        object = { object: { apply: jest.fn() } };
+        user = { apply: jest.fn(), getStats: jest.fn() };
+        object = { apply: jest.fn(), getStats: jest.fn() };
     });
 
     test('testing item health effect', () => {
@@ -18,8 +18,8 @@ describe('Equipment', () => {
         const result = lifeDrainingSword.use(user, object);
 
         expect(result).toBeTruthy();
-        expect(object.object.apply.mock.calls.length).toBe(1);
-        expect(object.object.apply.mock.calls[0][0].health).toBeLessThan(0);
+        expect(object.apply.mock.calls.length).toBe(1);
+        expect(object.apply.mock.calls[0][0].health).toBeLessThan(0);
         expect(user.apply.mock.calls.length).toBe(1);
         expect(user.apply.mock.calls[0][0].health).toBeGreaterThan(0);
 
@@ -45,8 +45,8 @@ describe('Equipment', () => {
         const result = lifeDrainingSword.use(user, object);
 
         expect(result).toBeTruthy();
-        expect(object.object.apply.mock.calls.length).toBe(1);
-        expect(object.object.apply.mock.calls[0][0].health).toBe(-1);
+        expect(object.apply.mock.calls.length).toBe(1);
+        expect(object.apply.mock.calls[0][0].health).toBe(-1);
         expect(user.apply.mock.calls.length).toBe(1);
         expect(user.apply.mock.calls[0][0].health).toBe(1);
 
@@ -69,7 +69,7 @@ describe('Equipment', () => {
         ];
 
         const lifeDrainingSword = new Equipment('Spada Suca-Vita', EQUIPMENT_TYPES.MELEE, effects, { hitDie: 1 });
-        const result = lifeDrainingSword.use(user, {});
+        const result = lifeDrainingSword.use(user, null);
 
         expect(result).toBe(false);
     });
@@ -84,8 +84,8 @@ describe('Equipment', () => {
         const result = lifeDrainingSword.use(user, object);
 
         expect(result).toBeTruthy();
-        expect(object.object.apply.mock.calls.length).toBe(1);
-        expect(object.object.apply.mock.calls[0][0].health).toBe(-1);
+        expect(object.apply.mock.calls.length).toBe(1);
+        expect(object.apply.mock.calls[0][0].health).toBe(-1);
         expect(user.apply.mock.calls.length).toBe(2);
         expect(user.apply.mock.calls[0][0].endurance).toBe(-1);
         expect(user.apply.mock.calls[1][0].health).toBe(1);

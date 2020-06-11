@@ -27,6 +27,11 @@ const VIEWS = {
     SETTINGS: 'settings',
 };
 
+const MESSAGE_TYPES = {
+    INFO: 'info',
+    ERROR: 'error',
+}
+
 const mapHelper = {
     move(direction, map, currentPosition) {
         if (this.isValidDirection(map[currentPosition][direction])) {
@@ -64,7 +69,7 @@ const areaHelper = {
     },
     getAreaTileConfig({ worldPosition, actionedTile: { position } }, areas) {
         const { i, j } = position;
-        return areas[worldPosition][i][j];
+        return get(areas, `${worldPosition}.${i}.${j}`, {});
     },
     getTileContent({ i, j }, tile, objects, interactables, objectConfig) {
         if (tile.link !== undefined) {
@@ -115,7 +120,7 @@ const gameHelper = {
         const tile = areas ? areaHelper.getAreaTileConfig(gameState, areas) : actionedTile;
         const { objects } = worldState;
         const areaObjects = objects[worldPosition];
-        const objectConfig = objects.config
+        const objectConfig = objects.config;
         return areaHelper.getTileContent(actionedTile.position, tile, areaObjects, interactables, objectConfig);
     },
     updateWorldStatePostDialogue(worldState, { quest = null, speakers = [] }, quests) {
@@ -175,7 +180,7 @@ const questHelper = {
         };
     },
     updateWorld(worldState, quest) {
-        const { flag = null, previousFlag = null, flagIcon } = quest
+        const { flag = null, previousFlag = null, flagIcon } = quest;
 
         if (previousFlag !== null) {
             worldState.flags = areaHelper.removeFlag(previousFlag.w, previousFlag.position, { flags: worldState.flags });
@@ -187,11 +192,11 @@ const questHelper = {
 
         return worldState;
     }
-}
+};
 
 export {
     mapHelper, areaHelper,
     gameHelper, questHelper,
     DIRECTIONS, STATUSES,
-    ACTIONS, VIEWS
+    ACTIONS, VIEWS, MESSAGE_TYPES
 };

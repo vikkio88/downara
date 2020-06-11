@@ -1,7 +1,6 @@
 import { interactables, OBJECT_DESCRIPTIONS, map } from 'downara';
-import areas from 'downara/areas';
-import { gameHelper, VIEWS, areaHelper } from 'lib/game';
-
+import { gameHelper, areaHelper, MESSAGE_TYPES } from 'lib/game';
+import { areas } from 'downara/areas';
 
 export default store => {
     store.on('@init', () => {
@@ -25,7 +24,7 @@ export default store => {
                 ...ui,
                 transition: { message: message || '' }
             }
-        }
+        };
     });
 
     store.on('transitionOver', ({ ui }) => {
@@ -34,11 +33,16 @@ export default store => {
                 ...ui,
                 transition: false
             }
-        }
+        };
+    });
+
+    store.on('error', ({ ui }, message) => {
+        return { ui: { ...ui, message: { message, type: MESSAGE_TYPES.ERROR } } };
     });
 
     store.on('message', ({ ui }, message) => {
-        return { ui: { message } };
+        console.log('newMessage', message);
+        return { ui: { ...ui, message: { message, type: MESSAGE_TYPES.INFO } } };
     });
 
     store.on('notify', ({ ui }, notification) => {
@@ -53,12 +57,8 @@ export default store => {
         }
 
         const tile = gameHelper.getTileContent(gameState, worldState, interactables, areas);
-        return {
-            ui: {
-                ...ui,
-                message: tile.description || OBJECT_DESCRIPTIONS.default
-            }
-        };
+        store.dispatch('message', tile.description || OBJECT_DESCRIPTIONS.default);
+        return;
     });
 
     store.on('changeView', ({ ui }, view) => {
@@ -66,6 +66,8 @@ export default store => {
     });
 
     store.on('clearMessage', ({ ui }) => {
+        if (!ui.message) return;
+
         return {
             ui: {
                 ...ui,

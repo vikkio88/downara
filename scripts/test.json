@@ -1,0 +1,1786 @@
+{
+  "0": {
+    "0": {
+      "t": "grass"
+    },
+    "1": {
+      "t": "sand",
+      "o": "mansion",
+      "ov": 3
+    },
+    "2": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "3": {
+      "t": "grass"
+    },
+    "4": {
+      "t": "sand"
+    },
+    "5": {
+      "t": "grass",
+      "o": "mountains",
+      "ov": 1,
+      "b": 1
+    },
+    "6": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "7": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "8": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "9": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "10": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 2
+    },
+    "11": {
+      "t": "grass"
+    },
+    "12": {
+      "t": "grass"
+    },
+    "13": {
+      "t": "grass"
+    },
+    "14": {
+      "t": "sand"
+    },
+    "15": {
+      "t": "sand"
+    },
+    "16": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "17": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "18": {
+      "t": "grass",
+      "o": "mountains",
+      "ov": 1,
+      "b": 1
+    },
+    "19": {
+      "t": "grass"
+    }
+  },
+  "1": {
+    "0": {
+      "t": "grass"
+    },
+    "1": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "2": {
+      "t": "grass"
+    },
+    "3": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "4": {
+      "t": "grass",
+      "o": "mountains",
+      "ov": 1,
+      "b": 1
+    },
+    "5": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "6": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "7": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "8": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "9": {
+      "t": "grass"
+    },
+    "10": {
+      "t": "grass"
+    },
+    "11": {
+      "t": "sand"
+    },
+    "12": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "13": {
+      "t": "sand"
+    },
+    "14": {
+      "t": "sand",
+      "o": "mansion",
+      "ov": 1
+    },
+    "15": {
+      "t": "grass",
+      "o": "house",
+      "ov": 2
+    },
+    "16": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "17": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "18": {
+      "t": "grass"
+    },
+    "19": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 1
+    }
+  },
+  "2": {
+    "0": {
+      "t": "grass"
+    },
+    "1": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "2": {
+      "t": "sand"
+    },
+    "3": {
+      "t": "grass",
+      "o": "mountains",
+      "ov": 1,
+      "b": 1
+    },
+    "4": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "5": {
+      "t": "grass",
+      "o": "house",
+      "ov": 2
+    },
+    "6": {
+      "t": "grass"
+    },
+    "7": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "8": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "9": {
+      "t": "grass"
+    },
+    "10": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 1
+    },
+    "11": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "12": {
+      "t": "sand"
+    },
+    "13": {
+      "t": "grass"
+    },
+    "14": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "15": {
+      "t": "grass"
+    },
+    "16": {
+      "t": "grass"
+    },
+    "17": {
+      "t": "grass"
+    },
+    "18": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "19": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    }
+  },
+  "3": {
+    "0": {
+      "t": "grass"
+    },
+    "1": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "2": {
+      "t": "grass",
+      "o": "mountains",
+      "ov": 1,
+      "b": 1
+    },
+    "3": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "4": {
+      "t": "grass"
+    },
+    "5": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "6": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "7": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "8": {
+      "t": "grass"
+    },
+    "9": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "10": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "11": {
+      "t": "sand"
+    },
+    "12": {
+      "t": "sand"
+    },
+    "13": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "14": {
+      "t": "grass"
+    },
+    "15": {
+      "t": "grass",
+      "o": "mountains",
+      "ov": 1,
+      "b": 1
+    },
+    "16": {
+      "t": "grass"
+    },
+    "17": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "18": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "19": {
+      "t": "grass"
+    }
+  },
+  "4": {
+    "0": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "1": {
+      "t": "grass",
+      "o": "mountains",
+      "ov": 1,
+      "b": 1
+    },
+    "2": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "3": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "4": {
+      "t": "grass"
+    },
+    "5": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 2
+    },
+    "6": {
+      "t": "sand",
+      "o": "mansion",
+      "ov": 3
+    },
+    "7": {
+      "t": "grass"
+    },
+    "8": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "9": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "10": {
+      "t": "grass"
+    },
+    "11": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "12": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "13": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "14": {
+      "t": "grass",
+      "o": "house",
+      "ov": 1
+    },
+    "15": {
+      "t": "grass"
+    },
+    "16": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "17": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 1
+    },
+    "18": {
+      "t": "grass"
+    },
+    "19": {
+      "t": "grass"
+    }
+  },
+  "5": {
+    "0": {
+      "t": "grass"
+    },
+    "1": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "2": {
+      "t": "grass"
+    },
+    "3": {
+      "t": "grass"
+    },
+    "4": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "5": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "6": {
+      "t": "grass"
+    },
+    "7": {
+      "t": "grass"
+    },
+    "8": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "9": {
+      "t": "sand"
+    },
+    "10": {
+      "t": "grass"
+    },
+    "11": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "12": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "13": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "14": {
+      "t": "grass"
+    },
+    "15": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "16": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "17": {
+      "t": "grass"
+    },
+    "18": {
+      "t": "grass"
+    },
+    "19": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    }
+  },
+  "6": {
+    "0": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "1": {
+      "t": "sand",
+      "o": "mansion",
+      "ov": 3
+    },
+    "2": {
+      "t": "grass"
+    },
+    "3": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 2
+    },
+    "4": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "5": {
+      "t": "grass"
+    },
+    "6": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 1
+    },
+    "7": {
+      "t": "grass"
+    },
+    "8": {
+      "t": "grass"
+    },
+    "9": {
+      "t": "grass"
+    },
+    "10": {
+      "t": "grass"
+    },
+    "11": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "12": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "13": {
+      "t": "grass"
+    },
+    "14": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "15": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "16": {
+      "t": "grass"
+    },
+    "17": {
+      "t": "grass"
+    },
+    "18": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "19": {
+      "t": "grass",
+      "o": "house",
+      "ov": 2
+    }
+  },
+  "7": {
+    "0": {
+      "t": "grass"
+    },
+    "1": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "2": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "3": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 2
+    },
+    "4": {
+      "t": "grass"
+    },
+    "5": {
+      "t": "grass",
+      "o": "mountains",
+      "ov": 1,
+      "b": 1
+    },
+    "6": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "7": {
+      "t": "sand"
+    },
+    "8": {
+      "t": "grass"
+    },
+    "9": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "10": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 1
+    },
+    "11": {
+      "t": "grass"
+    },
+    "12": {
+      "t": "grass"
+    },
+    "13": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "14": {
+      "t": "grass"
+    },
+    "15": {
+      "t": "grass"
+    },
+    "16": {
+      "t": "grass"
+    },
+    "17": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "18": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "19": {
+      "t": "grass"
+    }
+  },
+  "8": {
+    "0": {
+      "t": "grass"
+    },
+    "1": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 1
+    },
+    "2": {
+      "t": "sand",
+      "o": "house",
+      "ov": 2
+    },
+    "3": {
+      "t": "grass"
+    },
+    "4": {
+      "t": "sand"
+    },
+    "5": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "6": {
+      "t": "sand"
+    },
+    "7": {
+      "t": "sand"
+    },
+    "8": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "9": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "10": {
+      "t": "grass"
+    },
+    "11": {
+      "t": "grass"
+    },
+    "12": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "13": {
+      "t": "grass",
+      "o": "mountains",
+      "ov": 1,
+      "b": 1
+    },
+    "14": {
+      "t": "grass"
+    },
+    "15": {
+      "t": "sand",
+      "o": "house",
+      "ov": 3
+    },
+    "16": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "17": {
+      "t": "grass",
+      "o": "house",
+      "ov": 2
+    },
+    "18": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "19": {
+      "t": "sand"
+    }
+  },
+  "9": {
+    "0": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "1": {
+      "t": "sand",
+      "o": "mansion",
+      "ov": 3
+    },
+    "2": {
+      "t": "grass"
+    },
+    "3": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "4": {
+      "t": "grass"
+    },
+    "5": {
+      "t": "sand"
+    },
+    "6": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "7": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "8": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "9": {
+      "t": "grass",
+      "o": "house",
+      "ov": 1
+    },
+    "10": {
+      "t": "grass"
+    },
+    "11": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "12": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "13": {
+      "t": "grass"
+    },
+    "14": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 1
+    },
+    "15": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "16": {
+      "t": "grass"
+    },
+    "17": {
+      "t": "grass",
+      "o": "house",
+      "ov": 3
+    },
+    "18": {
+      "t": "sand"
+    },
+    "19": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    }
+  },
+  "10": {
+    "0": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "1": {
+      "t": "grass"
+    },
+    "2": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "3": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "4": {
+      "t": "sand"
+    },
+    "5": {
+      "t": "sand",
+      "o": "house",
+      "ov": 2
+    },
+    "6": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "7": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "8": {
+      "t": "grass",
+      "o": "mountains",
+      "ov": 1,
+      "b": 1
+    },
+    "9": {
+      "t": "grass"
+    },
+    "10": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "11": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "12": {
+      "t": "grass"
+    },
+    "13": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "14": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "15": {
+      "t": "grass"
+    },
+    "16": {
+      "t": "grass"
+    },
+    "17": {
+      "t": "sand",
+      "o": "house",
+      "ov": 2
+    },
+    "18": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 2
+    },
+    "19": {
+      "t": "grass"
+    }
+  },
+  "11": {
+    "0": {
+      "t": "grass"
+    },
+    "1": {
+      "t": "sand"
+    },
+    "2": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "3": {
+      "t": "sand"
+    },
+    "4": {
+      "t": "grass"
+    },
+    "5": {
+      "t": "grass"
+    },
+    "6": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "7": {
+      "t": "sand",
+      "o": "mansion",
+      "ov": 1
+    },
+    "8": {
+      "t": "grass"
+    },
+    "9": {
+      "t": "grass"
+    },
+    "10": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "11": {
+      "t": "grass"
+    },
+    "12": {
+      "t": "grass"
+    },
+    "13": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "14": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "15": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "16": {
+      "t": "sand"
+    },
+    "17": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "18": {
+      "t": "sand"
+    },
+    "19": {
+      "t": "grass"
+    }
+  },
+  "12": {
+    "0": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 1
+    },
+    "1": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "2": {
+      "t": "sand",
+      "o": "house",
+      "ov": 3
+    },
+    "3": {
+      "t": "grass"
+    },
+    "4": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "5": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "6": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "7": {
+      "t": "grass"
+    },
+    "8": {
+      "t": "sand",
+      "o": "mansion",
+      "ov": 3
+    },
+    "9": {
+      "t": "grass"
+    },
+    "10": {
+      "t": "grass"
+    },
+    "11": {
+      "t": "grass",
+      "o": "mountains",
+      "ov": 1,
+      "b": 1
+    },
+    "12": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "13": {
+      "t": "grass",
+      "o": "house",
+      "ov": 2
+    },
+    "14": {
+      "t": "grass"
+    },
+    "15": {
+      "t": "sand"
+    },
+    "16": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 1
+    },
+    "17": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "18": {
+      "t": "grass"
+    },
+    "19": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 2
+    }
+  },
+  "13": {
+    "0": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "1": {
+      "t": "sand"
+    },
+    "2": {
+      "t": "grass"
+    },
+    "3": {
+      "t": "grass",
+      "o": "house",
+      "ov": 2
+    },
+    "4": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "5": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "6": {
+      "t": "grass"
+    },
+    "7": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "8": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 2
+    },
+    "9": {
+      "t": "grass"
+    },
+    "10": {
+      "t": "grass"
+    },
+    "11": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "12": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "13": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "14": {
+      "t": "sand"
+    },
+    "15": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "16": {
+      "t": "grass",
+      "o": "house",
+      "ov": 3
+    },
+    "17": {
+      "t": "grass"
+    },
+    "18": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "19": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    }
+  },
+  "14": {
+    "0": {
+      "t": "sand",
+      "o": "house",
+      "ov": 3
+    },
+    "1": {
+      "t": "grass"
+    },
+    "2": {
+      "t": "grass",
+      "o": "house",
+      "ov": 2
+    },
+    "3": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 1
+    },
+    "4": {
+      "t": "grass"
+    },
+    "5": {
+      "t": "grass"
+    },
+    "6": {
+      "t": "sand",
+      "o": "house",
+      "ov": 2
+    },
+    "7": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 1
+    },
+    "8": {
+      "t": "grass"
+    },
+    "9": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "10": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "11": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "12": {
+      "t": "grass"
+    },
+    "13": {
+      "t": "sand"
+    },
+    "14": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "15": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "16": {
+      "t": "grass"
+    },
+    "17": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "18": {
+      "t": "grass"
+    },
+    "19": {
+      "t": "grass"
+    }
+  },
+  "15": {
+    "0": {
+      "t": "grass"
+    },
+    "1": {
+      "t": "grass"
+    },
+    "2": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 1
+    },
+    "3": {
+      "t": "grass",
+      "o": "house",
+      "ov": 1
+    },
+    "4": {
+      "t": "grass"
+    },
+    "5": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "6": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "7": {
+      "t": "grass"
+    },
+    "8": {
+      "t": "grass",
+      "o": "mountains",
+      "ov": 1,
+      "b": 1
+    },
+    "9": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "10": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "11": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "12": {
+      "t": "sand"
+    },
+    "13": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "14": {
+      "t": "sand"
+    },
+    "15": {
+      "t": "grass"
+    },
+    "16": {
+      "t": "grass",
+      "o": "mountains",
+      "ov": 1,
+      "b": 1
+    },
+    "17": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "18": {
+      "t": "grass"
+    },
+    "19": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    }
+  },
+  "16": {
+    "0": {
+      "t": "grass",
+      "o": "house",
+      "ov": 2
+    },
+    "1": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "2": {
+      "t": "grass"
+    },
+    "3": {
+      "t": "grass"
+    },
+    "4": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "5": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "6": {
+      "t": "grass"
+    },
+    "7": {
+      "t": "grass",
+      "o": "house",
+      "ov": 1
+    },
+    "8": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "9": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "10": {
+      "t": "grass"
+    },
+    "11": {
+      "t": "sand"
+    },
+    "12": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 2
+    },
+    "13": {
+      "t": "sand",
+      "o": "house",
+      "ov": 3
+    },
+    "14": {
+      "t": "grass"
+    },
+    "15": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "16": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 2
+    },
+    "17": {
+      "t": "grass"
+    },
+    "18": {
+      "t": "grass",
+      "o": "house",
+      "ov": 2
+    },
+    "19": {
+      "t": "grass",
+      "o": "mountains",
+      "ov": 1,
+      "b": 1
+    }
+  },
+  "17": {
+    "0": {
+      "t": "sand",
+      "o": "mansion",
+      "ov": 3
+    },
+    "1": {
+      "t": "grass"
+    },
+    "2": {
+      "t": "grass"
+    },
+    "3": {
+      "t": "grass"
+    },
+    "4": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "5": {
+      "t": "grass"
+    },
+    "6": {
+      "t": "grass"
+    },
+    "7": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "8": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "9": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "10": {
+      "t": "sand"
+    },
+    "11": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 1
+    },
+    "12": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "13": {
+      "t": "grass"
+    },
+    "14": {
+      "t": "grass",
+      "o": "mountains",
+      "ov": 1,
+      "b": 1
+    },
+    "15": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 1
+    },
+    "16": {
+      "t": "grass"
+    },
+    "17": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "18": {
+      "t": "sand",
+      "o": "mansion",
+      "ov": 2
+    },
+    "19": {
+      "t": "grass",
+      "o": "mountains",
+      "ov": 1,
+      "b": 1
+    }
+  },
+  "18": {
+    "0": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "1": {
+      "t": "grass"
+    },
+    "2": {
+      "t": "grass"
+    },
+    "3": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "4": {
+      "t": "grass"
+    },
+    "5": {
+      "t": "grass",
+      "o": "house",
+      "ov": 1
+    },
+    "6": {
+      "t": "grass"
+    },
+    "7": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "8": {
+      "t": "grass"
+    },
+    "9": {
+      "t": "sand",
+      "o": "house",
+      "ov": 2
+    },
+    "10": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "11": {
+      "t": "grass",
+      "o": "pond",
+      "ov": 1,
+      "b": 1
+    },
+    "12": {
+      "t": "grass"
+    },
+    "13": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 2
+    },
+    "14": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 1
+    },
+    "15": {
+      "t": "grass"
+    },
+    "16": {
+      "t": "grass"
+    },
+    "17": {
+      "t": "grass",
+      "o": "mountains",
+      "ov": 1,
+      "b": 1
+    },
+    "18": {
+      "t": "sand",
+      "o": "mansion",
+      "ov": 1
+    },
+    "19": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    }
+  },
+  "19": {
+    "0": {
+      "t": "grass"
+    },
+    "1": {
+      "t": "grass",
+      "o": "mansion",
+      "ov": 1
+    },
+    "2": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "3": {
+      "t": "grass"
+    },
+    "4": {
+      "t": "sand",
+      "o": "mansion",
+      "ov": 1
+    },
+    "5": {
+      "t": "grass"
+    },
+    "6": {
+      "t": "grass"
+    },
+    "7": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "8": {
+      "t": "sand"
+    },
+    "9": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "10": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "11": {
+      "t": "grass"
+    },
+    "12": {
+      "t": "sand",
+      "o": "house",
+      "ov": 1
+    },
+    "13": {
+      "t": "grass",
+      "o": "hills",
+      "ov": 1
+    },
+    "14": {
+      "t": "grass"
+    },
+    "15": {
+      "t": "grass",
+      "o": "trees",
+      "ov": 1
+    },
+    "16": {
+      "t": "grass",
+      "o": "mountains",
+      "ov": 1,
+      "b": 1
+    },
+    "17": {
+      "t": "grass",
+      "o": "mountains",
+      "ov": 1,
+      "b": 1
+    },
+    "18": {
+      "t": "grass"
+    },
+    "19": {
+      "t": "grass"
+    }
+  }
+}

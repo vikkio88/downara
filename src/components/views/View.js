@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStoreon } from 'storeon/react';
-import { Icon, Button } from 'components/common';
+import { CloseRow } from 'components/common';
 import { VIEWS } from 'lib/game';
 
 import { Inventory, Journal, Map, Profile, Settings } from './subViews';
@@ -19,12 +19,7 @@ const View = () => {
     const Component = viewsMap[view];
     return (
         <>
-            <div className="flex justify-end">
-                <Button onClick={() => dispatch('changeView', null)}>
-                    <Icon name={Icon.names.CROSS} />
-                </Button>
-            </div>
-
+            <CloseRow onClose={()=> dispatch('changeView', null)} />
             <div className="flex-1 flex flex-col shadow overflow-y-auto">
                 <Component />
             </div>

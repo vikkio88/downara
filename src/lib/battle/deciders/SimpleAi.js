@@ -23,15 +23,27 @@ export default class SimpleAi {
 
         const humanPosition = battle.getHumanPosition();
         const selfPosition = self.getPosition();
-        const weaponReach = self.inventory.getWeapon().getReach();
+        const weaponReach = self.getWeapon().getReach();
 
         const targetDistance = battle.field.tilesDistance(selfPosition, humanPosition);
 
+        const endurance = self.getEndurance();
+
+        if (endurance < 30) {
+            return {
+                type: ACTIONS.PARRY,
+                payload: {
+                    position: null
+                }
+            };
+        }
+
         if (targetDistance > weaponReach) {
+            const nextStep = battle.field.nextStepToTile(selfPosition, humanPosition);
             return {
                 type: ACTIONS.MOVE,
                 payload: {
-                    position: battle.field.nextStepToTile(selfPosition, humanPosition)
+                    position: nextStep
                 }
             };
         }

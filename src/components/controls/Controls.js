@@ -5,19 +5,19 @@ import { Actions, Message, Dialogue } from 'components/controls';
 import { STATUSES } from 'lib/game';
 
 const Controls = () => {
-    const { gameState: { status }, ui: { message } } = useStoreon('gameState', 'ui');
+    const { dispatch, gameState: { status }, ui: { message } } = useStoreon('gameState', 'ui');
 
     if (status === STATUSES.SPEAKING) {
         return (
-            <div className="flex-1 flex items-center">
+            <div className="flex-1 flex items-center bg-gray-400">
                 {status === STATUSES.SPEAKING && !message && <Dialogue />}
             </div>
         );
     }
 
     return (
-        <div className="flex-1 flex items-center justify-center">
-            {message && <Message />}
+        <div className="flex-1 flex items-center justify-center bg-gray-400">
+            {message && <Message {...message} onDismiss={() => dispatch('clearMessage')} />}
             {status === STATUSES.IDLE && !message && <Actions />}
         </div>
     );

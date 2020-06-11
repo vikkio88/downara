@@ -1,10 +1,9 @@
 import { Character, FACING, ACTIONS, AI } from './Character';
-import { Field } from 'components/battle';
 
 describe('Character', () => {
     const id = 'someId';
     const config = {};
-    const inventory = {};
+    const inventory = { getArmour: () => { } };
     const position = { i: 0, j: 0 };
     const facing = FACING.RIGHT;
 
@@ -60,6 +59,40 @@ describe('Character', () => {
 
             character.apply({ health: 10 });
             expect(character.getHealthPoints()).toBe(100);
+        });
+
+        test('applying health effect with Shield Up', () => {
+            const character = new Character(id, { shield: 10 });
+            expect(character.getHealthPoints()).toBe(100);
+            expect(character.getShield()).toBe(10);
+            const effect = { health: -10 };
+            character.apply(effect);
+            expect(character.getShield()).toBe(0);
+            expect(character.getHealthPoints()).toBe(100);
+
+            character.apply({ health: -10 });
+            expect(character.getShield()).toBe(0);
+            expect(character.getHealthPoints()).toBe(90);
+
+            // shield cannot go over max (default 10)
+            character.apply({ health: 10, shield: 20 });
+            expect(character.getShield()).toBe(10);
+            expect(character.getHealthPoints()).toBe(100);
+        });
+
+        test('[REGRESSION] Healing ShieldUP lol', () => {
+            let character = new Character(id, { shield: 50, max: { shield: 50 } });
+            character.apply({ health: -100 });
+            expect(character.getShield()).toBe(0);
+            expect(character.getHealthPoints()).toBe(50);
+
+            character.apply({ shield: 50 });
+            expect(character.getShield()).toBe(50);
+            expect(character.getHealthPoints()).toBe(50);
+
+            character.apply({ health: -10 });
+            expect(character.getShield()).toBe(40);
+            expect(character.getHealthPoints()).toBe(50); // lol this failed
         });
 
         test('applying endurance effect', () => {
@@ -138,7 +171,8 @@ describe('Character', () => {
                 };
 
                 const inventory = {
-                    getWeapon: () => ({ getReach: () => 1 })
+                    getWeapon: () => ({ getReach: () => 1 }),
+                    getArmour: () => null
                 };
                 const aiCharPosition = { i: 0, j: 0 };
                 const aiCharacter = new Character(id, config, inventory, aiCharPosition);
@@ -162,7 +196,8 @@ describe('Character', () => {
                 };
 
                 const inventory = {
-                    getWeapon: () => ({ getReach: () => 1 })
+                    getWeapon: () => ({ getReach: () => 1 }),
+                    getArmour: () => null
                 };
                 const aiCharPosition = { i: 0, j: 0 };
                 const aiCharacter = new Character(id, config, inventory, aiCharPosition);
@@ -187,7 +222,8 @@ describe('Character', () => {
                 };
 
                 const inventory = {
-                    getWeapon: () => ({ getReach: () => 1 })
+                    getWeapon: () => ({ getReach: () => 1 }),
+                    getArmour: () => null
                 };
                 const aiCharPosition = { i: 0, j: 0 };
                 const aiCharacter = new Character(
@@ -229,7 +265,8 @@ describe('Character', () => {
                 };
 
                 const inventory = {
-                    getWeapon: () => ({ getReach: () => 1 })
+                    getWeapon: () => ({ getReach: () => 1 }),
+                    getArmour: () => null
                 };
                 const aiCharPosition = { i: 0, j: 0 };
                 const aiCharacter = new Character(
