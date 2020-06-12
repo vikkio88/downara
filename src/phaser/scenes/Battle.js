@@ -35,7 +35,7 @@ export default class extends Phaser.Scene {
             const stroke = winner ? '#fff' : '#000';
             // just trying to see what to do in here
             this.add.text(
-                100, 100,
+                (window.innerWidth / 2) - 200, (window.innerHeight / 2) - 200,
                 message,
                 {
                     font: '40px monospace',
@@ -49,8 +49,8 @@ export default class extends Phaser.Scene {
     }
 
     create() {
-        const marginJ = (window.innerWidth - 600) / 2;
-        const marginI = (window.innerHeight - 600) / 2;
+        const marginJ = 10;
+        const marginI = 10;
         this.grid = new BattleGrid(
             this,
             {
