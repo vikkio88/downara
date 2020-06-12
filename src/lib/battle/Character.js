@@ -149,10 +149,18 @@ export class Character {
         return this.inventory.getArmour();
     }
 
+    isDead() {
+        return this.getHealthPoints() <= 0;
+    }
+
 
     perform({ type, payload = {} }, battle) {
         // this makes the user pay endurance
         this.apply(ACTIONS_CONFIG[type]);
+
+        if (this.isDead()) {
+            return false;
+        }
 
         const { position = this.getPosition() } = payload;
 

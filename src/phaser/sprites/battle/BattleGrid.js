@@ -48,8 +48,9 @@ const ACTION_ANIMATIONS = {
         };
     },
     [ACTIONS.PARRY]: (grid, target, result, index) => {
-        // result will always be true here I think
+        // parry can fail if player died
         const callback = () => grid.scene.events.emit(animationFinishedLabel(index));
+        if (!result) return () => callback();
         return () => {
             target.reportResult(ACTIONS.PARRY, Boolean(result));
             target.showParry(callback);

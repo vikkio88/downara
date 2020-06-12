@@ -4,7 +4,8 @@ export const ACTIONS = {
     ATTACK: 'attack',
     PARRY: 'parry',
     CHANGE_FACING: 'change_facing',
-    USE_ITEM: 'use_item'
+    USE_ITEM: 'use_item',
+    DIE: ' die'
 };
 
 export class Battle {
@@ -147,12 +148,12 @@ export class Battle {
     getStatus() {
         let finished = false, winner = false, deaths = [];
         const human = this.getHuman();
-        if (human && human.getHealthPoints() <= 0) {
+        if (human && human.isDead()) {
             return { finished: true, winner: false };
         }
 
         for (const enemy of this.aliveEnemies) {
-            if (enemy.getHealthPoints() <= 0) {
+            if (enemy.isDead()) {
                 deaths.push(enemy.id);
             }
         }
