@@ -1,13 +1,13 @@
 import React from 'react';
 import './Stat.css';
 
-const VARIANTS = {
+export const VARIANTS = {
     GRAY: 'gray',
     RED: 'red',
     GREEN: 'green'
 };
 
-const Stat = ({ label, value, max, variant }) => {
+export const Stat = ({ label, value, max, variant }) => {
     const percentage = value / max * 100;
     return (
         <div className="relative">
@@ -28,6 +28,10 @@ const Stat = ({ label, value, max, variant }) => {
             </div>
         </div>
     );
+};
+
+export const HP = ({ hp, max }) => {
+    return <Stat label={`Health`} value={hp} max={max} variant={VARIANTS.RED} />;
 };
 
 export default ({ stats, maxes }) => {

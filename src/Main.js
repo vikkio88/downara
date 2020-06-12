@@ -8,7 +8,6 @@ import CommandBar from "components/ui/CommandBar";
 
 import { Controls as BattleControls } from "components/battle";
 import { View } from "components/views";
-import { Container } from "components/dialogues";
 import { Controls as IdleControls } from "components/controls";
 
 function Main() {
@@ -27,11 +26,6 @@ function Main() {
       {view && <View />}
       {!view && (
         <>
-          <EnvWindow>
-            {/*status === STATUSES.FIGHTING && <Field />*/}
-            {/*status === STATUSES.IDLE && <Area />*/}
-            {status === STATUSES.SPEAKING && <Container />}
-          </EnvWindow>
           <CommandBar>
             <Controls />
           </CommandBar>

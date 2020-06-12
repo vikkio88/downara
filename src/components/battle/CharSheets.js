@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import get from 'lodash.get';
 import { useStoreon } from 'storeon/react';
-import { CloseRow } from '../common';
+import { CloseRow, Tabs } from '../common';
 import Stats from './Stats';
 
-const ValueRow = ({ label, value }) => {
+const ValueRow = ({ label = '', value = '' }) => {
     return (
         <tr className="border hover:bg-gray-300 bg-white">
             <td className="font-semibold border">{label}</td>
@@ -43,7 +43,7 @@ const Armour = ({ name, maxShield, parry, speedModifier }) => {
             <tbody>
                 <ValueRow label="shield" value={`+${maxShield}`} />
                 <ValueRow label="parry" value={`${parry}`} />
-                {speedModifier !== 0 && <ValueRow label="movement" value={`${speedModifier}`} />}
+                <ValueRow label="movement" value={`${speedModifier}`} />
             </tbody>
         </table>
     );
@@ -51,6 +51,7 @@ const Armour = ({ name, maxShield, parry, speedModifier }) => {
 
 const CharSheet = ({ char }) => {
     const { dispatch } = useStoreon();
+    const [activeTab, setTab] = useState(0);
     const isPlayer = !(char.isAi());
     const header = <span className={`text-xl${isPlayer ? ' font-semibold' : ''}`}>{char.getName()}</span>;
     const weapon = char.getWeapon().toJs();
@@ -59,12 +60,11 @@ const CharSheet = ({ char }) => {
         <div className="flex-1 flex flex-col m-2 bg-gray-300 border-2 border-solid rounded">
             <CloseRow onClose={() => dispatch('battle:unselectCharacter', char.id)} header={header} />
             <div className="flex flex-col">
+                <Tabs tabs={['weapon', 'armour']} active={activeTab} onClick={tab => setTab(tab)} />
                 <div className="flex flex-row justify-center items-center">
                     <div className="flex-1 flex flex-col">
-                        <Weapon {...weapon} />
-                    </div>
-                    <div className="flex-1 flex flex-col">
-                        <Armour {...armour} />
+                        {activeTab === 0 && <Weapon {...weapon} />}
+                        {activeTab === 1 && <Armour {...armour} />}
                     </div>
                 </div>
                 <Stats stats={char.getStats()} maxes={char.getMaxValues()} />
