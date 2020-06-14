@@ -33,8 +33,9 @@ export default class extends Phaser.Scene {
             const message = winner ? 'YOU WIN' : 'YOU DIED';
             const fill = winner ? '#00ff00' : '#ff0000';
             const stroke = winner ? '#fff' : '#000';
+            this.input.on('wheel', () => { });
             // just trying to see what to do in here
-            this.add.text(
+            const text = this.add.text(
                 (window.innerWidth / 2) - 200, (window.innerHeight / 2) - 200,
                 message,
                 {
@@ -45,6 +46,8 @@ export default class extends Phaser.Scene {
                     stroke
                 }
             );
+            this.mainCamera.x = text.x;
+            this.mainCamera.y = text.y;
         });
     }
 
