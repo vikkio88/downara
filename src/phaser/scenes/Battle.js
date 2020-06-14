@@ -36,8 +36,10 @@ export default class extends Phaser.Scene {
             this.mainCamera.zoom = 1;
             this.input.removeListener('wheel');
             // just trying to see what to do in here
+            const centerX = this.mainCamera.worldView.x + this.mainCamera.width / 2;
+            const centerY = this.mainCamera.worldView.y + this.mainCamera.height / 2;
             const text = this.add.text(
-                (window.innerWidth / 2) - 400, 100,
+                centerX, centerY,
                 message,
                 {
                     font: '40px monospace',
@@ -47,8 +49,7 @@ export default class extends Phaser.Scene {
                     stroke
                 }
             );
-            this.mainCamera.x = text.x;
-            this.mainCamera.y = text.y;
+            text.setOrigin(.5);
         });
     }
 

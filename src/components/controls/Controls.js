@@ -5,7 +5,9 @@ import { Actions, Message, Dialogue } from 'components/controls';
 import { STATUSES } from 'lib/game';
 
 const Controls = () => {
-    const { dispatch, gameState: { status }, ui: { message } } = useStoreon('gameState', 'ui');
+    const { dispatch, gameState: { isLoading, status }, ui: { message } } = useStoreon('gameState', 'ui');
+
+    if (isLoading) return null;
 
     if (status === STATUSES.SPEAKING) {
         return (

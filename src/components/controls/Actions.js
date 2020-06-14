@@ -37,7 +37,7 @@ const SecondaryMenu = ({ showMenu, setShowMenu, dispatch }) => {
 };
 
 const Actions = () => {
-    const { dispatch, ui: { notification } } = useStoreon('gameState', 'ui');
+    const { dispatch, ui: { notification } } = useStoreon('ui');
     const [showMenu, setShowMenu] = useState(false);
     if (showMenu) {
         const props = { showMenu, setShowMenu, dispatch };

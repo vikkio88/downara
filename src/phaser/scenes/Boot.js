@@ -8,12 +8,18 @@ export default class extends Phaser.Scene {
   }
 
   preload() {
-    const progress = this.add.graphics();
+    const centerX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
+    const centerY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
+    const loadingText = this.add.text(centerX, centerY, 'Loading...',{
+      font: '40px monospace',
+      stroke: '#cbd5e0',
+      fontStyle: 'strong',
+      strokeThickness: 2,
+      fill: '#4299e1'
+  }).setOrigin(0.5);
 
-    this.load.on("fileprogress", (file, value) => {
-      progress.clear();
-      progress.fillStyle(0xffffff, 0.75);
-      progress.fillRect(700 - value * 600, 250, value * 600, 100);
+    this.load.on('complete', () => {
+      loadingText.destroy();
     });
 
     this.load.image('grass', 'assets/tiles/grass_1.png');
@@ -24,27 +30,13 @@ export default class extends Phaser.Scene {
     this.load.image('battlePlayer', 'assets/battle/man_up.png');
     this.load.image('battleEnemy', 'assets/battle/man_up2.png');
 
-    /*
-    this.load.spritesheet('player', "assets/objects/main/player.png", {
-      frameWidth: 32,
-      frameHeight: 32,
-    });
-    */
-
     this.load.spritesheet('mapTiles', "assets/tiles/tileset.png", {
       frameWidth: 16,
       frameHeight: 16,
     });
-    /*
-    for (let i = 0; i <= 4; i++) {
-      this.load.json(`area_${i}`, `assets/areas/area_${i}.json`);
-    }
-    */
   }
 
   create() {
-    //this.scene.start("TestMap");
-    //this.scene.start("World");
     eventBridge.on('game:battle', payload => {
       console.log('[phaser] trigger battle', payload);
       this.scene.start("Battle", payload);

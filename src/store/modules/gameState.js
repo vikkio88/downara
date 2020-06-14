@@ -9,13 +9,14 @@ export default store => {
     store.on('@init', () => {
         return {
             gameState: {
+                isLoading: true,
                 ...initialGameState,
             },
         };
     });
 
     store.on('phaserReady', ({ gameState }) => {
-        return { gameState: { ...gameState, status: STATUSES.IDLE } };
+        return { gameState: { ...gameState, isLoading: false, status: STATUSES.IDLE } };
     });
 
     store.on('startBattle', ({ gameState }) => {
