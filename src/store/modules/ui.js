@@ -1,4 +1,4 @@
-import { MESSAGE_TYPES } from 'lib/game';
+import { MESSAGE_TYPES, VIEWS } from 'lib/game';
 
 
 export default store => {
@@ -29,6 +29,7 @@ export default store => {
     });
 
     store.on('changeView', ({ ui }, view) => {
+        if (!view) view = VIEWS.MAIN;
         return { ui: { ...ui, view: view, notification: null } };
     });
 

@@ -5,6 +5,10 @@ const initialGameState = {
     status: STATUSES.IDLE,
     player: {
         name: null
+    },
+    inventory: {
+        maxWeight: 10,
+        money: 0,
     }
 };
 

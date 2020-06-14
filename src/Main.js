@@ -16,7 +16,7 @@ function Main() {
 
   const isInFightMode = status === STATUSES.FIGHTING;
 
-  const Controls = status === isInFightMode ? BattleControls : IdleControls;
+  const Controls = isInFightMode ? BattleControls : IdleControls;
 
   return (
     <>

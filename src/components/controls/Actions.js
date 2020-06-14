@@ -19,12 +19,6 @@ const SecondaryMenu = ({ showMenu, setShowMenu, dispatch }) => {
                 <Button className="flex-1" onClick={() => dispatch('changeView', VIEWS.INVENTORY)}>
                     <Icon name={Icon.names.BOX} />
                 </Button>
-                <Button className="flex-1" onClick={() => dispatch('changeView', VIEWS.JOURNAL)}>
-                    <Icon name={Icon.names.BOOK} />
-                </Button>
-                <Button className="flex-1" onClick={() => dispatch('changeView', VIEWS.MAP)}>
-                    <Icon name={Icon.names.MAP} />
-                </Button>
                 <Button className="flex-1" onClick={() => dispatch('changeView', VIEWS.PROFILE)}>
                     <Icon name={Icon.names.USER} />
                 </Button>
