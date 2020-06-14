@@ -5,7 +5,7 @@ export const ACTIONS = {
     PARRY: 'parry',
     CHANGE_FACING: 'change_facing',
     USE_ITEM: 'use_item',
-    DIE: ' die'
+    DIE: 'die'
 };
 
 export class Battle {
@@ -235,7 +235,6 @@ export class Battle {
 
             const result = character.perform(move, this);
             // here we check if is dead and we override the move
-            console.log(`MOVE: ${move.id} `, { move, result });
             if (character.isDead()) {
                 move.type = ACTIONS.DIE;
             }

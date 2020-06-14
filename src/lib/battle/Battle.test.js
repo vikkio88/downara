@@ -1,10 +1,11 @@
 import { Battle } from './Battle';
 import { pg } from 'lib';
 
-const charGen = ({ id = 'test1', getSpeed = () => 1, isAi = () => true, getHealthPoints = () => 1, ...others } = {}) => {
+const charGen = ({ id = 'test1', getSpeed = () => 1, isAi = () => true, getHealthPoints = () => 1, isDead = () => false, ...others } = {}) => {
     return {
         id, getSpeed, isAi,
         getHealthPoints, getPosition: () => pg(0, 0),
+        isDead,
         ...others
     };
 };
@@ -193,7 +194,7 @@ describe('Battle test (battletesting battle test)', () => {
         it('returns correct info given enemies are still alive', () => {
             const characters = [
                 charGen(),
-                charGen({ id: 'test2', getHealthPoints: () => 0 }),
+                charGen({ id: 'test2', isDead: () => true }),
                 charGen({ id: 'test3' }),
                 charGen({ id: 'human', isAi: () => false }),
             ];
@@ -208,7 +209,7 @@ describe('Battle test (battletesting battle test)', () => {
                 charGen(),
                 charGen({ id: 'test2' }),
                 charGen({ id: 'test3' }),
-                charGen({ id: 'human', isAi: () => false, getHealthPoints: () => 0 }),
+                charGen({ id: 'human', isAi: () => false, isDead: () => true }),
             ];
 
             const battle = new Battle(fieldMock, characters);
@@ -218,9 +219,9 @@ describe('Battle test (battletesting battle test)', () => {
 
         it('returns correct info given all enemies are dead', () => {
             const characters = [
-                charGen({ getHealthPoints: () => 0 }),
-                charGen({ id: 'test2', getHealthPoints: () => 0 }),
-                charGen({ id: 'test3', getHealthPoints: () => 0 }),
+                charGen({ isDead: () => true }),
+                charGen({ id: 'test2', isDead: () => true }),
+                charGen({ id: 'test3', isDead: () => true }),
                 charGen({ id: 'human', isAi: () => false }),
             ];
 

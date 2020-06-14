@@ -235,7 +235,9 @@ describe('Full Battle test (battletesting battle test testing battle testing bat
         playerMove = currentTurnResult[0];
         enemyMove = currentTurnResult[1];
         expect(Boolean(playerMove.result)).toBe(true);
-        expect(Boolean(enemyMove.result)).toBe(true);
+        // enemy move is DIE and result is false
+        expect(enemyMove.move.type).toBe(ACTIONS.DIE);
+        expect(Boolean(enemyMove.result)).toBe(false);
         expect(battleInstance.field.getObject(pg(1, 2))).toEqual({
             id: HUMAN_ID,
             type: 'character'
