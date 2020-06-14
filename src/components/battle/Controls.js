@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStoreon } from 'storeon/react';
-import { HP, Endurance } from './Stats';
+import { LiteStats } from './Stats';
 import CharSheets from './CharSheets';
 import { Button } from '../common';
 
@@ -17,8 +17,7 @@ const Controls = () => {
                 <CharSheets characters={selectedCharacters} />
             )}
             <div className="flex-1 flex flex-col bg-gray-400">
-                <Endurance value={human.getEndurance()} max={human.getMaxValues().endurance} />
-                <HP value={human.getHealthPoints()} max={human.getMaxValues().hp} />
+                <LiteStats stats={human.getStats()} maxes={human.getMaxValues()} />
                 <div className="flex-1 flex items-center justify-center flex-col">
                     <div className="flex-1 flex items-center justify-center">
                         {action && <Button
@@ -28,7 +27,7 @@ const Controls = () => {
                             Cancel
                         </Button>
                         }
-                        {true && (
+                        {!action && (
                             <>
                                 <Button
                                     disabled={lock || (action && !tile)}

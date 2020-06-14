@@ -40,6 +40,18 @@ export const Endurance = ({ value, max }) => {
     return <Stat value={value} max={max} variant={VARIANTS.GREEN} noLabel />;
 };
 
+export const LiteStats = ({ stats, maxes }) => {
+    const { hp, endurance, shield } = stats;
+    const { hp: maxH, endurance: maxE, shield: maxS } = maxes;
+    return (
+        <>
+            <Stat value={shield} max={maxS} variant={VARIANTS.GRAY} noLabel />
+            <Stat value={endurance} max={maxE} variant={VARIANTS.GREEN} noLabel />
+            <Stat value={hp} max={maxH} variant={VARIANTS.RED} noLabel />
+        </>
+    );
+};
+
 export default ({ stats, maxes }) => {
     const { hp, endurance, shield } = stats;
     const { hp: maxH, endurance: maxE, shield: maxS } = maxes;
