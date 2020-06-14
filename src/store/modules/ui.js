@@ -10,7 +10,6 @@ export default store => {
                 //view: VIEWS.INVENTORY,
                 view: null,
                 notification: null,
-                transition: false,
                 transitionMessage: null
             }
         };

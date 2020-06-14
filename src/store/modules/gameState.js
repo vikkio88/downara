@@ -1,4 +1,4 @@
-import { STATUSES } from 'lib/game';
+import { STATUSES, VIEWS } from 'lib/game';
 
 import { initialGameState } from 'downara';
 
@@ -16,6 +16,7 @@ export default store => {
     });
 
     store.on('phaserReady', ({ gameState }) => {
+        store.dispatch('changeView', VIEWS.MAIN);
         return { gameState: { ...gameState, isLoading: false, status: STATUSES.IDLE } };
     });
 

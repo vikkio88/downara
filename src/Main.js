@@ -2,7 +2,6 @@ import React from "react";
 import { useStoreon } from "storeon/react";
 import { STATUSES } from "lib/game";
 
-import Transition from "components/ui/Transition";
 import CommandBar from "components/ui/CommandBar";
 
 import { Controls as BattleControls } from "components/battle";
@@ -12,24 +11,19 @@ import { Controls as IdleControls } from "components/controls";
 function Main() {
   const {
     gameState: { status },
-    ui: { view, transition },
+    ui: { view },
   } = useStoreon("gameState", "ui");
 
-  const Controls = status === STATUSES.FIGHTING ? BattleControls : IdleControls;
-  if (transition) {
-    return <Transition message={transition.message} />;
-  }
+  const isInFightMode = status === STATUSES.FIGHTING;
+
+  const Controls = status === isInFightMode ? BattleControls : IdleControls;
 
   return (
     <>
-      {view && <View />}
-      {!view && (
-        <>
-          <CommandBar>
-            <Controls />
-          </CommandBar>
-        </>
-      )}
+      {(view && !isInFightMode) && <View />}
+      <CommandBar>
+        <Controls />
+      </CommandBar>
     </>
   );
 }

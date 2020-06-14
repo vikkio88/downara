@@ -3,12 +3,11 @@ import { useStoreon } from 'storeon/react';
 import { CloseRow } from 'components/common';
 import { VIEWS } from 'lib/game';
 
-import { Inventory, Journal, Map, Profile, Settings } from './subViews';
+import { Main, Inventory, Profile, Settings } from './subViews';
 
 const viewsMap = {
+    [VIEWS.MAIN]: Main,
     [VIEWS.INVENTORY]: Inventory,
-    [VIEWS.JOURNAL]: Journal,
-    [VIEWS.MAP]: Map,
     [VIEWS.PROFILE]: Profile,
     [VIEWS.SETTINGS]: Settings,
 };
@@ -19,7 +18,7 @@ const View = () => {
     const Component = viewsMap[view];
     return (
         <>
-            <CloseRow onClose={()=> dispatch('changeView', null)} />
+            {view !== VIEWS.MAIN && <CloseRow onClose={() => dispatch('changeView', null)} />}
             <div className="flex-1 flex flex-col shadow overflow-y-auto">
                 <Component />
             </div>

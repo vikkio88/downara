@@ -20,6 +20,7 @@ const ACTIONS = {
 };
 
 const VIEWS = {
+    MAIN: 'main',
     INVENTORY: 'inventory',
     JOURNAL: 'journal',
     MAP: 'map',
