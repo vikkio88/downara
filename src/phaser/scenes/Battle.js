@@ -49,15 +49,18 @@ export default class extends Phaser.Scene {
     }
 
     create() {
-        const marginJ = 10;
-        const marginI = 10;
+        const marginRight = 400;
+        const marginTop = 100;
         this.grid = new BattleGrid(
             this,
             {
                 actors: this.actors,
                 map: this.map
             },
-            { rows: this.rows, columns: this.columns, tileSize: 100, marginJ, marginI }
+            {
+                rows: this.rows, columns: this.columns,
+                tileSize: 100, marginJ: marginRight, marginI: marginTop
+            }
         );
         this.grid.create();
 
@@ -70,7 +73,10 @@ export default class extends Phaser.Scene {
         this.mainCamera.setBounds(0, 0, this.widthInPixels, this.heightInPixels);
         this.mainCamera.zoom = 1;
         this.input.on('wheel', ({ deltaY }) => {
-            console.log('wheel', { deltaY });
+            let { zoom } = this.mainCamera;
+            zoom += (-1) * (deltaY / Math.abs(deltaY)) * 0.1;
+            if (zoom >= 2 || zoom <= 0.5) return;
+            this.mainCamera.zoom = zoom;
         });
     }
 }
