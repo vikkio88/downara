@@ -33,10 +33,11 @@ export default class extends Phaser.Scene {
             const message = winner ? 'YOU WIN' : 'YOU DIED';
             const fill = winner ? '#00ff00' : '#ff0000';
             const stroke = winner ? '#fff' : '#000';
-            this.input.on('wheel', () => { });
+            this.mainCamera.zoom = 1;
+            this.input.removeListener('wheel');
             // just trying to see what to do in here
             const text = this.add.text(
-                (window.innerWidth / 2) - 200, (window.innerHeight / 2) - 200,
+                (window.innerWidth / 2) - 400, 100,
                 message,
                 {
                     font: '40px monospace',
