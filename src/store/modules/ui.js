@@ -1,6 +1,5 @@
-import { interactables, OBJECT_DESCRIPTIONS, map } from 'downara';
-import { gameHelper, areaHelper, MESSAGE_TYPES } from 'lib/game';
-import { areas } from 'downara/areas';
+import { MESSAGE_TYPES } from 'lib/game';
+
 
 export default store => {
     store.on('@init', () => {

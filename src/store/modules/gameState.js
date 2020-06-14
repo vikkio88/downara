@@ -15,9 +15,17 @@ export default store => {
     });
 
     store.on('phaserReady', ({ gameState }) => {
+        return { gameState: { ...gameState, status: STATUSES.IDLE } };
+    });
+
+    store.on('startBattle', ({ gameState }) => {
         const payload = battleHelper.payloadGenerator();
         store.dispatch('battle:init', payload);
         return { gameState: { ...gameState, status: STATUSES.FIGHTING } };
+    });
+
+    store.on('interact', ({ }) => {
+        store.dispatch('startBattle');
     });
 
 

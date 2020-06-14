@@ -3,15 +3,14 @@ import { useStoreon } from 'storeon/react';
 
 import { Button, Icon } from 'components/common';
 import { ACTIONS_LABELS } from 'downara';
-import { ACTIONS, VIEWS, areaHelper } from 'lib/game';
+import { ACTIONS, VIEWS } from 'lib/game';
 
-const SecondaryMenu = ({ showMenu, isPlayerTile, setShowMenu, dispatch }) => {
+const SecondaryMenu = ({ showMenu, setShowMenu, dispatch }) => {
     return (
         <div>
             <Button
                 className="flex-1"
                 secondary
-                disabled={!isPlayerTile}
                 onClick={() => setShowMenu(!showMenu)}
             >
                 <Icon name={Icon.names.MENU} />
@@ -35,25 +34,20 @@ const SecondaryMenu = ({ showMenu, isPlayerTile, setShowMenu, dispatch }) => {
             </div>
         </div>
     );
-}
+};
 
 const Actions = () => {
-    const { dispatch, gameState: { player, actionedTile }, ui: { notification } } = useStoreon('gameState', 'ui');
-    const { areaPosition: playerAreaPosition } = player;
-    const isPlayerTile = areaHelper.isSameTile(actionedTile.position, playerAreaPosition);
-
+    const { dispatch, ui: { notification } } = useStoreon('gameState', 'ui');
     const [showMenu, setShowMenu] = useState(false);
-
     if (showMenu) {
-        const props = { showMenu, isPlayerTile, setShowMenu, dispatch }
-        return <SecondaryMenu {...props} />
+        const props = { showMenu, setShowMenu, dispatch };
+        return <SecondaryMenu {...props} />;
     }
 
     return (
         <div>
             <Button
                 className="flex-1"
-                disabled={!isPlayerTile}
                 notification={Boolean(notification)}
                 onClick={() => setShowMenu(!showMenu)}
             >
@@ -62,15 +56,6 @@ const Actions = () => {
 
             <Button
                 className="flex-1"
-                disabled={!isPlayerTile}
-                onClick={() => dispatch('examine')}
-            >
-                <Icon name={Icon.names.SEARCH} title={ACTIONS_LABELS[ACTIONS.EXAMINE]} />
-            </Button>
-
-            <Button
-                className="flex-1"
-                disabled={!isPlayerTile}
                 onClick={() => dispatch('interact')}
             >
                 <Icon name={Icon.names.BOLT} title={ACTIONS_LABELS[ACTIONS.INTERACT]} />

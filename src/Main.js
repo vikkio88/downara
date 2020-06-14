@@ -3,7 +3,6 @@ import { useStoreon } from "storeon/react";
 import { STATUSES } from "lib/game";
 
 import Transition from "components/ui/Transition";
-import EnvWindow from "components/ui/EnvWindow";
 import CommandBar from "components/ui/CommandBar";
 
 import { Controls as BattleControls } from "components/battle";
