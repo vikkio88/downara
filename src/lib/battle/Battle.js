@@ -234,6 +234,11 @@ export class Battle {
             const character = this.getCharacter(move.id);
 
             const result = character.perform(move, this);
+            // here we check if is dead and we override the move
+            console.log(`MOVE: ${move.id} `, { move, result });
+            if (character.isDead()) {
+                move.type = ACTIONS.DIE;
+            }
 
             log.push({
                 turn,

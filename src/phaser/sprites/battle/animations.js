@@ -52,8 +52,18 @@ export const ACTION_ANIMATIONS = {
             target.showParry(callback);
         };
     },
-    [ACTIONS.USE_ITEM]: () => {
-
+    [ACTIONS.DIE]: (grid, target, result, index) => {
+        return () => {
+            target.reportResult(ACTIONS.DIE);
+            grid.scene.tweens.add({
+                targets: target,
+                alpha: { from: 1, to: 0.5 },
+                duration: 1000,
+                ease: 'sine.out',
+                loop: false,
+                onComplete: () => grid.scene.events.emit(animationFinishedLabel(index))
+            });
+        };
     },
     failedWiggle: (grid, target, result, index, move) => {
         const x = randomizer.bool() ? 1 : -1 * randomizer.int(30, 50);
