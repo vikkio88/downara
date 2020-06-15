@@ -50,6 +50,7 @@ export default class extends Tile {
     }
 
     showAttackSuccess(result, callback) {
+        this.resetIndicator();
         // here result has some info on the damage, will need to add it as text?
         const { x, y } = this.getCenter();
         this.indicator = this.scene.add.sprite(
@@ -66,6 +67,7 @@ export default class extends Tile {
     }
 
     showFailedMove(callback) {
+        this.resetIndicator();
         const { x, y } = this.getCenter();
         this.indicator = this.scene.add.sprite(
             x,

@@ -18,6 +18,9 @@ const randomizer = {
     bool() {
         return this.chance(50);
     },
+    string() {
+        return Math.random().toString(36).substring(7);
+    },
     tile({ i = null, j = null, size = 6 }) {
         i = i !== null ? i : this.int(0, size - 1);
         j = j !== null ? j : this.int(0, size - 1);

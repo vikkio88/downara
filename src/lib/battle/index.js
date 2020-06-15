@@ -12,7 +12,7 @@ export const FACING = {
 export const battleHelper = {
     getEnemy(level = 1) {
         return {
-            id: 'enemy',
+            id: `enemy?${randomizer.string()}`,
             name: 'A Random Bully',
             type: 'battleEnemy',
             facing: FACING.LEFT,
@@ -39,7 +39,7 @@ export const battleHelper = {
     },
     payloadGenerator() {
         return {
-            actors: [this.getPlayer(), this.getEnemy(),],
+            actors: [this.getPlayer(), this.getEnemy(), this.getEnemy()],
             size: { i: 6, j: 6 }
         };
     }
