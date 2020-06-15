@@ -32,8 +32,8 @@ export const ACTION_ANIMATIONS = {
             grid.scene.time.addEvent({
                 delay: 1500,
                 callback: () => {
-                    grid.scene.events.emit(animationFinishedLabel(index));
                     tile.resetIndicator();
+                    grid.scene.events.emit(animationFinishedLabel(index));
                 },
                 loop: false,
             });
@@ -91,8 +91,8 @@ export const ACTION_ANIMATIONS = {
             grid.scene.time.addEvent({
                 delay: 1000,
                 callback: () => {
-                    grid.scene.events.emit(animationFinishedLabel(index));
                     tile.resetIndicator();
+                    grid.scene.events.emit(animationFinishedLabel(index));
                 },
                 loop: false,
             });
